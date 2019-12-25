@@ -4,20 +4,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * A tester class to the Order and Mana classes
+ * A demonstration class to the Order and Mana classes
  */
-public class Tester {
+public class Demonstrator {
 
   /**
    * main driver of tests
    * @param args the arguments passed, at this point does not affect the tests
    */
-  public static void main(String[] args){ //TODO: Give tester function informative names
-    test1();
-    test2();
-    test3();
-    test4();
-    test5();
+  public static void main(String[] args){
+    addAndRemove();
+    flowExample();
+    incompleteMana();
+    reachingMinimum();
+    twoOrders();
   }
 
   /**
@@ -26,7 +26,7 @@ public class Tester {
    * add the mana to the order
    * try to add the mana to the order again
    */
-  private static void test5() {
+  private static void twoOrders() {
     System.out.println("---Test 5 Initiated---\n");
 
     // Part I: Creating a Mana and adding the mana to the order
@@ -53,7 +53,7 @@ public class Tester {
    * Lock the order ("send it to shevah")
    * move the order to an archive
    */
-  private static void test4() {
+  private static void reachingMinimum() {
     System.out.println("---Test 4 Initiated---\n");
 
     // Part I: Creating an order, filling it with Manot until reaching the
@@ -90,7 +90,7 @@ public class Tester {
    * completing the mana,
    * adding the mana to the order
    */
-  private static void test3() {
+  private static void incompleteMana() {
     System.out.println("---Test 3 Initiated---\n");
 
     // Part I: Creating a Mana only with type
@@ -122,9 +122,9 @@ public class Tester {
 
   /**
    * Creating an order,
-   * Creating mana from basic constructor and adding details lie expected from the flow
+   * Creating mana from basic constructor and adding details like expected from the flow
    */
-  private static void test2() {
+  private static void flowExample() {
     System.out.println("---Test 2 Initiated---\n");
 
     // Part I: An empty Mana
@@ -153,7 +153,7 @@ public class Tester {
    * adding Manot directly,
    * removing Manot
    */
-  private static void test1() {
+  private static void addAndRemove() {
     System.out.println("---Test 1 Initiated---\n");
 
     // Part I: print a non complete order
