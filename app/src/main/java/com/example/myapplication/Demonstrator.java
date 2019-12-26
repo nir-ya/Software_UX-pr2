@@ -1,5 +1,6 @@
 package com.example.myapplication;
 
+import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,6 +14,8 @@ public class Demonstrator {
    * @param args the arguments passed, at this point does not affect the tests
    */
   public static void main(String[] args){
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+
     addAndRemove();
     flowExample();
     incompleteMana();
