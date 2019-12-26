@@ -26,6 +26,7 @@ public class Mana {
   //-- Order status options
   private static final int OPEN = 1;
   private static final int LOCKED = 2;
+  private static final int APP = 3;
   //-- Tosafot
   private static final int TOMATO = 1;
   private static final int CUCUMBER = 2;
@@ -133,16 +134,17 @@ public class Mana {
    * @return String representation of the type of the Mana
    */
   private static String getTypeStr(int type){
-    if(type==PITA){
-      return "Pita";
-    }else if(type==LAFA){
-      return "Lafa";
-    }else if(type==HALF_PITA){
-      return "Half Pita";
-    }else if(type==HALF_LAFA){
-      return "Half Lafa";
-    }else{
-      return "Type not set";
+    switch(type){
+      case PITA:
+        return "Pita";
+      case LAFA:
+        return "Lafa";
+      case HALF_PITA:
+        return "Half Pita";
+      case HALF_LAFA:
+        return "Half Lafa";
+      default:
+        return "Type not set";
     }
   }
 
@@ -156,12 +158,15 @@ public class Mana {
    * @return a String representation of the payment method associated with the Mana
    */
   private String paymentStr(int payment_method) {
-    if(payment_method == MEZUMAN){
-      return "Mezuman";
-    }else if(payment_method == CREDIT){
-      return "Credit";
-    }else{
-      return "Payment method not set";
+    switch(payment_method){
+      case MEZUMAN:
+        return "Mezuman";
+      case CREDIT:
+        return "Credit";
+      case APP:
+        return "Applicatio";
+      default:
+        return "ooops";
     }
   }
 
@@ -171,17 +176,18 @@ public class Mana {
    * @return the price associated with the type, an int
    */
   private static int priceByType(int type){
-    if(type==PITA){
-      return PITA_PRICE;
-    }else if(type==LAFA){
-      return LAFA_PRICE;
-    }else if(type==HALF_PITA){
-      return HALF_PITA_PRICE;
-    }else if(type==HALF_LAFA){
-      return HALF_LAFA_PRICE;
-    }else{
-      System.out.println("ooops2");
-      return 0;
+    switch(type){
+      case PITA:
+        return PITA_PRICE;
+      case LAFA:
+        return LAFA_PRICE;
+      case HALF_PITA:
+        return HALF_PITA_PRICE;
+      case HALF_LAFA:
+        return HALF_LAFA_PRICE;
+      default:
+        System.out.println("ooops2");
+        return 0;
     }
   }
 

@@ -57,16 +57,17 @@ public class Order {
    * @return the status as a string
    */
   private String getStatusString() { //TODO: switch-case
-    if(status == OPEN){
-      return "Open";
-    }else if(status == LOCKED){
-      return "Locked";
-    }else if(status == DELIVERED){
-      return "Delivered";
-    }else if(status == CANCELED){
-      return "Canceled";
-    }else{
-      return "ooops1";
+    switch(status){
+      case OPEN:
+        return "Open";
+      case LOCKED:
+        return "Locked";
+      case DELIVERED:
+        return "Delivered";
+      case CANCELED:
+        return "Canceled";
+      default:
+        return "ooops1";
     }
   }
 
