@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#ECCC62"
+        android:padding="8dp"
+        android:layout_margin="8dp">
+
+        <TextView
+            android:id="@+id/order_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hazmana leshaa 20:00"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+        <ProgressBar
+            android:id="@+id/order_progress"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/order_title"
+            android:max="70">
+
+
+        </ProgressBar>
+
+        <Button
+            android:id="@+id/btn_join"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/order_progress"
+            android:text="Join Order" />
+
+        <Button
+            android:id="@+id/btn_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/order_progress"
+            android:layout_toRightOf="@id/btn_join"
+            android:text="info" />
+    </RelativeLayout>
+
+
+</androidx.cardview.widget.CardView>

@@ -29,132 +29,13 @@
         android:text="Open orders:"
         android:textSize="18sp" />
 
-    <LinearLayout
-        android:layout_below="@id/orders"
+
+
+    <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
-        android:orientation="vertical">
-
-        <RelativeLayout
-
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:background="#ECCC62">
-
-            <TextView
-                android:id="@+id/title0"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Hazmana leshaa 20:00" />
-
-            <ProgressBar
-                android:id="@+id/progress0"
-                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/title0"
-                android:max="70">
-
-
-            </ProgressBar>
-
-            <Button
-                android:id="@+id/btn_join0"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/progress0"
-                android:text="Join Order" />
-
-            <Button
-                android:id="@+id/btn_info0"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/progress0"
-                android:layout_toRightOf="@id/btn_join0"
-                android:text="info" />
-        </RelativeLayout>
-        <RelativeLayout
-
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:background="#ECCC62">
-
-            <TextView
-                android:id="@+id/title1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Hazmana leshaa 20:00" />
-
-            <ProgressBar
-                android:id="@+id/progress1"
-                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/title1"
-                android:max="70">
-
-
-            </ProgressBar>
-
-            <Button
-                android:id="@+id/btn_join1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/progress1"
-                android:text="Join Order" />
-
-            <Button
-                android:id="@+id/btn_info1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/progress1"
-                android:layout_toRightOf="@id/btn_join1"
-                android:text="info" />
-        </RelativeLayout>
-        <RelativeLayout
-
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:background="#ECCC62">
-
-            <TextView
-                android:id="@+id/title2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Hazmana leshaa 20:00" />
-
-            <ProgressBar
-                android:id="@+id/progress2"
-                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/title2"
-                android:max="70">
-
-
-            </ProgressBar>
-
-            <Button
-                android:id="@+id/btn_join2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/progress2"
-                android:text="Join Order" />
-
-            <Button
-                android:id="@+id/btn_info2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/progress2"
-                android:layout_toRightOf="@id/btn_join2"
-                android:text="info" />
-        </RelativeLayout>
-
-
-    </LinearLayout>
+        android:scrollbars="vertical"
+        android:id="@+id/orders_recycler_view"
+        android:layout_below="@id/orders"/>
 
 </RelativeLayout>
