@@ -33,7 +33,7 @@ public class LoginActivity extends AppCompatActivity {
 
         // todo delete
         String testMessage =
-                "username: " + username + "\n email: " + emailAddress + "\n pass: " + password;
+                "username: " + username + "\n email: " + emailAddress + "\n password: " + password;
         Toast.makeText(this, testMessage, Toast.LENGTH_SHORT).show();
     }
 }
