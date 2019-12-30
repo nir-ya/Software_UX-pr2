@@ -1,5 +1,13 @@
 package com.example.myapplication;
 
+import static androidx.core.app.ActivityCompat.startActivityForResult;
+
+import android.util.Log;
+import androidx.annotation.NonNull;
+//import com.firebase.ui.auth.AuthUI;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,17 +18,82 @@ import java.util.List;
 public class Demonstrator {
 
   /**
-   * main driver of tests
-   * @param args the arguments passed, at this point does not affect the tests
+   * demo driver of tests
    */
-  public static void main(String[] args){
+  public static void demo(){
+    //stuff i'm working on
     FirebaseFirestore db = FirebaseFirestore.getInstance();
+    tryingMyLuckWithFireStore2(db);
 
+    //Future me might play around with this: playinWithAuthentication();
+    //Stuff I'm done with: showOff();
+  }
+
+  private static void showOff() {
     addAndRemove();
     flowExample();
     incompleteMana();
     reachingMinimum();
     twoOrders();
+  }
+
+
+  //removed     implementation 'com.firebaseui:firebase-ui-auth:4.3.1'
+  // removed d    implementation 'com.google.firebase:firebase-auth:19.2.0'
+//  private static void playinWithAuthentication() {
+//    // Choose authentication providers
+//    List<AuthUI.IdpConfig> providers = Arrays.asList(
+//        new AuthUI.IdpConfig.EmailBuilder().build());
+//
+//    // Create and launch sign-in intent
+//    startActivityForResult(
+//        AuthUI.getInstance()
+//            .createSignInIntentBuilder()
+//            .setAvailableProviders(providers)
+//            .build(),
+//        RC_SIGN_IN);
+//  }
+
+  private static void tryingMyLuckWithFireStore2(FirebaseFirestore db) {
+    // Let's try something a bit more simple
+    Mana m1 = new Mana("Johnson", Mana.PITA, Mana.CREDIT);
+    Mana m2 = new Mana("JB", Mana.PITA, Mana.CREDIT);
+    Mana m3 = new Mana("Jay", Mana.LAFA, Mana.MEZUMAN);
+    Order ord = new Order();
+    ord.addMana(m1);
+    ord.addMana(m2);
+    ord.addMana(m3);
+
+    //Order.saveOrder(db, ord);
+  }
+
+  private static void tryingMyLuckWithFireStore(FirebaseFirestore db) {
+    // Create a new user with a first and last name
+    Order open_order;
+    open_order = new Order();
+    while(!open_order.reachedMin()){
+      Mana another_mana = new Mana("hungrystudent11");
+      another_mana.setType(Mana.PITA);
+      another_mana.setPaymentMethod(Mana.MEZUMAN);
+      open_order.addMana(another_mana);
+    }
+    open_order.lock();
+
+    // Add a new document with a generated ID
+    db.collection("OrderTest")
+        .add(open_order)
+        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+          @Override
+          public void onSuccess(DocumentReference documentReference) {
+            Log.d("Shevah", "DocumentSnapshot added with ID: " + documentReference.getId());
+          }
+        })
+        .addOnFailureListener(new OnFailureListener() {
+          @Override
+          public void onFailure(@NonNull Exception e) {
+            Log.w("Shevah", "Error adding document", e);
+          }
+        });
   }
 
   /**

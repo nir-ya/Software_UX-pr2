@@ -1,8 +1,14 @@
 package com.example.myapplication;
 
 
+import android.util.Log;
 import androidx.annotation.NonNull;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
+
 
 /**
  * A class representing a Falafel Mana from Shevah.
@@ -11,36 +17,37 @@ import java.util.HashMap;
  * The logistic aspect consists of the order status, the user who ordered the Mana (ordered_by),
  * the payment method, and a serial number,
  */
-public class Mana {
+public class Mana{
 
   // Constants
+  static final String SHEVAH = "Shevah";
   //-- Types of manot
-  static final int INVALID = 0;
-  static final int PITA = 1;
-  static final int LAFA = 2;
-  static final int HALF_PITA = 3;
-  static final int HALF_LAFA = 4;
+  static final String INVALID = "Not specified";
+  static final String PITA = "Pita";
+  static final String LAFA = "Lafa";
+  static final String HALF_PITA = "Half Pita";
+  static final String HALF_LAFA = "Half Lafa";
   //-- Payment methods
-  static final int MEZUMAN = 1;
-  static final int CREDIT = 2;
+  static final String MEZUMAN = "Mezuman";
+  static final String CREDIT = "Credit";
+  static final String APP = "App";
   //-- Order status options
-  private static final int OPEN = 1;
-  private static final int LOCKED = 2;
-  private static final int APP = 3;
+  private static final String OPEN = "Open";
+  private static final String LOCKED = "Locked";
   //-- Tosafot
-  private static final int TOMATO = 1;
-  private static final int CUCUMBER = 2;
-  private static final int KRUV = 3;
-  private static final int ONION = 4;
-  private static final int THINA = 5;
-  private static final int HUMUS = 6;
-  private static final int HARIF = 7;
-  private static final int AMBA = 8;
+  private static final String TOMATO = "Tomato";
+  private static final String CUCUMBER = "Cucumber";
+  private static final String KRUV = "kruv";
+  private static final String ONION = "Onion";
+  private static final String THINA = "Thina";
+  private static final String HUMUS = "Hummus";
+  private static final String HARIF = "Harif";
+  private static final String AMBA = "Amba";
   //-- Tosafot quantifiers
-  private static final int NO = 0;
-  private static final int LITTLE = 1;
-  private static final int YES = 2;
-  private static final int A_LOT = 3;
+  private static final String NO = "None";
+  private static final String LITTLE = "Little";
+  private static final String YES = "Yes";
+  private static final String A_LOT = "A lot";
   //-- Prices
   private static final int PITA_PRICE = 18;
   private static final int LAFA_PRICE = 22;
@@ -48,19 +55,26 @@ public class Mana {
   private static final int HALF_LAFA_PRICE = 0; //TODO
 
   // Vars
+  private final FirebaseFirestore db = FirebaseFirestore.getInstance();
+  //-- Logistic related vars
+  private String status;
+  private String part_of_order = "None.";
+  private String ordered_by;
+  private String payment_method;
+  private String serial_no;
   //-- Culinary related vars
-  private int type;
+  private String type;
   private int price;
-  private int thina, amba, tomato, cucumber, onion, kruv, hamuz, eggplant;
   private HashMap<String, Integer> tosafot = new HashMap<>();
   private String costumer_notes;
-  //-- Logistic related vars
-  private int status;
-  private int in_order;
-  private String ordered_by;
-  private int payment_method;
-  private int serial_no;
-  private static int counter = 1;
+
+
+  /**
+   * A public no args constructor for FireStore
+   */
+  Mana(){
+    // Public no args constructor necessary for FireStore
+  }
 
   /**
    * A basic Mana constructor with only the user that ordered it
@@ -68,8 +82,7 @@ public class Mana {
    */
   Mana(String ordered_by){
     status = OPEN;
-    in_order = 0;
-    serial_no = counter++;
+    part_of_order = NO;
     this.ordered_by = ordered_by;
   }
 
@@ -79,13 +92,14 @@ public class Mana {
    */
   Mana(Mana source){
     status = OPEN;
-    in_order = 0;
-    serial_no = counter++;
+    part_of_order = NO;
     ordered_by = source.ordered_by;
     type = source.type;
     payment_method = source.payment_method;
     tosafot = source.tosafot;
     price = source.price;
+    serial_no = source.serial_no;
+    costumer_notes = source.costumer_notes;
   }
 
   /**
@@ -94,58 +108,59 @@ public class Mana {
    * @param type the type of the Mana (Pita, Lafa etc.)
    * @param payment_method (Mezuman, Credit)
    */
-  Mana(String ordered_by, int type, int payment_method){
+  Mana(String ordered_by, String type, String payment_method){
     status = OPEN;
-    in_order = 0;
-    serial_no = counter++;
+    part_of_order = NO;
     this.ordered_by = ordered_by;
     this.type = type;
     this.payment_method = payment_method;
     this.price = getPrice();
   }
 
+  public String getStatus() {
+    return status;
+  }
+
+  private String getType(){
+    return type;
+  }
+
+  public String getPart_of_order() {
+    return part_of_order;
+  }
+
+  public String getOrdered_by() {
+    return ordered_by;
+  }
+
+  public String getPayment_method() {
+    return payment_method;
+  }
+
+  public String getSerial_no() {
+    return serial_no;
+  }
+
+  public HashMap<String, Integer> getTosafot() {
+    return tosafot;
+  }
+
+  public String getCostumer_notes() {
+    return costumer_notes;
+  }
+
   @NonNull
   @Override
   public String toString() {
-    String mana_string = ordered_by + ": " + getTypeStr(type) + ", "
-        + paymentStr(payment_method);
-    if(in_order == 0){
+    String mana_string = ordered_by + ": " + type + ", " + payment_method;
+    if(!part_of_order.equals(NO)){
       mana_string += ", Ready for ordering: " + isReadyToOrder() + ".";
     } else{
-      mana_string += ", Part of order serial number: " + in_order;
+      mana_string += ", Part of order serial number: " + part_of_order;
     }
     if(costumer_notes != null)
       mana_string += ". NOTE: " + costumer_notes;
     return mana_string + " (Mana serial number " + serial_no + ")";
-  }
-
-  // Getters
-  int getSerial(){
-    return serial_no;
-  }
-
-  private int getType(){
-    return type;
-  }
-
-  /**
-   * returns the type of the Mana represented as a String
-   * @param type the type of the Mana (int)
-   * @return String representation of the type of the Mana
-   */
-  private static String getTypeStr(int type){
-    switch(type){
-      case PITA:
-        return "Pita";
-      case LAFA:
-        return "Lafa";
-      case HALF_PITA:
-        return "Half Pita";
-      case HALF_LAFA:
-        return "Half Lafa";
-      default:
-        return "Type not set";
-    }
   }
 
   int getPrice(){
@@ -153,29 +168,11 @@ public class Mana {
   }
 
   /**
-   * Gets the payment method represeneted as a String
-   * @param payment_method the payment method for the Mana, an int
-   * @return a String representation of the payment method associated with the Mana
-   */
-  private String paymentStr(int payment_method) {
-    switch(payment_method){
-      case MEZUMAN:
-        return "Mezuman";
-      case CREDIT:
-        return "Credit";
-      case APP:
-        return "Applicatio";
-      default:
-        return "ooops";
-    }
-  }
-
-  /**
    * A static method that stores the information of the prices for each Mana
    * @param type the type of the Mana, as an int
    * @return the price associated with the type, an int
    */
-  private static int priceByType(int type){
+  private static int priceByType(String type){
     switch(type){
       case PITA:
         return PITA_PRICE;
@@ -192,8 +189,12 @@ public class Mana {
   }
 
   // Setters
-  boolean setType(int new_type){
-    if(status == OPEN){
+  void setSerial(String serial){
+    this.serial_no = serial;
+  }
+
+  boolean setType(String new_type){
+    if(status.equals(OPEN)){
       type = new_type;
       price = getPrice();
       return true;
@@ -201,8 +202,8 @@ public class Mana {
     return false;
   }
 
-  boolean setPaymentMethod(int new_method){
-    if(status == OPEN){
+  boolean setPaymentMethod(String new_method){
+    if(status.equals(OPEN)){
       payment_method = new_method;
       return true;
     }
@@ -210,7 +211,7 @@ public class Mana {
   }
 
   boolean addNote(String note){
-    if(status == OPEN){
+    if(status.equals(OPEN)){
       costumer_notes = note;
       return true;
     }
@@ -218,18 +219,32 @@ public class Mana {
   }
 
   boolean isReadyToOrder(){
-    return (type != INVALID) && (payment_method != INVALID);
+    return (!type.equals(INVALID)) && (!payment_method.equals(INVALID));
   }
 
   void lock() {
     status = LOCKED;
   }
 
-  void addToOrder(int order_no){
-    in_order = order_no;
+  void addToOrder(String order_no){
+    part_of_order = order_no;
   }
 
-  int inOrder() {
-    return in_order;
+  void saveToDB(FirebaseFirestore db){
+    db.collection("ManaTest")
+        .add(this)
+        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+          @Override
+          public void onSuccess(DocumentReference documentReference) {
+            Log.d(SHEVAH, "DocumentSnapshot added with ID: " + documentReference.getId());
+            serial_no = documentReference.getId();
+          }
+        })
+        .addOnFailureListener(new OnFailureListener() {
+          @Override
+          public void onFailure(@NonNull Exception e) {
+            Log.w(SHEVAH, "Error adding document", e);
+          }
+        });
   }
 }

@@ -1,6 +1,11 @@
 package com.example.myapplication;
 
+import android.util.Log;
 import androidx.annotation.NonNull;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -8,21 +13,23 @@ import java.util.List;
 /**
  * A class representing a Falafel order.
  */
-public class Order {
+public class Order{
 
   // Constants
+  private final FirebaseFirestore db = FirebaseFirestore.getInstance();
   private static final int MINIMUM = 70;
-  private static final int OPEN = 1;
-  private static final int LOCKED = 2;
-  private static final int DELIVERED = 3;
-  private static final int CANCELED = 4;
+  private static final String OPEN = "Open";
+  private static final String LOCKED = "Locked";
+  private static final String DELIVERED = "Delivered";
+  private static final String CANCELED = "Canceled";
+  private static final String ORDER_COLLECTION = "OrderCollection";
 
   // Vars
-  private static int status;
-  private static int counter = 1;
-  private int serial_no;
+  private String status;
+  private String serial_no;
   private ArrayList<Mana> manot = new ArrayList<>();
   private int price;
+
 
   /**
    * A basic Order constructor
@@ -30,7 +37,21 @@ public class Order {
   Order(){
     price = 0;
     status = OPEN;
-    serial_no = counter++;
+    DocumentReference ordRef = db.collection(ORDER_COLLECTION).document();
+    ordRef.set(this);
+    serial_no = ordRef.getId();
+  }
+
+  public String getStatus() {
+    return status;
+  }
+
+  public String getSerial_no() {
+    return serial_no;
+  }
+
+  public int getPrice() {
+    return price;
   }
 
   @NonNull
@@ -77,19 +98,58 @@ public class Order {
    * @return true iff the Mana was added to the order
    */
   boolean addMana(Mana m){
-    if(status == OPEN && m.isReadyToOrder()){
-      if(m.inOrder() != 0){
+    if(status.equals(OPEN ) && m.isReadyToOrder()){
+      if(m.getPart_of_order().equals(Mana.INVALID)){
         return false;
       }
       price += m.getPrice();
+
+      //TODO this should be a transaction
+      DocumentReference ordRef = db.collection(ORDER_COLLECTION).document(serial_no);
+      ordRef
+          .update("price", price)
+          .addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+              Log.d(Mana.SHEVAH, "DocumentSnapshot successfully updated!");
+            }
+          })
+          .addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+              Log.w(Mana.SHEVAH, "Error updating document", e);
+            }
+          });
+
       m.addToOrder(serial_no);
+      addManaToDB(m);
       return manot.add(m);
     }
     return false;
   }
 
-  boolean addMana(String ordered_by, int type, int payment_method){
-    if(status == OPEN){
+  private void addManaToDB(final Mana m) {
+    System.out.println("---"+serial_no);
+
+    db.collection("OrderCollection").document("/"+serial_no).collection("Manot")
+        .add(m)
+        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+          @Override
+          public void onSuccess(DocumentReference documentReference) {
+            Log.d(Mana.SHEVAH, "*DocumentSnapshot added with ID: " + documentReference.getId());
+            m.setSerial(documentReference.getId());
+          }
+        })
+        .addOnFailureListener(new OnFailureListener() {
+          @Override
+          public void onFailure(@NonNull Exception e) {
+            Log.w(Mana.SHEVAH, "Error adding document", e);
+          }
+        });
+  }
+
+  boolean addMana(String ordered_by, String type, String payment_method){
+    if(status.equals(OPEN)){
       Mana m = new Mana(ordered_by, type, payment_method);
       price += m.getPrice();
       m.addToOrder(serial_no);
@@ -99,11 +159,11 @@ public class Order {
   }
 
   List<Mana> getManot(){
-    return Collections.unmodifiableList(manot);
+    return manot;
   }
 
   boolean removeMana(Mana m){
-    if(status == OPEN){
+    if(status.equals(OPEN)){
       for(Mana mana : manot){
         if(mana == m){
           price -= mana.getPrice();
@@ -140,7 +200,45 @@ public class Order {
     status = LOCKED;
   }
 
-  int getSerial() {
+  String getSerial() {
     return serial_no;
+  }
+
+  void setSerial(String st){
+    serial_no = st;
+  }
+
+  void saveToDB(FirebaseFirestore db){
+    db.collection("OrderTest")
+        .add(this)
+        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+          @Override
+          public void onSuccess(DocumentReference documentReference) {
+            Log.d(Mana.SHEVAH, "DocumentSnapshot added with ID: " + documentReference.getId());
+            serial_no = documentReference.getId();
+          }
+        })
+        .addOnFailureListener(new OnFailureListener() {
+          @Override
+          public void onFailure(@NonNull Exception e) {
+            Log.w(Mana.SHEVAH, "Error adding document", e);
+          }
+        });
+
+    Log.d(Mana.SHEVAH, "---"+db.collection("OrderTest").document("/"+serial_no));
+    db.collection("OrderTest").document("/"+serial_no).collection("PPP")
+        .add(manot)
+        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+          @Override
+          public void onSuccess(DocumentReference documentReference) {
+            Log.d(Mana.SHEVAH, "DocumentSnapshot added with ID: " + documentReference.getId());
+          }
+        })
+        .addOnFailureListener(new OnFailureListener() {
+          @Override
+          public void onFailure(@NonNull Exception e) {
+            Log.w(Mana.SHEVAH, "Error adding document", e);
+          }
+        });
   }
 }
