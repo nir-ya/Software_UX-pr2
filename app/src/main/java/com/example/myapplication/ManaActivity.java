@@ -4,13 +4,22 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 public class ManaActivity extends AppCompatActivity {
 
-    ImageView mainBreadView;
-    ImageView secondaryBreadView;
-    TextView secondaryBreadText;
+    ImageView pitaView;
+    ImageView lafaView;
+    ImageView humusView;
+    ImageView harifView;
+    ImageView picklesView;
+    ImageView onionView;
+    ImageView tomatoView;
+    ImageView cucumberView;
+    ImageView ambaView;
+    ImageView tahiniView;
+    ImageView chipsView;
+    ImageView eggplantView;
+
 
 
     @Override
@@ -22,14 +31,21 @@ public class ManaActivity extends AppCompatActivity {
     }
 
     private void connectToxXML() {
-        mainBreadView = findViewById(R.id.main_bread);
-        secondaryBreadView = findViewById(R.id.secondary_bread);
-        secondaryBreadText = findViewById(R.id.secondary_bread_text);
+        pitaView = findViewById(R.id.pita_image);
+        lafaView = findViewById(R.id.lafa_image);
+
+        humusView = findViewById(R.id.humus_image);
+        harifView = findViewById(R.id.harif_image);
+        picklesView = findViewById(R.id.pickles_image);
+        onionView = findViewById(R.id.onion_image);
+        tomatoView = findViewById(R.id.tomato_image);
+        cucumberView = findViewById(R.id.cucumber_image);
+        ambaView = findViewById(R.id.amba_image);
+        tahiniView = findViewById(R.id.tahini_image);
+        chipsView = findViewById(R.id.chips_image);
+        eggplantView = findViewById(R.id.eggplant_image);
+
     }
 
-    private void swipeBreadViews(){
-        mainBreadView.setImageResource(R.drawable.pita);
-        secondaryBreadView.setImageResource(R.drawable.lafa);
 
-    }
 }

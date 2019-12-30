@@ -19,33 +19,33 @@
         android:textColor="@color/TextGreen"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/main_bread"
+        app:layout_constraintBottom_toTopOf="@+id/pita_image"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.86"
+        app:layout_constraintHorizontal_bias="0.883"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/secondary_bread"
+        android:id="@+id/lafa_image"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:clickable="true"
         android:src="@drawable/lafa"
         app:layout_constraintBottom_toTopOf="@+id/grid_view"
-        app:layout_constraintEnd_toStartOf="@+id/main_bread"
+        app:layout_constraintEnd_toStartOf="@+id/pita_image"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/what_eat_text" />
 
     <ImageView
-        android:id="@+id/main_bread"
+        android:id="@+id/pita_image"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:src="@drawable/pita"
         app:layout_constraintBottom_toTopOf="@+id/grid_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/secondary_bread"
+        app:layout_constraintStart_toEndOf="@+id/lafa_image"
         app:layout_constraintTop_toBottomOf="@+id/what_eat_text" />
 
     <GridLayout
@@ -57,79 +57,77 @@
         android:columnCount="4"
         android:padding="10dp"
         android:rowCount="3"
-        app:layout_constraintBottom_toTopOf="@+id/button2"
+        app:layout_constraintBottom_toTopOf="@+id/cancel_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/secondary_bread">
+        app:layout_constraintTop_toBottomOf="@+id/lafa_image">
 
         <ImageView
+            android:id="@+id/humus_image"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_margin="5dp"
             android:src="@drawable/lafa" />
 
         <ImageView
+            android:id="@+id/harif_image"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_margin="5dp"
             android:src="@drawable/lafa" />
 
         <ImageView
+            android:id="@+id/pickles_image"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_margin="5dp"
             android:src="@drawable/lafa" />
 
         <ImageView
+            android:id="@+id/onion_image"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_margin="5dp"
             android:src="@drawable/lafa" />
 
         <ImageView
+            android:id="@+id/tomato_image"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_margin="5dp"
             android:src="@drawable/lafa" />
 
         <ImageView
+            android:id="@+id/cucumber_image"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_margin="5dp"
             android:src="@drawable/lafa" />
 
         <ImageView
+            android:id="@+id/eggplant_image"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_margin="5dp"
             android:src="@drawable/lafa" />
 
         <ImageView
+            android:id="@+id/chips_image"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_margin="5dp"
             android:src="@drawable/lafa" />
 
         <ImageView
+            android:id="@+id/tahini_image"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_margin="5dp"
             android:src="@drawable/lafa" />
 
         <ImageView
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_margin="5dp"
-            android:src="@drawable/lafa" />
-
-        <ImageView
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_margin="5dp"
-            android:src="@drawable/lafa" />
-
-        <ImageView
+            android:id="@+id/amba_image"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_margin="5dp"
@@ -139,32 +137,37 @@
     </GridLayout>
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/cancel_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/varela_round"
-        android:text="הצטרף"
-        android:textDirection="rtl"
+        android:padding="20dp"
+        android:text="עזוב, ויתרתי"
+        android:textSize="14sp"
+        android:background="@drawable/border_button"
+
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/button"
+        app:layout_constraintEnd_toStartOf="@+id/accept_button"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/button"
+        app:layout_constraintTop_toTopOf="@+id/accept_button"
         app:layout_constraintVertical_bias="0.0" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/accept_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="48dp"
         android:fontFamily="@font/varela_round"
-        android:text="עזוב, ביטלתי"
-
-        android:textDirection="rtl"
+        android:background="@drawable/full_button"
+        android:textColor="@color/lightGrey"
+        android:padding="20dp"
+        android:text="יאללה, תביא!"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/button2" />
+        app:layout_constraintStart_toEndOf="@+id/cancel_button" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
