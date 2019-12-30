@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -29,5 +30,10 @@ public class LoginActivity extends AppCompatActivity {
         username = nameText.getText().toString();
         password = passwordText.getText().toString();
         emailAddress = emailText.getText().toString();
+
+        // todo delete
+        String testMessage =
+                "username: " + username + "\n email: " + emailAddress + "\n pass: " + password;
+        Toast.makeText(this, testMessage, Toast.LENGTH_SHORT).show();
     }
 }
