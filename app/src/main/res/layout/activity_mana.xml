@@ -79,8 +79,9 @@
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/lafa_image" />
-
     <GridLayout
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
         android:id="@+id/grid_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -94,28 +95,33 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lafa_text">
+        app:layout_constraintTop_toBottomOf="@+id/lafa_text"
+        app:layout_constraintVertical_bias="0.5">
 
-        <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-        <ImageView
-            android:id="@+id/humus_image"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:src="@drawable/hummus" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="חומוס"
-            android:layout_gravity="center"
-            android:padding="2dp"/>
-    </LinearLayout>
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/humus_image"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:src="@drawable/hummus" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:padding="2dp"
+                android:text="חומוס" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
             <ImageView
                 android:id="@+id/harif_image"
                 android:layout_width="70dp"
@@ -125,32 +131,35 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="חריף"
                 android:layout_gravity="center"
-                android:padding="2dp"/>
+                android:padding="2dp"
+                android:text="חריף" />
         </LinearLayout>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-        <ImageView
-            android:id="@+id/pickles_image"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:src="@drawable/pickle" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="חמוצים"
-            android:layout_gravity="center"
-            android:padding="2dp"/>
-    </LinearLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/pickles_image"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:src="@drawable/pickle" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:padding="2dp"
+                android:text="חמוצים" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
             <ImageView
                 android:id="@+id/onion_image"
                 android:layout_width="70dp"
@@ -161,15 +170,16 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="בצל"
                 android:layout_gravity="center"
-                android:padding="2dp"/>
+                android:padding="2dp"
+                android:text="בצל" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
             <ImageView
                 android:id="@+id/tomato_image"
                 android:layout_width="70dp"
@@ -180,15 +190,16 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="עגבניה"
                 android:layout_gravity="center"
-                android:padding="2dp"/>
+                android:padding="2dp"
+                android:text="עגבניה" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
             <ImageView
                 android:id="@+id/cucumber_image"
                 android:layout_width="70dp"
@@ -198,10 +209,11 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="מלפפון"
                 android:layout_gravity="center"
-                android:padding="2dp"/>
+                android:padding="2dp"
+                android:text="מלפפון" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -216,9 +228,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="חציל"
                 android:layout_gravity="center"
-                android:padding="2dp"/>
+                android:padding="2dp"
+                android:text="חציל" />
         </LinearLayout>
 
 
@@ -238,9 +250,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="ציפס"
                 android:layout_gravity="center"
-                android:padding="2dp"/>
+                android:padding="2dp"
+                android:text="ציפס" />
         </LinearLayout>
 
         <LinearLayout
@@ -258,9 +270,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="טחינה"
                 android:layout_gravity="center"
-                android:padding="2dp"/>
+                android:padding="2dp"
+                android:text="טחינה" />
         </LinearLayout>
 
 
@@ -278,11 +290,10 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="עמבה"
                 android:layout_gravity="center"
-                android:padding="2dp"/>
+                android:padding="2dp"
+                android:text="עמבה" />
         </LinearLayout>
-
 
 
     </GridLayout>
