@@ -3,6 +3,8 @@ package com.example.myapplication;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.Gravity;
+import android.widget.GridLayout;
 import android.widget.ImageView;
 
 public class ManaActivity extends AppCompatActivity {
@@ -19,6 +21,7 @@ public class ManaActivity extends AppCompatActivity {
     ImageView tahiniView;
     ImageView chipsView;
     ImageView eggplantView;
+    GridLayout gridView;
 
 
 
@@ -28,6 +31,7 @@ public class ManaActivity extends AppCompatActivity {
         setContentView(R.layout.activity_mana);
 
         connectToxXML();
+
     }
 
     private void connectToxXML() {
@@ -44,6 +48,8 @@ public class ManaActivity extends AppCompatActivity {
         tahiniView = findViewById(R.id.tahini_image);
         chipsView = findViewById(R.id.chips_image);
         eggplantView = findViewById(R.id.eggplant_image);
+
+        gridView = findViewById(R.id.grid_view);
 
     }
 
