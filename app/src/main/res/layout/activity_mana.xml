@@ -35,7 +35,8 @@
         app:layout_constraintEnd_toStartOf="@+id/pita_image"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/what_eat_text" />
+        app:layout_constraintTop_toBottomOf="@+id/what_eat_text"
+        android:focusable="true" />
 
     <ImageView
         android:id="@+id/pita_image"
@@ -48,6 +49,37 @@
         app:layout_constraintStart_toEndOf="@+id/lafa_image"
         app:layout_constraintTop_toBottomOf="@+id/what_eat_text" />
 
+
+    <TextView
+        android:id="@+id/pita_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/varela_round"
+        android:text="פיתה"
+        android:textSize="16sp"
+        android:textColor="@color/darkestGreen"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+
+
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/lafa_text"
+        app:layout_constraintTop_toBottomOf="@id/pita_image" />
+
+    <TextView
+        android:id="@+id/lafa_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/varela_round"
+        android:text="לאפה"
+        android:textStyle="bold"
+        android:textColor="@color/darkestGreen"
+        app:layout_constraintEnd_toStartOf="@+id/pita_text"
+        app:layout_constraintHorizontal_bias="0.5"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/lafa_image" />
+
     <GridLayout
         android:id="@+id/grid_view"
         android:layout_width="wrap_content"
@@ -55,83 +87,202 @@
         android:alignmentMode="alignMargins"
         android:background="@color/lightGrey"
         android:columnCount="4"
-        android:padding="10dp"
+        android:layoutDirection="rtl"
+        android:padding="5dp"
         android:rowCount="3"
         app:layout_constraintBottom_toTopOf="@+id/cancel_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lafa_image">
+        app:layout_constraintTop_toBottomOf="@+id/lafa_text">
 
+        <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
         <ImageView
             android:id="@+id/humus_image"
             android:layout_width="70dp"
             android:layout_height="70dp"
-            android:layout_margin="5dp"
-            android:src="@drawable/lafa" />
+            android:src="@drawable/hummus" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="חומוס"
+            android:layout_gravity="center"
+            android:padding="2dp"/>
+    </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <ImageView
+                android:id="@+id/harif_image"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:src="@drawable/harif" />
 
-        <ImageView
-            android:id="@+id/harif_image"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_margin="5dp"
-            android:src="@drawable/lafa" />
-
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="חריף"
+                android:layout_gravity="center"
+                android:padding="2dp"/>
+        </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
         <ImageView
             android:id="@+id/pickles_image"
             android:layout_width="70dp"
             android:layout_height="70dp"
-            android:layout_margin="5dp"
-            android:src="@drawable/lafa" />
+            android:src="@drawable/pickle" />
 
-        <ImageView
-            android:id="@+id/onion_image"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_margin="5dp"
-            android:src="@drawable/lafa" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="חמוצים"
+            android:layout_gravity="center"
+            android:padding="2dp"/>
+    </LinearLayout>
 
-        <ImageView
-            android:id="@+id/tomato_image"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_margin="5dp"
-            android:src="@drawable/lafa" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <ImageView
+                android:id="@+id/onion_image"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:src="@drawable/onion" />
 
-        <ImageView
-            android:id="@+id/cucumber_image"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_margin="5dp"
-            android:src="@drawable/lafa" />
 
-        <ImageView
-            android:id="@+id/eggplant_image"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_margin="5dp"
-            android:src="@drawable/lafa" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="בצל"
+                android:layout_gravity="center"
+                android:padding="2dp"/>
+        </LinearLayout>
 
-        <ImageView
-            android:id="@+id/chips_image"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_margin="5dp"
-            android:src="@drawable/lafa" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <ImageView
+                android:id="@+id/tomato_image"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:src="@drawable/tomato" />
 
-        <ImageView
-            android:id="@+id/tahini_image"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_margin="5dp"
-            android:src="@drawable/lafa" />
 
-        <ImageView
-            android:id="@+id/amba_image"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_margin="5dp"
-            android:src="@drawable/lafa" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="עגבניה"
+                android:layout_gravity="center"
+                android:padding="2dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <ImageView
+                android:id="@+id/cucumber_image"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:src="@drawable/cucumber" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="מלפפון"
+                android:layout_gravity="center"
+                android:padding="2dp"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/eggplant_image"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:src="@drawable/eggplant" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="חציל"
+                android:layout_gravity="center"
+                android:padding="2dp"/>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <ImageView
+                android:id="@+id/chips_image"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:src="@drawable/chips" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ציפס"
+                android:layout_gravity="center"
+                android:padding="2dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <ImageView
+                android:id="@+id/tahini_image"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:src="@drawable/tahini" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="טחינה"
+                android:layout_gravity="center"
+                android:padding="2dp"/>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/amba_image"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:src="@drawable/amba" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="עמבה"
+                android:layout_gravity="center"
+                android:padding="2dp"/>
+        </LinearLayout>
+
 
 
     </GridLayout>
@@ -140,11 +291,11 @@
         android:id="@+id/cancel_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@drawable/border_button"
         android:fontFamily="@font/varela_round"
         android:padding="20dp"
         android:text="עזוב, ויתרתי"
         android:textSize="14sp"
-        android:background="@drawable/border_button"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/accept_button"
@@ -158,11 +309,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="48dp"
-        android:fontFamily="@font/varela_round"
         android:background="@drawable/full_button"
-        android:textColor="@color/lightGrey"
+        android:fontFamily="@font/varela_round"
         android:padding="20dp"
         android:text="יאללה, תביא!"
+        android:textColor="@color/lightGrey"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
