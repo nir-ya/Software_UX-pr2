@@ -5,8 +5,9 @@
     android:id="@+id/card_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardBackgroundColor="@color/transparent"
     android:layout_margin="10dp"
+    app:cardBackgroundColor="@color/transparent"
+    app:cardElevation="0dp"
     app:cardUseCompatPadding="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -39,7 +40,7 @@
             android:indeterminateTintMode="src_in"
             android:max="70"
             android:progress="45"
-            android:progressDrawable="@drawable/progress_bar_orange"
+            android:progressDrawable="@drawable/progress_bar_green"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/order_title" />

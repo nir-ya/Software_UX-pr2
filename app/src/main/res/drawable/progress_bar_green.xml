@@ -18,8 +18,8 @@
 
                 <gradient
                     android:angle="90"
-                    android:endColor="#63a169"
-                    android:startColor="#49c355"
+                    android:endColor="#086c02"
+                    android:startColor="#17b326"
                     />
             </shape>
         </clip>
