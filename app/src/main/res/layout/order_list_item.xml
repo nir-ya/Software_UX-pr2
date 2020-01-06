@@ -51,7 +51,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:background="@drawable/full_button"
-            android:backgroundTint="@color/dark_navy"
+            android:backgroundTint="@color/darkestGreen"
             android:text="הצטרף"
             android:textColor="@color/lightGrey"
             app:layout_constraintEnd_toStartOf="@+id/btn_info"
