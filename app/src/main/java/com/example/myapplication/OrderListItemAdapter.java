@@ -1,7 +1,13 @@
 package com.example.myapplication;
 
+import android.content.Context;
+import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -12,32 +18,65 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 
 import android.view.View;
 
-public class OrderListItemAdapter extends FirestoreRecyclerAdapter <OrderListItem, OrderListItemAdapter.OrderListItemHolder> {
+import static java.lang.Boolean.TRUE;
+
+public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem, OrderListItemAdapter.OrderListItemHolder> {
 
 
-    public OrderListItemAdapter(@NonNull FirestoreRecyclerOptions<OrderListItem> options) {
+    private static final int CRITICAL_PRICE = 45;
+    private final Context context;
+
+    public OrderListItemAdapter(@NonNull FirestoreRecyclerOptions<OrderListItem> options, Context context) {
         super(options);
+        this.context = context;
+
     }
 
     @Override
-    protected void onBindViewHolder(@NonNull OrderListItemHolder holder, int position, @NonNull OrderListItem model) {
+    protected void onBindViewHolder(@NonNull final OrderListItemHolder holder, int position, @NonNull OrderListItem model) {
         holder.textViewTitle.setText(model.getOrderTime());//TODO - change to normal title
+
+
+        holder.infoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                progressBarHandler(holder);
+
+            }
+        });
+
+    }
+
+    private void progressBarHandler(@NonNull OrderListItemHolder holder) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            holder.progressBar.setProgress(Randomizer.generate(0, 70), TRUE);
+        }
+        if (holder.progressBar.getProgress() > CRITICAL_PRICE) {
+            holder.progressBar.setProgressDrawable(context.getDrawable(R.drawable.progress_bar_green));
+        } else {
+            holder.progressBar.setProgressDrawable(context.getDrawable(R.drawable.progress_bar_orange));
+
+        }
     }
 
     @NonNull
     @Override
     public OrderListItemHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.order_list_item,parent,false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.order_list_item, parent, false);
 
         return new OrderListItemHolder(v);
     }
 
-    class OrderListItemHolder extends RecyclerView.ViewHolder{
+    class OrderListItemHolder extends RecyclerView.ViewHolder {
         TextView textViewTitle;
+        Button infoButton;
+        ProgressBar progressBar;
 
-        public OrderListItemHolder(View itemView){
+        public OrderListItemHolder(View itemView) {
             super(itemView);
             textViewTitle = itemView.findViewById(R.id.order_title);
+            infoButton = itemView.findViewById(R.id.btn_info);
+            progressBar = itemView.findViewById(R.id.order_progress);
         }
     }
 

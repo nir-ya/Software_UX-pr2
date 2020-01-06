@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
         FirestoreRecyclerOptions options = new FirestoreRecyclerOptions.Builder<OrderListItem>().setQuery(query,OrderListItem.class)
                 .build();
-        adapter = new OrderListItemAdapter(options);
+        adapter = new OrderListItemAdapter(options, this.getApplicationContext());
 
         RecyclerView recyclerView = findViewById(R.id.orders_recycler_view);
         LinearLayoutManager layout =new LinearLayoutManager(this);

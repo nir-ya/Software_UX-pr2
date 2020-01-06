@@ -8,6 +8,8 @@
     <color name="lightGrey">#FCFCFC</color>
     <color name="darkestGreen">#435059</color>
     <color name="transparent">#00000000</color>
-
+    <color name="light_peach">#fcd7a1</color>
+    <color name="dark_green">#52857a</color>
+    <color name="dark_navy">#0b2b26</color>
 
 </resources>
