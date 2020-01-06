@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.os.Trace;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -33,25 +34,25 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
     }
 
     @Override
-    protected void onBindViewHolder(@NonNull final OrderListItemHolder holder, int position, @NonNull OrderListItem model) {
+    protected void onBindViewHolder(@NonNull final OrderListItemHolder holder, int position, @NonNull final OrderListItem model) {
         holder.textViewTitle.setText(model.getOrderTime());//TODO - change to normal title
 
 
-        holder.infoButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                progressBarHandler(holder);
+        progressBarHandler(holder, model);
 
-            }
-        });
+
 
     }
 
-    private void progressBarHandler(@NonNull OrderListItemHolder holder) {
+    private void progressBarHandler(@NonNull OrderListItemHolder holder, OrderListItem model) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            holder.progressBar.setProgress(Randomizer.generate(0, 70), TRUE);
+            holder.progressBar.setProgress(model.getCurrentPrice(), TRUE);
+            if(model.getCurrentPrice()>70){
+                holder.progressBar.setProgress(70, TRUE);
+
+            }
         }
-        if (holder.progressBar.getProgress() > CRITICAL_PRICE) {
+        if (model.getCurrentPrice() > CRITICAL_PRICE) {
             holder.progressBar.setProgressDrawable(context.getDrawable(R.drawable.progress_bar_green));
         } else {
             holder.progressBar.setProgressDrawable(context.getDrawable(R.drawable.progress_bar_orange));
