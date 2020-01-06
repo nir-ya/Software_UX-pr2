@@ -4,13 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/card_layout"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    app:cardBackgroundColor="@color/transparent"
+    android:layout_margin="10dp"
+    app:cardUseCompatPadding="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
 
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="8dp"
         android:background="@color/light_peach"
         android:layoutDirection="rtl"
         android:padding="20dp">
@@ -19,9 +21,9 @@
             android:id="@+id/order_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
             android:fontFamily="@font/varela_round"
             android:text="הזמנה לשעה 20:00"
-            android:layout_marginBottom="10dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textColor="@color/dark_navy"
             android:textStyle="bold"
@@ -34,11 +36,11 @@
             android:layout_width="match_parent"
             android:layout_height="25dp"
             android:layout_marginTop="20dp"
-            android:progress="45"
             android:indeterminateTintMode="src_in"
             android:max="70"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:progress="45"
             android:progressDrawable="@drawable/progress_bar_orange"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/order_title" />
 
@@ -46,10 +48,10 @@
             android:id="@+id/btn_join"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:background="@drawable/full_button"
             android:backgroundTint="@color/dark_navy"
             android:text="הצטרף"
-            android:layout_marginTop="20dp"
             android:textColor="@color/lightGrey"
             app:layout_constraintEnd_toStartOf="@+id/btn_info"
             app:layout_constraintHorizontal_bias="0.5"
