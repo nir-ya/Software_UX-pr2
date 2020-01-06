@@ -4,6 +4,8 @@ android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
     defaultConfig {
+
+        vectorDrawables.useSupportLibrary = true
         applicationId "com.example.myapplication"
         minSdkVersion 21
         targetSdkVersion 29
@@ -42,6 +44,7 @@ dependencies {
 
     // FirebaseUI for Cloud Storage
     implementation 'com.firebaseui:firebase-ui-storage:6.2.0'
+    implementation 'com.google.android.material:material:1.0.0'
 
 }
 apply plugin: 'com.google.gms.google-services'
