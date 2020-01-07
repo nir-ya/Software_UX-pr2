@@ -4,23 +4,23 @@ package com.example.myapplication;
 
 public class OrderListItem {
     private final static int MIN_ORDER = 70;
-    private String orderTime;
-    private int currentPrice;
+    private String serial;
+    private int price;
 
     public OrderListItem(){
     }
 
-    public OrderListItem(String orderTime, int price){
-        this.currentPrice = price;
-        this.orderTime = orderTime;
+    public OrderListItem(String serial, int price){
+        this.price = price;
+        this.serial = serial;
     }
 
-    public int getCurrentPrice() {
-        return currentPrice;
+    public int getPrice() {
+        return price;
     }
 
-    public String getOrderTime() {
-        return orderTime;
+    public String getSerial() {
+        return serial;
     }
 
 

@@ -16,7 +16,7 @@ import com.google.firebase.firestore.Query;
 
 public class MainActivity extends AppCompatActivity {
     private  FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private CollectionReference ordersRef = db.collection("Orders");
+    private CollectionReference ordersRef = db.collection("OpenOrders");
 
     private OrderListItemAdapter adapter;
     @Override
@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setUpRecyclerView() {
-        Query query = ordersRef.orderBy("orderTime",Query.Direction.DESCENDING);
+        Query query = ordersRef.orderBy("price",Query.Direction.DESCENDING);
 
         FirestoreRecyclerOptions options = new FirestoreRecyclerOptions.Builder<OrderListItem>().setQuery(query,OrderListItem.class)
                 .build();
