@@ -23,14 +23,15 @@ import com.google.firebase.firestore.Query;
 
 import android.view.View;
 
+
+
 import net.cachapa.expandablelayout.ExpandableLayout;
 
 import static java.lang.Boolean.TRUE;
 
 public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem, OrderListItemAdapter.OrderListItemHolder> {
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private CollectionReference ordersRef = db.collection("OpenOrders")
-            .document("open2").collection("Manot");
+
 
     private static final int CRITICAL_PRICE = 45;
     private static final int MIN_ORDER = 70;
@@ -56,6 +57,8 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
         statusTextHandler(holder, model);
 
         expandableLayoutHandler(holder);
+
+
 
 
     }
@@ -184,8 +187,10 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
             cardView = itemView.findViewById(R.id.card_layout);
             manotList = itemView.findViewById(R.id.manot_list);
 
+            CollectionReference ordersRef = db.collection("OpenOrders")
+                    .document("open2").collection("Manot");
 
-            Query query = ordersRef.orderBy("index", Query.Direction.DESCENDING);
+            Query query = ordersRef.orderBy("price", Query.Direction.DESCENDING);
 
             FirestoreRecyclerOptions options = new FirestoreRecyclerOptions.Builder<Manot>()
                     .setQuery(query, Manot.class)
