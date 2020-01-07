@@ -5,11 +5,15 @@ import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.transition.AutoTransition;
+import androidx.transition.TransitionManager;
 
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
@@ -30,7 +34,7 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
         this.context = context;
 
     }
-    
+
     @Override
     protected void onBindViewHolder(@NonNull final OrderListItemHolder holder, int position, @NonNull final OrderListItem model) {
         holder.textViewTitle.setText(model.getSerial());//TODO - change to normal title
@@ -41,7 +45,22 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
 
         statusTextHandler(holder, model);
 
+
+        holder.infoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (holder.expandableView.getVisibility()==View.GONE){
+                    TransitionManager.beginDelayedTransition(holder.cardView, new AutoTransition());
+                    holder.expandableView.setVisibility(View.VISIBLE);
+                } else {
+                    TransitionManager.beginDelayedTransition(holder.cardView, new AutoTransition());
+                    holder.expandableView.setVisibility(View.GONE);
+                }
+            }
+        });
     }
+
+
 
     /**
      * this function inserts the relevant text to the "order status" textView,
@@ -126,7 +145,8 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
         ProgressBar progressBar;
         TextView statusText;
         TextView priceText;
-
+        LinearLayout expandableView;
+        CardView cardView;
 
         public OrderListItemHolder(View itemView) {
             super(itemView);
@@ -136,6 +156,8 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
             progressBar = itemView.findViewById(R.id.order_progress);
             priceText = itemView.findViewById(R.id.money_text);
             statusText = itemView.findViewById(R.id.status);
+            expandableView = itemView.findViewById(R.id.expanded_layout);
+            cardView = itemView.findViewById(R.id.card_layout);
         }
     }
 
