@@ -30,7 +30,7 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
     private static final int MIN_ORDER = 70;
     private final Context context;
     static int mExpandedPosition = -1;
-    private int  previousExpandedPosition = -1;
+    private int previousExpandedPosition = -1;
     private RecyclerView recyclerView = null;
 
 
@@ -50,17 +50,22 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
 
         statusTextHandler(holder, model);
 
+        expandableLayoutHandler(holder);
+
+
+    }
+
+    private void expandableLayoutHandler(@NonNull final OrderListItemHolder holder) {
         holder.infoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                holder.expandableView.toggle(true);
+                if (!holder.expandableView.isExpanded()) {
+                    holder.expandableView.expand(true);
+                } else {
+                    holder.expandableView.expand(true);
+                }
             }
         });
-
-
-
-
-
     }
 
 
@@ -166,6 +171,7 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
 
         }
     }
+
     @Override
     public void onAttachedToRecyclerView(@NonNull RecyclerView recyclerView) {
         super.onAttachedToRecyclerView(recyclerView);
