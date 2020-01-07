@@ -21,13 +21,13 @@
             android:padding="20dp">
 
             <TextView
-                android:id="@+id/text_mana"
+                android:id="@+id/price_mana"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/varela_round"
                 android:text="ManaMana"
                 android:textSize="18sp"
-                app:layout_constraintBottom_toBottomOf="@+id/price_mana"
+                app:layout_constraintBottom_toBottomOf="@+id/text_mana"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toEndOf="@+id/payment_image"
@@ -43,7 +43,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/price_mana"
+                android:id="@+id/text_mana"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/varela_round"
@@ -52,7 +52,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.504" />
+                app:layout_constraintVertical_bias="0.5" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
