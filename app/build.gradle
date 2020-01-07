@@ -45,6 +45,7 @@ dependencies {
     // FirebaseUI for Cloud Storage
     implementation 'com.firebaseui:firebase-ui-storage:6.2.0'
     implementation 'com.google.android.material:material:1.0.0'
+    implementation 'net.cachapa.expandablelayout:expandablelayout:2.9.2'
 
 }
 apply plugin: 'com.google.gms.google-services'
