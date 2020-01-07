@@ -81,42 +81,29 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <net.cachapa.expandablelayout.ExpandableLayout
+            android:layoutDirection="rtl"
             android:id="@+id/expandable_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/light_salmon"
             app:el_duration="1000"
-            app:el_expanded="false"
+            app:el_expanded="true"
             app:el_parallax="0.5">
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                >
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="16dp"
-                    android:text="Fixed height" />
+                    android:fontFamily="@font/varela_round"
+                    android:text="יוסי:70,אשראי\nאבנר:90, מזומן\nויטלי: 20 מזומן\nיוסי:70,אשראי\nאבנר:90, מזומן\nויטלי: 20 מזומן\nיוסי:70,אשראי\nאבנר:90, מזומן\nויטלי: 20 מזומן\nיוסי:70,אשראי\nאבנר:90, מזומן\nויטלי: 20 מזומן\n" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="16dp"
-                    android:text="Fixed height" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="16dp"
-                    android:text="Fixed height" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="16dp"
-                    android:text="Fixed height" />
             </LinearLayout>
         </net.cachapa.expandablelayout.ExpandableLayout>
 
