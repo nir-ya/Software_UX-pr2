@@ -22,28 +22,56 @@
             android:id="@+id/order_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
             android:fontFamily="@font/varela_round"
             android:text="הזמנה לשעה 20:00"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textColor="@color/dark_navy"
+            android:textColor="@color/darkestGreen"
             android:textStyle="bold"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/money_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/varela_round"
+            android:text="הכסף שנצבר: 70 מתוך 70 שקלים"
+            android:textColor="@color/dark_green"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="@+id/order_title"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@id/order_title"
+            app:layout_constraintTop_toBottomOf="@id/order_title" />
 
         <ProgressBar
             android:id="@+id/order_progress"
             style="@android:style/Widget.ProgressBar.Horizontal"
             android:layout_width="match_parent"
             android:layout_height="25dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="15dp"
             android:indeterminateTintMode="src_in"
             android:max="70"
             android:progress="45"
             android:progressDrawable="@drawable/progress_bar_green"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/order_title" />
+            app:layout_constraintTop_toBottomOf="@id/money_text" />
+
+        <TextView
+            android:id="@+id/status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/varela_round"
+            android:text="סטטוס: מחכה לשילוח"
+            android:textColor="@color/TextGreen"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="@+id/order_title"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@id/order_title"
+            app:layout_constraintTop_toBottomOf="@id/order_progress" />
+
 
         <Button
             android:id="@+id/btn_join"
@@ -57,13 +85,12 @@
             app:layout_constraintEnd_toStartOf="@+id/btn_info"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/order_progress" />
+            app:layout_constraintTop_toBottomOf="@id/status" />
 
         <Button
             android:id="@+id/btn_info"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/order_progress"
             android:layout_toLeftOf="@id/btn_join"
             android:background="@drawable/border_button"
             android:fontFamily="@font/varela_round"

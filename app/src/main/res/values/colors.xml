@@ -11,5 +11,7 @@
     <color name="light_peach">#fcd7a1</color>
     <color name="dark_green">#52857a</color>
     <color name="dark_navy">#0b2b26</color>
+    <color name="grey">#bdbdbd</color>
+    <color name="dark_grey">#757575</color>
 
 </resources>
