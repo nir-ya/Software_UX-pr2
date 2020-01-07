@@ -55,6 +55,10 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
 
     }
 
+    /**
+     * a function that set the expandableLayout on and off
+     * @param holder
+     */
     private void expandableLayoutHandler(@NonNull final OrderListItemHolder holder) {
         holder.infoButton.setOnClickListener(new View.OnClickListener() {
             @Override
