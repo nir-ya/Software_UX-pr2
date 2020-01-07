@@ -22,7 +22,7 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
 
 
     private static final int CRITICAL_PRICE = 45;
-    private static final int MAX_PRICE = 70;
+    private static final int MIN_ORDER = 70;
     private final Context context;
 
     public OrderListItemAdapter(@NonNull FirestoreRecyclerOptions<OrderListItem> options, Context context) {
@@ -30,7 +30,7 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
         this.context = context;
 
     }
-
+    
     @Override
     protected void onBindViewHolder(@NonNull final OrderListItemHolder holder, int position, @NonNull final OrderListItem model) {
         holder.textViewTitle.setText(model.getSerial());//TODO - change to normal title
@@ -43,6 +43,12 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
 
     }
 
+    /**
+     * this function inserts the relevant text to the "order status" textView,
+     * by the relevant order status
+     * @param holder - the RecyclerView item holder
+     * @param model - the "Order" object
+     */
     private void statusTextHandler(OrderListItemHolder holder, OrderListItem model) {
         if (model.getStatus().equals("open")) {
             if (model.getPrice() > CRITICAL_PRICE) {
@@ -59,12 +65,22 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
 
     }
 
+    /**
+     * a function that change graphics to "locked" status graphics, if order is locked
+     * @param holder - the RecyclerView item holder
+     */
     private void lock_order(OrderListItemHolder holder) {
         holder.statusText.setText("ההזמנה יצאה");
         holder.joinButton.setText("נעול");
         holder.joinButton.setBackgroundColor(context.getResources().getColor(R.color.grey));
         holder.progressBar.setProgressDrawable(context.getDrawable(R.drawable.progress_bar_locked));    }
 
+    /**
+     * this function inserts the relevant text to the "order price" textView,
+     * by the relevant order collected money
+     * @param holder - the RecyclerView item holder
+     * @param model - the "Order" object
+     */
     private void priceTextHandler(OrderListItemHolder holder, OrderListItem model) {
         String priceStr = Integer.toString(model.getPrice());
         String priceTextInput = String.format("הכסף שנצבר: %s מתוך 70 שקלים", priceStr);
@@ -72,11 +88,17 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
 
     }
 
+    /**
+     * this function changes the status bar by the order price ration (price/MIN_ORDER)
+     * by the relevant order collected money
+     * @param holder - the RecyclerView item holder
+     * @param model - the "Order" object
+     */
     private void progressBarHandler(@NonNull OrderListItemHolder holder, OrderListItem model) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             holder.progressBar.setProgress(model.getPrice(), TRUE);
-            if (model.getPrice() > 70) {
-                holder.progressBar.setProgress(70, TRUE);
+            if (model.getPrice() > MIN_ORDER) {
+                holder.progressBar.setProgress(MIN_ORDER, TRUE);
 
             }
         }
