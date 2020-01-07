@@ -37,7 +37,7 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
     private final Context context;
 
     private RecyclerView recyclerView = null;
-
+    private ManotAdapter adapter;
 
     public OrderListItemAdapter(@NonNull FirestoreRecyclerOptions<OrderListItem> options, Context context) {
         super(options);
@@ -71,6 +71,8 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
             public void onClick(View view) {
                 if (!holder.expandableView.isExpanded()) {
                     holder.expandableView.expand(true);
+
+
 
                 } else {
                     holder.expandableView.collapse(true);
@@ -188,7 +190,7 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
             FirestoreRecyclerOptions options = new FirestoreRecyclerOptions.Builder<Manot>()
                     .setQuery(query, Manot.class)
                     .build();
-            ManotAdapter adapter = new ManotAdapter(options, itemView.getContext());
+            adapter = new ManotAdapter(options, itemView.getContext());
             LinearLayoutManager layout = new LinearLayoutManager(itemView.getContext());
             layout.setOrientation(RecyclerView.VERTICAL);
             manotList.setLayoutManager(layout);
