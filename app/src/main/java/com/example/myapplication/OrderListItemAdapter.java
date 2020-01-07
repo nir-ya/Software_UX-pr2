@@ -62,7 +62,7 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
                 if (!holder.expandableView.isExpanded()) {
                     holder.expandableView.expand(true);
                 } else {
-                    holder.expandableView.expand(true);
+                    holder.expandableView.collapse(true);
                 }
             }
         });
