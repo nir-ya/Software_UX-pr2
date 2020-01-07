@@ -107,19 +107,24 @@
             </LinearLayout>
         </net.cachapa.expandablelayout.ExpandableLayout>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/light_peach"
-            android:padding="5dp">
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="20dp">
 
             <Button
+                android:layout_weight="1"
                 android:id="@+id/btn_join"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/full_button"
                 android:backgroundTint="@color/darkestGreen"
                 android:text="הצטרף"
+                android:layout_margin="10dp"
+                android:paddingLeft="30dp"
+                android:paddingRight="30dp"
                 android:textColor="@color/lightGrey"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/btn_info"
@@ -134,6 +139,8 @@
                 android:layout_toLeftOf="@id/btn_join"
                 android:background="@drawable/border_button"
                 android:fontFamily="@font/varela_round"
+                android:layout_weight="1"
+                android:layout_margin="10dp"
 
                 android:text="מי שם?"
                 android:textColor="@color/dark_navy"
@@ -142,7 +149,7 @@
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/btn_join"
                 app:layout_constraintTop_toTopOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
 
 
     </LinearLayout>
