@@ -58,9 +58,6 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
 
         expandableLayoutHandler(holder);
 
-
-
-
     }
 
     /**
