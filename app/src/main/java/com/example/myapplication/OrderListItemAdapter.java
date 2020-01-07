@@ -11,11 +11,15 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 
 import android.view.View;
 
@@ -24,13 +28,14 @@ import net.cachapa.expandablelayout.ExpandableLayout;
 import static java.lang.Boolean.TRUE;
 
 public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem, OrderListItemAdapter.OrderListItemHolder> {
-
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private CollectionReference ordersRef = db.collection("OpenOrders")
+            .document("open2").collection("Manot");
 
     private static final int CRITICAL_PRICE = 45;
     private static final int MIN_ORDER = 70;
     private final Context context;
-    static int mExpandedPosition = -1;
-    private int previousExpandedPosition = -1;
+
     private RecyclerView recyclerView = null;
 
 
@@ -57,6 +62,7 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
 
     /**
      * a function that set the expandableLayout on and off
+     *
      * @param holder
      */
     private void expandableLayoutHandler(@NonNull final OrderListItemHolder holder) {
@@ -65,6 +71,7 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
             public void onClick(View view) {
                 if (!holder.expandableView.isExpanded()) {
                     holder.expandableView.expand(true);
+
                 } else {
                     holder.expandableView.collapse(true);
                 }
@@ -161,6 +168,7 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
         TextView priceText;
         ExpandableLayout expandableView;
         CardView cardView;
+        RecyclerView manotList;
 
         public OrderListItemHolder(View itemView) {
             super(itemView);
@@ -172,6 +180,20 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
             statusText = itemView.findViewById(R.id.status);
             expandableView = itemView.findViewById(R.id.expandable_layout);
             cardView = itemView.findViewById(R.id.card_layout);
+            manotList = itemView.findViewById(R.id.manot_list);
+
+
+            Query query = ordersRef.orderBy("index", Query.Direction.DESCENDING);
+
+            FirestoreRecyclerOptions options = new FirestoreRecyclerOptions.Builder<Manot>()
+                    .setQuery(query, Manot.class)
+                    .build();
+            ManotAdapter adapter = new ManotAdapter(options, itemView.getContext());
+            LinearLayoutManager layout = new LinearLayoutManager(itemView.getContext());
+            layout.setOrientation(RecyclerView.VERTICAL);
+            manotList.setLayoutManager(layout);
+            manotList.setAdapter(adapter);
+            adapter.startListening();
 
         }
     }
@@ -182,5 +204,6 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
 
         this.recyclerView = recyclerView;
     }
+
 
 }
