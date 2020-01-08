@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/light_peach">
+
+
+    <TextView
+        android:id="@+id/orderTimeHeaderTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="116dp"
+        android:fontFamily="@font/varela_round"
+        android:gravity="center"
+        android:text="הזמנה לשעה:"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/orderTimeTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="28dp"
+        android:fontFamily="@font/varela_round"
+        android:text="18:00"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/myBagListView"
+        app:layout_constraintEnd_toStartOf="@+id/orderTimeHeaderTxt" />
+
+    <ListView
+        android:id="@+id/myBagListView"
+        android:layout_width="412dp"
+        android:layout_height="270dp"
+        android:layout_marginTop="28dp"
+        android:layout_weight="1"
+        android:background="#00FFFFFF"
+        android:cacheColorHint="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/orderTimeHeaderTxt" />
+
+    <TextView
+        android:id="@+id/totalTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="116dp"
+        android:text="סך כל ההזמנה"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:fontFamily="@font/varela_round"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/myBagListView" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:text="₪ 45"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:fontFamily="@font/varela_round"
+        app:layout_constraintEnd_toStartOf="@+id/totalTxt"
+        app:layout_constraintHorizontal_bias="0.869"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/myBagListView" />
+
+    <TextView
+        android:id="@+id/howYouPayTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="164dp"
+        android:text="תשלום במזומן"
+        android:textColor="@color/gunmetal"
+        android:textSize="14dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/totalTxt" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

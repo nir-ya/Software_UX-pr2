@@ -29,7 +29,13 @@
         android:text="Open orders:"
         android:textSize="18sp" />
 
-
+    <Button
+        android:id="@+id/myBagBtn"
+        android:layout_width="60dp"
+        android:layout_height="53dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/bag" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
@@ -37,5 +43,7 @@
         android:scrollbars="vertical"
         android:id="@+id/orders_recycler_view"
         android:layout_below="@id/orders"/>
+
+
 
 </RelativeLayout>
