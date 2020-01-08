@@ -58,7 +58,22 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
 
         expandableLayoutHandler(holder, model);
 
-    }
+
+
+        CollectionReference manotRef = db.collection("OpenOrders")
+                .document(model.getSerial()).collection("Manot");
+
+        Query query = manotRef.orderBy("price", Query.Direction.DESCENDING);
+
+        FirestoreRecyclerOptions options = new FirestoreRecyclerOptions.Builder<Manot>()
+                .setQuery(query, Manot.class)
+                .build();
+        adapter = new ManotAdapter(options, holder.itemView.getContext());
+        LinearLayoutManager layout = new LinearLayoutManager(holder.itemView.getContext());
+        layout.setOrientation(RecyclerView.VERTICAL);
+        holder.manotList.setLayoutManager(layout);
+        holder.manotList.setAdapter(adapter);
+        adapter.startListening();    }
 
     /**
      * a function that s.et the expandableLayout on and off
@@ -182,26 +197,6 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
             cardView = itemView.findViewById(R.id.card_layout);
             manotList = itemView.findViewById(R.id.manot_list);
 
-
-            recyclerSetUp(itemView, "open2");
-
-        }
-
-        private void recyclerSetUp(View itemView, String doc) {
-            CollectionReference ordersRef = db.collection("OpenOrders")
-                    .document(doc).collection("Manot");
-
-            Query query = ordersRef.orderBy("price", Query.Direction.DESCENDING);
-
-            FirestoreRecyclerOptions options = new FirestoreRecyclerOptions.Builder<Manot>()
-                    .setQuery(query, Manot.class)
-                    .build();
-            adapter = new ManotAdapter(options, itemView.getContext());
-            LinearLayoutManager layout = new LinearLayoutManager(itemView.getContext());
-            layout.setOrientation(RecyclerView.VERTICAL);
-            manotList.setLayoutManager(layout);
-            manotList.setAdapter(adapter);
-            adapter.startListening();
         }
     }
 
