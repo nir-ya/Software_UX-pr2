@@ -42,7 +42,7 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
     public OrderListItemAdapter(@NonNull FirestoreRecyclerOptions<OrderListItem> options, Context context) {
         super(options);
         this.context = context;
-        ;
+
 
     }
 
@@ -205,6 +205,10 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
         }
     }
 
+    /**
+     * this function is important for the expandable view to work
+     * @param recyclerView
+     */
     @Override
     public void onAttachedToRecyclerView(@NonNull RecyclerView recyclerView) {
         super.onAttachedToRecyclerView(recyclerView);
