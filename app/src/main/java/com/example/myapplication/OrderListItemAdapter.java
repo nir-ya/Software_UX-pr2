@@ -24,7 +24,6 @@ import com.google.firebase.firestore.Query;
 import android.view.View;
 
 
-
 import net.cachapa.expandablelayout.ExpandableLayout;
 
 import static java.lang.Boolean.TRUE;
@@ -43,6 +42,7 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
     public OrderListItemAdapter(@NonNull FirestoreRecyclerOptions<OrderListItem> options, Context context) {
         super(options);
         this.context = context;
+        ;
 
     }
 
@@ -56,24 +56,22 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
 
         statusTextHandler(holder, model);
 
-        expandableLayoutHandler(holder);
+        expandableLayoutHandler(holder, model);
 
     }
 
     /**
-     * a function that set the expandableLayout on and off
+     * a function that s.et the expandableLayout on and off
      *
      * @param holder
      */
-    private void expandableLayoutHandler(@NonNull final OrderListItemHolder holder) {
+    private void expandableLayoutHandler(@NonNull final OrderListItemHolder holder, final OrderListItem model) {
+        holder.expandableView.collapse();
         holder.infoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (!holder.expandableView.isExpanded()) {
                     holder.expandableView.expand(true);
-
-
-
                 } else {
                     holder.expandableView.collapse(true);
                 }
@@ -184,8 +182,14 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
             cardView = itemView.findViewById(R.id.card_layout);
             manotList = itemView.findViewById(R.id.manot_list);
 
+
+            recyclerSetUp(itemView, "open2");
+
+        }
+
+        private void recyclerSetUp(View itemView, String doc) {
             CollectionReference ordersRef = db.collection("OpenOrders")
-                    .document("open2").collection("Manot");
+                    .document(doc).collection("Manot");
 
             Query query = ordersRef.orderBy("price", Query.Direction.DESCENDING);
 
@@ -198,7 +202,6 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
             manotList.setLayoutManager(layout);
             manotList.setAdapter(adapter);
             adapter.startListening();
-
         }
     }
 

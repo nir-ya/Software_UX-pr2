@@ -82,6 +82,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <net.cachapa.expandablelayout.ExpandableLayout
+
             android:layoutDirection="rtl"
             android:id="@+id/expandable_layout"
             android:layout_width="match_parent"
