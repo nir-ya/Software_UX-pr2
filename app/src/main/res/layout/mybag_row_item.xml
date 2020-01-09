@@ -5,34 +5,38 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/off_white"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:id="@+id/parent_layout">
 
 
     <TextView
         android:id="@+id/manaTypeTxt"
-        android:layout_width="108dp"
-        android:layout_height="36dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="36dp"
         android:layout_marginEnd="16dp"
         android:fontFamily="@font/varela_round"
         android:text="פלאפל"
-        android:textSize="24dp"
+        android:textColor="@color/dusty_teal"
+        android:textSize="26dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 
     <TextView
         android:id="@+id/manaPriceTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="8dp"
         android:fontFamily="@font/varela_round"
         android:text="₪ 20"
+        android:textColor="@color/dusty_teal"
         android:textSize="15dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/manaTypeTxt"
         app:layout_constraintTop_toTopOf="parent" />
-
 
     <TextView
         android:id="@+id/tosafutTxtHeader"
@@ -41,22 +45,26 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:fontFamily="@font/varela_round"
+        android:textColor="@color/dusty_teal"
         android:text="תוספות:"
         android:textSize="15dp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/manaTypeTxt" />
 
 
     <TextView
         android:id="@+id/tosafutTxt"
-        android:layout_width="323dp"
-        android:layout_height="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:fontFamily="@font/varela_round"
         android:text="טחינה, עמבה, סחוג"
+        android:textColor="@color/dusty_teal"
         android:textSize="15dp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/tosafutTxtHeader"
-        app:layout_constraintHorizontal_bias="0.857"
+        app:layout_constraintHorizontal_bias="0.938"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/manaPriceTxt"
         app:layout_constraintVertical_bias="1.0" />

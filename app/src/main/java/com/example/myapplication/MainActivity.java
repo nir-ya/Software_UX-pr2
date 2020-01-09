@@ -7,8 +7,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.text.Layout;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 
 
+import com.firebase.ui.database.FirebaseListAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -18,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     private  FirebaseFirestore db = FirebaseFirestore.getInstance();
     private CollectionReference ordersRef = db.collection("Orders");
 
+
     private OrderListItemAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         
         setUpRecyclerView();
+
 
     }
 

@@ -31,13 +31,13 @@
         android:text="18:00"
         android:textSize="20dp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/myBagListView"
+        app:layout_constraintBottom_toTopOf="@+id/myBagRecyclerView"
         app:layout_constraintEnd_toStartOf="@+id/orderTimeHeaderTxt" />
 
-    <ListView
-        android:id="@+id/myBagListView"
-        android:layout_width="412dp"
-        android:layout_height="270dp"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/myBagRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
         android:layout_weight="1"
         android:background="#00FFFFFF"
@@ -58,7 +58,7 @@
         android:textStyle="bold"
         android:fontFamily="@font/varela_round"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/myBagListView" />
+        app:layout_constraintTop_toBottomOf="@+id/myBagRecyclerView" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -71,7 +71,7 @@
         app:layout_constraintEnd_toStartOf="@+id/totalTxt"
         app:layout_constraintHorizontal_bias="0.869"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/myBagListView" />
+        app:layout_constraintTop_toBottomOf="@+id/myBagRecyclerView" />
 
     <TextView
         android:id="@+id/howYouPayTxt"
