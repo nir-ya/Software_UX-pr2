@@ -1,41 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:background="@color/backgroundGreen">
+    android:background="@color/backgroundGreen"
+    android:padding="20dp"
+    tools:context=".MainActivity">
 
     <TextView
         android:id="@+id/greeting"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello Avner"
+        android:fontFamily="@font/varela_round"
+        android:text="אהלן אבנר!"
+        android:textSize="24sp"
+        android:layout_marginTop="30dp"
+        android:textStyle="bold"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        android:textSize="24sp" />
+    <ImageView
+        android:id="@+id/bag"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginLeft="5dp"
+        android:src="@drawable/bag"
+        app:layout_constraintBottom_toBottomOf="@+id/greeting"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="@id/greeting" />
+    <TextView
+        android:id="@+id/bag_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ההזמנה שלי"
+        android:textSize="12sp"
+        app:layout_constraintRight_toRightOf="@id/bag"
+        app:layout_constraintLeft_toLeftOf="@id/bag"
+        app:layout_constraintTop_toBottomOf="@id/bag"/>
+
+
     <View
         android:id="@+id/line"
         android:layout_width="match_parent"
         android:layout_height="1dp"
+        android:layout_marginTop="15dp"
         android:background="@android:color/darker_gray"
-        android:layout_below="@id/greeting"/>
-
-    <TextView
-        android:id="@+id/orders"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/line"
-        android:text="Open orders:"
-        android:textSize="18sp" />
-
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bag_text" />
 
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scrollbars="vertical"
+        android:requiresFadingEdge="vertical"
         android:id="@+id/orders_recycler_view"
-        android:layout_below="@id/orders"/>
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scrollbars="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/line"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="20dp"
+        android:scrollbarThumbHorizontal="@color/dark_navy"
+        android:scrollbarSize="1dp"
+        android:scrollbarStyle="outsideOverlay"
+        />
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
