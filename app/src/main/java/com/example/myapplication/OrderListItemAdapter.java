@@ -37,19 +37,17 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
     private final Context context;
 
     private RecyclerView recyclerView = null;
-    private ManotAdapter adapter;
+    private ManaAdapter adapter;
 
     public OrderListItemAdapter(@NonNull FirestoreRecyclerOptions<OrderListItem> options, Context context) {
         super(options);
         this.context = context;
-
 
     }
 
     @Override
     protected void onBindViewHolder(@NonNull final OrderListItemHolder holder, final int position, @NonNull final OrderListItem model) {
         holder.textViewTitle.setText(model.getSerial());//TODO - change to normal title
-        //holder.expandableView.setVisibility(View.VISIBLE);
         progressBarHandler(holder, model);
 
         priceTextHandler(holder, model);
@@ -59,21 +57,29 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
         expandableLayoutHandler(holder, model);
 
 
-
-        CollectionReference manotRef = db.collection("OpenOrders")
+        CollectionReference manotRef = db.collection(MainActivity.COLLECTION)
                 .document(model.getSerial()).collection("Manot");
 
         Query query = manotRef.orderBy("price", Query.Direction.DESCENDING);
 
-        FirestoreRecyclerOptions options = new FirestoreRecyclerOptions.Builder<Manot>()
-                .setQuery(query, Manot.class)
+        FirestoreRecyclerOptions options = new FirestoreRecyclerOptions.Builder<Mana>()
+                .setQuery(query, Mana.class)
                 .build();
-        adapter = new ManotAdapter(options, holder.itemView.getContext());
+        adapter = new ManaAdapter(options, holder.itemView.getContext());
         LinearLayoutManager layout = new LinearLayoutManager(holder.itemView.getContext());
         layout.setOrientation(RecyclerView.VERTICAL);
         holder.manotList.setLayoutManager(layout);
         holder.manotList.setAdapter(adapter);
-        adapter.startListening();    }
+        adapter.startListening();
+
+
+        System.out.println("!!!!!!!!!!!!!!!!!!");
+        System.out.println(manotRef.getPath());
+        System.out.println(model.getSerial());
+
+
+    }
+
 
     /**
      * a function that s.et the expandableLayout on and off
@@ -104,14 +110,9 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
      */
     private void statusTextHandler(OrderListItemHolder holder, OrderListItem model) {
         if (model.getStatus().equals("open")) {
-            if (model.getPrice() > CRITICAL_PRICE) {
-                holder.statusText.setText("סטטוס: מוכנה לשילוח!");
-            } else {
-                holder.statusText.setText("סטטוס: מחכה למשבחים...");
-            }
+                open_order(holder, model);
         } else if (model.getStatus().equals("locked")) {
             lock_order(holder);
-
         }
 
     }
@@ -126,6 +127,26 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
         holder.joinButton.setText("נעול");
         holder.joinButton.setBackgroundColor(context.getResources().getColor(R.color.grey));
         holder.progressBar.setProgressDrawable(context.getDrawable(R.drawable.progress_bar_locked));
+    }
+
+    /**
+     * a function that graphics "open" orders
+     * @param holder - the RecyclerView item holder
+     * @param model - the orderListItem relevant item
+     */
+    private void open_order(OrderListItemHolder holder, OrderListItem model) {
+        holder.joinButton.setText("הצטרף!");
+        holder.joinButton.setBackgroundColor(context.getResources().getColor(R.color.dark_navy));
+        if (model.getPrice() >= CRITICAL_PRICE) {
+            holder.statusText.setText("מוכנה לשילוח!");
+            holder.progressBar.setProgressDrawable(context.getDrawable(R.drawable.progress_bar_green));
+        }
+        else {
+            holder.statusText.setText("מחכה למשבחים...");
+            holder.progressBar.setProgressDrawable(context.getDrawable(R.drawable.progress_bar_orange));
+        }
+
+
     }
 
     /**
@@ -197,11 +218,13 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
             cardView = itemView.findViewById(R.id.card_layout);
             manotList = itemView.findViewById(R.id.manot_list);
 
+
         }
     }
 
     /**
      * this function is important for the expandable view to work
+     *
      * @param recyclerView
      */
     @Override
@@ -209,6 +232,7 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
         super.onAttachedToRecyclerView(recyclerView);
 
         this.recyclerView = recyclerView;
+
     }
 
 

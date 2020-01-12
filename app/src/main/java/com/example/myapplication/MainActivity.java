@@ -15,8 +15,10 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
 public class MainActivity extends AppCompatActivity {
+    static final String COLLECTION = "OpenOrders";
+
     private  FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private CollectionReference ordersRef = db.collection("OpenOrders");
+    private CollectionReference ordersRef = db.collection(COLLECTION);
 
     private OrderListItemAdapter adapter;
     @Override

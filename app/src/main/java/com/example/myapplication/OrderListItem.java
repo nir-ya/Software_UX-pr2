@@ -25,6 +25,6 @@ public class OrderListItem {
     }
 
     public String getStatus() {
-        return status;
+        return status.toLowerCase();
     }
 }
