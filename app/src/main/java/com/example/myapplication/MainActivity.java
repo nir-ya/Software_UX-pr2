@@ -4,8 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.text.Layout;
+import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
@@ -16,9 +19,16 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
     private  FirebaseFirestore db = FirebaseFirestore.getInstance();
     private CollectionReference ordersRef = db.collection("Orders");
+
+    private Button myBagBtn;
+    ArrayList<String> mManaType = new ArrayList<>();
+    ArrayList<String> mManaPrice = new ArrayList<>();
+    ArrayList<String> mmTosafut = new ArrayList<>();
 
 
     private OrderListItemAdapter adapter;
@@ -26,9 +36,28 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        
         setUpRecyclerView();
 
+        mManaType.add("פלאפל");
+        mManaType.add("לאפה");
+        mManaPrice.add("20 שח");
+        mManaPrice.add("25 שח");
+        mmTosafut.add("טחינה,עמבה,סחוג");
+        mmTosafut.add("כל התוספות");
+
+
+        myBagBtn = findViewById(R.id.myBagBtn);
+        myBagBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Dialog myBagDialog = new Dialog(MainActivity.this);
+                myBagDialog.setTitle("My Bag");
+                myBagDialog.setContentView(R.layout.mybag_dialog);
+                setUpRecyclerViewBag();
+                myBagDialog.show();
+
+            }
+        });
 
     }
 
@@ -44,6 +73,14 @@ public class MainActivity extends AppCompatActivity {
         layout.setOrientation(RecyclerView.VERTICAL);
         recyclerView.setLayoutManager(layout);
         recyclerView.setAdapter(adapter);
+
+    }
+
+    private void setUpRecyclerViewBag() {
+        RecyclerView recyclerMyBag = findViewById(R.id.myBagRecyclerView);
+        MyBagAdapter myBagAdapter = new MyBagAdapter(mManaType,mManaPrice,mmTosafut,this);
+        recyclerMyBag.setAdapter(myBagAdapter);
+        recyclerMyBag.setLayoutManager(new LinearLayoutManager(this));
 
     }
 

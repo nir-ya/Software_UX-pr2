@@ -37,10 +37,7 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
     protected void onBindViewHolder(@NonNull final OrderListItemHolder holder, int position, @NonNull final OrderListItem model) {
         holder.textViewTitle.setText(model.getOrderTime());//TODO - change to normal title
 
-
         progressBarHandler(holder, model);
-
-
 
     }
 
