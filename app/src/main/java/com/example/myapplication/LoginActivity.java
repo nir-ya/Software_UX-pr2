@@ -15,13 +15,11 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+
 public class LoginActivity extends AppCompatActivity {
 
-//    private static final String TAG = "shevach";
-//        String username, password, emailAddress;
     EditText nameText, passwordText, emailText;
     private FirebaseAuth firebaseAuth;
-//    private FirebaseUser firebaseUser;
 
 
     @Override
@@ -31,6 +29,10 @@ public class LoginActivity extends AppCompatActivity {
 
         firebaseAuth = FirebaseAuth.getInstance();
 
+        assignViewsFromLayout();
+    }
+
+    private void assignViewsFromLayout() {
         nameText = findViewById(R.id.username_text);
         passwordText = findViewById(R.id.password_text);
         emailText = findViewById(R.id.email_text);
@@ -40,8 +42,9 @@ public class LoginActivity extends AppCompatActivity {
     public void onStart() {
         super.onStart();
 
-        //todo?
+        //todo sign in?
     }
+
 
     public void login(View view) {
 
@@ -94,7 +97,6 @@ public class LoginActivity extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
 
-        //todo?
-//        firebaseAuth.signOut();
+        // todo sign out?
     }
 }
