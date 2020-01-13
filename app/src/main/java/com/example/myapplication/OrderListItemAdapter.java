@@ -2,6 +2,7 @@ package com.example.myapplication;
 
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -29,6 +31,10 @@ import net.cachapa.expandablelayout.ExpandableLayout;
 import static java.lang.Boolean.TRUE;
 
 public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem, OrderListItemAdapter.OrderListItemHolder> {
+    private static final String OPEN_ORDERS_COLLECTION = Resources.getSystem().getString(R.string.open_orders);
+    private static final String MANOT_SUBCOLLECTION = Resources.getSystem().getString(R.string.manot_collection);
+
+    
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
 
@@ -57,8 +63,8 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
         expandableLayoutHandler(holder, model);
 
 
-        CollectionReference manotRef = db.collection(MainActivity.COLLECTION)
-                .document(model.getSerial()).collection("Manot");
+        CollectionReference manotRef = db.collection(OPEN_ORDERS_COLLECTION)
+                .document(model.getSerial()).collection(MANOT_SUBCOLLECTION);
 
         Query query = manotRef.orderBy("price", Query.Direction.DESCENDING);
 

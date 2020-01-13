@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">My Application</string>
+    <string name="open_orders">OpenOrders</string>
+    <string name="price">price</string>
+    <string name="my_order">ההזמנה שלי</string>
+    <string name="manot_collection">Manot</string>
+    <string name="owner_field">owner</string>
 </resources>

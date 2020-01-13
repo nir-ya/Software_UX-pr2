@@ -16,14 +16,11 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
-import java.util.ArrayList;
-
 public class MainActivity extends AppCompatActivity {
-    static final String COLLECTION = "OpenOrders";
 
     //fireBase Objects
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private CollectionReference ordersRef = db.collection(COLLECTION);
+    private CollectionReference ordersRef = db.collection(getString(R.string.open_orders));
 
     //adapters
     private OrderListItemAdapter orderAdapter;
@@ -43,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
      * this function is setting up the orders recycler view
      */
     private void setUpOrdersRecyclerView() {
-        Query query = ordersRef.orderBy("price", Query.Direction.DESCENDING);
+        Query query = ordersRef.orderBy(getString(R.string.price), Query.Direction.DESCENDING);
 
         FirestoreRecyclerOptions options = new FirestoreRecyclerOptions.Builder<OrderListItem>().setQuery(query, OrderListItem.class)
                 .build();
@@ -63,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
      */
     public void callDialog(View view) {
         Dialog myBagDialog = new Dialog(MainActivity.this);
-        myBagDialog.setTitle("ההזמנה שלי");
+        myBagDialog.setTitle(getString(R.string.my_order));
         myBagDialog.setContentView(R.layout.mybag_dialog);
         myBagDialog.show();
 
@@ -76,7 +73,11 @@ public class MainActivity extends AppCompatActivity {
      * @param myBagDialog parent dialog popup windows
      */
     private void setUpMyBag(Dialog myBagDialog) {
-        Query query = db.collectionGroup("Manot").whereEqualTo("owner","luli");
+       //this is an example query: "luli" is just a generic name for checking the filtering from
+        //collections
+        //Todo: change luli to getUserId after merging
+        Query query = db.collectionGroup(getString(R.string.manot_collection))
+                .whereEqualTo(getString(R.string.owner_field),"luli");
 
         FirestoreRecyclerOptions options = new FirestoreRecyclerOptions.Builder<Mana>()
                 .setQuery(query, Mana.class)
