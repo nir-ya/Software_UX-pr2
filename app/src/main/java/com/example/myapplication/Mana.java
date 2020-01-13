@@ -21,8 +21,8 @@ public class Mana {
     static final int HALF_PITA = 3;
     static final int HALF_LAFA = 4;
     //-- Payment methods
-    static final int MEZUMAN = 1;
-    static final int CREDIT = 2;
+    static final int MEZUMAN = 0;
+    static final int CREDIT = 1;
     //-- Order status options
     private static final String OPEN = "open";
     private static final int LOCKED = 2;

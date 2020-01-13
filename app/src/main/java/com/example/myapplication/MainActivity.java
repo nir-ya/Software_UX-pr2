@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
      * this function is calling the dialog
      * @param view - the button that his onClick call the function
      */
-    public void callDialog(View view) {
+    public void launchDialog(View view) {
         Dialog myBagDialog = new Dialog(MainActivity.this);
         myBagDialog.setTitle(getString(R.string.my_order));
         myBagDialog.setContentView(R.layout.mybag_dialog);

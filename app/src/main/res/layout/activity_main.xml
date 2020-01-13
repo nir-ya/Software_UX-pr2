@@ -29,7 +29,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/greeting"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="@id/greeting"
-        android:onClick="callDialog"
+        android:onClick="launchDialog"
 
         />
     <TextView
