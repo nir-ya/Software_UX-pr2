@@ -9,4 +9,17 @@
     <string name="login_button_text">כנס</string>
     <string name="email_hint">כתובת e-mail</string>
     <string name="password_hint">סיסמה</string>
+    <string name="welcome_str">אהלן אבנר!</string>
+    <string name="hour_for">הזמנה לשעה:</string>
+    <string name="sum_order_string">סך כל ההזמנה</string>
+    <string name="payment_method">תשלום במזומן</string>
+    <string name="type_string">פלאפל</string>
+    <string name="price_shekels">₪ 20</string>
+    <string name="additions_header_string">תוספות:</string>
+    <string name="delete_string">מחק</string>
+    <string name="update_string">עדכן</string>
+    <string name="status_string">סטטוס: מחכה לשילוח</string>
+    <string name="join_string">הצטרף</string>
+    <string name="info_string">מי שם?</string>
+    <string name="money_made">הכסף שנצבר: %s מתוך 70 שקלים</string>
 </resources>
