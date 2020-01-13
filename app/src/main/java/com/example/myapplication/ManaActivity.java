@@ -24,7 +24,6 @@ public class ManaActivity extends AppCompatActivity {
     GridLayout gridView;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
