@@ -52,6 +52,7 @@
         app:layout_constraintTop_toBottomOf="@+id/bag_text" />
 
 
+
     <androidx.recyclerview.widget.RecyclerView
         android:requiresFadingEdge="vertical"
         android:id="@+id/orders_recycler_view"
@@ -70,3 +71,4 @@
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+

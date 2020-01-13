@@ -71,13 +71,6 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
         holder.manotList.setLayoutManager(layout);
         holder.manotList.setAdapter(adapter);
         adapter.startListening();
-
-
-        System.out.println("!!!!!!!!!!!!!!!!!!");
-        System.out.println(manotRef.getPath());
-        System.out.println(model.getSerial());
-
-
     }
 
 
@@ -114,7 +107,7 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
         } else if (model.getStatus().equals("locked")) {
             lock_order(holder);
         }
-
+        progressBarHandler(holder, model);
     }
 
     /**
@@ -175,15 +168,12 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
             holder.progressBar.setProgress(model.getPrice(), TRUE);
             if (model.getPrice() > MIN_ORDER) {
                 holder.progressBar.setProgress(MIN_ORDER, TRUE);
-
             }
         }
         if (model.getPrice() > CRITICAL_PRICE) {
             holder.progressBar.setProgressDrawable(context.getDrawable(R.drawable.progress_bar_green));
-
         } else {
             holder.progressBar.setProgressDrawable(context.getDrawable(R.drawable.progress_bar_orange));
-
         }
     }
 
