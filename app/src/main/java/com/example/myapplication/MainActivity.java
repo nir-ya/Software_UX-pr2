@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
                 .setQuery(query, Mana.class)
                 .build();
 
-        MyBagAdapter myBagAdapter = new MyBagAdapter(options, this);
+        final MyBagAdapter myBagAdapter = new MyBagAdapter(options, this);
 
         RecyclerView myBagRecView = myBagDialog.findViewById(R.id.myBagRecyclerView);
 
@@ -89,6 +89,13 @@ public class MainActivity extends AppCompatActivity {
         myBagRecView.setLayoutManager(layout);
         myBagRecView.setAdapter(myBagAdapter);
         myBagAdapter.startListening();
+
+        myBagDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialogInterface) {
+                myBagAdapter.stopListening();
+            }
+        });
     }
 
     /**
