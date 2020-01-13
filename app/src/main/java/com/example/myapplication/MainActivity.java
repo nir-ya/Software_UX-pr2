@@ -37,28 +37,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setUpRecyclerView();
-
-        mManaType.add("פלאפל");
-        mManaType.add("לאפה");
-        mManaPrice.add("20 שח");
-        mManaPrice.add("25 שח");
-        mmTosafut.add("טחינה,עמבה,סחוג");
-        mmTosafut.add("כל התוספות");
-
-
-        myBagBtn = findViewById(R.id.myBagBtn);
-        myBagBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Dialog myBagDialog = new Dialog(MainActivity.this);
-                myBagDialog.setTitle("My Bag");
-                myBagDialog.setContentView(R.layout.mybag_dialog);
-                setUpRecyclerViewBag();
-                myBagDialog.show();
-
-            }
-        });
-
     }
 
     private void setUpRecyclerView() {
