@@ -25,9 +25,6 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private CollectionReference ordersRef = db.collection(COLLECTION);
 
-    //views
-    private ImageView bag;
-
     //adapters
     private OrderListItemAdapter orderAdapter;
     private MyBagAdapter bagAdapter;
@@ -81,13 +78,11 @@ public class MainActivity extends AppCompatActivity {
                 .build();
 
         final MyBagAdapter myBagAdapter = new MyBagAdapter(options, this);
-
         RecyclerView myBagRecView = myBagDialog.findViewById(R.id.myBagRecyclerView);
-
         LinearLayoutManager layout = new LinearLayoutManager(this.getApplicationContext());
-
         myBagRecView.setLayoutManager(layout);
         myBagRecView.setAdapter(myBagAdapter);
+        //start listening
         myBagAdapter.startListening();
 
         myBagDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
@@ -102,7 +97,8 @@ public class MainActivity extends AppCompatActivity {
      * connect views to xml shapes
      */
     private void connectToXML() {
-        bag = findViewById(R.id.bag);
+        //views
+        ImageView bag = findViewById(R.id.bag);
     }
 
     @Override
