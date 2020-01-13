@@ -43,6 +43,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:orientation="vertical"
         android:id="@+id/myBagRecyclerView"
         android:layout_width="416dp"
         android:layout_height="196dp"

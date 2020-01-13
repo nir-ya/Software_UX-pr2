@@ -80,7 +80,6 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
      * @param holder
      */
     private void expandableLayoutHandler(@NonNull final OrderListItemHolder holder, final OrderListItem model) {
-        holder.expandableView.collapse();
         holder.infoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -153,7 +152,6 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
         String priceStr = Integer.toString(model.getPrice());
         String priceTextInput = String.format("הכסף שנצבר: %s מתוך 70 שקלים", priceStr);
         holder.priceText.setText(priceTextInput);
-
     }
 
     /**
