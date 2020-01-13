@@ -1,102 +1,112 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/off_white"
-    android:orientation="vertical"
-    android:id="@+id/parent_layout">
+    android:layout_width="match_parent"
+>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/parent_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/off_white"
+        android:orientation="vertical"
+        android:paddingBottom="10dp"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp">
 
 
-    <TextView
-        android:id="@+id/manaTypeTxt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="16dp"
-        android:fontFamily="@font/varela_round"
-        android:text="פלאפל"
-        android:textColor="@color/dusty_teal"
-        android:textSize="26dp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/manaTypeTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="16dp"
+            android:fontFamily="@font/varela_round"
+            android:text="פלאפל"
+            android:textColor="@color/dusty_teal"
+            android:textSize="26dp"
+            android:textStyle="bold"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
-    <TextView
-        android:id="@+id/manaPriceTxt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="8dp"
-        android:fontFamily="@font/varela_round"
-        android:text="₪ 20"
-        android:textColor="@color/dusty_teal"
-        android:textSize="15dp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/manaTypeTxt"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/manaPriceTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:fontFamily="@font/varela_round"
+            android:text="₪ 20"
+            android:textColor="@color/dusty_teal"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/manaTypeTxt"
+            app:layout_constraintRight_toLeftOf="@+id/manaTypeTxt"
+            app:layout_constraintTop_toTopOf="@id/manaTypeTxt" />
 
-    <TextView
-        android:id="@+id/tosafutTxtHeader"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:fontFamily="@font/varela_round"
-        android:textColor="@color/dusty_teal"
-        android:text="תוספות:"
-        android:textSize="15dp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/manaTypeTxt" />
-
-
-    <TextView
-        android:id="@+id/tosafutTxt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/varela_round"
-        android:text="טחינה, עמבה, סחוג"
-        android:textColor="@color/dusty_teal"
-        android:textSize="15dp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/tosafutTxtHeader"
-        app:layout_constraintHorizontal_bias="0.938"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/manaPriceTxt"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <Button
-        android:id="@+id/deleteBtn"
-        android:layout_width="73dp"
-        android:layout_height="37dp"
-        android:layout_marginStart="116dp"
-        android:layout_marginTop="22dp"
-        android:background="@color/transparent"
-        android:fontFamily="@font/varela_round"
-        android:text="מחק"
-        android:textColor="@color/faded_orange"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/updateBtn"
-        android:layout_width="73dp"
-        android:layout_height="37dp"
-        android:layout_marginTop="22dp"
-        android:layout_marginEnd="8dp"
-        android:background="@color/darkestGreen"
-        android:fontFamily="@font/varela_round"
-        android:text="עדכן"
-        android:textColor="@color/lightGrey"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/deleteBtn"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/tosafutTxtHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="16dp"
+            android:fontFamily="@font/varela_round"
+            android:text="תוספות:"
+            android:textColor="@color/dusty_teal"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/updateBtn" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/tosafutTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:fontFamily="@font/varela_round"
+            android:text="טחינה, עמבה, סחוג"
+            android:textColor="@color/dusty_teal"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/tosafutTxtHeader"
+            app:layout_constraintRight_toLeftOf="@id/tosafutTxtHeader"
+            app:layout_constraintTop_toTopOf="@id/tosafutTxtHeader" />
+
+        <Button
+            android:id="@+id/deleteBtn"
+            android:layout_width="73dp"
+            android:layout_height="37dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/border_button"
+            android:fontFamily="@font/varela_round"
+            android:text="מחק"
+            android:textColor="@color/faded_orange"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/updateBtn"
+            android:layout_width="73dp"
+            android:layout_height="37dp"
+            android:layout_marginLeft="15dp"
+            android:background="@color/darkestGreen"
+            android:fontFamily="@font/varela_round"
+            android:text="עדכן"
+            android:textColor="@color/lightGrey"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/deleteBtn"
+            app:layout_constraintLeft_toRightOf="@id/deleteBtn"
+            app:layout_constraintTop_toTopOf="@id/deleteBtn" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

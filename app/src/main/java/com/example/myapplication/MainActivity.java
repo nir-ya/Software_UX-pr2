@@ -89,7 +89,6 @@ public class MainActivity extends AppCompatActivity {
     public void callDialog(View view) {
         Dialog myBagDialog = new Dialog(MainActivity.this);
         myBagDialog.setTitle("ההזמנה שלי");
-
         myBagDialog.setContentView(R.layout.mybag_dialog);
         myBagRecView = myBagDialog.findViewById(R.id.myBagRecyclerView);
         myBagRecView.setAdapter(bagAdapter);
