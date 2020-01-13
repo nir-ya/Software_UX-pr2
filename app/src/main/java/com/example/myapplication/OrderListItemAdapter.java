@@ -30,9 +30,6 @@ import net.cachapa.expandablelayout.ExpandableLayout;
 import static java.lang.Boolean.TRUE;
 
 public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem, OrderListItemAdapter.OrderListItemHolder> {
-    private static final String OPEN_ORDERS_COLLECTION = Resources.getSystem().getString(R.string.open_orders);
-    private static final String MANOT_SUBCOLLECTION = Resources.getSystem().getString(R.string.manot_collection);
-    private static final String MONEY_MADE = Resources.getSystem().getString(R.string.money_made);
 
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -60,11 +57,11 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
 
         setStatusTextView(holder, model);
 
-        expandableLayoutHandler(holder, model);
+        setOrderDescriptionExpansion(holder, model);
 
 
-        CollectionReference manotRef = db.collection(OPEN_ORDERS_COLLECTION)
-                .document(model.getSerial()).collection(MANOT_SUBCOLLECTION);
+        CollectionReference manotRef = db.collection(Constants.OPEN_ORDERS_COLLECTION)
+                .document(model.getSerial()).collection(Constants.MANOT_SUBCOLLECTION);
 
         Query query = manotRef.orderBy("price", Query.Direction.DESCENDING);
 
@@ -85,7 +82,7 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
      *
      * @param holder
      */
-    private void expandableLayoutHandler(@NonNull final OrderListItemHolder holder, final OrderListItem model) {
+    private void setOrderDescriptionExpansion(@NonNull final OrderListItemHolder holder, final OrderListItem model) {
         holder.infoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -107,9 +104,9 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
      * @param model  - the "Order" object
      */
     private void setStatusTextView(OrderListItemHolder holder, OrderListItem model) {
-        if (model.getStatus().equals("open")) {
+        if (model.getStatus().equals(OrderListItem.OPEN)) {
                 openOrder(holder, model);
-        } else if (model.getStatus().equals("locked")) {
+        } else if (model.getStatus().equals(OrderListItem.LOCKED)) {
             lockOrder(holder);
         }
         setProgressBar(holder, model);
@@ -121,8 +118,8 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
      * @param holder - the RecyclerView item holder
      */
     private void lockOrder(OrderListItemHolder holder) {
-        holder.statusText.setText("ההזמנה יצאה");
-        holder.joinButton.setText("נעול");
+        holder.statusText.setText(Constants.ORDER_OUT);
+        holder.joinButton.setText(Constants.LOCKED_TEXT);
         holder.joinButton.setBackgroundColor(context.getResources().getColor(R.color.grey));
         holder.progressBar.setProgressDrawable(context.getDrawable(R.drawable.progress_bar_locked));
     }
@@ -133,14 +130,14 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
      * @param model - the orderListItem relevant item
      */
     private void openOrder(OrderListItemHolder holder, OrderListItem model) {
-        holder.joinButton.setText("הצטרף!");
+        holder.joinButton.setText(Constants.JOIN_TEXT);
         holder.joinButton.setBackgroundColor(context.getResources().getColor(R.color.dark_navy));
         if (model.getPrice() >= CRITICAL_PRICE) {
-            holder.statusText.setText("מוכנה לשילוח!");
+            holder.statusText.setText(Constants.READY_TEXT);
             holder.progressBar.setProgressDrawable(context.getDrawable(R.drawable.progress_bar_green));
         }
         else {
-            holder.statusText.setText("מחכה למשבחים...");
+            holder.statusText.setText(Constants.WAITING);
             holder.progressBar.setProgressDrawable(context.getDrawable(R.drawable.progress_bar_orange));
         }
 
@@ -156,7 +153,7 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
      */
     private void setPriceTextView(OrderListItemHolder holder, OrderListItem model) {
         String priceStr = Integer.toString(model.getPrice());
-        String priceTextInput = String.format(MONEY_MADE, priceStr);
+        String priceTextInput = String.format(Constants.MONEY_MADE, priceStr);
         holder.priceText.setText(priceTextInput);
     }
 

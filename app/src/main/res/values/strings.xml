@@ -19,7 +19,11 @@
     <string name="delete_string">מחק</string>
     <string name="update_string">עדכן</string>
     <string name="status_string">סטטוס: מחכה לשילוח</string>
-    <string name="join_string">הצטרף</string>
+    <string name="join_string">הצטרף!</string>
     <string name="info_string">מי שם?</string>
     <string name="money_made">הכסף שנצבר: %s מתוך 70 שקלים</string>
+    <string name="locked_str">נעול</string>
+    <string name="ready_str">\"סטטוס: מוכנה לשילוח\"</string>
+    <string name="order_out">ההזמנה יצאה</string>
+    <string name="waiting">מחכה למשבחים...</string>
 </resources>
