@@ -39,22 +39,40 @@ public class LoginActivity extends AppCompatActivity {
     public void onStart() {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        updateUI(currentUser);
+//        FirebaseUser currentUser = mAuth.getCurrentUser();
     }
+
 
     public void login(View view) {
 
         // todo error handling
-        String username = nameText.getText().toString();
-        String password = passwordText.getText().toString();
-        String emailAddress = emailText.getText().toString();
+        final String username = nameText.getText().toString();
+        final String emailAddress = emailText.getText().toString();
+        final String password = passwordText.getText().toString();
 
-        // todo delete
-        String testMessage =
-                "username: " + username + "\n email: " + emailAddress + "\n password: " + password;
-        Toast.makeText(this, testMessage, Toast.LENGTH_SHORT).show();
+        mAuth.signInWithEmailAndPassword(emailAddress, password).addOnCompleteListener(this,
+                new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d(TAG, "signInWithEmail:success");
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            Toast.makeText(LoginActivity.this, "user logged in",
+                                    Toast.LENGTH_SHORT).show();
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w(TAG, "signInWithEmail:failure", task.getException());
 
+                            register(username, emailAddress, password);
+                        }
+
+                        // ...
+                    }
+                });
+    }
+
+    private void register(String username, String emailAddress, String password) {
         mAuth.createUserWithEmailAndPassword(emailAddress, password).addOnCompleteListener(this,
                 new OnCompleteListener<AuthResult>() {
                     @Override
@@ -63,31 +81,31 @@ public class LoginActivity extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "createUserWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-                            updateUI(user);
+                            Toast.makeText(LoginActivity.this, "user signed up",
+                                    Toast.LENGTH_SHORT).show();
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
                             Toast.makeText(LoginActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
-                            updateUI(null);
                         }
                     }
 
                 });
     }
 
-    private void updateUI(FirebaseUser user) {
-        if (user == null) {
-            Toast.makeText(this, "no user", Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(this, "user logged in", Toast.LENGTH_SHORT).show();
-        }
-    }
+//    private void updateUI(FirebaseUser user) {
+//        if (user == null) {
+//            Toast.makeText(this, "no user", Toast.LENGTH_SHORT).show();
+//        } else {
+//            Toast.makeText(this, "user logged in", Toast.LENGTH_SHORT).show();
+//        }
+//    }
 
     @Override
     protected void onStop() {
         super.onStop();
 
-        mAuth.signOut();
+//        mAuth.signOut();
     }
 }
