@@ -41,7 +41,6 @@ public class MyBagAdapter extends RecyclerView.Adapter<MyBagAdapter.MyBagHolder>
         holder.manaPrice.setText(mManaPrice.get(position));
         holder.tosafut.setText(mTosafut.get(position));
 
-
     }
 
     @Override
