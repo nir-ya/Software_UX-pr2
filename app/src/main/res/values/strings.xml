@@ -5,4 +5,8 @@
     <string name="my_order">ההזמנה שלי</string>
     <string name="manot_collection">Manot</string>
     <string name="owner_field">owner</string>
+    <string name="username_hint">שם משתמש</string>
+    <string name="login_button_text">כנס</string>
+    <string name="email_hint">כתובת e-mail</string>
+    <string name="password_hint">סיסמה</string>
 </resources>
