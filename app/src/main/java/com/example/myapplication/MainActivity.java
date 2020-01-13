@@ -39,7 +39,9 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
+    /**
+     * this function is setting up the orders recycler view
+     */
     private void setUpOrdersRecyclerView() {
         Query query = ordersRef.orderBy("price", Query.Direction.DESCENDING);
 
@@ -55,7 +57,10 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
+    /**
+     * this function is calling the dialog
+     * @param view - the button that his onClick call the function
+     */
     public void callDialog(View view) {
         Dialog myBagDialog = new Dialog(MainActivity.this);
         myBagDialog.setTitle("ההזמנה שלי");
