@@ -6,14 +6,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Dialog;
 import android.os.Bundle;
-import android.text.Layout;
 import android.view.View;
-import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.ListView;
+import android.widget.ImageView;
 
 
-import com.firebase.ui.database.FirebaseListAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -27,54 +23,85 @@ public class MainActivity extends AppCompatActivity {
     private  FirebaseFirestore db = FirebaseFirestore.getInstance();
     private CollectionReference ordersRef = db.collection(COLLECTION);
 
-    private Button myBagBtn;
+    private ImageView bag;
+    private RecyclerView myBagRecView;
+
     ArrayList<String> mManaType = new ArrayList<>();
     ArrayList<String> mManaPrice = new ArrayList<>();
     ArrayList<String> mmTosafut = new ArrayList<>();
 
 
-    private OrderListItemAdapter adapter;
+
+
+
+    private OrderListItemAdapter orderAdapter;
+    private MyBagAdapter bagAdapter;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        connectToXML();
         setUpRecyclerView();
+
+        addFictiveData();
     }
+
+    private void addFictiveData() {
+        mManaType.add("Hi");
+        mManaPrice.add("90");
+        mmTosafut.add("bye");
+        mManaType.add("wow");
+        mManaPrice.add("100");
+        mmTosafut.add("WOW");
+    }
+
 
     private void setUpRecyclerView() {
         Query query = ordersRef.orderBy("price",Query.Direction.DESCENDING);
 
         FirestoreRecyclerOptions options = new FirestoreRecyclerOptions.Builder<OrderListItem>().setQuery(query,OrderListItem.class)
                 .build();
-        adapter = new OrderListItemAdapter(options, this.getApplicationContext());
+        orderAdapter = new OrderListItemAdapter(options, this.getApplicationContext());
 
         RecyclerView recyclerView = findViewById(R.id.orders_recycler_view);
         LinearLayoutManager layout =new LinearLayoutManager(this);
         layout.setOrientation(RecyclerView.VERTICAL);
         recyclerView.setLayoutManager(layout);
-        recyclerView.setAdapter(adapter);
+        recyclerView.setAdapter(orderAdapter);
 
     }
 
-    private void setUpRecyclerViewBag() {
-        RecyclerView recyclerMyBag = findViewById(R.id.myBagRecyclerView);
-        MyBagAdapter myBagAdapter = new MyBagAdapter(mManaType,mManaPrice,mmTosafut,this);
-        recyclerMyBag.setAdapter(myBagAdapter);
-        recyclerMyBag.setLayoutManager(new LinearLayoutManager(this));
-
-    }
 
     @Override
     protected void onStart() {
         super.onStart();
-        adapter.startListening();
+        orderAdapter.startListening();
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        adapter.stopListening();
+        orderAdapter.stopListening();
+    }
+
+    public void callDialog(View view) {
+        Dialog myBagDialog = new Dialog(MainActivity.this);
+        myBagDialog.setTitle("ההזמנה שלי");
+
+        myBagDialog.setContentView(R.layout.mybag_dialog);
+        myBagRecView = myBagDialog.findViewById(R.id.myBagRecyclerView);
+        myBagRecView.setAdapter(bagAdapter);
+        bagAdapter = new MyBagAdapter(mManaType,mManaPrice,mmTosafut,this);
+        myBagRecView.setAdapter(bagAdapter);
+        myBagRecView.setLayoutManager(new LinearLayoutManager(this));
+
+        myBagDialog.show();
+    }
+
+    private void connectToXML() {
+        bag = findViewById(R.id.bag);
     }
 }
 

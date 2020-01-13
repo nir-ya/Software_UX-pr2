@@ -28,7 +28,9 @@
         android:src="@drawable/bag"
         app:layout_constraintBottom_toBottomOf="@+id/greeting"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="@id/greeting" />
+        app:layout_constraintTop_toTopOf="@id/greeting"
+        android:onClick="callDialog"
+        />
     <TextView
         android:id="@+id/bag_text"
         android:layout_width="wrap_content"
