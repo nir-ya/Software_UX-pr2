@@ -22,16 +22,21 @@ public class ManaPickerActivity extends AppCompatActivity {
         setContentView(R.layout.mana_picker);
 
         models = new ArrayList<>();
-        models.add(new ManaListItem(R.drawable.pita, "פיתה","20 שקלים"));
         models.add(new ManaListItem(R.drawable.pita, "חצי פיתה","15 שקלים"));
+        models.add(new ManaListItem(R.drawable.pita, "פיתה","20 שקלים"));
         models.add(new ManaListItem(R.drawable.lafa, "לאפה","25 שקלים"));
-
 
         adapter = new ManaPickerAdapter(models,this);
 
         viewPager = findViewById(R.id.manaPager);
         viewPager.setAdapter(adapter);
-        viewPager.setPadding(10,0,10,0);
+        viewPager.setPadding(0,0,0,0);
+        viewPager.setCurrentItem(1);
+
+
+        DepthTransformation depthTransformation = new DepthTransformation();
+        viewPager.setPageTransformer(true, depthTransformation);
+
 
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
