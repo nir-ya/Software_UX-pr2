@@ -10,8 +10,8 @@
     <string name="email_hint">כתובת e-mail</string>
     <string name="password_hint">סיסמה</string>
     <string name="welcome_str">אהלן אבנר!</string>
-    <string name="hour_for">הזמנה לשעה:</string>
-    <string name="sum_order_string">סך כל ההזמנה</string>
+    <string name="hour_for">הזמנתך לשעה: %s</string>
+    <string name="sum_order_string">הזמנה בסך %s שקלים</string>
     <string name="payment_method">תשלום במזומן</string>
     <string name="type_string">פלאפל</string>
     <string name="price_shekels">₪ 20</string>
@@ -25,9 +25,8 @@
     <string name="locked_str">נעול</string>
     <string name="ready_str">\"סטטוס: מוכנה לשילוח\"</string>
     <string name="order_out">ההזמנה יצאה</string>
-    <string name="waiting">מחכה למשבחים...</string>
+    <string name="waiting">מחכה למשבחים…</string>
     <string name="my_order_str">ההזמנה שלי</string>
-    <string name="title_activity_main2">Main2Activity</string>
     <string name="new_order_success">הזמנתך נוספה בהצלחה!</string>
     <string name="new_order_fail">אוי! משהו קרה..תנסה שוב כפרה</string>
 </resources>
