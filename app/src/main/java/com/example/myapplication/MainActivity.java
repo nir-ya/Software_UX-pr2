@@ -11,6 +11,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -191,16 +192,13 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void popToast(boolean sucsses) {
+    private void popToast(boolean success) {
         int msgId = R.string.new_order_success;
-        if (sucsses == false) {
+        if (success == false) {
             msgId = R.string.new_order_fail;
-            Toast toast = Toast.makeText(MainActivity.this, getResources().getString(msgId), Toast.LENGTH_LONG);
-            toast.getView().setBackgroundColor(getResources().getColor(R.color.dark_navy));
-            TextView v = (TextView) toast.getView().findViewById(android.R.id.message);
-            v.setTextColor(Color.WHITE);
-            toast.show();
         }
+        Toast.makeText(MainActivity.this, getResources().getString(msgId), Toast.LENGTH_LONG).show();
     }
 }
+
 
