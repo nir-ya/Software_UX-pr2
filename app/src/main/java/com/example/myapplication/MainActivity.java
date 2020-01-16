@@ -10,16 +10,22 @@ import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
 
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.CollectionReference;
@@ -28,6 +34,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
 import java.util.Calendar;
+import java.util.Collection;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -74,8 +81,8 @@ public class MainActivity extends AppCompatActivity {
      * @param view - the button that his onClick call the function
      */
     public void launchDialog(View view) {
-        Dialog myBagDialog = new Dialog(MainActivity.this);
-        myBagDialog.setTitle(getString(R.string.my_order));
+        Dialog myBagDialog = new Dialog(MainActivity.this, R.style.Theme_Dialog);
+        myBagDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         myBagDialog.setContentView(R.layout.mybag_dialog);
         myBagDialog.show();
 
@@ -164,17 +171,35 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void addOrdertoServer() {
-        final OrderListItem order = new OrderListItem("serial",0,"open");
+        final OrderListItem order = new OrderListItem("ser", 0, "open");
         ordersRef.add(order).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
             @Override
-            public void onComplete(@NonNull Task<DocumentReference> task) {
-                task.getResult().collection("Manot").add(new Mana("avnush",0,10));
+            public void onComplete(@NonNull final Task<DocumentReference> task) {
+                task.getResult()
+                        .collection("Manot")
+                        .add(new Mana("avnush", 0, 10))
+                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                            @Override
+                            public void onSuccess(DocumentReference documentReference) {
+                                popToast(true);
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        popToast(false);
+                    }
+                });
             }
         });
+    }
 
-
-
-
+    private void popToast(boolean success) {
+        int msgId = R.string.new_order_success;
+        if (success == false) {
+            msgId = R.string.new_order_fail;
+        }
+        Toast.makeText(MainActivity.this, getResources().getString(msgId), Toast.LENGTH_LONG).show();
     }
 }
+
 

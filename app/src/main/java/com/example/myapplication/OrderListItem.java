@@ -10,9 +10,6 @@ public class OrderListItem {
     static final String LOCKED = "locked";
     static final String OPEN = "open";
 
-
-
-
     private final static int MIN_ORDER = 70;
     private String serial;
     private int price;
