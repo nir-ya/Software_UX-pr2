@@ -48,11 +48,12 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <ImageView
+            <CheckBox
                 android:id="@+id/humus_image"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
-                android:src="@drawable/hummus" />
+                android:button="@null"
+                android:background="@drawable/humus_selector"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -67,11 +68,12 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <ImageView
+            <CheckBox
                 android:id="@+id/harif_image"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
-                android:src="@drawable/harif" />
+                android:button="@null"
+                android:background="@drawable/harif_selector" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -86,11 +88,12 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <ImageView
+            <CheckBox
                 android:id="@+id/pickles_image"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
-                android:src="@drawable/pickle" />
+                android:button="@null"
+                android:background="@drawable/pickle_selector"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -107,11 +110,12 @@
             android:layout_gravity="center"
             android:orientation="vertical">
 
-            <ImageView
+            <CheckBox
                 android:id="@+id/onion_image"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
-                android:src="@drawable/onion" />
+                android:button="@null"
+                android:background="@drawable/onion_selector" />
 
 
             <TextView
@@ -127,11 +131,12 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <ImageView
+            <CheckBox
                 android:id="@+id/tomato_image"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
-                android:src="@drawable/tomato" />
+                android:button="@null"
+                android:background="@drawable/tomato_selector" />
 
 
             <TextView
@@ -147,11 +152,12 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <ImageView
+            <CheckBox
                 android:id="@+id/cucumber_image"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
-                android:src="@drawable/cucumber" />
+                android:button="@null"
+                android:background="@drawable/cucumber_selector" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -166,11 +172,12 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <ImageView
+            <CheckBox
                 android:id="@+id/eggplant_image"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
-                android:src="@drawable/eggplant" />
+                android:button="@null"
+                android:background="@drawable/eggplant_selector" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -187,11 +194,12 @@
             android:orientation="vertical">
 
 
-            <ImageView
+            <CheckBox
                 android:id="@+id/chips_image"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
-                android:src="@drawable/chips" />
+                android:button="@null"
+                android:background="@drawable/chips_selector" />
 
 
             <TextView
@@ -208,11 +216,12 @@
             android:orientation="vertical">
 
 
-            <ImageView
+            <CheckBox
                 android:id="@+id/tahini_image"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
-                android:src="@drawable/tahini" />
+                android:button="@null"
+                android:background="@drawable/tahini_selector" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -228,11 +237,12 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <ImageView
+            <CheckBox
                 android:id="@+id/amba_image"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
-                android:src="@drawable/amba" />
+                android:button="@null"
+                android:background="@drawable/amba_selector" />
 
             <TextView
                 android:layout_width="wrap_content"
