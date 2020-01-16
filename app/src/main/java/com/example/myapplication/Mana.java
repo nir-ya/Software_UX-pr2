@@ -21,10 +21,10 @@ public class Mana {
     static final int HALF_PITA = 3;
     static final int HALF_LAFA = 4;
     //-- Payment methods
-    static final int MEZUMAN = 1;
-    static final int CREDIT = 2;
+    static final int MEZUMAN = 0;
+    static final int CREDIT = 1;
     //-- Order status options
-    private static final int OPEN = 1;
+    private static final String OPEN = "open";
     private static final int LOCKED = 2;
     private static final int APP = 3;
     //-- Tosafot
@@ -55,7 +55,7 @@ public class Mana {
     public HashMap<String, Integer> tosafot = new HashMap<>();
     public String costumer_notes;
     //-- Logistic related vars
-    public int status;
+    public String status;
     public int in_order;
     public String owner;
     public int paymentMethod;
@@ -64,7 +64,7 @@ public class Mana {
         return paymentMethod;
     }
 
-    public int serial_no;
+
     public static int counter = 1;
 
 
@@ -80,7 +80,6 @@ public class Mana {
     Mana(String owner) {
         status = OPEN;
         in_order = 0;
-        serial_no = counter++;
         this.owner = owner;
     }
 
@@ -92,7 +91,7 @@ public class Mana {
     Mana(Mana source) {
         status = OPEN;
         in_order = 0;
-        serial_no = counter++;
+
         owner = source.owner;
         type = source.type;
         paymentMethod = source.paymentMethod;
@@ -110,7 +109,6 @@ public class Mana {
     Mana(String owner, int type, int payment_method) {
         status = OPEN;
         in_order = 0;
-        serial_no = counter++;
         this.owner = owner;
         this.type = type;
         this.paymentMethod = payment_method;
@@ -118,25 +116,8 @@ public class Mana {
         this.paymentMethod = payment_method;
     }
 
-    @NonNull
-    @Override
-    public String toString() {
-        String mana_string = owner + ": " + getTypeStr(type) + ", "
-                + paymentStr(paymentMethod);
-        if (in_order == 0) {
-            mana_string += ", Ready for ordering: " + isReadyToOrder() + ".";
-        } else {
-            mana_string += ", Part of order serial number: " + in_order;
-        }
-        if (costumer_notes != null)
-            mana_string += ". NOTE: " + costumer_notes;
-        return mana_string + " (Mana serial number " + serial_no + ")";
-    }
 
     // Getters
-    int getSerial() {
-        return serial_no;
-    }
 
     public int getType() {
         return type;
@@ -238,9 +219,6 @@ public class Mana {
         return (type != INVALID) && (paymentMethod != INVALID);
     }
 
-    void lock() {
-        status = LOCKED;
-    }
 
     void addToOrder(int order_no) {
         in_order = order_no;
@@ -254,4 +232,7 @@ public class Mana {
         return this.owner;
     }
 
+    void lock(){
+
+    }
 }

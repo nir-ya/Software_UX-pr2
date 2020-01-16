@@ -42,7 +42,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:fontFamily="@font/varela_round"
-                android:text="הכסף שנצבר: 70 מתוך 70 שקלים"
+                android:text="@string/money_made"
                 android:textColor="@color/dark_green"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="@+id/order_title"
@@ -70,7 +70,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:fontFamily="@font/varela_round"
-                android:text="סטטוס: מחכה לשילוח"
+                android:text="@string/status_string"
                 android:textColor="@color/TextGreen"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="@+id/order_title"
@@ -89,7 +89,7 @@
             android:layout_height="wrap_content"
             android:background="@color/light_salmon"
             app:el_duration="1000"
-            app:el_expanded="true"
+            app:el_expanded="false"
             app:el_parallax="0.5">
 
             <LinearLayout
@@ -122,7 +122,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/full_button"
                 android:backgroundTint="@color/darkestGreen"
-                android:text="הצטרף"
+                android:text="@string/join_string"
                 android:layout_margin="10dp"
                 android:paddingLeft="30dp"
                 android:paddingRight="30dp"
@@ -137,7 +137,6 @@
                 android:id="@+id/btn_info"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toLeftOf="@id/btn_join"
                 android:background="@drawable/border_button"
                 android:fontFamily="@font/varela_round"
                 android:layout_weight="1"
@@ -145,7 +144,7 @@
                 android:layout_marginTop="20dp"
 
 
-                android:text="מי שם?"
+                android:text="@string/info_string"
                 android:textColor="@color/dark_navy"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

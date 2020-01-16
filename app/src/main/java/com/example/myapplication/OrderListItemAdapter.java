@@ -2,6 +2,7 @@ package com.example.myapplication;
 
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -29,6 +30,8 @@ import net.cachapa.expandablelayout.ExpandableLayout;
 import static java.lang.Boolean.TRUE;
 
 public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem, OrderListItemAdapter.OrderListItemHolder> {
+
+
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
 
@@ -48,17 +51,17 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
     @Override
     protected void onBindViewHolder(@NonNull final OrderListItemHolder holder, final int position, @NonNull final OrderListItem model) {
         holder.textViewTitle.setText(model.getSerial());//TODO - change to normal title
-        progressBarHandler(holder, model);
+        setProgressBar(holder, model);
 
-        priceTextHandler(holder, model);
+        setPriceTextView(holder, model);
 
-        statusTextHandler(holder, model);
+        setStatusTextView(holder, model);
 
-        expandableLayoutHandler(holder, model);
+        setOrderDescriptionExpansion(holder, model);
 
 
-        CollectionReference manotRef = db.collection(MainActivity.COLLECTION)
-                .document(model.getSerial()).collection("Manot");
+        CollectionReference manotRef = db.collection(Constants.OPEN_ORDERS_COLLECTION)
+                .document(model.getSerial()).collection(Constants.MANOT_SUBCOLLECTION);
 
         Query query = manotRef.orderBy("price", Query.Direction.DESCENDING);
 
@@ -79,8 +82,7 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
      *
      * @param holder
      */
-    private void expandableLayoutHandler(@NonNull final OrderListItemHolder holder, final OrderListItem model) {
-        holder.expandableView.collapse();
+    private void setOrderDescriptionExpansion(@NonNull final OrderListItemHolder holder, final OrderListItem model) {
         holder.infoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -101,13 +103,13 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
      * @param holder - the RecyclerView item holder
      * @param model  - the "Order" object
      */
-    private void statusTextHandler(OrderListItemHolder holder, OrderListItem model) {
-        if (model.getStatus().equals("open")) {
-                open_order(holder, model);
-        } else if (model.getStatus().equals("locked")) {
-            lock_order(holder);
+    private void setStatusTextView(OrderListItemHolder holder, OrderListItem model) {
+        if (model.getStatus().equals(OrderListItem.OPEN)) {
+                openOrder(holder, model);
+        } else if (model.getStatus().equals(OrderListItem.LOCKED)) {
+            lockOrder(holder);
         }
-        progressBarHandler(holder, model);
+        setProgressBar(holder, model);
     }
 
     /**
@@ -115,9 +117,9 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
      *
      * @param holder - the RecyclerView item holder
      */
-    private void lock_order(OrderListItemHolder holder) {
-        holder.statusText.setText("ההזמנה יצאה");
-        holder.joinButton.setText("נעול");
+    private void lockOrder(OrderListItemHolder holder) {
+        holder.statusText.setText(Constants.ORDER_OUT);
+        holder.joinButton.setText(Constants.LOCKED_TEXT);
         holder.joinButton.setBackgroundColor(context.getResources().getColor(R.color.grey));
         holder.progressBar.setProgressDrawable(context.getDrawable(R.drawable.progress_bar_locked));
     }
@@ -127,15 +129,15 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
      * @param holder - the RecyclerView item holder
      * @param model - the orderListItem relevant item
      */
-    private void open_order(OrderListItemHolder holder, OrderListItem model) {
-        holder.joinButton.setText("הצטרף!");
+    private void openOrder(OrderListItemHolder holder, OrderListItem model) {
+        holder.joinButton.setText(Constants.JOIN_TEXT);
         holder.joinButton.setBackgroundColor(context.getResources().getColor(R.color.dark_navy));
         if (model.getPrice() >= CRITICAL_PRICE) {
-            holder.statusText.setText("מוכנה לשילוח!");
+            holder.statusText.setText(Constants.READY_TEXT);
             holder.progressBar.setProgressDrawable(context.getDrawable(R.drawable.progress_bar_green));
         }
         else {
-            holder.statusText.setText("מחכה למשבחים...");
+            holder.statusText.setText(Constants.WAITING);
             holder.progressBar.setProgressDrawable(context.getDrawable(R.drawable.progress_bar_orange));
         }
 
@@ -149,11 +151,10 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
      * @param holder - the RecyclerView item holder
      * @param model  - the "Order" object
      */
-    private void priceTextHandler(OrderListItemHolder holder, OrderListItem model) {
+    private void setPriceTextView(OrderListItemHolder holder, OrderListItem model) {
         String priceStr = Integer.toString(model.getPrice());
-        String priceTextInput = String.format("הכסף שנצבר: %s מתוך 70 שקלים", priceStr);
+        String priceTextInput = String.format(Constants.MONEY_MADE, priceStr);
         holder.priceText.setText(priceTextInput);
-
     }
 
     /**
@@ -163,7 +164,7 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
      * @param holder - the RecyclerView item holder
      * @param model  - the "Order" object
      */
-    private void progressBarHandler(@NonNull final OrderListItemHolder holder, OrderListItem model) {
+    private void setProgressBar(@NonNull final OrderListItemHolder holder, OrderListItem model) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             holder.progressBar.setProgress(model.getPrice(), TRUE);
             if (model.getPrice() > MIN_ORDER) {
