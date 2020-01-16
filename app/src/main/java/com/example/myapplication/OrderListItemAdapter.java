@@ -2,6 +2,7 @@ package com.example.myapplication;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -26,6 +27,7 @@ import android.view.View;
 
 import net.cachapa.expandablelayout.ExpandableLayout;
 
+import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 import static java.lang.Boolean.TRUE;
 
 public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem, OrderListItemAdapter.OrderListItemHolder> {
@@ -58,8 +60,20 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
 
         setCardExpansion(holder.orderCard,holder);
         setCardExpansion(holder.infoButton,holder);
+        setJoinButtonHandler(holder.joinButton, order);
 
         setOrderInfoRecyclerView(holder, order);
+    }
+
+    private void setJoinButtonHandler(View joinButton, OrderListItem order) {
+        joinButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context.getApplicationContext(), ManaPickerActivity.class);
+                intent.addFlags(FLAG_ACTIVITY_NEW_TASK);
+                context.getApplicationContext().startActivity(intent);
+            }
+        });
     }
 
     private void setOrderInfoRecyclerView(@NonNull OrderListItemHolder holder, @NonNull OrderListItem order) {
