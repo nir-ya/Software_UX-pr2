@@ -71,6 +71,7 @@
 
     <Button
         android:id="@+id/combineBtn"
+        android:onClick="startManaActivity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="56dp"

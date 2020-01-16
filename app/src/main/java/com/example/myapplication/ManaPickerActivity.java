@@ -1,5 +1,6 @@
 package com.example.myapplication;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -19,7 +20,7 @@ public class ManaPickerActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.mana_picker);
+        setContentView(R.layout.activity_mana_picker);
 
         models = new ArrayList<>();
         models.add(new ManaListItem(R.drawable.pita, "חצי פיתה","15 שקלים"));
@@ -33,33 +34,24 @@ public class ManaPickerActivity extends AppCompatActivity {
         viewPager.setPadding(0,0,0,0);
         viewPager.setCurrentItem(1);
 
-
         DepthTransformation depthTransformation = new DepthTransformation();
         viewPager.setPageTransformer(true, depthTransformation);
 
 
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-
-            }
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) { }
 
             @Override
-            public void onPageSelected(int position) {
-
-            }
+            public void onPageSelected(int position) { }
 
             @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
+            public void onPageScrollStateChanged(int state) { }
         });
-
-
-
-
     }
 
-
+    public void startManaActivity(View view) {
+        Intent intent = new Intent(this, ManaActivity.class);
+        startActivity(intent);
+    }
 }
