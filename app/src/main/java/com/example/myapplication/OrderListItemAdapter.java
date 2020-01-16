@@ -59,7 +59,6 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
         setCardExpansion(holder.orderCard,holder);
         setCardExpansion(holder.infoButton,holder);
 
-
         setOrderInfoRecyclerView(holder, order);
     }
 
