@@ -2,7 +2,6 @@ package com.example.myapplication;
 
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -35,7 +34,7 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
 
-    private static final int CRITICAL_PRICE = 45;
+    private static final int CRITICAL_PRICE_1 = 45;
     private static final int MIN_ORDER = 70;
     private final Context context;
 
@@ -132,7 +131,7 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
     private void openOrder(OrderListItemHolder holder, OrderListItem model) {
         holder.joinButton.setText(Constants.JOIN_TEXT);
         holder.joinButton.setBackgroundColor(context.getResources().getColor(R.color.dark_navy));
-        if (model.getPrice() >= CRITICAL_PRICE) {
+        if (model.getPrice() >= CRITICAL_PRICE_1) {
             holder.statusText.setText(Constants.READY_TEXT);
             holder.progressBar.setProgressDrawable(context.getDrawable(R.drawable.progress_bar_green));
         }
@@ -171,7 +170,7 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
                 holder.progressBar.setProgress(MIN_ORDER, TRUE);
             }
         }
-        if (model.getPrice() > CRITICAL_PRICE) {
+        if (model.getPrice() > CRITICAL_PRICE_1) {
             holder.progressBar.setProgressDrawable(context.getDrawable(R.drawable.progress_bar_green));
         } else {
             holder.progressBar.setProgressDrawable(context.getDrawable(R.drawable.progress_bar_orange));
