@@ -26,4 +26,5 @@
     <string name="ready_str">\"סטטוס: מוכנה לשילוח\"</string>
     <string name="order_out">ההזמנה יצאה</string>
     <string name="waiting">מחכה למשבחים...</string>
+    <string name="my_order_str">ההזמנה שלי</string>
 </resources>

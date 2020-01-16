@@ -2,7 +2,6 @@ package com.example.myapplication;
 
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -49,19 +48,24 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
     }
 
     @Override
-    protected void onBindViewHolder(@NonNull final OrderListItemHolder holder, final int position, @NonNull final OrderListItem model) {
-        holder.textViewTitle.setText(model.getSerial());//TODO - change to normal title
-        setProgressBar(holder, model);
+    protected void onBindViewHolder(@NonNull final OrderListItemHolder holder, final int position, @NonNull final OrderListItem order) {
+        holder.textViewTitle.setText(order.getSerial());//TODO - change to normal title
+        setProgressBar(holder, order);
 
-        setPriceTextView(holder, model);
+        setPriceTextView(holder, order);
 
-        setStatusTextView(holder, model);
+        setStatusTextView(holder, order);
 
-        setOrderDescriptionExpansion(holder, model);
+        setCardExpansion(holder.orderCard,holder);
+        setCardExpansion(holder.infoButton,holder);
 
 
+        setOrderInfoRecyclerView(holder, order);
+    }
+
+    private void setOrderInfoRecyclerView(@NonNull OrderListItemHolder holder, @NonNull OrderListItem order) {
         CollectionReference manotRef = db.collection(Constants.OPEN_ORDERS_COLLECTION)
-                .document(model.getSerial()).collection(Constants.MANOT_SUBCOLLECTION);
+                .document(order.getSerial()).collection(Constants.MANOT_SUBCOLLECTION);
 
         Query query = manotRef.orderBy("price", Query.Direction.DESCENDING);
 
@@ -82,8 +86,8 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
      *
      * @param holder
      */
-    private void setOrderDescriptionExpansion(@NonNull final OrderListItemHolder holder, final OrderListItem model) {
-        holder.infoButton.setOnClickListener(new View.OnClickListener() {
+    private void setCardExpansion(View view, @NonNull final OrderListItemHolder holder) {
+        view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (!holder.expandableView.isExpanded()) {
@@ -94,6 +98,7 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
             }
         });
     }
+
 
 
     /**
@@ -194,7 +199,7 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
         TextView statusText;
         TextView priceText;
         ExpandableLayout expandableView;
-        CardView cardView;
+        CardView orderCard;
         RecyclerView manotList;
 
         public OrderListItemHolder(View itemView) {
@@ -206,7 +211,7 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
             priceText = itemView.findViewById(R.id.money_text);
             statusText = itemView.findViewById(R.id.status);
             expandableView = itemView.findViewById(R.id.expandable_layout);
-            cardView = itemView.findViewById(R.id.card_layout);
+            orderCard = itemView.findViewById(R.id.card_layout);
             manotList = itemView.findViewById(R.id.manot_list);
 
 

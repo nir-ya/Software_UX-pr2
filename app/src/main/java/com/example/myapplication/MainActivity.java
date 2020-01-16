@@ -1,6 +1,7 @@
 package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -20,11 +21,10 @@ public class MainActivity extends AppCompatActivity {
 
     //fireBase Objects
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private CollectionReference ordersRef = db.collection(getString(R.string.open_orders));
+    private CollectionReference ordersRef = db.collection(Constants.OPEN_ORDERS_COLLECTION);
 
     //adapters
     private OrderListItemAdapter orderAdapter;
-    private MyBagAdapter bagAdapter;
 
 
     @Override
