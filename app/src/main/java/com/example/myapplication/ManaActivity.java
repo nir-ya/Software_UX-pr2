@@ -9,8 +9,6 @@ import android.widget.ImageView;
 
 public class ManaActivity extends AppCompatActivity {
 
-    ImageView pitaView;
-    ImageView lafaView;
     ImageView humusView;
     ImageView harifView;
     ImageView picklesView;
@@ -34,8 +32,6 @@ public class ManaActivity extends AppCompatActivity {
     }
 
     private void connectToxXML() {
-        pitaView = findViewById(R.id.pita_image);
-        lafaView = findViewById(R.id.lafa_image);
 
         humusView = findViewById(R.id.humus_image);
         harifView = findViewById(R.id.harif_image);
