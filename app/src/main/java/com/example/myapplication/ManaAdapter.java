@@ -18,10 +18,7 @@ import android.view.View;
 
 public class ManaAdapter extends FirestoreRecyclerAdapter<Mana, ManaAdapter.ManotHolder> {
 
-
     private final Context context;
-
-
 
     public ManaAdapter(@NonNull FirestoreRecyclerOptions<Mana> options, Context context) {
         super(options);
@@ -42,8 +39,6 @@ public class ManaAdapter extends FirestoreRecyclerAdapter<Mana, ManaAdapter.Mano
 
 
     }
-
-
 
     @NonNull
     @Override

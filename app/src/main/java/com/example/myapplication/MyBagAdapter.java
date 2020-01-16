@@ -26,7 +26,6 @@ public class MyBagAdapter extends FirestoreRecyclerAdapter<Mana, MyBagAdapter.My
     public MyBagAdapter(@NonNull FirestoreRecyclerOptions<Mana> options, Context context) {
         super(options);
         this.context = context;
-
     }
 
     @Override
