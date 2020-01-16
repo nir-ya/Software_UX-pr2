@@ -15,6 +15,7 @@ import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -80,8 +81,8 @@ public class MainActivity extends AppCompatActivity {
      * @param view - the button that his onClick call the function
      */
     public void launchDialog(View view) {
-        Dialog myBagDialog = new Dialog(MainActivity.this);
-        myBagDialog.setTitle(getString(R.string.my_order));
+        Dialog myBagDialog = new Dialog(MainActivity.this, R.style.Theme_Dialog);
+        myBagDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         myBagDialog.setContentView(R.layout.mybag_dialog);
         myBagDialog.show();
 
