@@ -77,43 +77,11 @@ public class Mana {
      *
      * @param owner the user who ordered the Mana
      */
-    Mana(String owner) {
-        status = OPEN;
-        in_order = 0;
+
+    Mana(String owner, int paymentMethod, int price) {
         this.owner = owner;
-    }
-
-    /**
-     * A Mana constructor based on a previous mana previously ordered by the same user
-     *
-     * @param source a Mana object to copy the content of
-     */
-    Mana(Mana source) {
-        status = OPEN;
-        in_order = 0;
-
-        owner = source.owner;
-        type = source.type;
-        paymentMethod = source.paymentMethod;
-        tosafot = source.tosafot;
-        price = source.price;
-    }
-
-    /**
-     * A Mana constructor with user, type and payment method
-     *
-     * @param owner          the user who ordered the Mana
-     * @param type           the type of the Mana (Pita, Lafa etc.)
-     * @param payment_method (Mezuman, Credit)
-     */
-    Mana(String owner, int type, int payment_method) {
-        status = OPEN;
-        in_order = 0;
-        this.owner = owner;
-        this.type = type;
-        this.paymentMethod = payment_method;
-        this.price = getPrice();
-        this.paymentMethod = payment_method;
+        this.paymentMethod = paymentMethod;
+        this.price = price;
     }
 
 

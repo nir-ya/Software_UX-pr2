@@ -36,7 +36,7 @@
         android:id="@+id/bag_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="my_order_str"
+        android:text="@string/my_order_str"
         android:textSize="12sp"
         app:layout_constraintRight_toRightOf="@id/bag"
         app:layout_constraintLeft_toLeftOf="@id/bag"
@@ -72,6 +72,18 @@
         android:scrollbarSize="1dp"
         android:scrollbarStyle="outsideOverlay"
         />
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/new_order_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/fab_margin"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:srcCompat="@android:drawable/ic_input_add"
+/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
