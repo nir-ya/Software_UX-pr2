@@ -31,6 +31,12 @@ public class LoginActivity extends AppCompatActivity {
 
         firebaseAuth = FirebaseAuth.getInstance();
 
+        if (firebaseAuth.getCurrentUser() != null) {
+            Intent i = new Intent(this, MainActivity.class);
+            startActivity(i);
+            finish();
+        }
+
         assignViewsFromLayout();
     }
 
@@ -53,34 +59,25 @@ public class LoginActivity extends AppCompatActivity {
         final String emailAddress = emailText.getText().toString();
         final String password = passwordText.getText().toString();
         final LoginActivity thisActivity = this;
+
         firebaseAuth.signInWithEmailAndPassword(emailAddress, password).addOnCompleteListener(this,
                 new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-
                             FirebaseUser user = firebaseAuth.getCurrentUser();
+
                             Toast.makeText(LoginActivity.this, "Login successful!",
                                     Toast.LENGTH_SHORT).show();
-                            Handler handler = new Handler();
-
-                            handler.postDelayed(new Runnable() {
-                                @Override
-                                public void run() {
-                                    Intent i = new Intent(thisActivity, MainActivity.class);
-                                    startActivity(i);
-
-                                }
-                            },1200);
-                        }
-                        else {
+                            Intent i = new Intent(thisActivity, MainActivity.class);
+                            startActivity(i);
+                        } else {
 
                             // display error in
                         }
                     }
                 });
     }
-
 
 
     @Override
@@ -91,7 +88,17 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void register(View view) {
-        Intent i = new Intent(this,RegisterActivity.class);
-        startActivityForResult(i,1); //todo - pick better request code
+        Intent i = new Intent(this, RegisterActivity.class);
+        startActivityForResult(i, 1); //todo - pick better request code
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == resultCode) {
+            Intent i = new Intent(this, MainActivity.class);
+            startActivity(i);
+            finish();
+        }
     }
 }

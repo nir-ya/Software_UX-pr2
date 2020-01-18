@@ -14,6 +14,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 
 
 public class RegisterActivity extends AppCompatActivity {
@@ -43,8 +44,12 @@ public class RegisterActivity extends AppCompatActivity {
         super.onStart();
     }
 
-
+    /**
+     * function is responsible for registering new user
+     * @param view
+     */
     public void register(View view) {
+        // todo - maybe find a way to do this with one firebase call
         final String username = nameText.getText().toString();
         final String emailAddress = emailText.getText().toString();
         final String password = passwordText.getText().toString();
@@ -53,9 +58,26 @@ public class RegisterActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            Toast.makeText(RegisterActivity.this, "Register successful!",
-                                    Toast.LENGTH_SHORT).show();
-                            finish();
+
+                            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                            // create update to add display name to user
+                            UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                                    .setDisplayName(username)
+                                    .build();
+                            user.updateProfile(profileUpdates).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()) {
+                                        Toast.makeText(RegisterActivity.this, "Register successful!",
+                                                Toast.LENGTH_SHORT).show();
+                                        setResult(1);
+                                        finish();
+                                    } else {
+                                        //todo - maybe do something
+                                    }
+                                }
+                            });
+
 
                         } else {
                             Toast.makeText(RegisterActivity.this, "Problem while Registering",
