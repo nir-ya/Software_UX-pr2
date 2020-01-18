@@ -6,7 +6,7 @@
     <string name="manot_collection">Manot</string>
     <string name="owner_field">owner</string>
     <string name="username_hint">שם משתמש</string>
-    <string name="login_button_text">כנס</string>
+    <string name="login_button_text">כניסה</string>
     <string name="email_hint">כתובת e-mail</string>
     <string name="password_hint">סיסמה</string>
     <string name="welcome_str">אהלן אבנר!</string>
