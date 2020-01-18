@@ -51,6 +51,9 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
 
     @Override
     protected void onBindViewHolder(@NonNull final OrderListItemHolder holder, final int position, @NonNull final OrderListItem order) {
+       String documentId = getSnapshots().getSnapshot(position).getId();
+
+        
         holder.textViewTitle.setText(order.getSerial());//TODO - change to normal title
         setProgressBar(holder, order);
 
@@ -62,7 +65,7 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
         setCardExpansion(holder.infoButton,holder);
         setJoinButtonHandler(holder.joinButton, order);
 
-        setOrderInfoRecyclerView(holder, order);
+        setOrderInfoRecyclerView(holder, order,documentId);
     }
 
     private void setJoinButtonHandler(View joinButton, OrderListItem order) {
@@ -76,9 +79,10 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
         });
     }
 
-    private void setOrderInfoRecyclerView(@NonNull OrderListItemHolder holder, @NonNull OrderListItem order) {
+    private void setOrderInfoRecyclerView(@NonNull OrderListItemHolder holder, @NonNull OrderListItem order,String documentId) {
+
         CollectionReference manotRef = db.collection(Constants.OPEN_ORDERS_COLLECTION)
-                .document(order.getSerial()).collection(Constants.MANOT_SUBCOLLECTION);
+                .document(documentId).collection(Constants.MANOT_SUBCOLLECTION);
 
         Query query = manotRef.orderBy("price", Query.Direction.DESCENDING);
 
