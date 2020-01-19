@@ -87,6 +87,7 @@ public class ManaPickerActivity extends AppCompatActivity {
         tosafot.put(EGGPLAT, true);
         int price = ManaModel.getPrice(type);
         ManaListItem mana = new ManaListItem(owner, type, price, tosafot);
+        
         //TODO: forward mana object to
         //TODO: need to know what order is associated with this mana to the next screen payment + notes
 

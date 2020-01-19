@@ -68,12 +68,13 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
         setOrderInfoRecyclerView(holder, order,documentId);
     }
 
-    private void setJoinButtonHandler(View joinButton, OrderListItem order) {
+    private void setJoinButtonHandler(View joinButton, final OrderListItem order) {
         joinButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context.getApplicationContext(), ManaPickerActivity.class);
                 intent.addFlags(FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtra("ref", order.getRef().getId());
                 context.getApplicationContext().startActivity(intent);
             }
         });
