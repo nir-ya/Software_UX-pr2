@@ -11,6 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".OrderConfirmationActivity"></activity>
         <activity android:name=".LoginActivity" />
         <activity android:name=".ManaActivity" />
         <activity android:name=".ManaPickerActivity" />
