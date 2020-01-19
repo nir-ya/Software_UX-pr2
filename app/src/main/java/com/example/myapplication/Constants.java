@@ -4,7 +4,7 @@ import android.content.res.Resources;
 
 public class Constants {
 
-    static final String OPEN_ORDERS_COLLECTION = "OpenOrders";
+    static final String ORDERS = "OrdersS";
     static final String MANOT_SUBCOLLECTION = "Manot";
     static final String MONEY_MADE = "הכסף שנצבר: %s מתוך 70 שקלים";
     static final String LOCKED_TEXT = "נעול";

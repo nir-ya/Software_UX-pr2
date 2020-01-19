@@ -1,9 +1,7 @@
 package com.example.myapplication;
 
 import androidx.annotation.NonNull;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+
 
 /**
  * A class representing a Falafel order.
@@ -19,9 +17,6 @@ public class Order {
 
   // Vars
   private static int status;
-  private static int counter = 1;
-  private int serial_no;
-  private ArrayList<Mana> manot = new ArrayList<>();
   private int price;
 
   /**
@@ -30,14 +25,13 @@ public class Order {
   Order(){
     price = 0;
     status = OPEN;
-    serial_no = counter++;
   }
 
   @NonNull
   @Override
   public String toString() {
     StringBuilder str_repr = new StringBuilder(
-        "Order #"+serial_no+", Status: " + getStatusString()+"\n"
+        "Status: " + getStatusString()+"\n"
             + "Reached minimum: " + reachedMin());
     if(reachedMin()) {
       str_repr.append(" (").append(extraMoney()).append(" NIS Extra)");
@@ -45,10 +39,6 @@ public class Order {
       str_repr.append(" (").append(missingMoney()).append(" NIS Missing)");
     }
     str_repr.append("\nManot:");
-    int counter = 1;
-    for(Mana m : manot){
-      str_repr.append("\n\t").append(counter++).append(". ").append(m.toString());
-    }
     return str_repr.toString() + "\n";
   }
 
@@ -82,37 +72,15 @@ public class Order {
         return false;
       }
       price += m.getPrice();
-      m.addToOrder(serial_no);
-      return manot.add(m);
     }
     return false;
   }
 
-  boolean addMana(String ordered_by, int type, int payment_method){
+  void addMana(String ordered_by, int type, int payment_method){
     if(status == OPEN){
       Mana m = new Mana(ordered_by, type, payment_method);
       price += m.getPrice();
-      m.addToOrder(serial_no);
-      return manot.add(m);
     }
-    return false;
-  }
-
-  List<Mana> getManot(){
-    return Collections.unmodifiableList(manot);
-  }
-
-  boolean removeMana(Mana m){
-    if(status == OPEN){
-      for(Mana mana : manot){
-        if(mana == m){
-          price -= mana.getPrice();
-          manot.remove(mana);
-          return true;
-        }
-      }
-    }
-    return false;
   }
 
   boolean reachedMin(){
@@ -131,16 +99,5 @@ public class Order {
       return price - MINIMUM;
     }
     return missingMoney() * (-1);
-  }
-
-  void lock() {
-    for(Mana m : manot){
-      m.lock();
-    }
-    status = LOCKED;
-  }
-
-  int getSerial() {
-    return serial_no;
   }
 }

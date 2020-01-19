@@ -54,7 +54,7 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
        String documentId = getSnapshots().getSnapshot(position).getId();
 
         
-        holder.textViewTitle.setText(order.getSerial());//TODO - change to normal title
+        holder.textViewTitle.setText(order.displayTime());//TODO - change to normal title
         setProgressBar(holder, order);
 
         setPriceTextView(holder, order);
@@ -81,7 +81,7 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
 
     private void setOrderInfoRecyclerView(@NonNull OrderListItemHolder holder, @NonNull OrderListItem order,String documentId) {
 
-        CollectionReference manotRef = db.collection(Constants.OPEN_ORDERS_COLLECTION)
+        CollectionReference manotRef = db.collection(Constants.ORDERS)
                 .document(documentId).collection(Constants.MANOT_SUBCOLLECTION);
 
         Query query = manotRef.orderBy("price", Query.Direction.DESCENDING);

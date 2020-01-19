@@ -7,17 +7,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Dialog;
 import android.app.TimePickerDialog;
-import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -34,13 +28,12 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
 import java.util.Calendar;
-import java.util.Collection;
 
 public class MainActivity extends AppCompatActivity {
 
     //fireBase Objects
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private CollectionReference ordersRef = db.collection(Constants.OPEN_ORDERS_COLLECTION);
+    private CollectionReference ordersRef = db.collection(Constants.ORDERS);
 
     //adapters
     private OrderListItemAdapter orderAdapter;
@@ -155,14 +148,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void createNewOrder() {
-        final Calendar c = Calendar.getInstance();
-        int hour = c.get(Calendar.HOUR_OF_DAY);
-        int minute = c.get(Calendar.MINUTE);
+        final Calendar cal = Calendar.getInstance();
+        int hour = cal.get(Calendar.HOUR_OF_DAY);
+        int minute = cal.get(Calendar.MINUTE);
         TimePickerDialog timePickerDialog = new TimePickerDialog(MainActivity.this, new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                 // TODO Auto-generated method stub
-                addOrdertoServer();
+                addOrdertoServer(cal);
 //                Intent intent = new Intent(MainActivity.this, ManaPickerActivity.class);
 //                startActivity(intent);
             }
@@ -170,27 +163,57 @@ public class MainActivity extends AppCompatActivity {
         timePickerDialog.show();
     }
 
-    private void addOrdertoServer() {
-        final OrderListItem order = new OrderListItem("ser", 0, "open");
-        ordersRef.add(order).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+    private void addOrdertoServer(Calendar cal) {
+        //New Version
+        final DocumentReference ordRef = ordersRef.document();
+        final OrderListItem order = new OrderListItem(ordRef, cal);
+        ordRef.set(order).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
-            public void onComplete(@NonNull final Task<DocumentReference> task) {
-                task.getResult()
-                        .collection("Manot")
-                        .add(new Mana("avnush", 0, 10))
-                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                            @Override
-                            public void onSuccess(DocumentReference documentReference) {
-                                popToast(true);
-                            }
-                        }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        popToast(false);
-                    }
-                });
+            public void onSuccess(Void aVoid) {
+                popToast(true);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                popToast(false);
             }
         });
+
+        //TODO: delete commented code
+        //My take 1#
+//        ordersRef.add(order).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+//            @Override
+//            public void onSuccess(DocumentReference documentReference) {
+//                popToast(true);
+//                ordRef.set(documentReference);
+//            }
+//        }).addOnFailureListener(new OnFailureListener() {
+//            @Override
+//            public void onFailure(@NonNull Exception e) {
+//                popToast(false);
+//            }
+//        });
+
+        //Old Version
+//        ordersRef.add(order).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+//            @Override
+//            public void onComplete(@NonNull final Task<DocumentReference> task) {
+//                task.getResult()
+//                        .collection("Manot")
+//                        .add(new Mana("avnush", 0, 10)) //TODO (avner): replace avnush with the logged user
+//                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+//                            @Override
+//                            public void onSuccess(DocumentReference documentReference) {
+//                                popToast(true);
+//                            }
+//                        }).addOnFailureListener(new OnFailureListener() {
+//                    @Override
+//                    public void onFailure(@NonNull Exception e) {
+//                        popToast(false);
+//                    }
+//                });
+//            }
+//        });
     }
 
     private void popToast(boolean success) {

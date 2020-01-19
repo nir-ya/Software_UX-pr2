@@ -62,6 +62,7 @@
         android:padding="25dp"
         android:text="יאללה שים הכל!"
         android:textStyle="bold"
+        android:onClick="simHakol"
         app:layout_constraintBottom_toBottomOf="@+id/combineBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/combineBtn"
