@@ -31,6 +31,7 @@ public class ManaPickerActivity extends AppCompatActivity {
     ViewPager viewPager;  // TODO: find more informative variable names
     ManaPickerAdapter adapter;
     List<ManaListItem> models;
+    private String orderReference;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -52,6 +53,7 @@ public class ManaPickerActivity extends AppCompatActivity {
         DepthTransformation depthTransformation = new DepthTransformation();
         viewPager.setPageTransformer(true, depthTransformation);
 
+        orderReference = getIntent().getStringExtra("ref"); // todo const
 
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -94,6 +96,6 @@ public class ManaPickerActivity extends AppCompatActivity {
         System.out.println("I was just kidding!");
         Log.w("SHEVAH", "I was just kidding!!!");
 
-
+        
     }
 }
