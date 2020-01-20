@@ -1,6 +1,8 @@
 package com.example.myapplication;
 
 import java.security.SecureRandom;
+import java.text.Format;
+import java.text.SimpleDateFormat;
 
 public class Randomizer {
     public static int generate(int min,int max) {
@@ -16,4 +18,7 @@ public class Randomizer {
             sb.append( AB.charAt( rnd.nextInt(AB.length()) ) );
         return sb.toString();
     }
+
+    public static Format formatter = new SimpleDateFormat("HH:mm");
+
 }

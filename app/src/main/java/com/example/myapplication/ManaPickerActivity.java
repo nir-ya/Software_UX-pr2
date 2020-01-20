@@ -45,7 +45,6 @@ public class ManaPickerActivity extends AppCompatActivity {
     ManaPickerAdapter adapter;
     List<ManaListItem> models;
     private String orderId;
-    Format formatter = new SimpleDateFormat("HH:mm");
 
     Calendar cal;
 
@@ -68,7 +67,7 @@ public class ManaPickerActivity extends AppCompatActivity {
                OrderListItem order = documentSnapshot.toObject(OrderListItem.class);
                if (order != null)
                {
-                   String s = formatter.format(order.getTimestamp().toDate());
+                   String s = Randomizer.formatter.format(order.getTimestamp().toDate());
                    textHour.setText(s);
                }
             }

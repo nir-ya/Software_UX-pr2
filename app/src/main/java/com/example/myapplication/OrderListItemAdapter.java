@@ -28,6 +28,8 @@ import android.view.View;
 
 
 import java.io.Serializable;
+import java.util.Date;
+
 import net.cachapa.expandablelayout.ExpandableLayout;
 
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
@@ -58,7 +60,7 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
     protected void onBindViewHolder(@NonNull final OrderListItemHolder holder, final int position, @NonNull final OrderListItem order) {
        String documentId = getSnapshots().getSnapshot(position).getId();
 
-        holder.textViewTitle.setText("");//TODO - change to normal title
+        holder.textViewTitle.setText(getTimeTitle(order));//TODO - change to normal title
         setProgressBar(holder, order);
 
         setPriceTextView(holder, order);
@@ -68,8 +70,14 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
         setCardExpansion(holder.orderCard,holder);
         setCardExpansion(holder.infoButton,holder);
         setJoinButtonHandler(holder.joinButton, documentId);
-
+    
         setOrderInfoRecyclerView(holder ,documentId);
+    }
+
+    private String getTimeTitle(OrderListItem order) {
+        String s = Randomizer.formatter.format(order.getTimestamp().toDate());
+        String title = "הזמנה לשעה: "+s;
+        return title;
     }
 
     @Override
