@@ -16,8 +16,7 @@ public class OrderListItem {
     private int hour;
     private int minute;
 
-    public OrderListItem() {
-    }
+    public OrderListItem() { }
 
     public OrderListItem(DocumentReference ref, Calendar cal){
         ordRef = ref;
