@@ -79,9 +79,8 @@ public class MainActivity extends AppCompatActivity {
     ordersRecyclerView.setLayoutManager(layout);
     ordersRecyclerView.setAdapter(orderAdapter);
 
-    if(ordersRecyclerView.getAdapter().getItemCount()==0){
-      beFirst.setVisibility(View.VISIBLE);
-    }
+    beFirst.setVisibility(ordersRecyclerView.getAdapter()
+            .getItemCount()>0 ? View.GONE : View.VISIBLE);
   }
 
   /**
