@@ -72,6 +72,20 @@
         android:scrollbarSize="1dp"
         android:scrollbarStyle="outsideOverlay"
         />
+    <TextView
+        android:textDirection="rtl"
+        android:visibility="visible"
+        android:id="@+id/be_first"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/line"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:fontFamily="@font/varela_round"
+        android:text="@string/be_first"
+        android:textSize="24sp"
+        />
 
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

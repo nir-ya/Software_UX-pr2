@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
   FloatingActionButton newOrderButt;
 
   private TextView greeting;
+  private TextView beFirst;
 
 
   @Override
@@ -77,6 +78,10 @@ public class MainActivity extends AppCompatActivity {
     layout.setOrientation(RecyclerView.VERTICAL);
     ordersRecyclerView.setLayoutManager(layout);
     ordersRecyclerView.setAdapter(orderAdapter);
+
+    if(ordersRecyclerView.getAdapter().getItemCount()==0){
+      beFirst.setVisibility(View.VISIBLE);
+    }
   }
 
   /**
@@ -131,7 +136,7 @@ public class MainActivity extends AppCompatActivity {
     //views
     ImageView bag = findViewById(R.id.bag);
     newOrderButt = findViewById(R.id.new_order_button);
-
+    beFirst = findViewById(R.id.be_first);
 
   }
 
