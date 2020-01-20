@@ -1,5 +1,6 @@
 package com.example.myapplication;
 
+import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -58,7 +59,6 @@ public class MainActivity extends AppCompatActivity {
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         greeting = findViewById(R.id.greeting);
-
         greeting.setText(String.format(getResources().getString(R.string.welcome_str),user.getDisplayName()));
 
     }

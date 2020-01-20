@@ -51,8 +51,8 @@ public class OrderConfirmationActivity extends AppCompatActivity {
     void addToDB(){
         CollectionReference manotCollectionReference = db.collection(Constants.ORDERS).
             document(orderId).collection(Constants.MANOT_SUBCOLLECTION);
-        int price = Mana.priceByType(manaType);
-        ManaListItem newMana = new ManaListItem("USER", manaType, price, tosafot, paymentMethod);
+        int price = Mana.getPrice(manaType);
+        Mana newMana = new Mana(manaType, "", 0, tosafot,"Avnush");
 
         manotCollectionReference.add(newMana);
     }
