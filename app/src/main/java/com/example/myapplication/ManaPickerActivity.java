@@ -19,6 +19,7 @@ import java.text.DateFormat;
 import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import org.w3c.dom.Document;
@@ -46,6 +47,8 @@ public class ManaPickerActivity extends AppCompatActivity {
     private String orderId;
     Format formatter = new SimpleDateFormat("HH:mm");
 
+    Calendar cal;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -55,6 +58,8 @@ public class ManaPickerActivity extends AppCompatActivity {
         textHour = findViewById(R.id.hourText);
 
         orderId = getIntent().getStringExtra("ref");
+
+        cal = (Calendar) getIntent().getSerializableExtra("CALENDAR");
 
         DocumentReference orderRef = db.collection(Constants.ORDERS).document(orderId);
         orderRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -127,6 +132,7 @@ public class ManaPickerActivity extends AppCompatActivity {
         intent.putExtra("tosafot", tosafot);
         intent.putExtra("order_id", orderId);
         intent.putExtra("order_time", textHour.getText());
+        intent.putExtra("CALENDAR",cal);
         startActivity(intent);
     }
 
