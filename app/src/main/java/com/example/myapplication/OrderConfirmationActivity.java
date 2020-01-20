@@ -52,36 +52,18 @@ public class OrderConfirmationActivity extends AppCompatActivity {
 
 
 
-
-    void addToDB(String orderId){
+    void addToDB(){
         CollectionReference manotCollectionReference = db.collection(Constants.ORDERS).
             document(orderId).collection(Constants.MANOT_SUBCOLLECTION);
-        int price = Mana.priceByType(type);
-        ManaListItem newMana = new Mana("USER", type, tosafot);
+        int price = Mana.priceByType(manaType);
+        ManaListItem newMana = new ManaListItem("USER", manaType, price, tosafot, paymentMethod);
 
-//        manotCollectionReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-//            @Override
-//            public void onSuccess(DocumentSnapshot documentSnapshot) {
-//                OrderListItem order = documentSnapshot.toObject(OrderListItem.class);
-//                if (order != null)
-//                {
-//                    textHour.setText(order.displayTime());
-//                }
-//            }
-//        });
+        manotCollectionReference.add(newMana);
+    }
 
-//
-//        manotCollectionReference.add(newMana).addOnSuccessListener(new OnSuccessListener<Void>() {
-//            @Override
-//            public void onSuccess(Void aVoid) {
-////                popToast(true);
-//            }
-//        }).addOnFailureListener(new OnFailureListener() {
-//            @Override
-//            public void onFailure(@NonNull Exception e) {
-////                popToast(false);
-//            }
-//        });
+    public void confirmOrder(View view) {
+        addToDB();
+        finish();
     }
 
 //    private void popToast(boolean success) {

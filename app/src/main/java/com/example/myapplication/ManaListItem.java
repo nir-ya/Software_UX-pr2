@@ -30,7 +30,9 @@ public class ManaListItem {
 
 
 
-    public ManaListItem(String owner, String type, int price, HashMap<String, Boolean> tosafot) {
+    public ManaListItem(String owner, String type, int price, HashMap<String, Boolean> tosafot,
+                        String paymentMethod) {
+        this.paymentMethod = paymentMethod;
         this.owner = owner;
         this.type = type;
         this.realPrice = price;
