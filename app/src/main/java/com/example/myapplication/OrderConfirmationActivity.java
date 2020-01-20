@@ -26,7 +26,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 public class OrderConfirmationActivity extends AppCompatActivity {
 
-  String paymentMethod, manaType, orderId, orderTime;
+  String manaType, orderId, orderTime;
+  int paymentMethod;
   HashMap<String, Boolean> tosafot;
   Calendar cal;
   FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -55,12 +56,12 @@ public class OrderConfirmationActivity extends AppCompatActivity {
   }
 
   public void setCreditPayment(View view) {
-    paymentMethod = "Credit";
+    paymentMethod = 1;
   }
 
 
   public void setCashPayment(View view) {
-    paymentMethod = "Cash";
+    paymentMethod = 0;
   }
 
 
@@ -96,7 +97,7 @@ public class OrderConfirmationActivity extends AppCompatActivity {
   private void addManaToDB(CollectionReference ordersCollection) {
     CollectionReference manotCollectionReference = ordersCollection.document(orderId)
         .collection(Constants.MANOT_SUBCOLLECTION);
-    Mana newMana = new Mana(manaType, "", 0, tosafot, user.getDisplayName());
+    Mana newMana = new Mana(manaType, "", paymentMethod, tosafot, user.getDisplayName());
     manotCollectionReference.add(newMana);
   }
 
