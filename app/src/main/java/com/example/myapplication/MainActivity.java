@@ -174,7 +174,7 @@ public class MainActivity extends AppCompatActivity {
     private void addOrderToServer(Calendar cal) {
         //New Version
         final DocumentReference ordRef = ordersRef.document();
-        final OrderListItem order = new OrderListItem(ordRef, cal);
+        final OrderListItem order = new OrderListItem(cal);
         ordRef.set(order).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {

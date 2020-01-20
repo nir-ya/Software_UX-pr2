@@ -15,6 +15,9 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import java.text.DateFormat;
+import java.text.Format;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -41,7 +44,7 @@ public class ManaPickerActivity extends AppCompatActivity {
     ManaPickerAdapter adapter;
     List<ManaListItem> models;
     private String orderId;
-
+    Format formatter = new SimpleDateFormat("HH:mm");
 
 
     @Override
@@ -60,7 +63,8 @@ public class ManaPickerActivity extends AppCompatActivity {
                OrderListItem order = documentSnapshot.toObject(OrderListItem.class);
                if (order != null)
                {
-                   textHour.setText(order.displayTime());
+                   String s = formatter.format(order.getTimestamp().toDate());
+                   textHour.setText(s);
                }
             }
         });
@@ -125,4 +129,7 @@ public class ManaPickerActivity extends AppCompatActivity {
         intent.putExtra("order_time", textHour.getText());
         startActivity(intent);
     }
+
+
+
 }

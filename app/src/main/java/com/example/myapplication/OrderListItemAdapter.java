@@ -56,7 +56,7 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
     protected void onBindViewHolder(@NonNull final OrderListItemHolder holder, final int position, @NonNull final OrderListItem order) {
        String documentId = getSnapshots().getSnapshot(position).getId();
 
-        holder.textViewTitle.setText(order.displayTime());//TODO - change to normal title
+        holder.textViewTitle.setText("");//TODO - change to normal title
         setProgressBar(holder, order);
 
         setPriceTextView(holder, order);
