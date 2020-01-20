@@ -14,6 +14,8 @@ import android.widget.TextView;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -27,6 +29,7 @@ public class OrderConfirmationActivity extends AppCompatActivity {
   String paymentMethod, manaType, orderId, orderTime;
   HashMap<String, Boolean> tosafot;
   Calendar cal;
+  FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
   private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -40,6 +43,8 @@ public class OrderConfirmationActivity extends AppCompatActivity {
     Bundle extras = getIntent().getExtras();
 
     orderDetails.setText("הזמנה לשעה " + extras.getString("order_time"));
+
+
 
     manaType = extras.getString("mana_type");
     orderId = extras.getString("order_id");
@@ -91,7 +96,7 @@ public class OrderConfirmationActivity extends AppCompatActivity {
   private void addManaToDB(CollectionReference ordersCollection) {
     CollectionReference manotCollectionReference = ordersCollection.document(orderId)
         .collection(Constants.MANOT_SUBCOLLECTION);
-    Mana newMana = new Mana(manaType, "", 0, tosafot, "Avnush");
+    Mana newMana = new Mana(manaType, "", 0, tosafot, user.getDisplayName());
     manotCollectionReference.add(newMana);
   }
 
