@@ -16,10 +16,10 @@ public class Mana {
     // Constants
     //-- Types of manot
     static final int INVALID = 0;
-    static final int PITA = 1;
-    static final int LAFA = 2;
-    static final int HALF_PITA = 3;
-    static final int HALF_LAFA = 4;
+    static final String PITA = "pita";
+    static final String LAFA = "Lafa";
+    static final String HALF_PITA = "Half Pita";
+    static final String HALF_LAFA = "Half Lafa";
     //-- Payment methods
     static final int MEZUMAN = 0;
     static final int CREDIT = 1;
@@ -97,7 +97,7 @@ public class Mana {
      * @param type the type of the Mana (int)
      * @return String representation of the type of the Mana
      */
-    public static String getTypeStr(int type) {
+    public static String getTypeStr(String type) {
         switch (type) {
             case PITA:
                 return "Pita";
@@ -141,7 +141,7 @@ public class Mana {
      * @param type the type of the Mana, as an int
      * @return the price associated with the type, an int
      */
-    public static int priceByType(int type) {
+    public static int priceByType(String type) {
         switch (type) {
             case PITA:
                 return PITA_PRICE;

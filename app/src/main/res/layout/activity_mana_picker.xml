@@ -25,6 +25,22 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.48" />
 
+    <TextView
+      android:id="@+id/hourText"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="16dp"
+      android:fontFamily="@font/varela_round"
+      android:gravity="center"
+      android:padding="20dp"
+      android:text="אז, מה אוכלים?ffff"
+      android:textSize="20dp"
+      app:layout_constraintBottom_toTopOf="@+id/manaPager"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.497"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="@id/textHeader"
+      app:layout_constraintVertical_bias="0.48" />
 
     <Button
         android:id="@+id/returnBtn"
@@ -62,6 +78,7 @@
         android:padding="25dp"
         android:text="יאללה שים הכל!"
         android:textStyle="bold"
+        android:onClick="simHakol"
         app:layout_constraintBottom_toBottomOf="@+id/combineBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/combineBtn"

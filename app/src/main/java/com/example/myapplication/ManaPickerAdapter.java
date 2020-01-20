@@ -44,8 +44,8 @@ public class ManaPickerAdapter extends PagerAdapter {
         TextView manaPrice = view.findViewById(R.id.manaItemPriceTxt);
 
         manaImg.setImageResource(models.get(position).getManaImg());
-        manaType.setText(models.get(position).getManaType());
-        manaPrice.setText(models.get(position).getManaPrice());
+        manaType.setText(models.get(position).getType());
+        manaPrice.setText(models.get(position).getPrice());
 
         view.setOnClickListener(new View.OnClickListener() {
             @Override
