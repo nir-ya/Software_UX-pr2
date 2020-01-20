@@ -4,26 +4,73 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/backgroundGreen"
-    android:paddingLeft="20dp"
-    android:paddingTop="30dp"
-    android:paddingRight="20dp"
+    android:background="@color/off_white"
     tools:context=".ManaActivity">
 
-    <TextView
-        android:id="@+id/what_eat_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/varela_round"
-        android:text="מה אוכלים?"
-        android:textColor="@color/TextGreen"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.883"
-        app:layout_constraintStart_toStartOf="parent"
+    <ImageView
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="110dp"
+        android:background="@drawable/full_button"
+        android:backgroundTint="@color/light_peach"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/owner_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
+        android:fontFamily="@font/varela_round"
+        android:text="@string/owner_text"
+        android:textColor="@color/TextGreen"
+        android:textSize="26sp"
+        android:textStyle="bold"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/current_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/varela_round"
+        android:text="@string/price_shekels"
+        android:textColor="@color/TextGreen"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintRight_toRightOf="@id/owner_text"
+        app:layout_constraintTop_toBottomOf="@id/owner_text" />
+
+    <ImageView
+        android:id="@+id/mana_type_picture"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/ic_add_circle_black_24dp"
+        android:backgroundTint="@color/dark_green"
+        android:padding="10dp"
+        android:src="@drawable/pita"
+        app:layout_constraintBottom_toBottomOf="@id/toolbar"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="@id/toolbar" />
+
+    <CheckBox
+        android:id="@+id/mark_all_checkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/grid_view"
+        app:layout_constraintRight_toRightOf="@id/grid_view"
+        android:layout_marginRight="15dp"
+        android:text="@string/mark_everything"
+        android:layoutDirection="rtl"
+        android:padding="5dp"
+        android:textSize="12sp"
+        android:scaleY="1.5"
+        android:scaleX="1.5"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
     <GridLayout
         android:id="@+id/grid_view"
@@ -31,6 +78,7 @@
         android:layout_height="wrap_content"
         android:alignmentMode="alignMargins"
         android:background="@color/lightGrey"
+        android:backgroundTint="@color/transparent"
         android:columnCount="4"
         android:layoutDirection="rtl"
         android:padding="5dp"
@@ -41,7 +89,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/what_eat_text">
+        app:layout_constraintTop_toBottomOf="@+id/mark_all_checkbox">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -52,15 +100,16 @@
                 android:id="@+id/humus_image"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
-                android:button="@null"
-                android:background="@drawable/humus_selector"/>
+                android:background="@drawable/humus_selector"
+                android:button="@null" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:padding="2dp"
-                android:text="חומוס" />
+                android:text="חומוס"
+                android:textColor="@color/TextGreen" />
         </LinearLayout>
 
         <LinearLayout
@@ -72,8 +121,8 @@
                 android:id="@+id/harif_image"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
-                android:button="@null"
-                android:background="@drawable/harif_selector" />
+                android:background="@drawable/harif_selector"
+                android:button="@null" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -92,8 +141,8 @@
                 android:id="@+id/pickles_image"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
-                android:button="@null"
-                android:background="@drawable/pickle_selector"/>
+                android:background="@drawable/pickle_selector"
+                android:button="@null" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -114,8 +163,8 @@
                 android:id="@+id/onion_image"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
-                android:button="@null"
-                android:background="@drawable/onion_selector" />
+                android:background="@drawable/onion_selector"
+                android:button="@null" />
 
 
             <TextView
@@ -135,8 +184,8 @@
                 android:id="@+id/tomato_image"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
-                android:button="@null"
-                android:background="@drawable/tomato_selector" />
+                android:background="@drawable/tomato_selector"
+                android:button="@null" />
 
 
             <TextView
@@ -156,8 +205,8 @@
                 android:id="@+id/cucumber_image"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
-                android:button="@null"
-                android:background="@drawable/cucumber_selector" />
+                android:background="@drawable/cucumber_selector"
+                android:button="@null" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -176,8 +225,8 @@
                 android:id="@+id/eggplant_image"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
-                android:button="@null"
-                android:background="@drawable/eggplant_selector" />
+                android:background="@drawable/eggplant_selector"
+                android:button="@null" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -198,8 +247,8 @@
                 android:id="@+id/chips_image"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
-                android:button="@null"
-                android:background="@drawable/chips_selector" />
+                android:background="@drawable/chips_selector"
+                android:button="@null" />
 
 
             <TextView
@@ -220,8 +269,8 @@
                 android:id="@+id/tahini_image"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
-                android:button="@null"
-                android:background="@drawable/tahini_selector" />
+                android:background="@drawable/tahini_selector"
+                android:button="@null" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -241,8 +290,8 @@
                 android:id="@+id/amba_image"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
-                android:button="@null"
-                android:background="@drawable/amba_selector" />
+                android:background="@drawable/amba_selector"
+                android:button="@null" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -262,9 +311,9 @@
         android:background="@drawable/border_button"
         android:fontFamily="@font/varela_round"
         android:padding="20dp"
-        android:text="עזוב, ויתרתי"
+        android:text="@string/azov_vitarti"
         android:textSize="14sp"
-
+        android:autoSizeTextType="uniform"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/accept_button"
         app:layout_constraintHorizontal_bias="0.5"
@@ -276,16 +325,17 @@
         android:id="@+id/accept_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="48dp"
         android:background="@drawable/full_button"
         android:fontFamily="@font/varela_round"
         android:padding="20dp"
-        android:text="יאללה, תביא!"
+        android:text="@string/bring"
         android:textColor="@color/lightGrey"
         android:textSize="14sp"
+        android:autoSizeTextType="uniform"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
+        android:layout_marginBottom="50dp"
         app:layout_constraintStart_toEndOf="@+id/cancel_button" />
 
 
