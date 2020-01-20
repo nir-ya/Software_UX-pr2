@@ -46,9 +46,9 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
     public OrderListItemAdapter(@NonNull FirestoreRecyclerOptions<OrderListItem> options, Context context) {
         super(options);
         this.context = context;
-
     }
 
+    //TODO: please, doc string, please. trying to debug something that raises from here!
     @Override
     protected void onBindViewHolder(@NonNull final OrderListItemHolder holder, final int position, @NonNull final OrderListItem order) {
        String documentId = getSnapshots().getSnapshot(position).getId();
@@ -74,7 +74,7 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
             public void onClick(View view) {
                 Intent intent = new Intent(context.getApplicationContext(), ManaPickerActivity.class);
                 intent.addFlags(FLAG_ACTIVITY_NEW_TASK);
-                intent.putExtra("ref", order.getRef().getId()); // TODO: CONST
+                //intent.putExtra("ref", order.getRef().getId()); // TODO: CONST
                 context.getApplicationContext().startActivity(intent);
             }
         });
