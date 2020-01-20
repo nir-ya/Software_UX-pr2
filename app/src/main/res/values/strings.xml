@@ -54,4 +54,5 @@
     <string name="azov_vitarti">עזוב, ויתרתי</string>
     <string name="be_first">עדיין אין הזמנות...\nיאללה, קחו יוזמה!</string>
     <string name="owner_id">ownerUserId</string>
+    <string name="order_details">זהו! המנה בהזמנה\n של השעה %s</string>
 </resources>

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -50,16 +51,6 @@ public class OrderConfirmationActivity extends AppCompatActivity {
     tosafot = (HashMap<String, Boolean>) extras.getSerializable("tosafot");
   }
 
-  public void setCreditPayment(View view) {
-    paymentMethod = 1;
-  }
-
-
-  public void setCashPayment(View view) {
-    paymentMethod = 0;
-  }
-
-
   void addToDB() {
     final CollectionReference ordersCollection = db.collection(Constants.ORDERS);
     DocumentReference orderRef = ordersCollection.document(orderId);
@@ -101,6 +92,24 @@ public class OrderConfirmationActivity extends AppCompatActivity {
     finish();
   }
 
+    public void onRadioButtonClicked(View view) {
+        // Is the button now checked?
+        boolean checked = ((RadioButton) view).isChecked();
+
+        // Check which radio button was clicked
+        switch(view.getId()) {
+          case R.id.radio_cash:
+            if (checked)
+              paymentMethod = 0 ;
+            break;
+          case R.id.radio_credit:
+            if (checked)
+              paymentMethod = 1 ;
+              break;
+        }
+      }
+    }
+
 //    private void popToast(boolean success) {
 //        int msgId = R.string.new_order_success;
 //        if (success == false) {
@@ -108,4 +117,4 @@ public class OrderConfirmationActivity extends AppCompatActivity {
 //        }
 //        Toast.makeText(MainActivity.this, getResources().getString(msgId), Toast.LENGTH_LONG).show();
 //    }
-}
+
