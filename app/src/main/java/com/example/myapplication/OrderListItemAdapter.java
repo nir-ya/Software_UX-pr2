@@ -4,6 +4,7 @@ package com.example.myapplication;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -19,12 +20,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
 import android.view.View;
 
 
+import java.io.Serializable;
 import net.cachapa.expandablelayout.ExpandableLayout;
 
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
@@ -53,7 +56,6 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
     protected void onBindViewHolder(@NonNull final OrderListItemHolder holder, final int position, @NonNull final OrderListItem order) {
        String documentId = getSnapshots().getSnapshot(position).getId();
 
-        
         holder.textViewTitle.setText(order.displayTime());//TODO - change to normal title
         setProgressBar(holder, order);
 
@@ -63,24 +65,25 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
 
         setCardExpansion(holder.orderCard,holder);
         setCardExpansion(holder.infoButton,holder);
-        setJoinButtonHandler(holder.joinButton, order);
+        setJoinButtonHandler(holder.joinButton, documentId);
 
-        setOrderInfoRecyclerView(holder, order,documentId);
+        setOrderInfoRecyclerView(holder ,documentId);
     }
 
-    private void setJoinButtonHandler(View joinButton, final OrderListItem order) {
+    private void setJoinButtonHandler(View joinButton, final String doc) {
         joinButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context.getApplicationContext(), ManaPickerActivity.class);
-                intent.addFlags(FLAG_ACTIVITY_NEW_TASK);
-                //intent.putExtra("ref", order.getRef().getId()); // TODO: CONST
-                context.getApplicationContext().startActivity(intent);
+                Intent i = new Intent (context, ManaPickerActivity.class);
+
+                i.putExtra("ref", doc);
+                context.startActivity(i);
+
             }
         });
     }
 
-    private void setOrderInfoRecyclerView(@NonNull OrderListItemHolder holder, @NonNull OrderListItem order,String documentId) {
+    private void setOrderInfoRecyclerView(@NonNull OrderListItemHolder holder,String documentId) {
 
         CollectionReference manotRef = db.collection(Constants.ORDERS)
                 .document(documentId).collection(Constants.MANOT_SUBCOLLECTION);

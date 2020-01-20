@@ -1,11 +1,13 @@
 package com.example.myapplication;
 
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import com.google.firebase.firestore.DocumentReference;
 import java.util.Calendar;
 
 
-public class OrderListItem {
+public class OrderListItem implements Parcelable {
     static final String LOCKED = "locked";
     static final String OPEN = "open";
 
@@ -32,6 +34,25 @@ public class OrderListItem {
         this.status = mStatus;
     }
 
+    protected OrderListItem(Parcel in) {
+        price = in.readInt();
+        status = in.readString();
+        hour = in.readInt();
+        minute = in.readInt();
+    }
+
+    public static final Creator<OrderListItem> CREATOR = new Creator<OrderListItem>() {
+        @Override
+        public OrderListItem createFromParcel(Parcel in) {
+            return new OrderListItem(in);
+        }
+
+        @Override
+        public OrderListItem[] newArray(int size) {
+            return new OrderListItem[size];
+        }
+    };
+
     public String getStatus() {
         return status.toLowerCase();
     }
@@ -54,5 +75,18 @@ public class OrderListItem {
 
     public String displayTime(){
         return getHour() + ":" + getMinute();
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(price);
+        dest.writeString(status);
+        dest.writeInt(hour);
+        dest.writeInt(minute);
     }
 }

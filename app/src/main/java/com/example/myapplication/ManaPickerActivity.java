@@ -5,14 +5,20 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
+import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import org.w3c.dom.Document;
 
 public class ManaPickerActivity extends AppCompatActivity {
 
@@ -28,15 +34,35 @@ public class ManaPickerActivity extends AppCompatActivity {
     private static final String CHIPS = "Chips";
     private static final String EGGPLAT = "Eggplant";
 
-    ViewPager viewPager;  // TODO: find more informative variable names
+    TextView textHour;
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+    ViewPager viewPager;  // TODO: change to a more informative names
     ManaPickerAdapter adapter;
     List<ManaListItem> models;
-    private String orderReference;
+
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mana_picker);
+
+        textHour = findViewById(R.id.hourText);
+
+        Intent intent = getIntent();
+        String documentId = intent.getStringExtra("ref");
+
+        DocumentReference orderRef = db.collection(Constants.ORDERS)
+            .document(documentId);
+        orderRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+               OrderListItem order = documentSnapshot.toObject(OrderListItem.class);
+
+                textHour.setText(order.getStatus());
+            }
+        });
 
         models = new ArrayList<>();
         models.add(new ManaListItem(R.drawable.pita, "חצי פיתה","15 שקלים")); // TODO these should be consts
@@ -53,7 +79,6 @@ public class ManaPickerActivity extends AppCompatActivity {
         DepthTransformation depthTransformation = new DepthTransformation();
         viewPager.setPageTransformer(true, depthTransformation);
 
-        orderReference = getIntent().getStringExtra("ref"); // todo const
 
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -97,7 +122,7 @@ public class ManaPickerActivity extends AppCompatActivity {
         Log.w("SHEVAH", "I was just kidding!!!");
 
         Intent intent = new Intent(this, OrderConfirmationActivity.class);
-        intent.putExtra("ref", orderReference);
+//        intent.putExtra("ref", orderReference);
         intent.putExtra("mana_type", manaType);
         intent.putExtra("tosafot", tosafot);
     }
