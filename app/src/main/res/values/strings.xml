@@ -5,11 +5,11 @@
     <string name="my_order">ההזמנה שלי</string>
     <string name="manot_collection">Manot</string>
     <string name="owner_field">owner</string>
-    <string name="username_hint">שם משתמש</string>
-    <string name="login_button_text">כנס</string>
+    <string name="username_hint">שם מלא</string>
+    <string name="login_button_text">כניסה</string>
     <string name="email_hint">כתובת e-mail</string>
     <string name="password_hint">סיסמה</string>
-    <string name="welcome_str">אהלן אבנר!</string>
+    <string name="welcome_str">אהלן %s!</string>
     <string name="hour_for">הזמנתך לשעה: %s</string>
     <string name="sum_order_string">הזמנה בסך %s שקלים</string>
     <string name="payment_method">תשלום במזומן</string>
@@ -44,4 +44,8 @@
 
     <string name="new_order_success">הזמנתך נוספה בהצלחה!</string>
     <string name="new_order_fail">אוי! משהו קרה..תנסה שוב כפרה</string>
+    <string name="loginFailed">Login Failed</string>
+    <string name="loginSuccess">Login successful!</string>
+    <string name="registerSuccess">Register successful!</string>
+    <string name="registerFailure">Problem while Registering</string>
 </resources>
