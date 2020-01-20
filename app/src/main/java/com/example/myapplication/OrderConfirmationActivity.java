@@ -83,6 +83,9 @@ public class OrderConfirmationActivity extends AppCompatActivity {
   private void addManaToDB(CollectionReference ordersCollection) {
     CollectionReference manotCollectionReference = ordersCollection.document(orderId)
         .collection(Constants.MANOT_SUBCOLLECTION);
+    if(manaType==null){
+      manaType="pita" ;
+    }
     Mana newMana = new Mana(manaType, "", paymentMethod, tosafot, user.getDisplayName(), user.getUid());
     manotCollectionReference.add(newMana);
   }

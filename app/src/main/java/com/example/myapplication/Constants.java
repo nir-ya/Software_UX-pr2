@@ -12,4 +12,18 @@ public class Constants {
     static final String READY_TEXT = "מוכן לשילוח";
     static final String ORDER_OUT = "ההזמנה יצאה";
     static final String WAITING = "מחכה למשבחים...";
+
+    //Tosafot
+
+    static final String HUMMUS = "Hummus";
+    static final String HARIF = "Harif";
+    static final String THINA = "Thina";
+    static final String AMBA = "Amba";
+    static final String TOMATO = "Tomato";
+    static final String CUCUMBER = "Cucumber";
+    static final String ONION = "Onion";
+    static final String KRUV = "Kruv";
+    static final String PICKELS = "Pickels";
+    static final String CHIPS = "Chips";
+    static final String EGGPLAT = "Eggplant";
 }

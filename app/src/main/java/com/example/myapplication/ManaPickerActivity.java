@@ -26,17 +26,7 @@ import org.w3c.dom.Document;
 
 public class ManaPickerActivity extends AppCompatActivity {
 
-    private static final String HUMMUS = "Hummus";
-    private static final String HARIF = "Harif";
-    private static final String THINA = "Thina";
-    private static final String AMBA = "Amba";
-    private static final String TOMATO = "Tomato";
-    private static final String CUCUMBER = "Cucumber";
-    private static final String ONION = "Onion";
-    private static final String KRUV = "Kruv";
-    private static final String PICKELS = "Pickels";
-    private static final String CHIPS = "Chips";
-    private static final String EGGPLAT = "Eggplant";
+
 
     TextView textHour;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -103,21 +93,23 @@ public class ManaPickerActivity extends AppCompatActivity {
 
     public void startManaActivity(View view) {
         Intent intent = new Intent(this, ManaActivity.class);
+        intent.putExtra("ref",orderId);
+        intent.putExtra("CALENDAR",cal);
         startActivity(intent);
     }
 
     private void setTosafot(HashMap tosafot) {
-        tosafot.put(HUMMUS, true);
-        tosafot.put(THINA, true);
-        tosafot.put(HARIF, true);
-        tosafot.put(AMBA, true);
-        tosafot.put(TOMATO, true);
-        tosafot.put(CUCUMBER, true);
-        tosafot.put(ONION, true);
-        tosafot.put(KRUV, true);
-        tosafot.put(PICKELS, true);
-        tosafot.put(CHIPS, true);
-        tosafot.put(EGGPLAT, true);
+        tosafot.put(Constants.HUMMUS, true);
+        tosafot.put(Constants.THINA, true);
+        tosafot.put(Constants.HARIF, true);
+        tosafot.put(Constants.AMBA, true);
+        tosafot.put(Constants.TOMATO, true);
+        tosafot.put(Constants.CUCUMBER, true);
+        tosafot.put(Constants.ONION, true);
+        tosafot.put(Constants.KRUV, true);
+        tosafot.put(Constants.PICKELS, true);
+        tosafot.put(Constants.CHIPS, true);
+        tosafot.put(Constants.EGGPLAT, true);
     }
 
     public void simHakol(View view) {

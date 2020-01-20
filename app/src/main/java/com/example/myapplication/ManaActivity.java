@@ -2,13 +2,23 @@ package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
+
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.Calendar;
+import java.util.HashMap;
 
 public class ManaActivity extends AppCompatActivity {
 
@@ -27,6 +37,11 @@ public class ManaActivity extends AppCompatActivity {
 
     CheckBox[] checkBoxes;
 
+    String orderId;
+    Calendar cal;
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,8 +52,29 @@ public class ManaActivity extends AppCompatActivity {
 
         isAllMarkedListener();
 
+        orderId = getIntent().getStringExtra("ref");
+        cal = (Calendar) getIntent().getSerializableExtra("CALENDAR");
+
+
+
 
     }
+
+    private void setTosafot(HashMap tosafot) {
+        tosafot.put(Constants.HUMMUS, humusView.isChecked());
+        tosafot.put(Constants.THINA, tahiniView.isChecked());
+        tosafot.put(Constants.HARIF, harifView.isChecked());
+        tosafot.put(Constants.AMBA, ambaView.isChecked());
+        tosafot.put(Constants.TOMATO, tomatoView.isChecked());
+        tosafot.put(Constants.CUCUMBER, cucumberView.isChecked());
+        tosafot.put(Constants.ONION, onionView.isChecked());
+        tosafot.put(Constants.PICKELS, picklesView.isChecked());
+        tosafot.put(Constants.CHIPS, chipsView.isChecked());
+        tosafot.put(Constants.EGGPLAT, eggplantView.isChecked());
+        tosafot.put(Constants.KRUV, false);
+
+    }
+
 
     private void isAllMarkedListener() {
         markAll.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -86,4 +122,25 @@ public class ManaActivity extends AppCompatActivity {
         }
 
 
+    public void moveToConfirm(View view) {
+        DocumentReference orderRef = db.collection(Constants.ORDERS).document(orderId);
+        orderRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                OrderListItem order = documentSnapshot.toObject(OrderListItem.class);
+                if (order != null)
+                {
+                    String s = Randomizer.formatter.format(order.getTimestamp().toDate());
+
+                    HashMap<String, Boolean> tosafot = new HashMap<>();
+                    setTosafot(tosafot);
+                    Intent intent = new Intent(getApplicationContext(), OrderConfirmationActivity.class);
+                    intent.putExtra("tosafot", tosafot);
+                    intent.putExtra("order_id", orderId);
+                    intent.putExtra("CALENDAR",cal);
+                    startActivity(intent);
+                }
+            }
+        });
     }
+}
