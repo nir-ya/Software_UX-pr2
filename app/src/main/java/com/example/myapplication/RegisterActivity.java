@@ -3,7 +3,11 @@ package com.example.myapplication;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+
+import android.graphics.PorterDuff;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -17,11 +21,15 @@ import com.google.firebase.auth.UserProfileChangeRequest;
 
 
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+
 public class RegisterActivity extends AppCompatActivity {
 
     EditText nameText, passwordText, emailText;
     private FirebaseAuth firebaseAuth;
-
+    private Pattern emailChecker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +39,7 @@ public class RegisterActivity extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
 
         assignViewsFromLayout();
+        emailChecker = Pattern.compile(".+@.+\\..+");
     }
 
     private void assignViewsFromLayout() {
@@ -38,6 +47,54 @@ public class RegisterActivity extends AppCompatActivity {
         passwordText = findViewById(R.id.password_text);
         emailText = findViewById(R.id.email_text);
 
+        nameText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                nameText.getBackground().mutate().setColorFilter(getResources().getColor(android.R.color.holo_blue_light), PorterDuff.Mode.SRC_ATOP);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+        passwordText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                passwordText.getBackground().mutate().setColorFilter(getResources().getColor(android.R.color.holo_blue_light), PorterDuff.Mode.SRC_ATOP);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+        emailText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                emailText.getBackground().mutate().setColorFilter(getResources().getColor(android.R.color.holo_blue_light), PorterDuff.Mode.SRC_ATOP);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
     }
 
     @Override
@@ -90,6 +147,31 @@ public class RegisterActivity extends AppCompatActivity {
                 });
     }
 
+    /**
+     * check whether input fields have valid values
+     * @param view
+     */
+    public void checkInput(View view){
+        boolean good = true;
+        if(nameText.length() <3){
+            nameText.getBackground().mutate().setColorFilter(getResources().getColor(android.R.color.holo_red_light), PorterDuff.Mode.SRC_ATOP);
+            good = false;
+        }
+
+        if(passwordText.length() <6){
+            passwordText.getBackground().mutate().setColorFilter(getResources().getColor(android.R.color.holo_red_light), PorterDuff.Mode.SRC_ATOP);
+            good = false;
+        }
+        Matcher matcher = emailChecker.matcher(emailText.getText().toString());
+        if(!matcher.matches()){
+            emailText.getBackground().mutate().setColorFilter(getResources().getColor(android.R.color.holo_red_light), PorterDuff.Mode.SRC_ATOP);
+            good = false;
+        }
+
+        if (good){
+            register(view);
+        }
+    }
 
     @Override
     protected void onStop() {

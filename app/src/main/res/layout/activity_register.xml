@@ -6,7 +6,7 @@
     android:layout_gravity="center"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context=".LoginActivity"
+    tools:context=".RegisterActivity"
     android:background="@color/backgroundGreen">
 
     <ImageView
@@ -69,7 +69,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="34dp"
         android:layout_marginEnd="34dp"
-        android:onClick="register"
+        android:onClick="checkInput"
         android:text="הרשם"
         android:textSize="20sp" />
 

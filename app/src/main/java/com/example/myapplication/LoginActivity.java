@@ -4,8 +4,11 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -17,11 +20,15 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 
 public class LoginActivity extends AppCompatActivity {
 
     EditText passwordText, emailText;
     private FirebaseAuth firebaseAuth;
+    private Pattern emailChecker;
 
 
     @Override
@@ -36,6 +43,7 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(i);
             finish();
         }
+        emailChecker = Pattern.compile(".+@.+\\..+");
 
         assignViewsFromLayout();
     }
@@ -43,13 +51,45 @@ public class LoginActivity extends AppCompatActivity {
     private void assignViewsFromLayout() {
         passwordText = findViewById(R.id.password_text);
         emailText = findViewById(R.id.email_text);
+
+        passwordText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                passwordText.getBackground().mutate().setColorFilter(getResources().getColor(android.R.color.holo_blue_light), PorterDuff.Mode.SRC_ATOP);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+        emailText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                emailText.getBackground().mutate().setColorFilter(getResources().getColor(android.R.color.holo_blue_light), PorterDuff.Mode.SRC_ATOP);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
     }
 
     @Override
     public void onStart() {
         super.onStart();
 
-        //todo sign in?
     }
 
 
@@ -79,6 +119,28 @@ public class LoginActivity extends AppCompatActivity {
                 });
     }
 
+
+    /**
+     * check whether input fields have valid values
+     * @param view
+     */
+    public void checkInput(View view){
+        boolean good = true;
+
+        if(passwordText.length() <6){
+            passwordText.getBackground().mutate().setColorFilter(getResources().getColor(android.R.color.holo_red_light), PorterDuff.Mode.SRC_ATOP);
+            good = false;
+        }
+        Matcher matcher = emailChecker.matcher(emailText.getText().toString());
+        if(!matcher.matches()){
+            emailText.getBackground().mutate().setColorFilter(getResources().getColor(android.R.color.holo_red_light), PorterDuff.Mode.SRC_ATOP);
+            good = false;
+        }
+
+        if (good){
+            login(view);
+        }
+    }
 
     @Override
     protected void onStop() {

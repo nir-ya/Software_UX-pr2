@@ -53,7 +53,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="34dp"
         android:layout_marginEnd="34dp"
-        android:onClick="login"
+        android:onClick="checkInput"
         android:text="@string/login_button_text"
         android:textSize="20sp" />
 
