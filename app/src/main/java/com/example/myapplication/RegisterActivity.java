@@ -3,13 +3,11 @@ package com.example.myapplication;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
+
 import android.graphics.PorterDuff;
 import android.os.Bundle;
-import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -19,39 +17,52 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
+
+
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
-public class LoginActivity extends AppCompatActivity {
+public class RegisterActivity extends AppCompatActivity {
 
-    EditText passwordText, emailText;
+    EditText nameText, passwordText, emailText;
     private FirebaseAuth firebaseAuth;
     private Pattern emailChecker;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_register);
 
         firebaseAuth = FirebaseAuth.getInstance();
 
-        if (firebaseAuth.getCurrentUser() != null) {
-            Intent i = new Intent(this, MainActivity.class);
-            startActivity(i);
-            finish();
-        }
-        emailChecker = Pattern.compile(".+@.+\\..+");
-
         assignViewsFromLayout();
+        emailChecker = Pattern.compile(".+@.+\\..+");
     }
 
     private void assignViewsFromLayout() {
+        nameText = findViewById(R.id.username_text);
         passwordText = findViewById(R.id.password_text);
         emailText = findViewById(R.id.email_text);
 
+        nameText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                nameText.getBackground().mutate().setColorFilter(getResources().getColor(android.R.color.holo_blue_light), PorterDuff.Mode.SRC_ATOP);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
         passwordText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -89,40 +100,52 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
-
     }
 
     /**
-     * handle login to firebase
+     * function is responsible for registering new user
      * @param view
      */
-    public void login(View view) {
-
-        // todo error handling
+    public void register(View view) {
+        // todo - maybe find a way to do this with one firebase call
+        final String username = nameText.getText().toString();
         final String emailAddress = emailText.getText().toString();
         final String password = passwordText.getText().toString();
-        final LoginActivity thisActivity = this;
-
-        firebaseAuth.signInWithEmailAndPassword(emailAddress, password).addOnCompleteListener(this,
+        firebaseAuth.createUserWithEmailAndPassword(emailAddress, password).addOnCompleteListener(this,
                 new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            FirebaseUser user = firebaseAuth.getCurrentUser();
 
-                            Toast.makeText(LoginActivity.this, getResources().getString(R.string.loginSuccess),
-                                    Toast.LENGTH_SHORT).show();
-                            Intent i = new Intent(thisActivity, MainActivity.class);
-                            startActivity(i);
+                            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                            // create update to add display name to user
+                            UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                                    .setDisplayName(username)
+                                    .build();
+                            user.updateProfile(profileUpdates).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()) {
+                                        Toast.makeText(RegisterActivity.this, getResources().getString(R.string.registerSuccess),
+                                                Toast.LENGTH_SHORT).show();
+                                        setResult(1);
+                                        finish();
+                                    } else {
+                                        //todo - maybe do something
+                                    }
+                                }
+                            });
+
+
                         } else {
-
-                            Toast.makeText(LoginActivity.this, getResources().getString(R.string.loginFailed),
+                            Toast.makeText(RegisterActivity.this, getResources().getString(R.string.registerFailure),
                                     Toast.LENGTH_SHORT).show();
+
                         }
                     }
+
                 });
     }
-
 
     /**
      * check whether input fields have valid values
@@ -130,6 +153,10 @@ public class LoginActivity extends AppCompatActivity {
      */
     public void checkInput(View view){
         boolean good = true;
+        if(nameText.length() <3){
+            nameText.getBackground().mutate().setColorFilter(getResources().getColor(android.R.color.holo_red_light), PorterDuff.Mode.SRC_ATOP);
+            good = false;
+        }
 
         if(passwordText.length() <6){
             passwordText.getBackground().mutate().setColorFilter(getResources().getColor(android.R.color.holo_red_light), PorterDuff.Mode.SRC_ATOP);
@@ -142,7 +169,7 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         if (good){
-            login(view);
+            register(view);
         }
     }
 
@@ -150,32 +177,5 @@ public class LoginActivity extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
 
-
-    }
-
-    /**
-     * start register activity
-     * @param view
-     */
-    public void register(View view) {
-        Intent i = new Intent(this, RegisterActivity.class);
-        startActivityForResult(i, 1);
-    }
-
-
-    /**
-     * used to handle register activity sucess
-     * @param requestCode
-     * @param resultCode
-     * @param data
-     */
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == resultCode) {
-            Intent i = new Intent(this, MainActivity.class);
-            startActivity(i);
-            finish();
-        }
     }
 }

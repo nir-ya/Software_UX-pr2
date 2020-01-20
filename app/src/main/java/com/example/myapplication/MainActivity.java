@@ -20,6 +20,8 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -33,10 +35,13 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private CollectionReference ordersRef = db.collection(Constants.ORDERS);
 
+
     //adapters
     private OrderListItemAdapter orderAdapter;
 
     FloatingActionButton newOrderButt;
+
+    private TextView greeting;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +50,11 @@ public class MainActivity extends AppCompatActivity {
         connectToXML();
         setUpOrdersRecyclerView();
         setFab();
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        greeting = findViewById(R.id.greeting);
+
+        greeting.setText(String.format(getResources().getString(R.string.welcome_str),user.getDisplayName()));
 
     }
 
