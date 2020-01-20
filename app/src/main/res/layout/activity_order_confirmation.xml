@@ -22,10 +22,9 @@
         android:textStyle="bold"/>
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/order_details_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView_header" />
 
@@ -55,6 +54,7 @@
         android:id="@+id/button_credit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:onClick="setCreditPayment"
         android:text="אשראי"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -69,6 +69,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="שלח הזמנה"
+        android:onClick="setCashPayment"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
