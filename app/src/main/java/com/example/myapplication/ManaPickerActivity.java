@@ -40,6 +40,7 @@ public class ManaPickerActivity extends AppCompatActivity {
     ViewPager viewPager;  // TODO: change to a more informative names
     ManaPickerAdapter adapter;
     List<ManaListItem> models;
+    private String orderId;
 
 
 
@@ -50,17 +51,17 @@ public class ManaPickerActivity extends AppCompatActivity {
 
         textHour = findViewById(R.id.hourText);
 
-        Intent intent = getIntent();
-        String documentId = intent.getStringExtra("ref");
+        orderId = getIntent().getStringExtra("ref");
 
-        DocumentReference orderRef = db.collection(Constants.ORDERS)
-            .document(documentId);
+        DocumentReference orderRef = db.collection(Constants.ORDERS).document(orderId);
         orderRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                OrderListItem order = documentSnapshot.toObject(OrderListItem.class);
-
-                textHour.setText(order.getStatus());
+               if (order != null)
+               {
+                   textHour.setText(order.displayTime());
+               }
             }
         });
 
@@ -97,10 +98,7 @@ public class ManaPickerActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void simHakol(View view) {
-        String owner = "John"; // TODO: this should be set to the real username
-        String manaType = "pita"; // TODO: this should be set according to the "model" presented
-        HashMap tosafot = new HashMap<String, Boolean>(); // TODO: there are better ways to do this
+    private void setTosafot(HashMap tosafot) {
         tosafot.put(HUMMUS, true);
         tosafot.put(THINA, true);
         tosafot.put(HARIF, true);
@@ -112,18 +110,19 @@ public class ManaPickerActivity extends AppCompatActivity {
         tosafot.put(PICKELS, true);
         tosafot.put(CHIPS, true);
         tosafot.put(EGGPLAT, true);
-        int price = ManaModel.getPrice(manaType);
-        ManaListItem mana = new ManaListItem(owner, manaType, price, tosafot);
-        
-        //TODO: forward mana object to
-        //TODO: need to know what order is associated with this mana to the next screen payment + notes
+    }
 
-        System.out.println("I was just kidding!");
-        Log.w("SHEVAH", "I was just kidding!!!");
+    public void simHakol(View view) {
+        String manaType = "pita"; // TODO: this should be set according to the "model" presented
+        HashMap tosafot = new HashMap<String, Boolean>(); // TODO: there are better ways to do this
+        setTosafot(tosafot);
 
         Intent intent = new Intent(this, OrderConfirmationActivity.class);
 //        intent.putExtra("ref", orderReference);
         intent.putExtra("mana_type", manaType);
         intent.putExtra("tosafot", tosafot);
+        intent.putExtra("order_id", orderId);
+        intent.putExtra("order_time", textHour.getText());
+        startActivity(intent);
     }
 }

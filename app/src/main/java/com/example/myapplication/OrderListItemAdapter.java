@@ -77,6 +77,7 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
                 Intent i = new Intent (context, ManaPickerActivity.class);
 
                 i.putExtra("ref", doc);
+                i.addFlags(FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(i);
 
             }
