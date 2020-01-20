@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     //yalla
-    
+
     //fireBase Objects
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private CollectionReference ordersRef = db.collection(Constants.OPEN_ORDERS_COLLECTION);
