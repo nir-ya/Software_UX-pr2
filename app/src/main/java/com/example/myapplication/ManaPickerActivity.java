@@ -74,7 +74,7 @@ public class ManaPickerActivity extends AppCompatActivity {
 
     public void simHakol(View view) {
         String owner = "John"; // TODO: this should be set to the real username
-        String type = "pita"; // TODO: this should be set according to the "model" presented
+        String manaType = "pita"; // TODO: this should be set according to the "model" presented
         HashMap tosafot = new HashMap<String, Boolean>(); // TODO: there are better ways to do this
         tosafot.put(HUMMUS, true);
         tosafot.put(THINA, true);
@@ -87,8 +87,8 @@ public class ManaPickerActivity extends AppCompatActivity {
         tosafot.put(PICKELS, true);
         tosafot.put(CHIPS, true);
         tosafot.put(EGGPLAT, true);
-        int price = ManaModel.getPrice(type);
-        ManaListItem mana = new ManaListItem(owner, type, price, tosafot);
+        int price = ManaModel.getPrice(manaType);
+        ManaListItem mana = new ManaListItem(owner, manaType, price, tosafot);
         
         //TODO: forward mana object to
         //TODO: need to know what order is associated with this mana to the next screen payment + notes
@@ -96,6 +96,9 @@ public class ManaPickerActivity extends AppCompatActivity {
         System.out.println("I was just kidding!");
         Log.w("SHEVAH", "I was just kidding!!!");
 
-        
+        Intent intent = new Intent(this, OrderConfirmationActivity.class);
+        intent.putExtra("ref", orderReference);
+        intent.putExtra("mana_type", manaType);
+        intent.putExtra("tosafot", tosafot);
     }
 }
