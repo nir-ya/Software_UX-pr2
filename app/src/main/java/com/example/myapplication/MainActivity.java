@@ -17,10 +17,8 @@ import android.widget.Toast;
 
 
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
@@ -55,17 +53,14 @@ public class MainActivity extends AppCompatActivity {
      */
     private void setUpOrdersRecyclerView() {
         Query query = ordersRef.orderBy(getString(R.string.price), Query.Direction.DESCENDING);
-
         FirestoreRecyclerOptions options = new FirestoreRecyclerOptions.Builder<OrderListItem>().setQuery(query, OrderListItem.class)
                 .build();
         orderAdapter = new OrderListItemAdapter(options, this.getApplicationContext());
-
         RecyclerView ordersRecyclerView = findViewById(R.id.orders_recycler_view);
         LinearLayoutManager layout = new LinearLayoutManager(this);
         layout.setOrientation(RecyclerView.VERTICAL);
         ordersRecyclerView.setLayoutManager(layout);
         ordersRecyclerView.setAdapter(orderAdapter);
-
     }
 
     /**
@@ -78,9 +73,7 @@ public class MainActivity extends AppCompatActivity {
         myBagDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         myBagDialog.setContentView(R.layout.mybag_dialog);
         myBagDialog.show();
-
         setUpMyBag(myBagDialog);
-
     }
 
     /**
@@ -155,7 +148,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                 // TODO Auto-generated method stub
-                addOrdertoServer(cal);
+                addOrderToServer(cal);
 //                Intent intent = new Intent(MainActivity.this, ManaPickerActivity.class);
 //                startActivity(intent);
             }
@@ -163,7 +156,7 @@ public class MainActivity extends AppCompatActivity {
         timePickerDialog.show();
     }
 
-    private void addOrdertoServer(Calendar cal) {
+    private void addOrderToServer(Calendar cal) {
         //New Version
         final DocumentReference ordRef = ordersRef.document();
         final OrderListItem order = new OrderListItem(ordRef, cal);
