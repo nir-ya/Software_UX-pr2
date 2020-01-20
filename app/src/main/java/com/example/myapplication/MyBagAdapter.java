@@ -30,8 +30,8 @@ public class MyBagAdapter extends FirestoreRecyclerAdapter<Mana, MyBagAdapter.My
 
     @Override
     protected void onBindViewHolder(@NonNull final MyBagHolder holder, final int position, @NonNull final Mana mana) {
-        holder.textViewType.setText(mana.getOwner());//TODO - change to normal title
-        holder.textViewPrice.setText(Integer.toString(mana.getPrice()));
+        holder.textViewType.setText(Mana.getHebType(mana.getType()));//TODO - change to normal title
+        holder.textViewPrice.setText(Integer.toString(mana.getPrice())+"₪");
 
     }
 

@@ -31,13 +31,15 @@ import java.io.Serializable;
 import net.cachapa.expandablelayout.ExpandableLayout;
 
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
 import static java.lang.Boolean.TRUE;
 
 public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem, OrderListItemAdapter.OrderListItemHolder> {
 
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
-
+    private View emptyView;
 
     private static final int CRITICAL_PRICE = 45;
     private static final int MIN_ORDER = 70;
@@ -68,6 +70,12 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
         setJoinButtonHandler(holder.joinButton, documentId);
 
         setOrderInfoRecyclerView(holder ,documentId);
+    }
+
+    @Override
+    public void onDataChanged() {
+        super.onDataChanged();
+        initEmptyView();
     }
 
     private void setJoinButtonHandler(View joinButton, final String doc) {
@@ -250,6 +258,18 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
 
         this.recyclerView = recyclerView;
 
+    }
+
+    private void initEmptyView() {
+        if (emptyView != null) {
+            emptyView.setVisibility(
+                    getItemCount() == 0 ? VISIBLE : GONE);
+        }
+    }
+
+    public void setEmptyView(View view) {
+        this.emptyView = view;
+        initEmptyView();
     }
 
 

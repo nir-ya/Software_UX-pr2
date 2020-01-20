@@ -38,6 +38,7 @@ public class Mana {
     private int paymentMethod;
     private String notes;
     private int price;
+    private String ownerUserId;
 
 
     /**
@@ -54,10 +55,12 @@ public class Mana {
      * @param paymentMethod - String representing the payment method for the Mana (Credit / Cash)
      * @param tosafot - A Hashmap of Tosafot: String->Boolean
      * @param owner - A String representing the user who ordered the Mana
+     * @param ownerUserId
      */
     public Mana(String type, String notes, int paymentMethod,
-        HashMap<String, Boolean> tosafot, String owner) {
+                HashMap<String, Boolean> tosafot, String owner, String ownerUserId) {
         this.owner = owner;
+        this.ownerUserId = ownerUserId;
         this.status = OPEN;
         this.type = type;
         this.tosafot = tosafot;
@@ -118,6 +121,21 @@ public class Mana {
         return type;
     }
 
+    public static String getHebType(String type) {
+        switch (type) {
+            case PITA:
+                return "פיתה";
+            case LAFA:
+                return "לאפה";
+            case HALF_PITA:
+                return "חצי פיתה";
+            case HALF_LAFA:
+                return "חצי לאפה";
+            default:
+                return "שגיאה";
+        }
+    }
+
     /**
      * A getter, as required by FireStore
      * @return the payment method for the Mana
@@ -140,5 +158,9 @@ public class Mana {
      */
     public String getNotes() {
         return notes;
+    }
+
+    public String getOwnerUserId() {
+        return ownerUserId;
     }
 }

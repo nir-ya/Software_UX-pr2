@@ -74,7 +74,7 @@
         />
     <TextView
         android:textDirection="rtl"
-        android:visibility="visible"
+        android:visibility="gone"
         android:id="@+id/be_first"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
