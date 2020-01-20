@@ -143,7 +143,6 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
         });
     }
 
-
     /**
      * this function inserts the relevant text to the "order status" textView,
      * by the relevant order status

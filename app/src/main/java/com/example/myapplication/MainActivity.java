@@ -60,7 +60,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         connectToXML();
         setUpOrdersRecyclerView();
-        setFab();
 
         user = FirebaseAuth.getInstance().getCurrentUser();
         greeting = findViewById(R.id.greeting);
@@ -141,14 +140,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void setFab() {
-        newOrderButt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                createNewOrder();
-            }
-        });
-    }
+
 
     @Override
     protected void onStart() {
@@ -162,7 +154,7 @@ public class MainActivity extends AppCompatActivity {
         orderAdapter.stopListening();
     }
 
-    private void createNewOrder() {
+    public void createNewOrder(View view) {
         final Calendar cal = Calendar.getInstance();
         int hour = cal.get(Calendar.HOUR_OF_DAY);
         int minute = cal.get(Calendar.MINUTE);
@@ -214,6 +206,7 @@ public class MainActivity extends AppCompatActivity {
         }
         Toast.makeText(MainActivity.this, getResources().getString(msgId), Toast.LENGTH_LONG).show();
     }
+
 }
 
 
