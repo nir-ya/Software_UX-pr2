@@ -44,4 +44,8 @@
 
     <string name="new_order_success">הזמנתך נוספה בהצלחה!</string>
     <string name="new_order_fail">אוי! משהו קרה..תנסה שוב כפרה</string>
+    <string name="loginFailed">Login Failed</string>
+    <string name="loginSuccess">Login successful!</string>
+    <string name="registerSuccess">Register successful!</string>
+    <string name="registerFailure">Problem while Registering</string>
 </resources>

@@ -126,7 +126,7 @@ public class RegisterActivity extends AppCompatActivity {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()) {
-                                        Toast.makeText(RegisterActivity.this, "Register successful!",
+                                        Toast.makeText(RegisterActivity.this, getResources().getString(R.string.registerSuccess),
                                                 Toast.LENGTH_SHORT).show();
                                         setResult(1);
                                         finish();
@@ -138,7 +138,7 @@ public class RegisterActivity extends AppCompatActivity {
 
 
                         } else {
-                            Toast.makeText(RegisterActivity.this, "Problem while Registering",
+                            Toast.makeText(RegisterActivity.this, getResources().getString(R.string.registerFailure),
                                     Toast.LENGTH_SHORT).show();
 
                         }

@@ -92,7 +92,10 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-
+    /**
+     * handle login to firebase
+     * @param view
+     */
     public void login(View view) {
 
         // todo error handling
@@ -107,13 +110,14 @@ public class LoginActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             FirebaseUser user = firebaseAuth.getCurrentUser();
 
-                            Toast.makeText(LoginActivity.this, "Login successful!",
+                            Toast.makeText(LoginActivity.this, getResources().getString(R.string.loginSuccess),
                                     Toast.LENGTH_SHORT).show();
                             Intent i = new Intent(thisActivity, MainActivity.class);
                             startActivity(i);
                         } else {
 
-                            // display error in
+                            Toast.makeText(LoginActivity.this, getResources().getString(R.string.loginFailed),
+                                    Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -146,14 +150,25 @@ public class LoginActivity extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
 
-        // todo sign out?
+
     }
 
+    /**
+     * start register activity
+     * @param view
+     */
     public void register(View view) {
         Intent i = new Intent(this, RegisterActivity.class);
-        startActivityForResult(i, 1); //todo - pick better request code
+        startActivityForResult(i, 1);
     }
 
+
+    /**
+     * used to handle register activity sucess
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
