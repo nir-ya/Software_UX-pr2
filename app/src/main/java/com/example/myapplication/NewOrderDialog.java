@@ -13,7 +13,9 @@ import androidx.appcompat.app.AppCompatDialogFragment;
 
 import android.content.Context;
 
-
+/**
+ * This class builds the new order dialog fragment
+ */
 public class NewOrderDialog extends AppCompatDialogFragment {
     private TimePicker timePicker;
     private NewOrderDialogListener listener;
@@ -22,11 +24,19 @@ public class NewOrderDialog extends AppCompatDialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
+        View view = setViewToBuilder(builder);
+
+        timePicker = view.findViewById(R.id.timepicker);
+        timePicker.setIs24HourView(true);
+
+        return builder.create();
+    }
+
+    private View setViewToBuilder(AlertDialog.Builder builder) {
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.new_order_dialog, null);
 
         builder.setView(view)
-
                 .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
@@ -41,11 +51,7 @@ public class NewOrderDialog extends AppCompatDialogFragment {
                         listener.applyTime(hour, minute);
                     }
                 });
-
-        timePicker = view.findViewById(R.id.timepicker);
-        timePicker.setIs24HourView(true);
-
-        return builder.create();
+        return view;
     }
 
     @Override
