@@ -1,5 +1,9 @@
 package com.example.myapplication;
 
+import android.app.MediaRouteButton;
+import android.content.Intent;
+import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -45,6 +49,8 @@ public class MainActivity extends AppCompatActivity {
     FloatingActionButton newOrderButt;
 
     private TextView greeting;
+    private TextView beFirst;
+    private FirebaseUser user;
 
 
 
@@ -54,12 +60,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         connectToXML();
         setUpOrdersRecyclerView();
-        setFab();
 
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        user = FirebaseAuth.getInstance().getCurrentUser();
         greeting = findViewById(R.id.greeting);
-
-        greeting.setText(String.format(getResources().getString(R.string.welcome_str),user.getDisplayName()));
+        greeting.setText(
+                String.format(getResources().getString(R.string.welcome_str), user.getDisplayName()));
 
     }
 
@@ -68,14 +73,17 @@ public class MainActivity extends AppCompatActivity {
      */
     private void setUpOrdersRecyclerView() {
         Query query = ordersRef.orderBy(getString(R.string.price), Query.Direction.DESCENDING);
-        FirestoreRecyclerOptions options = new FirestoreRecyclerOptions.Builder<OrderListItem>().setQuery(query, OrderListItem.class)
+        FirestoreRecyclerOptions options = new FirestoreRecyclerOptions.Builder<OrderListItem>()
+                .setQuery(query, OrderListItem.class)
                 .build();
         orderAdapter = new OrderListItemAdapter(options, this.getApplicationContext());
+        orderAdapter.setEmptyView(beFirst);
         RecyclerView ordersRecyclerView = findViewById(R.id.orders_recycler_view);
         LinearLayoutManager layout = new LinearLayoutManager(this);
         layout.setOrientation(RecyclerView.VERTICAL);
         ordersRecyclerView.setLayoutManager(layout);
         ordersRecyclerView.setAdapter(orderAdapter);
+
     }
 
     /**
@@ -97,11 +105,9 @@ public class MainActivity extends AppCompatActivity {
      * @param myBagDialog parent dialog popup windows
      */
     private void setUpMyBag(Dialog myBagDialog) {
-        //this is an example query: "luli" is just a generic name for checking the filtering from
-        //collections
-        //Todo: change luli to getUserId after merging
         Query query = db.collectionGroup(getString(R.string.manot_collection))
-                .whereEqualTo(getString(R.string.owner_field), "luli");
+                .whereEqualTo(getString(R.string.owner_id), user.getUid());
+
 
         FirestoreRecyclerOptions options = new FirestoreRecyclerOptions.Builder<Mana>()
                 .setQuery(query, Mana.class)
@@ -130,18 +136,11 @@ public class MainActivity extends AppCompatActivity {
         //views
         ImageView bag = findViewById(R.id.bag);
         newOrderButt = findViewById(R.id.new_order_button);
-
+        beFirst = findViewById(R.id.be_first);
 
     }
 
-    private void setFab() {
-        newOrderButt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                createNewOrder();
-            }
-        });
-    }
+
 
     @Override
     protected void onStart() {
@@ -155,26 +154,35 @@ public class MainActivity extends AppCompatActivity {
         orderAdapter.stopListening();
     }
 
-    private void createNewOrder() {
+    public void createNewOrder(View view) {
         final Calendar cal = Calendar.getInstance();
         int hour = cal.get(Calendar.HOUR_OF_DAY);
         int minute = cal.get(Calendar.MINUTE);
-        TimePickerDialog timePickerDialog = new TimePickerDialog(MainActivity.this, new TimePickerDialog.OnTimeSetListener() {
-            @Override
-            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                // TODO Auto-generated method stub
-                addOrderToServer(cal);
-//                Intent intent = new Intent(MainActivity.this, ManaPickerActivity.class);
-//                startActivity(intent);
-            }
-        }, hour, minute, true);
+        TimePickerDialog timePickerDialog = new TimePickerDialog(MainActivity.this,
+                new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                        // TODO Auto-generated method stub
+                        cal.set(Calendar.HOUR_OF_DAY, hourOfDay);
+                        cal.set(Calendar.MINUTE, minute);
+                        startOrderProcedure(cal);
+                    }
+                }, hour, minute, true);
         timePickerDialog.show();
     }
 
+    private void startOrderProcedure(Calendar cal) {
+
+        Intent intent = new Intent(MainActivity.this, ManaPickerActivity.class);
+        intent.putExtra("CALENDAR", cal);
+        intent.putExtra("ref", Randomizer.randomString(18));
+        startActivity(intent);
+
+    }
+
     private void addOrderToServer(Calendar cal) {
-        //New Version
         final DocumentReference ordRef = ordersRef.document();
-        final OrderListItem order = new OrderListItem(ordRef, cal);
+        final OrderListItem order = new OrderListItem(cal);
         ordRef.set(order).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
@@ -187,42 +195,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //TODO: delete commented code
-        //My take 1#
-//        ordersRef.add(order).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-//            @Override
-//            public void onSuccess(DocumentReference documentReference) {
-//                popToast(true);
-//                ordRef.set(documentReference);
-//            }
-//        }).addOnFailureListener(new OnFailureListener() {
-//            @Override
-//            public void onFailure(@NonNull Exception e) {
-//                popToast(false);
-//            }
-//        });
 
-        //Old Version
-//        ordersRef.add(order).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
-//            @Override
-//            public void onComplete(@NonNull final Task<DocumentReference> task) {
-//                task.getResult()
-//                        .collection("Manot")
-//                        .add(new Mana("avnush", 0, 10)) //TODO (avner): replace avnush with the logged user
-//                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-//                            @Override
-//                            public void onSuccess(DocumentReference documentReference) {
-//                                popToast(true);
-//                            }
-//                        }).addOnFailureListener(new OnFailureListener() {
-//                    @Override
-//                    public void onFailure(@NonNull Exception e) {
-//                        popToast(false);
-//                    }
-//                });
-//            }
-//        });
     }
+
 
     private void popToast(boolean success) {
         int msgId = R.string.new_order_success;
@@ -231,6 +206,7 @@ public class MainActivity extends AppCompatActivity {
         }
         Toast.makeText(MainActivity.this, getResources().getString(msgId), Toast.LENGTH_LONG).show();
     }
+
 }
 
 

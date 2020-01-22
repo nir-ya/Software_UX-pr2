@@ -28,16 +28,20 @@ import android.view.View;
 
 
 import java.io.Serializable;
+import java.util.Date;
+
 import net.cachapa.expandablelayout.ExpandableLayout;
 
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
 import static java.lang.Boolean.TRUE;
 
 public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem, OrderListItemAdapter.OrderListItemHolder> {
 
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
-
+    private View emptyView;
 
     private static final int CRITICAL_PRICE = 45;
     private static final int MIN_ORDER = 70;
@@ -54,27 +58,45 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
     //TODO: please, doc string, please. trying to debug something that raises from here!
     @Override
     protected void onBindViewHolder(@NonNull final OrderListItemHolder holder, final int position, @NonNull final OrderListItem order) {
-       String documentId = getSnapshots().getSnapshot(position).getId();
+        String documentId = getSnapshots().getSnapshot(position).getId();
 
-        holder.textViewTitle.setText(order.displayTime());//TODO - change to normal title
+        holder.textViewTitle.setText(getTimeTitle(order));//TODO - change to normal title
+
         setProgressBar(holder, order);
 
         setPriceTextView(holder, order);
 
         setStatusTextView(holder, order);
 
-        setCardExpansion(holder.orderCard,holder);
-        setCardExpansion(holder.infoButton,holder);
+        setCardExpansion(holder.orderCard, holder);
+        setCardExpansion(holder.infoButton, holder);
         setJoinButtonHandler(holder.joinButton, documentId);
 
-        setOrderInfoRecyclerView(holder ,documentId);
+        setOrderInfoRecyclerView(holder, documentId);
+    }
+
+    private String getTimeTitle(OrderListItem order) {
+        String title;
+        try {
+            String s = Randomizer.formatter.format(order.getTimestamp().toDate());
+            title = "הזמנה לשעה: " + s;
+        } catch (NullPointerException e) {
+            title = "";
+        }
+        return title;
+    }
+
+    @Override
+    public void onDataChanged() {
+        super.onDataChanged();
+        initEmptyView();
     }
 
     private void setJoinButtonHandler(View joinButton, final String doc) {
         joinButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent (context, ManaPickerActivity.class);
+                Intent i = new Intent(context, ManaPickerActivity.class);
 
                 i.putExtra("ref", doc);
                 i.addFlags(FLAG_ACTIVITY_NEW_TASK);
@@ -84,7 +106,7 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
         });
     }
 
-    private void setOrderInfoRecyclerView(@NonNull OrderListItemHolder holder,String documentId) {
+    private void setOrderInfoRecyclerView(@NonNull OrderListItemHolder holder, String documentId) {
 
         CollectionReference manotRef = db.collection(Constants.ORDERS)
                 .document(documentId).collection(Constants.MANOT_SUBCOLLECTION);
@@ -121,7 +143,6 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
         });
     }
 
-
     /**
      * this function inserts the relevant text to the "order status" textView,
      * by the relevant order status
@@ -131,7 +152,7 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
      */
     private void setStatusTextView(OrderListItemHolder holder, OrderListItem model) {
         if (model.getStatus().equals(OrderListItem.OPEN)) {
-                openOrder(holder, model);
+            openOrder(holder, model);
         } else if (model.getStatus().equals(OrderListItem.LOCKED)) {
             lockOrder(holder);
         }
@@ -152,8 +173,9 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
 
     /**
      * a function that graphics "open" orders
+     *
      * @param holder - the RecyclerView item holder
-     * @param model - the orderListItem relevant item
+     * @param model  - the orderListItem relevant item
      */
     private void openOrder(OrderListItemHolder holder, OrderListItem model) {
         holder.joinButton.setText(Constants.JOIN_TEXT);
@@ -161,8 +183,7 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
         if (model.getPrice() >= CRITICAL_PRICE) {
             holder.statusText.setText(Constants.READY_TEXT);
             holder.progressBar.setProgressDrawable(context.getDrawable(R.drawable.progress_bar_green));
-        }
-        else {
+        } else {
             holder.statusText.setText(Constants.WAITING);
             holder.progressBar.setProgressDrawable(context.getDrawable(R.drawable.progress_bar_orange));
         }
@@ -250,6 +271,18 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
 
         this.recyclerView = recyclerView;
 
+    }
+
+    private void initEmptyView() {
+        if (emptyView != null) {
+            emptyView.setVisibility(
+                    getItemCount() == 0 ? VISIBLE : GONE);
+        }
+    }
+
+    public void setEmptyView(View view) {
+        this.emptyView = view;
+        initEmptyView();
     }
 
 

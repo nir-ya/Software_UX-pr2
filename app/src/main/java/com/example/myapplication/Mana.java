@@ -1,7 +1,6 @@
 package com.example.myapplication;
 
 
-import androidx.annotation.NonNull;
 import java.util.HashMap;
 
 /**
@@ -9,139 +8,80 @@ import java.util.HashMap;
  * Each Mana is devised from the culinary aspect and logistic aspect.
  * The culinary aspect is the type (namely Pita, Lafa etc), as well as Tosafot.
  * The logistic aspect consists of the order status, the user who ordered the Mana (owner),
- * the payment method, and a serial number,
+ * the paymentMethod method, and a serial number,
  */
 public class Mana {
 
     // Constants
     //-- Types of manot
-    static final int INVALID = 0;
     static final String PITA = "pita";
-    static final String LAFA = "Lafa";
-    static final String HALF_PITA = "Half Pita";
-    static final String HALF_LAFA = "Half Lafa";
+    static final String LAFA = "lafa";
+    static final String HALF_PITA = "half pita";
+    static final String HALF_LAFA = "half lafa";
     //-- Payment methods
     static final int MEZUMAN = 0;
     static final int CREDIT = 1;
     //-- Order status options
     private static final String OPEN = "open";
-    private static final int LOCKED = 2;
-    private static final int APP = 3;
-    //-- Tosafot
-    private static final int TOMATO = 1;
-    private static final int CUCUMBER = 2;
-    private static final int KRUV = 3;
-    private static final int ONION = 4;
-    private static final int THINA = 5;
-    private static final int HUMUS = 6;
-    private static final int HARIF = 7;
-    private static final int AMBA = 8;
-    //-- Tosafot quantifiers
-    private static final int NO = 0;
-    private static final int LITTLE = 1;
-    private static final int YES = 2;
-    private static final int A_LOT = 3;
-    //-- Prices
+    private static final String LOCKED = "locked";
+    //-- Price Listing
     private static final int PITA_PRICE = 18;
     private static final int LAFA_PRICE = 22;
     private static final int HALF_PITA_PRICE = 0; //TODO
     private static final int HALF_LAFA_PRICE = 0; //TODO
 
     // Vars
-    //-- Culinary related vars
-    public int type;
-    public int price;
-    public int thina, amba, tomato, cucumber, onion, kruv, hamuz, eggplant;
-    public HashMap<String, Integer> tosafot = new HashMap<>();
-    public String costumer_notes;
-    //-- Logistic related vars
-    public String status;
-    public int in_order;
-    public String owner;
-    public int paymentMethod;
-
-    public int getPaymentMethod() {
-        return paymentMethod;
-    }
+    private String owner;
+    private String status;
+    private String type;
+    private HashMap<String, Boolean> tosafot;
+    private int paymentMethod;
+    private String notes;
+    private int price;
+    private String ownerUserId;
 
 
-    public static int counter = 1;
-
-
+    /**
+     * An empty constructor for Mana object. Required for FireStore integration.
+     */
     public Mana() {
-        //empty constructor needed here
+
     }
 
     /**
-     * A basic Mana constructor with only the user that ordered it
-     *
-     * @param owner the user who ordered the Mana
+     * Complete constructor of a Mana object
+     * @param type - String representing the break type of the Mana
+     * @param notes
+     * @param paymentMethod - String representing the payment method for the Mana (Credit / Cash)
+     * @param tosafot - A Hashmap of Tosafot: String->Boolean
+     * @param owner - A String representing the user who ordered the Mana
+     * @param ownerUserId
      */
-
-    Mana(String owner, int paymentMethod, int price) {
+    public Mana(String type, String notes, int paymentMethod,
+                HashMap<String, Boolean> tosafot, String owner, String ownerUserId) {
         this.owner = owner;
+        this.ownerUserId = ownerUserId;
+        this.status = OPEN;
+        this.type = type;
+        this.tosafot = tosafot;
         this.paymentMethod = paymentMethod;
-        this.price = price;
-    }
-
-
-    // Getters
-
-    public int getType() {
-        return type;
+        this.notes = notes;
+        this.price = getPrice(type);
     }
 
     /**
-     * returns the type of the Mana represented as a String
-     *
-     * @param type the type of the Mana (int)
-     * @return String representation of the type of the Mana
+     * A getter method for the price of the Mana
+     * @return the price of the selected mana, based on the price list.
      */
-    public static String getTypeStr(String type) {
-        switch (type) {
-            case PITA:
-                return "Pita";
-            case LAFA:
-                return "Lafa";
-            case HALF_PITA:
-                return "Half Pita";
-            case HALF_LAFA:
-                return "Half Lafa";
-            default:
-                return "Type not set";
-        }
-    }
-
-    int getPrice() {
+    public int getPrice() {
         return price;
     }
 
     /**
-     * Gets the payment method represeneted as a String
-     *
-     * @param payment_method the payment method for the Mana, an int
-     * @return a String representation of the payment method associated with the Mana
+     * A static method for getting prices of dishes
+     * @return the price of the selected mana, based on the price list.
      */
-    public String paymentStr(int payment_method) {
-        switch (payment_method) {
-            case MEZUMAN:
-                return "Mezuman";
-            case CREDIT:
-                return "Credit";
-            case APP:
-                return "Applicatio";
-            default:
-                return "ooops";
-        }
-    }
-
-    /**
-     * A static method that stores the information of the prices for each Mana
-     *
-     * @param type the type of the Mana, as an int
-     * @return the price associated with the type, an int
-     */
-    public static int priceByType(String type) {
+    public static int getPrice(String type) {
         switch (type) {
             case PITA:
                 return PITA_PRICE;
@@ -157,50 +97,70 @@ public class Mana {
         }
     }
 
-    // Setters
-    boolean setType(int new_type) {
-        if (status == OPEN) {
-            type = new_type;
-            price = getPrice();
-            return true;
+    /**
+     * A getter, as required by FireStore
+     * @return the owner for the Mana
+     */
+    public String getOwner() {
+        return owner;
+    }
+
+    /**
+     * A getter, as required by FireStore
+     * @return the status of the Mana
+     */
+    public String getStatus() {
+        return status;
+    }
+
+    /**
+     * A getter, as required by FireStore
+     * @return the type of the Mana
+     */
+    public String getType() {
+        return type;
+    }
+
+    public static String getHebType(String type) {
+        switch (type) {
+            case PITA:
+                return "פיתה";
+            case LAFA:
+                return "לאפה";
+            case HALF_PITA:
+                return "חצי פיתה";
+            case HALF_LAFA:
+                return "חצי לאפה";
+            default:
+                return "שגיאה";
         }
-        return false;
     }
 
-    boolean setPaymentMethod(int new_method) {
-        if (status == OPEN) {
-            paymentMethod = new_method;
-            return true;
-        }
-        return false;
+    /**
+     * A getter, as required by FireStore
+     * @return the payment method for the Mana
+     */
+    public int getPaymentMethod() {
+        return paymentMethod;
     }
 
-    boolean addNote(String note) {
-        if (status == OPEN) {
-            costumer_notes = note;
-            return true;
-        }
-        return false;
+    /**
+     * A getter, as required by FireStore
+     * @return the Tosafot for the Mana, as HashMap
+     */
+    public HashMap<String, Boolean> getTosafot() {
+        return tosafot;
     }
 
-    boolean isReadyToOrder() {
-        return (type != INVALID) && (paymentMethod != INVALID);
+    /**
+     * A getter, as required by FireStore
+     * @return the notes for the Mana
+     */
+    public String getNotes() {
+        return notes;
     }
 
-
-    void addToOrder(int order_no) {
-        in_order = order_no;
-    }
-
-    int inOrder() {
-        return in_order;
-    }
-
-    String getOwner() {
-        return this.owner;
-    }
-
-    void lock(){
-
+    public String getOwnerUserId() {
+        return ownerUserId;
     }
 }
