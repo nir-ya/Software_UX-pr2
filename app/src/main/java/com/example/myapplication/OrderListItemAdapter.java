@@ -284,7 +284,7 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
                     emptyView.setVisibility(
                             getItemCount() == 0 ? VISIBLE : GONE);
                 }
-            }, 100);
+            }, Constants.SHORT_DELAY);
         }
     }
 

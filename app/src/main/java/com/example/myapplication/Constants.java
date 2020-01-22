@@ -4,6 +4,7 @@ import android.content.res.Resources;
 
 public class Constants {
 
+    public static final long SHORT_DELAY = 1000;
     static final String ORDERS = "OpenOrders";
     static final String MANOT_SUBCOLLECTION = "Manot";
     static final String MONEY_MADE = "הכסף שנצבר: %s מתוך 70 שקלים";
@@ -26,7 +27,7 @@ public class Constants {
     static final String PICKELS = "Pickels";
     static final String CHIPS = "Chips";
     static final String EGGPLAT = "Eggplant";
-    static final long longDelay = 3000;
+    static final long LONG_DELAY = 3000;
 
     //TOOLTIP
     static final String REC_USAGE_ID = "rec_intro";

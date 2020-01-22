@@ -224,7 +224,7 @@ public class MainActivity extends AppCompatActivity {
      * this function craete tooltip, if user first using the app
      */
     private void initializeTooltip() {
-        
+
         //create a spotlight configuration
         final SpotlightConfig config = getSpotlightConfig();
 
@@ -249,7 +249,7 @@ public class MainActivity extends AppCompatActivity {
                                 , getString(R.string.mybag_tooltip_subtext), Constants.BAG_USAGE_ID)
                         .startSequence();
             }
-        }, Constants.longDelay); //3 seconds delay from application start
+        }, Constants.LONG_DELAY); //3 seconds delay from application start
     }
 
 
