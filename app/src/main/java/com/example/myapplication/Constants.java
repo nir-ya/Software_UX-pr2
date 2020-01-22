@@ -26,4 +26,11 @@ public class Constants {
     static final String PICKELS = "Pickels";
     static final String CHIPS = "Chips";
     static final String EGGPLAT = "Eggplant";
+    static final long longDelay = 3000;
+
+    //TOOLTIP
+    static final String REC_USAGE_ID = "rec_intro";
+    static final String FAB_USAGE_ID = "fab_intro";
+    static final String BAG_USAGE_ID = "fab_intro";
+
 }
