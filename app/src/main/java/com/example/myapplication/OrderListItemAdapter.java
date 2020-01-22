@@ -4,6 +4,7 @@ package com.example.myapplication;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
+import android.os.Handler;
 import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -275,8 +276,15 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
 
     private void initEmptyView() {
         if (emptyView != null) {
-            emptyView.setVisibility(
-                    getItemCount() == 0 ? VISIBLE : GONE);
+            //handler is needed because load data takes time
+            final Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    emptyView.setVisibility(
+                            getItemCount() == 0 ? VISIBLE : GONE);
+                }
+            }, 100);
         }
     }
 

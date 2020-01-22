@@ -31,6 +31,6 @@ public class Constants {
     //TOOLTIP
     static final String REC_USAGE_ID = "rec_intro";
     static final String FAB_USAGE_ID = "fab_intro";
-    static final String BAG_USAGE_ID = "fab_intro";
+    static final String BAG_USAGE_ID = "bag_intro";
 
 }
