@@ -1,6 +1,5 @@
 package com.example.myapplication;
 
-import android.app.MediaRouteButton;
 import android.content.Intent;
 import android.widget.TextView;
 
@@ -10,13 +9,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Dialog;
-import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
-import android.widget.TimePicker;
 import android.widget.Toast;
 
 
@@ -33,7 +30,7 @@ import com.google.firebase.firestore.Query;
 
 import java.util.Calendar;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements NewOrderDialog.NewOrderDialogListener {
 
 
     //yalla
@@ -52,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView beFirst;
     private FirebaseUser user;
 
+    Calendar cal;
 
 
     @Override
@@ -155,20 +153,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void createNewOrder(View view) {
-        final Calendar cal = Calendar.getInstance();
+        cal = Calendar.getInstance();
         int hour = cal.get(Calendar.HOUR_OF_DAY);
         int minute = cal.get(Calendar.MINUTE);
-        TimePickerDialog timePickerDialog = new TimePickerDialog(MainActivity.this,
-                new TimePickerDialog.OnTimeSetListener() {
-                    @Override
-                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                        // TODO Auto-generated method stub
-                        cal.set(Calendar.HOUR_OF_DAY, hourOfDay);
-                        cal.set(Calendar.MINUTE, minute);
-                        startOrderProcedure(cal);
-                    }
-                }, hour, minute, true);
-        timePickerDialog.show();
+
+        openNewOrderDialog();
+
     }
 
     private void startOrderProcedure(Calendar cal) {
@@ -207,6 +197,19 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(MainActivity.this, getResources().getString(msgId), Toast.LENGTH_LONG).show();
     }
 
+    public void openNewOrderDialog() {
+
+        NewOrderDialog newOrderDialog = new NewOrderDialog();
+        newOrderDialog.show(getSupportFragmentManager(), "order dialog");
+    }
+
+
+    @Override
+    public void applyTime(int hour, int minute) {
+        cal.set(Calendar.HOUR_OF_DAY, hour);
+        cal.set(Calendar.MINUTE, minute);
+        startOrderProcedure(cal);
+    }
 }
 
 
