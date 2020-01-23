@@ -1,7 +1,9 @@
 package com.example.myapplication;
 
-import android.app.MediaRouteButton;
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.Handler;
+import android.os.Looper;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -10,13 +12,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Dialog;
-import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
-import android.widget.TimePicker;
 import android.widget.Toast;
 
 
@@ -30,10 +30,12 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
+import com.wooplr.spotlight.SpotlightConfig;
+import com.wooplr.spotlight.utils.SpotlightSequence;
 
 import java.util.Calendar;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements NewOrderDialog.NewOrderDialogListener {
 
 
     //yalla
@@ -45,14 +47,14 @@ public class MainActivity extends AppCompatActivity {
 
     //adapters
     private OrderListItemAdapter orderAdapter;
-
     FloatingActionButton newOrderButt;
-
+    ImageView myBagBtn;
     private TextView greeting;
     private TextView beFirst;
     private FirebaseUser user;
 
-
+    Calendar cal;
+    private RecyclerView ordersRecyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +68,12 @@ public class MainActivity extends AppCompatActivity {
         greeting.setText(
                 String.format(getResources().getString(R.string.welcome_str), user.getDisplayName()));
 
+        initializeTooltip();
+
     }
+
+
+
 
     /**
      * this function is setting up the orders recycler view
@@ -78,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
                 .build();
         orderAdapter = new OrderListItemAdapter(options, this.getApplicationContext());
         orderAdapter.setEmptyView(beFirst);
-        RecyclerView ordersRecyclerView = findViewById(R.id.orders_recycler_view);
+        ordersRecyclerView = findViewById(R.id.orders_recycler_view);
         LinearLayoutManager layout = new LinearLayoutManager(this);
         layout.setOrientation(RecyclerView.VERTICAL);
         ordersRecyclerView.setLayoutManager(layout);
@@ -134,12 +141,11 @@ public class MainActivity extends AppCompatActivity {
      */
     private void connectToXML() {
         //views
-        ImageView bag = findViewById(R.id.bag);
+        myBagBtn = findViewById(R.id.bag);
         newOrderButt = findViewById(R.id.new_order_button);
         beFirst = findViewById(R.id.be_first);
 
     }
-
 
 
     @Override
@@ -154,21 +160,19 @@ public class MainActivity extends AppCompatActivity {
         orderAdapter.stopListening();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+    }
+
     public void createNewOrder(View view) {
-        final Calendar cal = Calendar.getInstance();
+        cal = Calendar.getInstance();
         int hour = cal.get(Calendar.HOUR_OF_DAY);
         int minute = cal.get(Calendar.MINUTE);
-        TimePickerDialog timePickerDialog = new TimePickerDialog(MainActivity.this,
-                new TimePickerDialog.OnTimeSetListener() {
-                    @Override
-                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                        // TODO Auto-generated method stub
-                        cal.set(Calendar.HOUR_OF_DAY, hourOfDay);
-                        cal.set(Calendar.MINUTE, minute);
-                        startOrderProcedure(cal);
-                    }
-                }, hour, minute, true);
-        timePickerDialog.show();
+
+        openNewOrderDialog();
+
     }
 
     private void startOrderProcedure(Calendar cal) {
@@ -207,6 +211,74 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(MainActivity.this, getResources().getString(msgId), Toast.LENGTH_LONG).show();
     }
 
+    public void openNewOrderDialog() {
+
+        NewOrderDialog newOrderDialog = new NewOrderDialog();
+        newOrderDialog.show(getSupportFragmentManager(), "order dialog");
+    }
+
+
+    @Override
+    public void applyTime(int hour, int minute) {
+        cal.set(Calendar.HOUR_OF_DAY, hour);
+        cal.set(Calendar.MINUTE, minute);
+        startOrderProcedure(cal);
+
+      /**
+     * this function craete tooltip, if user first using the app
+     */
+    private void initializeTooltip() {
+
+        //create a spotlight configuration
+        final SpotlightConfig config = getSpotlightConfig();
+
+        //handler is for the spotlight delay - 3 seconds from app onCreate
+        new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //create spotlight sequence
+                runSpotlightSequence();
+            }
+
+            /**
+             * this function create and run the spotlights sequence.
+             */
+            private void runSpotlightSequence() {
+                SpotlightSequence.getInstance(MainActivity.this, config)
+                        .addSpotlight(ordersRecyclerView, getString(R.string.join_order_tooltop),
+                                getString(R.string.join_tooltip_subtext), Constants.REC_USAGE_ID)
+                        .addSpotlight(newOrderButt, getString(R.string.create_order_tooltip)
+                                , getString(R.string.create_tooltip_subtext), Constants.FAB_USAGE_ID)
+                        .addSpotlight(myBagBtn, getString(R.string.mybag_tooltip)
+                                , getString(R.string.mybag_tooltip_subtext), Constants.BAG_USAGE_ID)
+                        .startSequence();
+            }
+        }, Constants.LONG_DELAY); //3 seconds delay from application start
+    }
+
+
+    /**
+     * this function creates a spotlight configuration
+     * configuration sets the colors, animations, etc. of the spotlight
+     * @return SpotlightConfiguration object
+     */
+    private SpotlightConfig getSpotlightConfig() {
+        final SpotlightConfig config = new SpotlightConfig();
+        config.setIntroAnimationDuration(500);
+        config.setRevealAnimationEnabled(true);
+        config.setPerformClick(true);
+        config.setFadingTextDuration(500);
+        config.setHeadingTvColor(Color.parseColor("#ffffff"));
+        config.setHeadingTvSize(32);
+        config.setSubHeadingTvColor(Color.parseColor("#ffffff"));
+        config.setSubHeadingTvSize(16);
+        config.setMaskColor(Color.parseColor("#dc6faf9f"));
+        config.setLineAnimationDuration(500);
+        config.setLineAndArcColor(Color.parseColor("#f47d5c"));
+        config.setDismissOnBackpress(true);
+        config.setDismissOnTouch(true);
+        return config;
+    }
 }
 
 

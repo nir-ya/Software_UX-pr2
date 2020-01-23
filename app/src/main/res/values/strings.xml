@@ -52,9 +52,18 @@
     <string name="mark_everything">סמן הכל</string>
     <string name="bring">יאללה, תביא!</string>
     <string name="azov_vitarti">עזוב, ויתרתי</string>
-    <string name="be_first">עדיין אין הזמנות...\nיאללה, קחו יוזמה!</string>
+    <string name="be_first">עדיין אין הזמנות…\nיאללה, קחו יוזמה!</string>
     <string name="owner_id">ownerUserId</string>
     <string name="order_details">זהו! המנה בהזמנה\n של השעה %s</string>
+
     <string name="mana_success_toast">המנה שלך נוספה בהצלחה!</string>
     <string name="order_time_text">הזמנה לשעה %s</string>
+
+    <string name="join_order_tooltop">הצטרף להזמנה פתוחה</string>
+    <string name="join_tooltip_subtext">יש חבר\'ה שעדיין מתארגנים? יאללה, בוא תצטרף להזמנה!</string>
+    <string name="create_order_tooltip">צור הזמנה חדשה</string>
+    <string name="create_tooltip_subtext">אם אין הזמנה בשעה שתרצה,\nתוכל ליצור אחת חדשה</string>
+    <string name="mybag_tooltip">שכחת אם כבר הזמנת?</string>
+    <string name="mybag_tooltip_subtext">תמיד תוכל להסתכל על ההזמנות שלך מהיום</string>
+
 </resources>
