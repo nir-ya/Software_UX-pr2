@@ -54,10 +54,6 @@ public class ManaActivity extends AppCompatActivity {
 
         orderId = getIntent().getStringExtra("ref");
         cal = (Calendar) getIntent().getSerializableExtra("CALENDAR");
-
-
-
-
     }
 
     private void setTosafot(HashMap tosafot) {
@@ -130,13 +126,14 @@ public class ManaActivity extends AppCompatActivity {
                 OrderListItem order = documentSnapshot.toObject(OrderListItem.class);
                 if (order != null)
                 {
-                    String s = Randomizer.formatter.format(order.getTimestamp().toDate());
+                    String orderTime = Randomizer.formatter.format(order.getTimestamp().toDate());
 
                     HashMap<String, Boolean> tosafot = new HashMap<>();
                     setTosafot(tosafot);
                     Intent intent = new Intent(getApplicationContext(), OrderConfirmationActivity.class);
                     intent.putExtra("tosafot", tosafot);
                     intent.putExtra("order_id", orderId);
+                    intent.putExtra("order_time", orderTime);
                     intent.putExtra("CALENDAR",cal);
                     startActivity(intent);
                 }

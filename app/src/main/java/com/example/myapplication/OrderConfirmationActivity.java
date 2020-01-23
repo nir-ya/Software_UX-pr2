@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -39,14 +40,12 @@ public class OrderConfirmationActivity extends AppCompatActivity {
 
     Bundle extras = getIntent().getExtras();
 
-    orderDetails.setText("הזמנה לשעה " + extras.getString("order_time"));
-
-
-
     manaType = extras.getString("mana_type");
     orderId = extras.getString("order_id");
     orderTime = extras.getString("order_time");
     cal = (Calendar) extras.getSerializable("CALENDAR");
+
+    orderDetails.setText(getString(R.string.order_time_text, orderTime));
 
     tosafot = (HashMap<String, Boolean>) extras.getSerializable("tosafot");
   }
@@ -70,14 +69,9 @@ public class OrderConfirmationActivity extends AppCompatActivity {
 
             addManaToDB(ordersCollection);
           }
-        } else {
-
         }
       }
     });
-
-//    addManaToDB(ordersCollection);
-
   }
 
   private void addManaToDB(CollectionReference ordersCollection) {
@@ -93,6 +87,7 @@ public class OrderConfirmationActivity extends AppCompatActivity {
   public void confirmOrder(View view) {
     addToDB();
     finish();
+    Toast.makeText(this, getString(R.string.mana_success_toast), Toast.LENGTH_LONG).show();
   }
 
     public void onRadioButtonClicked(View view) {

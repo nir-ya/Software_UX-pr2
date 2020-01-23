@@ -28,7 +28,7 @@ public class ManaPickerActivity extends AppCompatActivity {
 
 
 
-    TextView textHour;
+    String orderTime;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     ViewPager viewPager;  // TODO: change to a more informative names
@@ -44,8 +44,6 @@ public class ManaPickerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mana_picker);
 
-        textHour = findViewById(R.id.hourText);
-
         orderId = getIntent().getStringExtra("ref");
 
         cal = (Calendar) getIntent().getSerializableExtra("CALENDAR");
@@ -57,8 +55,7 @@ public class ManaPickerActivity extends AppCompatActivity {
                OrderListItem order = documentSnapshot.toObject(OrderListItem.class);
                if (order != null)
                {
-                   String s = Randomizer.formatter.format(order.getTimestamp().toDate());
-                   textHour.setText(s);
+                   orderTime = Randomizer.formatter.format(order.getTimestamp().toDate());
                }
             }
         });
@@ -118,11 +115,10 @@ public class ManaPickerActivity extends AppCompatActivity {
         setTosafot(tosafot);
 
         Intent intent = new Intent(this, OrderConfirmationActivity.class);
-//        intent.putExtra("ref", orderReference);
         intent.putExtra("mana_type", manaType);
         intent.putExtra("tosafot", tosafot);
         intent.putExtra("order_id", orderId);
-        intent.putExtra("order_time", textHour.getText());
+        intent.putExtra("order_time", orderTime);
         intent.putExtra("CALENDAR",cal);
         startActivity(intent);
     }
