@@ -43,7 +43,7 @@
     </array>
 
     <string name="new_order_success">הזמנתך נוספה בהצלחה!</string>
-    <string name="new_order_fail">אוי! משהו קרה..תנסה שוב כפרה</string>
+    <string name="new_order_fail">אוי! משהו קרה..נסה שוב כפרה</string>
     <string name="loginFailed">Login Failed</string>
     <string name="loginSuccess">Login successful!</string>
     <string name="registerSuccess">Register successful!</string>
@@ -55,4 +55,6 @@
     <string name="be_first">עדיין אין הזמנות...\nיאללה, קחו יוזמה!</string>
     <string name="owner_id">ownerUserId</string>
     <string name="order_details">זהו! המנה בהזמנה\n של השעה %s</string>
+    <string name="mana_success_toast">המנה שלך נוספה בהצלחה!</string>
+    <string name="order_time_text">הזמנה לשעה %s</string>
 </resources>
