@@ -55,7 +55,7 @@ public class ManaPickerActivity extends AppCompatActivity {
                OrderListItem order = documentSnapshot.toObject(OrderListItem.class);
                if (order != null)
                {
-                   String orderTime = Randomizer.formatter.format(order.getTimestamp().toDate());
+                   orderTime = Randomizer.formatter.format(order.getTimestamp().toDate());
                }
             }
         });

@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -70,8 +71,6 @@ public class OrderConfirmationActivity extends AppCompatActivity {
 
             addManaToDB(ordersCollection);
           }
-        } else {
-
         }
       }
     });
@@ -93,6 +92,7 @@ public class OrderConfirmationActivity extends AppCompatActivity {
   public void confirmOrder(View view) {
     addToDB();
     finish();
+    Toast.makeText(this, "המנה שלך נוספה בהצלחה!", Toast.LENGTH_LONG).show();
   }
 
     public void onRadioButtonClicked(View view) {
