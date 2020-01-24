@@ -44,26 +44,29 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private View emptyView;
 
-    private static final int CRITICAL_PRICE = 45;
+    private static final int CRITICAL_PRICE = 52;
     private static final int MIN_ORDER = 70;
     private final Context context;
 
-    private RecyclerView recyclerView = null;
-    private ManaAdapter adapter;
 
-    public OrderListItemAdapter(@NonNull FirestoreRecyclerOptions<OrderListItem> options, Context context) {
+    OrderListItemAdapter(@NonNull FirestoreRecyclerOptions<OrderListItem> options, Context context) {
         super(options);
         this.context = context;
     }
 
-    //TODO: please, doc string, please. trying to debug something that raises from here!
+    /**
+     * Called by RecyclerView to display the data at the specified position.
+     * This method should update the contents of the itemView to reflect the item at the given position.
+     * 
+     * @param holder
+     * @param position
+     * @param order
+     */
     @Override
     protected void onBindViewHolder(@NonNull final OrderListItemHolder holder, final int position, @NonNull final OrderListItem order) {
         String documentId = getSnapshots().getSnapshot(position).getId();
 
         holder.textViewTitle.setText(getTimeTitle(order));//TODO - change to normal title
-
-        setProgressBar(holder, order);
 
         setPriceTextView(holder, order);
 
@@ -117,7 +120,7 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
         FirestoreRecyclerOptions options = new FirestoreRecyclerOptions.Builder<Mana>()
                 .setQuery(query, Mana.class)
                 .build();
-        adapter = new ManaAdapter(options, holder.itemView.getContext());
+        ManaAdapter adapter = new ManaAdapter(options, holder.itemView.getContext());
         LinearLayoutManager layout = new LinearLayoutManager(holder.itemView.getContext());
         layout.setOrientation(RecyclerView.VERTICAL);
         holder.manotList.setLayoutManager(layout);
@@ -157,7 +160,6 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
         } else if (model.getStatus().equals(OrderListItem.LOCKED)) {
             lockOrder(holder);
         }
-        setProgressBar(holder, model);
     }
 
     /**
@@ -181,15 +183,15 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
     private void openOrder(OrderListItemHolder holder, OrderListItem model) {
         holder.joinButton.setText(Constants.JOIN_TEXT);
         holder.joinButton.setBackgroundColor(context.getResources().getColor(R.color.dark_navy));
-        if (model.getPrice() >= CRITICAL_PRICE) {
+        if (model.getPrice() >= MIN_ORDER) {
             holder.statusText.setText(Constants.READY_TEXT);
             holder.progressBar.setProgressDrawable(context.getDrawable(R.drawable.progress_bar_green));
+            holder.progressBar.setProgress(model.getPrice());
         } else {
             holder.statusText.setText(Constants.WAITING);
             holder.progressBar.setProgressDrawable(context.getDrawable(R.drawable.progress_bar_orange));
+            holder.progressBar.setProgress(model.getPrice());
         }
-
-
     }
 
     /**
@@ -205,26 +207,6 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
         holder.priceText.setText(priceTextInput);
     }
 
-    /**
-     * this function changes the status bar by the order price ration (price/MIN_ORDER)
-     * by the relevant order collected money
-     *
-     * @param holder - the RecyclerView item holder
-     * @param model  - the "Order" object
-     */
-    private void setProgressBar(@NonNull final OrderListItemHolder holder, OrderListItem model) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            holder.progressBar.setProgress(model.getPrice(), TRUE);
-            if (model.getPrice() > MIN_ORDER) {
-                holder.progressBar.setProgress(MIN_ORDER, TRUE);
-            }
-        }
-        if (model.getPrice() > CRITICAL_PRICE) {
-            holder.progressBar.setProgressDrawable(context.getDrawable(R.drawable.progress_bar_green));
-        } else {
-            holder.progressBar.setProgressDrawable(context.getDrawable(R.drawable.progress_bar_orange));
-        }
-    }
 
     @NonNull
     @Override
@@ -269,8 +251,6 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
     @Override
     public void onAttachedToRecyclerView(@NonNull RecyclerView recyclerView) {
         super.onAttachedToRecyclerView(recyclerView);
-
-        this.recyclerView = recyclerView;
 
     }
 
