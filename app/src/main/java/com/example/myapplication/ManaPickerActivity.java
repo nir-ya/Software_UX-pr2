@@ -111,7 +111,6 @@ public class ManaPickerActivity extends AppCompatActivity {
         Intent intent = new Intent(this, OrderConfirmationActivity.class);
 
         intent.putExtra("tosafot", tosafot);
-
         intent.putExtra("mana_type", manaType);
         intent.putExtra("order_id", orderId);
         intent.putExtra("order_time", orderTime);

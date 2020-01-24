@@ -61,16 +61,20 @@ public class OrderConfirmationActivity extends AppCompatActivity {
         orderRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
+                if(documentSnapshot.exists()) {
                     addManaToDB(ordersCollection);
-                System.out.println("!!!!!!!!!!");
-                System.out.println("YESH");
+                }
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
                     OrderListItem order = new OrderListItem(time);
+                    orderId = Randomizer.randomString(18);
                     DocumentReference d = ordersCollection.document(orderId);
+                System.out.println("!!!!!!!!!");
+                System.out.println(orderId);
                     d.set(order);
+
                     addManaToDB(ordersCollection);
                 }
                     });
