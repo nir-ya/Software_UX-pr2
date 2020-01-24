@@ -48,10 +48,8 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
     private static final int MIN_ORDER = 70;
     private final Context context;
 
-    private RecyclerView recyclerView = null;
-    private ManaAdapter adapter;
-
-    public OrderListItemAdapter(@NonNull FirestoreRecyclerOptions<OrderListItem> options, Context context) {
+    
+    OrderListItemAdapter(@NonNull FirestoreRecyclerOptions<OrderListItem> options, Context context) {
         super(options);
         this.context = context;
     }
@@ -117,7 +115,7 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
         FirestoreRecyclerOptions options = new FirestoreRecyclerOptions.Builder<Mana>()
                 .setQuery(query, Mana.class)
                 .build();
-        adapter = new ManaAdapter(options, holder.itemView.getContext());
+        ManaAdapter adapter = new ManaAdapter(options, holder.itemView.getContext());
         LinearLayoutManager layout = new LinearLayoutManager(holder.itemView.getContext());
         layout.setOrientation(RecyclerView.VERTICAL);
         holder.manotList.setLayoutManager(layout);
@@ -267,8 +265,6 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
     @Override
     public void onAttachedToRecyclerView(@NonNull RecyclerView recyclerView) {
         super.onAttachedToRecyclerView(recyclerView);
-
-        this.recyclerView = recyclerView;
 
     }
 
