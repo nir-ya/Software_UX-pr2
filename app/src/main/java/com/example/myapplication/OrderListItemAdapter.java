@@ -48,13 +48,20 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
     private static final int MIN_ORDER = 70;
     private final Context context;
 
-    
+
     OrderListItemAdapter(@NonNull FirestoreRecyclerOptions<OrderListItem> options, Context context) {
         super(options);
         this.context = context;
     }
 
-    //TODO: please, doc string, please. trying to debug something that raises from here!
+    /**
+     * Called by RecyclerView to display the data at the specified position.
+     * This method should update the contents of the itemView to reflect the item at the given position.
+     * 
+     * @param holder
+     * @param position
+     * @param order
+     */
     @Override
     protected void onBindViewHolder(@NonNull final OrderListItemHolder holder, final int position, @NonNull final OrderListItem order) {
         String documentId = getSnapshots().getSnapshot(position).getId();
@@ -210,10 +217,10 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
      */
     private void setProgressBar(@NonNull final OrderListItemHolder holder, OrderListItem model) {
 //        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            holder.progressBar.setProgress(model.getPrice());
-            if (model.getPrice() > MIN_ORDER) {
-                holder.progressBar.setProgress(MIN_ORDER);
-            }
+        holder.progressBar.setProgress(model.getPrice());
+        if (model.getPrice() > MIN_ORDER) {
+            holder.progressBar.setProgress(MIN_ORDER);
+        }
 //        }
         if (model.getPrice() >= CRITICAL_PRICE) {
             holder.progressBar.setProgressDrawable(context.getDrawable(R.drawable.progress_bar_green));
