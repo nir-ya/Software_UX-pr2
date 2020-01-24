@@ -102,7 +102,7 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
             public void onClick(View view) {
                 Intent i = new Intent(context, ManaPickerActivity.class);
 
-                i.putExtra("ref", doc);
+                i.putExtra("order_id", doc);
                 i.addFlags(FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(i);
 

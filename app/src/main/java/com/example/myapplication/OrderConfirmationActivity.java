@@ -11,7 +11,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
@@ -28,7 +31,7 @@ public class OrderConfirmationActivity extends AppCompatActivity {
     String manaType, orderId, orderTime;
     int paymentMethod;
     HashMap<String, Boolean> tosafot;
-    Calendar cal;
+    Timestamp time;
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -45,7 +48,7 @@ public class OrderConfirmationActivity extends AppCompatActivity {
         manaType = extras.getString("mana_type");
         orderId = extras.getString("order_id");
         orderTime = extras.getString("order_time");
-        cal = (Calendar) extras.getSerializable("CALENDAR");
+        time = extras.getParcelable("CALENDAR");
 
         orderDetails.setText(getString(R.string.order_time_text, orderTime));
 
@@ -55,25 +58,35 @@ public class OrderConfirmationActivity extends AppCompatActivity {
     void addToDB() {
         final CollectionReference ordersCollection = db.collection(Constants.ORDERS);
         DocumentReference orderRef = ordersCollection.document(orderId);
-
-
-        orderRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+        orderRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
-                    DocumentSnapshot document = task.getResult();
-                    if (document.exists()) {
-                        addManaToDB(ordersCollection);
-                    } else {
-                        OrderListItem order = new OrderListItem(cal);
-                        DocumentReference d = ordersCollection.document(orderId);
-                        d.set(order);
-
-                        addManaToDB(ordersCollection);
-                    }
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                if(documentSnapshot.exists()) {
+                    addManaToDB(ordersCollection);
+                }
+                else{
+                    OrderListItem order = new OrderListItem(time);
+                    orderId = Randomizer.randomString(18);
+                    DocumentReference d = ordersCollection.document(orderId);
+                    System.out.println("!!!!!!!!!");
+                    System.out.println(orderId);
+                    d.set(order);
+                    addManaToDB(ordersCollection);
                 }
             }
-        });
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                    OrderListItem order = new OrderListItem(time);
+                    orderId = Randomizer.randomString(18);
+                    DocumentReference d = ordersCollection.document(orderId);
+                System.out.println("!!!!!!!!!");
+                System.out.println(orderId);
+                    d.set(order);
+
+                    addManaToDB(ordersCollection);
+                }
+                    });
     }
 
     private void addManaToDB(CollectionReference ordersCollection) {

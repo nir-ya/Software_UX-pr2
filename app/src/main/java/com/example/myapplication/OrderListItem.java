@@ -16,29 +16,8 @@ public class OrderListItem implements Parcelable {
     private final static int MIN_ORDER = 70;
     private int price;
     private String status;
-
-    public int getPrice() {
-        return price;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public Timestamp getTimestamp() {
-        return timestamp;
-    }
-
     private  Timestamp timestamp;
 
-    public OrderListItem() {
-    }
-
-    public OrderListItem(Calendar cal) {
-        this.price = 0;
-        this.status = "open";
-        this.timestamp = new Timestamp(cal.getTime());
-    }
 
     protected OrderListItem(Parcel in) {
         price = in.readInt();
@@ -58,15 +37,38 @@ public class OrderListItem implements Parcelable {
         }
     };
 
+    public int getPrice() {
+        return price;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public Timestamp getTimestamp() {
+        return timestamp;
+    }
+
+
+    public OrderListItem() {
+    }
+
+    public OrderListItem(Timestamp time) {
+        this.price = 0;
+        this.status = "open";
+        this.timestamp = time;
+    }
+
+
     @Override
     public int describeContents() {
         return 0;
     }
 
     @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(price);
-        dest.writeString(status);
-        dest.writeParcelable(timestamp, flags);
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeInt(price);
+        parcel.writeString(status);
+        parcel.writeParcelable(timestamp, i);
     }
 }
