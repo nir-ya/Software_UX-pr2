@@ -68,8 +68,6 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
 
         holder.textViewTitle.setText(getTimeTitle(order));//TODO - change to normal title
 
-        setProgressBar(holder, order);
-
         setPriceTextView(holder, order);
 
         setStatusTextView(holder, order);
@@ -209,27 +207,6 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
         holder.priceText.setText(priceTextInput);
     }
 
-    /**
-     * this function changes the status bar by the order price ration (price/MIN_ORDER)
-     * by the relevant order collected money
-     *
-     * @param holder - the RecyclerView item holder
-     * @param model  - the "Order" object
-     */
-    private void setProgressBar(@NonNull OrderListItemHolder holder, OrderListItem model) {
-
-        holder.progressBar.setProgress(40);
-
-//
-//        if (model.getPrice() >= CRITICAL_PRICE) {
-//            holder.progressBar.setProgressDrawable(context.getDrawable(R.drawable.progress_bar_green));
-//        } else {
-//            holder.progressBar.setProgressDrawable(context.getDrawable(R.drawable.progress_bar_orange));
-//        }
-
-        holder.progressBar.setProgress(40);
-
-    }
 
     @NonNull
     @Override
