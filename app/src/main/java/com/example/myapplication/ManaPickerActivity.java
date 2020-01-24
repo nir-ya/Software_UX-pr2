@@ -60,6 +60,7 @@ public class ManaPickerActivity extends AppCompatActivity {
                {
                    orderTime = Randomizer.formatter.format(order.getTimestamp().toDate());
                }
+               
 
             }
         }).addOnFailureListener(new OnFailureListener() {
