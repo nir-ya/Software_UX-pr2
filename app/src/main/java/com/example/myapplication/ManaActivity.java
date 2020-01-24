@@ -1,5 +1,6 @@
 package com.example.myapplication;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -12,11 +13,14 @@ import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
 
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.HashMap;
 
@@ -37,8 +41,11 @@ public class ManaActivity extends AppCompatActivity {
 
     CheckBox[] checkBoxes;
 
+
+    String manatype;
+    String orderTime;
     String orderId;
-    Calendar cal;
+    Timestamp time;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
 
@@ -52,8 +59,11 @@ public class ManaActivity extends AppCompatActivity {
 
         isAllMarkedListener();
 
+        manatype = getIntent().getStringExtra("mana_type");
+        orderTime = getIntent().getStringExtra("order_time");
         orderId = getIntent().getStringExtra("ref");
-        cal = (Calendar) getIntent().getSerializableExtra("CALENDAR");
+        time = (Timestamp) getIntent().getParcelableExtra("CALENDAR");
+
     }
 
     private void setTosafot(HashMap tosafot) {
@@ -96,49 +106,40 @@ public class ManaActivity extends AppCompatActivity {
     }
 
 
-        private void connectToxXML () {
+    private void connectToxXML() {
 
-            humusView = findViewById(R.id.humus_image);
-            harifView = findViewById(R.id.harif_image);
-            picklesView = findViewById(R.id.pickles_image);
-            onionView = findViewById(R.id.onion_image);
-            tomatoView = findViewById(R.id.tomato_image);
-            cucumberView = findViewById(R.id.cucumber_image);
-            ambaView = findViewById(R.id.amba_image);
-            tahiniView = findViewById(R.id.tahini_image);
-            chipsView = findViewById(R.id.chips_image);
-            eggplantView = findViewById(R.id.eggplant_image);
+        humusView = findViewById(R.id.humus_image);
+        harifView = findViewById(R.id.harif_image);
+        picklesView = findViewById(R.id.pickles_image);
+        onionView = findViewById(R.id.onion_image);
+        tomatoView = findViewById(R.id.tomato_image);
+        cucumberView = findViewById(R.id.cucumber_image);
+        ambaView = findViewById(R.id.amba_image);
+        tahiniView = findViewById(R.id.tahini_image);
+        chipsView = findViewById(R.id.chips_image);
+        eggplantView = findViewById(R.id.eggplant_image);
 
-            checkBoxes = new CheckBox[]{humusView, harifView, picklesView,
-                    onionView, tomatoView, cucumberView,
-                    ambaView, tahiniView, chipsView, eggplantView};
+        checkBoxes = new CheckBox[]{humusView, harifView, picklesView,
+                onionView, tomatoView, cucumberView,
+                ambaView, tahiniView, chipsView, eggplantView};
 
-            markAll = findViewById(R.id.mark_all_checkbox);
+        markAll = findViewById(R.id.mark_all_checkbox);
 
-        }
+    }
 
 
     public void moveToConfirm(View view) {
-        DocumentReference orderRef = db.collection(Constants.ORDERS).document(orderId);
-        orderRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-            @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                OrderListItem order = documentSnapshot.toObject(OrderListItem.class);
-                if (order != null)
-                {
-                    String orderTime = Randomizer.formatter.format(order.getTimestamp().toDate());
 
-                    HashMap<String, Boolean> tosafot = new HashMap<>();
-                    setTosafot(tosafot);
-                    Intent intent = new Intent(getApplicationContext(), OrderConfirmationActivity.class);
-                    intent.putExtra("tosafot", tosafot);
-                    intent.putExtra("order_id", orderId);
-                    intent.putExtra("order_time", orderTime);
-                    intent.putExtra("CALENDAR",cal);
-                    startActivity(intent);
-                }
-            }
-        });
+        HashMap<String, Boolean> tosafot = new HashMap<>();
+        setTosafot(tosafot);
+        Intent intent = new Intent(getApplicationContext(), OrderConfirmationActivity.class);
+        intent.putExtra("tosafot", tosafot);
+        intent.putExtra("order_id", orderId);
+        intent.putExtra("order_time", orderTime);
+        intent.putExtra("CALENDAR", time);
+        startActivity(intent);
+
+
     }
 
     public void cancelOrder(View view) {

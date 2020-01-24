@@ -34,10 +34,10 @@ public class OrderListItem implements Parcelable {
     public OrderListItem() {
     }
 
-    public OrderListItem(Calendar cal) {
+    public OrderListItem(Timestamp time) {
         this.price = 0;
         this.status = "open";
-        this.timestamp = new Timestamp(cal.getTime());
+        this.timestamp = time;
     }
 
     protected OrderListItem(Parcel in) {

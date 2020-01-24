@@ -6,11 +6,15 @@ import android.util.Log;
 import android.view.View;
 
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -35,8 +39,9 @@ public class ManaPickerActivity extends AppCompatActivity {
     ManaPickerAdapter adapter;
     List<ManaListItem> models;
     private String orderId;
+    String manaType = "pita"; // TODO: this should be set according to the "model" presented
 
-    Calendar cal;
+    Timestamp time;
 
 
     @Override
@@ -45,8 +50,6 @@ public class ManaPickerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_mana_picker);
 
         orderId = getIntent().getStringExtra("ref");
-
-        cal = (Calendar) getIntent().getSerializableExtra("CALENDAR");
 
         DocumentReference orderRef = db.collection(Constants.ORDERS).document(orderId);
         orderRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -57,6 +60,13 @@ public class ManaPickerActivity extends AppCompatActivity {
                {
                    orderTime = Randomizer.formatter.format(order.getTimestamp().toDate());
                }
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                time = (Timestamp) getIntent().getParcelableExtra("CALENDAR");
+                orderTime = Randomizer.formatter.format(time.toDate());
             }
         });
 
@@ -90,8 +100,10 @@ public class ManaPickerActivity extends AppCompatActivity {
 
     public void startManaActivity(View view) {
         Intent intent = new Intent(this, ManaActivity.class);
-        intent.putExtra("ref",orderId);
-        intent.putExtra("CALENDAR",cal);
+        intent.putExtra("mana_type", manaType);
+        intent.putExtra("order_id", orderId);
+        intent.putExtra("order_time", orderTime);
+        intent.putExtra("CALENDAR",time);
         startActivity(intent);
     }
 
@@ -110,7 +122,6 @@ public class ManaPickerActivity extends AppCompatActivity {
     }
 
     public void simHakol(View view) {
-        String manaType = "pita"; // TODO: this should be set according to the "model" presented
         HashMap tosafot = new HashMap<String, Boolean>(); // TODO: there are better ways to do this
         setTosafot(tosafot);
 
@@ -119,7 +130,7 @@ public class ManaPickerActivity extends AppCompatActivity {
         intent.putExtra("tosafot", tosafot);
         intent.putExtra("order_id", orderId);
         intent.putExtra("order_time", orderTime);
-        intent.putExtra("CALENDAR",cal);
+        intent.putExtra("CALENDAR",time);
         startActivity(intent);
     }
 

@@ -24,6 +24,7 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
@@ -166,40 +167,21 @@ public class MainActivity extends AppCompatActivity implements NewOrderDialog.Ne
 
     public void createNewOrder(View view) {
         cal = Calendar.getInstance();
-        int hour = cal.get(Calendar.HOUR_OF_DAY);
-        int minute = cal.get(Calendar.MINUTE);
 
         openNewOrderDialog();
 
     }
 
-    private void startOrderProcedure(Calendar cal) {
+
+
+    private void startOrderProcedure(Timestamp time) {
 
         Intent intent = new Intent(MainActivity.this, ManaPickerActivity.class);
-        intent.putExtra("CALENDAR", cal);
+        intent.putExtra("CALENDAR", time);
         intent.putExtra("ref", Randomizer.randomString(18));
         startActivity(intent);
 
     }
-
-    private void addOrderToServer(Calendar cal) {
-        final DocumentReference ordRef = ordersRef.document();
-        final OrderListItem order = new OrderListItem(cal);
-        ordRef.set(order).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void aVoid) {
-                popToast(true);
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                popToast(false);
-            }
-        });
-
-
-    }
-
 
     private void popToast(boolean success) {
         int msgId = R.string.new_order_success;
@@ -220,7 +202,7 @@ public class MainActivity extends AppCompatActivity implements NewOrderDialog.Ne
     public void applyTime(int hour, int minute) {
         cal.set(Calendar.HOUR_OF_DAY, hour);
         cal.set(Calendar.MINUTE, minute);
-        startOrderProcedure(cal);
+        startOrderProcedure(new Timestamp(cal.getTime()));
     }
         /**
          * this function craete tooltip, if user first using the app
