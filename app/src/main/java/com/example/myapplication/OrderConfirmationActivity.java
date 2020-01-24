@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
@@ -56,20 +57,16 @@ public class OrderConfirmationActivity extends AppCompatActivity {
     void addToDB() {
         final CollectionReference ordersCollection = db.collection(Constants.ORDERS);
         DocumentReference orderRef = ordersCollection.document(orderId);
-        orderRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+        orderRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
-                    DocumentSnapshot document = task.getResult();
-                    if (document.exists()) {
-                        addManaToDB(ordersCollection);
-                    } else {
-                        OrderListItem order = new OrderListItem(time);
-                        DocumentReference d = ordersCollection.document(orderId);
-                        d.set(order);
-
-                        addManaToDB(ordersCollection);
-                    }
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                if (documentSnapshot.exists()) {
+                    addManaToDB(ordersCollection);
+                } else {
+                    OrderListItem order = new OrderListItem(time);
+                    DocumentReference d = ordersCollection.document(orderId);
+                    d.set(order);
+                    addManaToDB(ordersCollection);
                 }
             }
         });
