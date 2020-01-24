@@ -140,4 +140,10 @@ public class ManaActivity extends AppCompatActivity {
             }
         });
     }
+
+    public void cancelOrder(View view) {
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+    }
 }

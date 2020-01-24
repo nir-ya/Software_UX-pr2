@@ -314,6 +314,7 @@
         android:text="@string/azov_vitarti"
         android:textSize="14sp"
         android:autoSizeTextType="uniform"
+        android:onClick="cancelOrder"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/accept_button"
         app:layout_constraintHorizontal_bias="0.5"
