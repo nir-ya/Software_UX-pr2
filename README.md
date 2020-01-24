@@ -1,4 +1,4 @@
-# Software_UX-pr2
+# Software_UX-pr2 - The ShevachApp
 
 Project 2 in Software and UX workshop
 
