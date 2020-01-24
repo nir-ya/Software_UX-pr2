@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity implements NewOrderDialog.Ne
     private TextView beFirst;
     private FirebaseUser user;
 
-    Calendar cal;
+    Calendar cal = Calendar.getInstance();
     private RecyclerView ordersRecyclerView;
 
     @Override
@@ -165,20 +165,13 @@ public class MainActivity extends AppCompatActivity implements NewOrderDialog.Ne
 
     }
 
-    public void createNewOrder(View view) {
-        cal = Calendar.getInstance();
-
-        openNewOrderDialog();
-
-    }
-
 
 
     private void startOrderProcedure(Timestamp time) {
 
         Intent intent = new Intent(MainActivity.this, ManaPickerActivity.class);
         intent.putExtra("CALENDAR", time);
-        intent.putExtra("ref", Randomizer.randomString(18));
+        intent.putExtra("order_id", Randomizer.randomString(18));
         startActivity(intent);
 
     }
@@ -191,10 +184,11 @@ public class MainActivity extends AppCompatActivity implements NewOrderDialog.Ne
         Toast.makeText(MainActivity.this, getResources().getString(msgId), Toast.LENGTH_LONG).show();
     }
 
-    public void openNewOrderDialog() {
+    public void openNewOrderDialog(View view) {
 
         NewOrderDialog newOrderDialog = new NewOrderDialog();
         newOrderDialog.show(getSupportFragmentManager(), "order dialog");
+
     }
 
 
@@ -202,7 +196,8 @@ public class MainActivity extends AppCompatActivity implements NewOrderDialog.Ne
     public void applyTime(int hour, int minute) {
         cal.set(Calendar.HOUR_OF_DAY, hour);
         cal.set(Calendar.MINUTE, minute);
-        startOrderProcedure(new Timestamp(cal.getTime()));
+        Timestamp timestamp = new Timestamp(cal.getTime());
+        startOrderProcedure(timestamp);
     }
         /**
          * this function craete tooltip, if user first using the app

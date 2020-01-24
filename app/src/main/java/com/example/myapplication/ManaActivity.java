@@ -15,12 +15,12 @@ import android.widget.RadioGroup;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.sql.Time;
-import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.HashMap;
 
@@ -61,8 +61,8 @@ public class ManaActivity extends AppCompatActivity {
 
         manatype = getIntent().getStringExtra("mana_type");
         orderTime = getIntent().getStringExtra("order_time");
-        orderId = getIntent().getStringExtra("ref");
-        time = (Timestamp) getIntent().getParcelableExtra("CALENDAR");
+        orderId = getIntent().getStringExtra("order_id");
+        time =  getIntent().getParcelableExtra("CALENDAR");
 
     }
 

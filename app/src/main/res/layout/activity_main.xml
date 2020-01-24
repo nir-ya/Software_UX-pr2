@@ -99,7 +99,7 @@
             app:maxImageSize="48dp"
             app:backgroundTint="@color/TextGreen"
             android:scaleType="center"
-            android:onClick="createNewOrder"
+            android:onClick="openNewOrderDialog"
 
             />
 

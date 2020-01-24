@@ -32,8 +32,8 @@ public class ManaPickerActivity extends AppCompatActivity {
 
 
 
-    String orderTime;
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     ViewPager viewPager;  // TODO: change to a more informative names
     ManaPickerAdapter adapter;
@@ -42,34 +42,16 @@ public class ManaPickerActivity extends AppCompatActivity {
     String manaType = "pita"; // TODO: this should be set according to the "model" presented
 
     Timestamp time;
-
+    String orderTime;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mana_picker);
 
-        orderId = getIntent().getStringExtra("ref");
-
-        DocumentReference orderRef = db.collection(Constants.ORDERS).document(orderId);
-        orderRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-            @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-               OrderListItem order = documentSnapshot.toObject(OrderListItem.class);
-               if (order != null)
-               {
-                   orderTime = Randomizer.formatter.format(order.getTimestamp().toDate());
-               }
-               
-
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                time = (Timestamp) getIntent().getParcelableExtra("CALENDAR");
-                orderTime = Randomizer.formatter.format(time.toDate());
-            }
-        });
+        orderId = getIntent().getStringExtra("order_id");
+        time = getIntent().getParcelableExtra("CALENDAR");
+        orderTime = getIntent().getStringExtra("order_time");
 
         models = new ArrayList<>();
         models.add(new ManaListItem(R.drawable.pita, "חצי פיתה","15 שקלים")); // TODO these should be consts
@@ -127,8 +109,10 @@ public class ManaPickerActivity extends AppCompatActivity {
         setTosafot(tosafot);
 
         Intent intent = new Intent(this, OrderConfirmationActivity.class);
-        intent.putExtra("mana_type", manaType);
+
         intent.putExtra("tosafot", tosafot);
+
+        intent.putExtra("mana_type", manaType);
         intent.putExtra("order_id", orderId);
         intent.putExtra("order_time", orderTime);
         intent.putExtra("CALENDAR",time);

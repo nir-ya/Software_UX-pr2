@@ -47,7 +47,7 @@ public class OrderConfirmationActivity extends AppCompatActivity {
         manaType = extras.getString("mana_type");
         orderId = extras.getString("order_id");
         orderTime = extras.getString("order_time");
-        time = (Timestamp) extras.getParcelable("CALENDAR");
+        time = extras.getParcelable("CALENDAR");
 
         orderDetails.setText(getString(R.string.order_time_text, orderTime));
 
