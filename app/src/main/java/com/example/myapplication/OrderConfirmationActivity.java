@@ -64,6 +64,15 @@ public class OrderConfirmationActivity extends AppCompatActivity {
                 if(documentSnapshot.exists()) {
                     addManaToDB(ordersCollection);
                 }
+                else{
+                    OrderListItem order = new OrderListItem(time);
+                    orderId = Randomizer.randomString(18);
+                    DocumentReference d = ordersCollection.document(orderId);
+                    System.out.println("!!!!!!!!!");
+                    System.out.println(orderId);
+                    d.set(order);
+                    addManaToDB(ordersCollection);
+                }
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
