@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
@@ -60,16 +61,17 @@ public class OrderConfirmationActivity extends AppCompatActivity {
         orderRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
-                if (documentSnapshot.exists()) {
                     addManaToDB(ordersCollection);
-                } else {
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
                     OrderListItem order = new OrderListItem(time);
                     DocumentReference d = ordersCollection.document(orderId);
                     d.set(order);
                     addManaToDB(ordersCollection);
                 }
-            }
-        });
+                    });
     }
 
     private void addManaToDB(CollectionReference ordersCollection) {
