@@ -44,7 +44,7 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private View emptyView;
 
-    private static final int CRITICAL_PRICE = 45;
+    private static final int CRITICAL_PRICE = 52;
     private static final int MIN_ORDER = 70;
     private final Context context;
 
@@ -157,7 +157,7 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
         } else if (model.getStatus().equals(OrderListItem.LOCKED)) {
             lockOrder(holder);
         }
-        setProgressBar(holder, model);
+//        setProgressBar(holder, model);
     }
 
     /**
@@ -169,7 +169,7 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
         holder.statusText.setText(Constants.ORDER_OUT);
         holder.joinButton.setText(Constants.LOCKED_TEXT);
         holder.joinButton.setBackgroundColor(context.getResources().getColor(R.color.grey));
-        holder.progressBar.setProgressDrawable(context.getDrawable(R.drawable.progress_bar_locked));
+//        holder.progressBar.setProgressDrawable(context.getDrawable(R.drawable.progress_bar_locked));
     }
 
     /**
@@ -181,15 +181,13 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
     private void openOrder(OrderListItemHolder holder, OrderListItem model) {
         holder.joinButton.setText(Constants.JOIN_TEXT);
         holder.joinButton.setBackgroundColor(context.getResources().getColor(R.color.dark_navy));
-        if (model.getPrice() >= CRITICAL_PRICE) {
+        if (model.getPrice() >= MIN_ORDER) {
             holder.statusText.setText(Constants.READY_TEXT);
-            holder.progressBar.setProgressDrawable(context.getDrawable(R.drawable.progress_bar_green));
+//            holder.progressBar.setProgressDrawable(context.getDrawable(R.drawable.progress_bar_green));
         } else {
             holder.statusText.setText(Constants.WAITING);
-            holder.progressBar.setProgressDrawable(context.getDrawable(R.drawable.progress_bar_orange));
+//            holder.progressBar.setProgressDrawable(context.getDrawable(R.drawable.progress_bar_orange));
         }
-
-
     }
 
     /**
@@ -213,13 +211,13 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
      * @param model  - the "Order" object
      */
     private void setProgressBar(@NonNull final OrderListItemHolder holder, OrderListItem model) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            holder.progressBar.setProgress(model.getPrice(), TRUE);
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            holder.progressBar.setProgress(model.getPrice());
             if (model.getPrice() > MIN_ORDER) {
-                holder.progressBar.setProgress(MIN_ORDER, TRUE);
+                holder.progressBar.setProgress(MIN_ORDER);
             }
-        }
-        if (model.getPrice() > CRITICAL_PRICE) {
+//        }
+        if (model.getPrice() >= CRITICAL_PRICE) {
             holder.progressBar.setProgressDrawable(context.getDrawable(R.drawable.progress_bar_green));
         } else {
             holder.progressBar.setProgressDrawable(context.getDrawable(R.drawable.progress_bar_orange));
