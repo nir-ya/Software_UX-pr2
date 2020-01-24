@@ -162,7 +162,6 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
         } else if (model.getStatus().equals(OrderListItem.LOCKED)) {
             lockOrder(holder);
         }
-//        setProgressBar(holder, model);
     }
 
     /**
@@ -174,7 +173,7 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
         holder.statusText.setText(Constants.ORDER_OUT);
         holder.joinButton.setText(Constants.LOCKED_TEXT);
         holder.joinButton.setBackgroundColor(context.getResources().getColor(R.color.grey));
-//        holder.progressBar.setProgressDrawable(context.getDrawable(R.drawable.progress_bar_locked));
+        holder.progressBar.setProgressDrawable(context.getDrawable(R.drawable.progress_bar_locked));
     }
 
     /**
