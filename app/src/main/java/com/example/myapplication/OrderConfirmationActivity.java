@@ -3,6 +3,7 @@ package com.example.myapplication;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.RadioButton;
@@ -86,8 +87,11 @@ public class OrderConfirmationActivity extends AppCompatActivity {
 
   public void confirmOrder(View view) {
     addToDB();
-    finish();
     Toast.makeText(this, getString(R.string.mana_success_toast), Toast.LENGTH_LONG).show();
+    Intent intent = new Intent(this, MainActivity.class);
+    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+    startActivity(intent);
+    finish();
   }
 
     public void onRadioButtonClicked(View view) {
