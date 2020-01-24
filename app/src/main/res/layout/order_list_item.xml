@@ -58,7 +58,7 @@
                 android:layout_marginTop="15dp"
                 android:indeterminateTintMode="src_in"
                 android:max="70"
-                android:progress="45"
+                android:progress="55"
                 android:progressDrawable="@drawable/progress_bar_green"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

@@ -188,10 +188,12 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
         holder.joinButton.setBackgroundColor(context.getResources().getColor(R.color.dark_navy));
         if (model.getPrice() >= MIN_ORDER) {
             holder.statusText.setText(Constants.READY_TEXT);
-//            holder.progressBar.setProgressDrawable(context.getDrawable(R.drawable.progress_bar_green));
+            holder.progressBar.setProgressDrawable(context.getDrawable(R.drawable.progress_bar_green));
+            holder.progressBar.setProgress(model.getPrice());
         } else {
             holder.statusText.setText(Constants.WAITING);
-//            holder.progressBar.setProgressDrawable(context.getDrawable(R.drawable.progress_bar_orange));
+            holder.progressBar.setProgressDrawable(context.getDrawable(R.drawable.progress_bar_orange));
+            holder.progressBar.setProgress(model.getPrice());
         }
     }
 
@@ -215,18 +217,19 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
      * @param holder - the RecyclerView item holder
      * @param model  - the "Order" object
      */
-    private void setProgressBar(@NonNull final OrderListItemHolder holder, OrderListItem model) {
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-        holder.progressBar.setProgress(model.getPrice());
-        if (model.getPrice() > MIN_ORDER) {
-            holder.progressBar.setProgress(MIN_ORDER);
-        }
+    private void setProgressBar(@NonNull OrderListItemHolder holder, OrderListItem model) {
+
+        holder.progressBar.setProgress(40);
+
+//
+//        if (model.getPrice() >= CRITICAL_PRICE) {
+//            holder.progressBar.setProgressDrawable(context.getDrawable(R.drawable.progress_bar_green));
+//        } else {
+//            holder.progressBar.setProgressDrawable(context.getDrawable(R.drawable.progress_bar_orange));
 //        }
-        if (model.getPrice() >= CRITICAL_PRICE) {
-            holder.progressBar.setProgressDrawable(context.getDrawable(R.drawable.progress_bar_green));
-        } else {
-            holder.progressBar.setProgressDrawable(context.getDrawable(R.drawable.progress_bar_orange));
-        }
+
+        holder.progressBar.setProgress(40);
+
     }
 
     @NonNull
