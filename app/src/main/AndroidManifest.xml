@@ -10,19 +10,31 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-        tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".OrderConfirmationActivity" />
-        <activity android:name=".LoginActivity">
+        tools:ignore="GoogleAppIndexingWarning"
+        android:screenOrientation="portrait">
+        <activity
+            android:name=".OrderConfirmationActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".LoginActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".RegisterActivity" />
-        <activity android:name=".ManaActivity" />
-        <activity android:name=".ManaPickerActivity" />
-        <activity android:name=".MainActivity"/>
-
+        <activity
+            android:name=".RegisterActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ManaActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ManaPickerActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait"/>
 
         <meta-data
             android:name="preloaded_fonts"

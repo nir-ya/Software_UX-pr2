@@ -154,18 +154,20 @@ public class RegisterActivity extends AppCompatActivity {
      */
     public void checkInput(View view){
         boolean good = true;
-        if(nameText.length() <3){
+        if(nameText.length() < 3){
             nameText.getBackground().mutate().setColorFilter(getResources().getColor(android.R.color.holo_red_light), PorterDuff.Mode.SRC_ATOP);
             good = false;
         }
 
-        if(passwordText.length() <6){
+        if(passwordText.length() < 6){
             passwordText.getBackground().mutate().setColorFilter(getResources().getColor(android.R.color.holo_red_light), PorterDuff.Mode.SRC_ATOP);
+            Toast.makeText(this, getString(R.string.invalid_password_msg), Toast.LENGTH_SHORT).show();
             good = false;
         }
         Matcher matcher = emailChecker.matcher(emailText.getText().toString());
         if(!matcher.matches()){
             emailText.getBackground().mutate().setColorFilter(getResources().getColor(android.R.color.holo_red_light), PorterDuff.Mode.SRC_ATOP);
+            Toast.makeText(this, getString(R.string.invalid_email_msg), Toast.LENGTH_SHORT).show();
             good = false;
         }
 
