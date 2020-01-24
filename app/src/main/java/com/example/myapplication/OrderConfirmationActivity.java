@@ -62,6 +62,8 @@ public class OrderConfirmationActivity extends AppCompatActivity {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                     addManaToDB(ordersCollection);
+                System.out.println("!!!!!!!!!!");
+                System.out.println("YESH");
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
