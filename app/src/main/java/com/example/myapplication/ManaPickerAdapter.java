@@ -38,7 +38,7 @@ public class ManaPickerAdapter extends PagerAdapter {
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
 
         layoutInflater = LayoutInflater.from(mContext);
-        View view = layoutInflater.inflate(R.layout.mana_item,container,false);
+        View view = layoutInflater.inflate(R.layout.mana_pick_item,container,false);
         ImageView manaImg = view.findViewById(R.id.manaItemImg);
         TextView manaType = view.findViewById(R.id.manaItemTxt);
         TextView manaPrice = view.findViewById(R.id.manaItemPriceTxt);
