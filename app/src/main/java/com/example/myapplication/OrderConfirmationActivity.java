@@ -1,8 +1,5 @@
 package com.example.myapplication;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -10,21 +7,20 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
-
-import java.util.Calendar;
-import java.util.HashMap;
-
-import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
 
 public class OrderConfirmationActivity extends AppCompatActivity {
 
@@ -49,8 +45,8 @@ public class OrderConfirmationActivity extends AppCompatActivity {
         orderId = extras.getString("order_id");
         orderTime = extras.getString("order_time");
         time = extras.getParcelable("CALENDAR");
-
-        orderDetails.setText(getString(R.string.order_time_text, orderTime));
+        
+        orderDetails.setText(getString(R.string.order_details_text,"פיתה", orderTime));
 
         tosafot = (HashMap<String, Boolean>) extras.getSerializable("tosafot");
     }
@@ -125,12 +121,4 @@ public class OrderConfirmationActivity extends AppCompatActivity {
         }
     }
 }
-
-//    private void popToast(boolean success) {
-//        int msgId = R.string.new_order_success;
-//        if (success == false) {
-//            msgId = R.string.new_order_fail;
-//        }
-//        Toast.makeText(MainActivity.this, getResources().getString(msgId), Toast.LENGTH_LONG).show();
-//    }
 

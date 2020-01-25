@@ -18,7 +18,7 @@ public class ManaPickerAdapter extends PagerAdapter {
     private Context mContext;
 
 
-    public ManaPickerAdapter(List<ManaListItem> models, Context mContext) {
+    ManaPickerAdapter(List<ManaListItem> models, Context mContext) {
         this.models = models;
         this.mContext = mContext;
     }
@@ -38,7 +38,7 @@ public class ManaPickerAdapter extends PagerAdapter {
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
 
         layoutInflater = LayoutInflater.from(mContext);
-        View view = layoutInflater.inflate(R.layout.mana_item,container,false);
+        View view = layoutInflater.inflate(R.layout.mana_pick_item,container,false);
         ImageView manaImg = view.findViewById(R.id.manaItemImg);
         TextView manaType = view.findViewById(R.id.manaItemTxt);
         TextView manaPrice = view.findViewById(R.id.manaItemPriceTxt);
@@ -47,16 +47,8 @@ public class ManaPickerAdapter extends PagerAdapter {
         manaType.setText(models.get(position).getType());
         manaPrice.setText(models.get(position).getPrice());
 
-        view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-
         container.addView(view,0);
         return view;
-
     }
 
     @Override

@@ -50,7 +50,6 @@ public class MainActivity extends AppCompatActivity implements NewOrderDialog.Ne
     private OrderListItemAdapter orderAdapter;
     FloatingActionButton newOrderButt;
     ImageView myBagBtn;
-    private TextView greeting;
     private TextView beFirst;
     private FirebaseUser user;
 
@@ -65,12 +64,11 @@ public class MainActivity extends AppCompatActivity implements NewOrderDialog.Ne
         setUpOrdersRecyclerView();
 
         user = FirebaseAuth.getInstance().getCurrentUser();
-        greeting = findViewById(R.id.greeting);
+        TextView greeting = findViewById(R.id.greeting);
         greeting.setText(
                 String.format(getResources().getString(R.string.welcome_str), user.getDisplayName()));
 
         initializeTooltip();
-
     }
 
 
