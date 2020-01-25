@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">My Application</string>
+    <string name="app_name">ShevachApp</string>
     <string name="open_orders">OpenOrders</string>
     <string name="price">price</string>
     <string name="my_order">ההזמנה שלי</string>
