@@ -126,11 +126,3 @@ public class OrderConfirmationActivity extends AppCompatActivity {
     }
 }
 
-//    private void popToast(boolean success) {
-//        int msgId = R.string.new_order_success;
-//        if (success == false) {
-//            msgId = R.string.new_order_fail;
-//        }
-//        Toast.makeText(MainActivity.this, getResources().getString(msgId), Toast.LENGTH_LONG).show();
-//    }
-
