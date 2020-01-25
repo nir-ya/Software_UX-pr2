@@ -67,5 +67,6 @@
     <string name="mybag_tooltip_subtext">תמיד תוכל להסתכל על ההזמנות שלך מהיום</string>
     <string name="invalid_password_msg">בחר סיסמה בעלת 6 תווים לפחות</string>
     <string name="invalid_email_msg">כתובת הe-mail שהכנסת לא תקינה</string>
+    <string name="order_list_item_title">הזמנה לשעה: %s</string>
 
 </resources>
