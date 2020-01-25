@@ -75,7 +75,6 @@ public class ManaActivity extends AppCompatActivity {
                 dishDescription.setText("לאפה, 24 שקלים");
                 break;
         }
-        dishDescription.setText(manatype);
     }
 
     private void setTosafot(HashMap tosafot) {
