@@ -16,7 +16,7 @@ public class OrderFinishActivity extends AppCompatActivity {
     }
 
     public void dialShevach(View view) {
-        Intent dialIntent = new Intent(Intent.ACTION_DIAL, Uri.parse("026528317"));
+        Intent dialIntent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:026528317"));
         startActivity(dialIntent);
     }
 }
