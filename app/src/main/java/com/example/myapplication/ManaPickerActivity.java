@@ -24,6 +24,7 @@ import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import org.w3c.dom.Document;
@@ -51,7 +52,7 @@ public class ManaPickerActivity extends AppCompatActivity {
 
         orderId = getIntent().getStringExtra("order_id");
         time = getIntent().getParcelableExtra("CALENDAR");
-        orderTime = getIntent().getStringExtra("order_time");
+        orderTime = Randomizer.formatter.format(new Date(time.toDate().toString()));
 
         models = new ArrayList<>();
         models.add(new ManaListItem(R.drawable.pita, "חצי פיתה","15 שקלים")); // TODO these should be consts

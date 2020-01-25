@@ -74,7 +74,7 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
 
         setCardExpansion(holder.orderCard, holder);
         setCardExpansion(holder.infoButton, holder);
-        setJoinButtonHandler(holder.joinButton, documentId);
+        setJoinButtonHandler(holder.joinButton, documentId, order);
 
         setOrderInfoRecyclerView(holder, documentId);
     }
@@ -96,13 +96,14 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
         initEmptyView();
     }
 
-    private void setJoinButtonHandler(View joinButton, final String doc) {
+    private void setJoinButtonHandler(View joinButton, final String doc, final OrderListItem order) {
         joinButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(context, ManaPickerActivity.class);
 
                 i.putExtra("order_id", doc);
+                i.putExtra("CALENDAR",order.getTimestamp());
                 i.addFlags(FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(i);
 
