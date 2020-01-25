@@ -152,11 +152,12 @@ public class Mana {
         return tosafot;
     }
 
-    public String getTosafotString(){
-        StringBuilder tosafotString = new StringBuilder("");
-        for(String key: tosafot.keySet()){
+    String getTosafotString(){
+        Constants.setHebrewExtrasMap();
+        StringBuilder tosafotString = new StringBuilder();
+        for(String key : tosafot.keySet()){
             if(tosafot.get(key)){
-                tosafotString.append(key + ",");
+                tosafotString.append(Constants.hebrewExtras.get(key)).append(",");
             }
         }
         tosafotString.delete(tosafotString.length()-2, tosafotString.length());
