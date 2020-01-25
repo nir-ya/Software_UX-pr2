@@ -101,7 +101,7 @@ public class ManaPickerActivity extends AppCompatActivity {
 
     private static class ManaPickListener implements ViewPager.OnPageChangeListener {
 
-        String selectedType;
+        String selectedType = ManaListItem.PITA;
 
         @Override
         public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {}

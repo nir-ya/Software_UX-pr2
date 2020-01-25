@@ -53,16 +53,28 @@ public class ManaActivity extends AppCompatActivity {
 
         isAllMarkedListener();
 
-        updateTextViews();
-
         manatype = getIntent().getStringExtra("mana_type");
         orderTime = getIntent().getStringExtra("order_time");
         orderId = getIntent().getStringExtra("order_id");
         time =  getIntent().getParcelableExtra("CALENDAR");
+
+        updateTextViews();
     }
 
     private void updateTextViews() {
         ownerText.setText(getString(R.string.owner_text, user.getDisplayName()));
+
+        switch (manatype) {
+            case ManaListItem.HALF_PITA:
+                dishDescription.setText("חצי פיתה, 11 שקלים");
+                break;
+            case ManaListItem.PITA:
+                dishDescription.setText("פיתה, 20 שקלים");
+                break;
+            case ManaListItem.LAFA:
+                dishDescription.setText("לאפה, 24 שקלים");
+                break;
+        }
         dishDescription.setText(manatype);
     }
 
