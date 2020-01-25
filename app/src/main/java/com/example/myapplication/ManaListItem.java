@@ -23,25 +23,26 @@ public class ManaListItem {
     private String owner;
     private String status;
     private HashMap<String, Boolean> tosafot;
-    private String paymentMethod;
+    private int paymentMethod;
     private String notes;
-    private String price; // TODO: Remove this.
-    private int realPrice;
+    private int price;
 
 
+
+    public ManaListItem(){ }
 
     public ManaListItem(String owner, String type, int price, HashMap<String, Boolean> tosafot,
-                        String paymentMethod) {
+                        int paymentMethod) {
         this.paymentMethod = paymentMethod;
         this.owner = owner;
         this.type = type;
-        this.realPrice = price;
+        this.price = price;
         this.status = "open"; // TODO: remove, or at least put as a constant
         this.tosafot = tosafot;
         //TODO: no payment method, no option to add notes.
     }
 
-    public ManaListItem(int manaImg, String type, String price) {
+    public ManaListItem(int manaImg, String type, int price) {
         this.manaImg = manaImg;
         this.type = type;
         this.price = price;
@@ -59,7 +60,7 @@ public class ManaListItem {
         return tosafot;
     }
 
-    public String getPaymentMethod() {
+    public int getPaymentMethod() {
         return paymentMethod;
     }
 
@@ -67,12 +68,8 @@ public class ManaListItem {
         return notes;
     }
 
-    public String getPrice() {
+    public int getPrice() {
         return price;
-    }
-
-    public int getRealPrice() {
-        return realPrice;
     }
 
     public int getManaImg() {
@@ -89,6 +86,22 @@ public class ManaListItem {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+
+    public static String getHebType(String type) {
+        switch (type) {
+            case PITA:
+                return "פיתה";
+            case LAFA:
+                return "לאפה";
+            case HALF_PITA:
+                return "חצי פיתה";
+            case HALF_LAFA:
+                return "חצי לאפה";
+            default:
+                return "שגיאה";
+        }
     }
 
 

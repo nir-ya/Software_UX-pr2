@@ -10,7 +10,7 @@
     <string name="email_hint">כתובת e-mail</string>
     <string name="password_hint">סיסמה</string>
     <string name="welcome_str">אהלן %s!</string>
-    <string name="hour_for">הזמנתך לשעה: %s</string>
+    <string name="hour_for">השבחים שלך</string>
     <string name="sum_order_string">הזמנה בסך %s שקלים</string>
     <string name="payment_method">תשלום במזומן</string>
     <string name="type_string">פלאפל</string>

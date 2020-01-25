@@ -2,6 +2,7 @@ package com.example.myapplication;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Handler;
 import android.os.Looper;
 import android.widget.TextView;
@@ -37,8 +38,6 @@ import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity implements NewOrderDialog.NewOrderDialogListener {
 
-
-    //yalla
 
     //fireBase Objects
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -100,8 +99,12 @@ public class MainActivity extends AppCompatActivity implements NewOrderDialog.Ne
         Dialog myBagDialog = new Dialog(MainActivity.this, R.style.Theme_Dialog);
         myBagDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         myBagDialog.setContentView(R.layout.mybag_dialog);
-        myBagDialog.show();
+        myBagDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         setUpMyBag(myBagDialog);
+
+
+
+        myBagDialog.show();
     }
 
     /**

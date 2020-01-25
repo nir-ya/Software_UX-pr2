@@ -27,8 +27,9 @@ import org.w3c.dom.Document;
 public class ManaPickerActivity extends AppCompatActivity {
 
 
-
     String orderTime;
+    String manaType;
+    int manaPrice;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     ViewPager viewPager;  // TODO: change to a more informative names
@@ -61,9 +62,9 @@ public class ManaPickerActivity extends AppCompatActivity {
         });
 
         models = new ArrayList<>();
-        models.add(new ManaListItem(R.drawable.pita, "חצי פיתה","15 שקלים")); // TODO these should be consts
-        models.add(new ManaListItem(R.drawable.pita, "פיתה","18 שקלים"));
-        models.add(new ManaListItem(R.drawable.lafa, "לאפה","22 שקלים"));
+        models.add(new ManaListItem(R.drawable.pita,ManaListItem.HALF_PITA,15)); // TODO these should be consts
+        models.add(new ManaListItem(R.drawable.pita, ManaListItem.PITA,18));
+        models.add(new ManaListItem(R.drawable.lafa, ManaListItem.LAFA,22));
 
         adapter = new ManaPickerAdapter(models,this);
 
@@ -81,7 +82,10 @@ public class ManaPickerActivity extends AppCompatActivity {
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) { }
 
             @Override
-            public void onPageSelected(int position) { }
+            public void onPageSelected(int position) {
+                manaType = models.get(position).getType();
+                System.out.println("manaType:" + manaType);
+            }
 
             @Override
             public void onPageScrollStateChanged(int state) { }
@@ -110,7 +114,7 @@ public class ManaPickerActivity extends AppCompatActivity {
     }
 
     public void simHakol(View view) {
-        String manaType = "pita"; // TODO: this should be set according to the "model" presented
+
         HashMap tosafot = new HashMap<String, Boolean>(); // TODO: there are better ways to do this
         setTosafot(tosafot);
 

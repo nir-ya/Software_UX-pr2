@@ -6,32 +6,39 @@
     android:layout_height="wrap_content"
     android:layout_width="match_parent"
 >
+
     <androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/parent_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/off_white"
         android:orientation="vertical"
-        android:padding="5dp">
+        android:padding="25dp">
 
+
+        <ImageView
+            android:id="@+id/manaImg"
+            android:layout_width="63dp"
+            android:layout_height="60dp"
+            android:background="@drawable/pita"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/updateBtn"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/manaTypeTxt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
-            android:layout_marginTop="5dp"
-            android:layout_marginRight="16dp"
+            android:layout_marginRight="72dp"
             android:fontFamily="@font/varela_round"
             android:text="@string/type_string"
             android:textColor="@color/dusty_teal"
             android:textSize="18sp"
             android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/manaImg"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
+            app:layout_constraintTop_toTopOf="@+id/manaImg" />
 
         <TextView
             android:id="@+id/manaPriceTxt"
@@ -47,12 +54,12 @@
             app:layout_constraintRight_toLeftOf="@+id/manaTypeTxt"
             app:layout_constraintTop_toTopOf="@id/manaTypeTxt" />
 
+
         <TextView
             android:id="@+id/tosafutTxtHeader"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginRight="16dp"
+            android:layout_marginRight="4dp"
             android:fontFamily="@font/varela_round"
             android:text="@string/additions_header_string"
             android:textColor="@color/dusty_teal"
@@ -60,13 +67,13 @@
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/updateBtn" />
-
+            app:layout_constraintTop_toBottomOf="@+id/manaImg"
+            app:layout_constraintVertical_bias="0.428" />
 
         <TextView
             android:id="@+id/tosafutTxt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="297dp"
+            android:layout_height="31dp"
             android:layout_marginRight="10dp"
             android:fontFamily="@font/varela_round"
             android:text="טחינה, עמבה, סחוג"
@@ -75,25 +82,27 @@
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@id/tosafutTxtHeader"
             app:layout_constraintRight_toLeftOf="@id/tosafutTxtHeader"
-            app:layout_constraintTop_toTopOf="@id/tosafutTxtHeader" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tosafutTxtHeader"
+            app:layout_constraintVertical_bias="0.0" />
 
         <Button
             android:id="@+id/deleteBtn"
-            android:layout_width="75dp"
-            android:layout_height="40dp"
-            android:layout_marginLeft="5dp"
+            android:layout_width="50dp"
+            android:layout_height="25dp"
+            android:layout_marginTop="20dp"
             android:background="@drawable/border_button"
             android:fontFamily="@font/varela_round"
             android:text="@string/delete_string"
             android:textColor="@color/faded_orange"
             android:textStyle="bold"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="@id/manaTypeTxt" />
+            app:layout_constraintTop_toTopOf="@+id/manaImg" />
 
         <Button
             android:id="@+id/updateBtn"
-            android:layout_width="75dp"
-            android:layout_height="40dp"
+            android:layout_width="50dp"
+            android:layout_height="25dp"
             android:layout_marginLeft="15dp"
             android:background="@color/darkestGreen"
             android:fontFamily="@font/varela_round"

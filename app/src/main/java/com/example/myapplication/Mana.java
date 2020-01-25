@@ -27,7 +27,7 @@ public class Mana {
     //-- Price Listing
     private static final int PITA_PRICE = 18;
     private static final int LAFA_PRICE = 22;
-    private static final int HALF_PITA_PRICE = 0; //TODO
+    private static final int HALF_PITA_PRICE = 15;
     private static final int HALF_LAFA_PRICE = 0; //TODO
 
     // Vars
@@ -150,6 +150,19 @@ public class Mana {
      */
     public HashMap<String, Boolean> getTosafot() {
         return tosafot;
+    }
+
+    public String getTosafotString(){
+        StringBuilder tosafotString = new StringBuilder("");
+        for(String key: tosafot.keySet()){
+            if(tosafot.get(key)){
+                tosafotString.append(key + ",");
+            }
+        }
+        tosafotString.delete(tosafotString.length()-2, tosafotString.length());
+//        if(tosafotString.length() >  0)
+//            return tosafotString.toString();
+        return "בלי תוספות";
     }
 
     /**

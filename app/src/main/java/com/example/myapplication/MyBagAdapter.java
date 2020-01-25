@@ -30,17 +30,18 @@ public class MyBagAdapter extends FirestoreRecyclerAdapter<Mana, MyBagAdapter.My
 
     @Override
     protected void onBindViewHolder(@NonNull final MyBagHolder holder, final int position, @NonNull final Mana mana) {
-        holder.textViewType.setText(Mana.getHebType(mana.getType()));//TODO - change to normal title
-        holder.textViewPrice.setText(Integer.toString(mana.getPrice())+"₪");
-
+        System.out.println(position); // todo: delete
+        holder.textViewType.setText(mana.getHebType(mana.getType()));
+        holder.textViewPrice.setText(Integer.toString(mana.getPrice()));
+        holder.tosafot.setText(mana.getTosafotString());
     }
-
 
 
     @NonNull
     @Override
     public MyBagHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.mybag_row_item, parent, false);
+
 
         return new MyBagHolder(v);
     }
@@ -56,6 +57,5 @@ public class MyBagAdapter extends FirestoreRecyclerAdapter<Mana, MyBagAdapter.My
             tosafot = itemView.findViewById(R.id.tosafutTxt);
         }
     }
-
 
 }

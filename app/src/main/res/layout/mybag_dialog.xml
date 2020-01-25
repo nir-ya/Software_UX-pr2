@@ -4,16 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/light_peach"
+    android:background="@color/transparent"
+    android:backgroundTint="@color/transparent"
     android:layoutDirection="rtl"
     android:orientation="vertical"
     android:paddingTop="5dp"
     android:paddingBottom="5dp"
-    app:layout_constraintHeight_max="500dp">
+    app:layout_constraintHeight_max="500dp"
+
+    >
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/rounded_layout"
+        android:backgroundTint="@color/light_peach"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,10 +28,13 @@
             android:id="@+id/orderTimeHeaderTxt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
             android:layout_alignParentRight="true"
+            android:layout_marginStart="109dp"
             android:layout_marginTop="10dp"
-            android:layout_marginRight="10dp"
+            android:layout_marginRight="129dp"
             android:fontFamily="@font/varela_round"
+            android:gravity="center"
             android:text="@string/hour_for"
             android:textColor="@color/darkestGreen"
             android:textDirection="rtl"
@@ -41,8 +49,9 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="5dp"
             android:background="@color/transparent"
+            android:orientation="vertical"
 
-            android:orientation="vertical" />
+            />
 
         <TextView
             android:id="@+id/totalTxt"
@@ -58,7 +67,6 @@
             android:textSize="16sp"
             android:textStyle="bold" />
 
-
         <TextView
             android:id="@+id/howYouPayTxt"
             android:layout_width="wrap_content"
@@ -70,5 +78,8 @@
             android:textColor="@color/gunmetal"
             android:textSize="12dp"
             android:textStyle="bold" />
+
     </RelativeLayout>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
