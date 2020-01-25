@@ -10,9 +10,7 @@
     android:orientation="vertical"
     android:paddingTop="5dp"
     android:paddingBottom="5dp"
-    app:layout_constraintHeight_max="500dp"
-
-    >
+    app:layout_constraintHeight_max="500dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -30,9 +28,9 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentRight="true"
-            android:layout_marginStart="109dp"
+            android:layout_marginStart="133dp"
             android:layout_marginTop="10dp"
-            android:layout_marginRight="129dp"
+            android:layout_marginRight="153dp"
             android:fontFamily="@font/varela_round"
             android:gravity="center"
             android:text="@string/hour_for"
@@ -49,9 +47,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="5dp"
             android:background="@color/transparent"
-            android:orientation="vertical"
-
-            />
+            android:orientation="vertical" />
 
         <TextView
             android:id="@+id/totalTxt"
@@ -67,19 +63,5 @@
             android:textSize="16sp"
             android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/howYouPayTxt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/totalTxt"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="5dp"
-            android:text="@string/payment_method"
-            android:textColor="@color/gunmetal"
-            android:textSize="12dp"
-            android:textStyle="bold" />
-
     </RelativeLayout>
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>
