@@ -57,7 +57,7 @@
     <string name="order_details">זהו! המנה בהזמנה\n של השעה %s</string>
 
     <string name="mana_success_toast">המנה שלך נוספה בהצלחה!</string>
-    <string name="order_details_text">%s בהזמנה לשעה \n%s</string>
+    <string name="order_details_text">%s הזמנה לשעה</string>
 
     <string name="join_order_tooltop">הצטרף להזמנה פתוחה</string>
     <string name="join_tooltip_subtext">יש חבר\'ה שעדיין מתארגנים? יאללה, בוא תצטרף להזמנה!</string>
