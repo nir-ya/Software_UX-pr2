@@ -11,7 +11,7 @@ public class Constants {
     static final String LOCKED_TEXT = "הזמן!";
     static final String JOIN_TEXT = "הצטרף!";
     static final String READY_TEXT = "מוכן לשילוח";
-    static final String ORDER_OUT = "ההזמנה יצאה";
+    static final String ORDER_OUT = "שעת ההזמנה הגיעה. מישהו צריך לקחת יוזמה";
     static final String WAITING = "מחכה למשבחים...";
 
     //Tosafot
