@@ -18,7 +18,24 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.CollectionReference;
+
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+
+import android.view.View;
+
+
+import java.io.Serializable;
+import java.sql.Time;
+import java.time.Instant;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Timer;
+
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
@@ -31,7 +48,7 @@ import static android.view.View.VISIBLE;
 
 public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem, OrderListItemAdapter.OrderListItemHolder> {
 
-
+    private Calendar cal = Calendar.getInstance();
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private View emptyView;
 
@@ -54,6 +71,7 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
      * @param order
      */
     @Override
+
     protected void onBindViewHolder(@NonNull final OrderListItemHolder holder, final int position,
                                     @NonNull final OrderListItem order) {
 
@@ -70,6 +88,17 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
         setJoinButtonHandler(holder.joinButton, documentId, order);
 
         setOrderInfoRecyclerView(holder, documentId);
+
+
+        checkIfOrderTimePassed(order, documentId);
+    }
+
+    private void checkIfOrderTimePassed(@NonNull OrderListItem order, String documentId) {
+        if(order.getTimestamp().compareTo(Timestamp.now()) < 0){
+            DocumentReference orderRef = db.collection(Constants.ORDERS)
+                    .document(documentId);
+            orderRef.update("status","locked");
+        }
     }
 
     private String getTimeTitle(OrderListItem order) {
@@ -268,6 +297,8 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
         this.emptyView = view;
         initEmptyView();
     }
+
+
 
 
 }
