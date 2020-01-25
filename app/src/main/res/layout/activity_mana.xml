@@ -108,8 +108,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:padding="2dp"
-                android:text="חומוס"
-                android:textColor="@color/TextGreen" />
+                android:text="חומוס" />
         </LinearLayout>
 
         <LinearLayout
