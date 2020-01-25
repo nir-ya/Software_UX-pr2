@@ -1,9 +1,11 @@
 package com.example.myapplication;
 
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -25,6 +27,7 @@ public class MyBagAdapter extends FirestoreRecyclerAdapter<Mana, MyBagAdapter.My
 
 
 
+
     MyBagAdapter(@NonNull FirestoreRecyclerOptions<Mana> options, Context context) {
         super(options);
         this.context = context;
@@ -37,12 +40,31 @@ public class MyBagAdapter extends FirestoreRecyclerAdapter<Mana, MyBagAdapter.My
         holder.textViewPrice.setText(Integer.toString(mana.getPrice()));
         holder.tosafot.setText(mana.getTosafotString());
         holder.statusText.setText(mana.getStatus());
+        holder.deleteBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Todo - alert dialog
+                deleteItem(position);
+            }
+        });
+
+
+
         if(mana.getPaymentMethod()==Mana.MEZUMAN){
             holder.paymentImg.setImageDrawable(context.getDrawable(R.drawable.cash));
         }
         else {
             holder.paymentImg.setImageDrawable(context.getDrawable(R.drawable.credit));
         }
+
+        if(mana.getType().equals(Mana.PITA)){
+            holder.manaImg.setImageDrawable(context.getDrawable(R.drawable.pita_full));
+        }
+        else if(mana.getType().equals(Mana.LAFA)){
+            holder.manaImg.setImageDrawable(context.getDrawable(R.drawable.lafa_full));
+        }
+        else
+            holder.manaImg.setImageDrawable(context.getDrawable(R.drawable.half_pita_full));
     }
 
 
@@ -50,10 +72,14 @@ public class MyBagAdapter extends FirestoreRecyclerAdapter<Mana, MyBagAdapter.My
     @Override
     public MyBagHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.mybag_row_item, parent, false);
-
-
         return new MyBagHolder(v);
     }
+
+    public void deleteItem(int position){
+        getSnapshots().getSnapshot(position).getReference().delete();
+//        notifyItemRemoved(position);
+    }
+
 
     class MyBagHolder extends RecyclerView.ViewHolder {
         TextView textViewType;
@@ -62,6 +88,8 @@ public class MyBagAdapter extends FirestoreRecyclerAdapter<Mana, MyBagAdapter.My
         TextView hourText;
         TextView statusText;
         ImageView paymentImg;
+        ImageView manaImg;
+        Button deleteBtn;
 
         public MyBagHolder(View itemView) {
             super(itemView);
@@ -71,6 +99,8 @@ public class MyBagAdapter extends FirestoreRecyclerAdapter<Mana, MyBagAdapter.My
             hourText = itemView.findViewById(R.id.hourTxt);
             statusText = itemView.findViewById(R.id.statusTxt);
             paymentImg = itemView.findViewById(R.id.paymentImg);
+            manaImg = itemView.findViewById(R.id.manaImg);
+            deleteBtn = itemView.findViewById(R.id.deleteBtn);
         }
     }
 

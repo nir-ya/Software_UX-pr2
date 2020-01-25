@@ -152,18 +152,18 @@ public class Mana {
         return tosafot;
     }
 
-    String getTosafotString(){
-        Constants.setHebrewExtrasMap();
-        StringBuilder tosafotString = new StringBuilder();
-        for(String key : tosafot.keySet()){
-            if(tosafot.get(key)){
+    public String getTosafotString() {
+        StringBuilder tosafotString = new StringBuilder("");
+        for (String key : tosafot.keySet()) {
+            if (tosafot.get(key)) {
+                System.out.println(key);
                 tosafotString.append(Constants.hebrewExtras.get(key)).append(",");
             }
         }
-        tosafotString.delete(tosafotString.length()-2, tosafotString.length());
-//        if(tosafotString.length() >  0)
-//            return tosafotString.toString();
-        return "בלי תוספות";
+//        tosafotString.delete(tosafotString.length()-2, tosafotString.length());
+
+        return tosafotString.toString();
+//       return Constants.NO_TOSAFOT;
     }
 
     /**

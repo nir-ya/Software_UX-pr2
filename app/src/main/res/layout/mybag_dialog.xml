@@ -17,6 +17,7 @@
         android:layout_height="match_parent"
         android:background="@drawable/rounded_layout"
         android:backgroundTint="@color/light_peach"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -58,7 +59,6 @@
             android:layout_marginTop="20dp"
             android:fontFamily="@font/varela_round"
             android:gravity="center"
-            android:text="@string/sum_order_string"
             android:textColor="@color/darkestGreen"
             android:textSize="16sp"
             android:textStyle="bold" />

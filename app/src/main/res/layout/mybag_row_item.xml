@@ -22,7 +22,7 @@
             android:id="@+id/manaImg"
             android:layout_width="63dp"
             android:layout_height="60dp"
-            android:background="@drawable/pita"
+
             app:layout_constraintHorizontal_chainStyle="spread"
             app:layout_constraintLeft_toRightOf="@id/manaTypeTxt"
             app:layout_constraintRight_toRightOf="parent"

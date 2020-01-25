@@ -17,7 +17,7 @@ class Constants {
     static final String WAITING = "מחכה למשבחים...";
 
     //Tosafot
-
+    static final String NO_TOSAFOT = "בלי תוספות";
     static final String HUMMUS = "Hummus";
     static final String HARIF = "Harif";
     static final String THINA = "Thina";
@@ -37,11 +37,10 @@ class Constants {
     static final String BAG_USAGE_ID = "bag_intro";
 
 
-    static HashMap<String, String> hebrewExtras;
+    static HashMap<String, String> hebrewExtras = setHebrewExtrasMap();
 
-    static void setHebrewExtrasMap() {
+    static HashMap<String,String> setHebrewExtrasMap() {
         hebrewExtras = new HashMap<>();
-
         hebrewExtras.put("Amba", "עמבה");
         hebrewExtras.put("Chips", "צ'יפס");
         hebrewExtras.put("Cucumber", "מלפפון");
@@ -53,5 +52,6 @@ class Constants {
         hebrewExtras.put("Pickles", "חמוצים");
         hebrewExtras.put("Thina", "טחינה");
         hebrewExtras.put("Tomato", "עבניה");
+        return hebrewExtras;
     }
 }
