@@ -28,6 +28,7 @@ import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
+
 public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem, OrderListItemAdapter.OrderListItemHolder> {
 
 
@@ -47,16 +48,18 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
     /**
      * Called by RecyclerView to display the data at the specified position.
      * This method should update the contents of the itemView to reflect the item at the given position.
-     * 
+     *
      * @param holder
      * @param position
      * @param order
      */
     @Override
-    protected void onBindViewHolder(@NonNull final OrderListItemHolder holder, final int position, @NonNull final OrderListItem order) {
+    protected void onBindViewHolder(@NonNull final OrderListItemHolder holder, final int position,
+                                    @NonNull final OrderListItem order) {
+
         String documentId = getSnapshots().getSnapshot(position).getId();
 
-        holder.textViewTitle.setText(getTimeTitle(order));//TODO - change to normal title
+        holder.textViewTitle.setText(getTimeTitle(order));
 
         setPriceTextView(holder, order);
 
@@ -71,10 +74,10 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
 
     private String getTimeTitle(OrderListItem order) {
         String title;
-        try {
-            String s = Randomizer.formatter.format(order.getTimestamp().toDate());
-            title = "הזמנה לשעה: " + s;
-        } catch (NullPointerException e) {
+        if (order != null) {
+            String time = Randomizer.formatter.format(order.getTimestamp().toDate());
+            title = context.getResources().getString(R.string.order_list_item_title, time);
+        } else {
             title = "";
         }
         return title;
@@ -90,13 +93,12 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
         joinButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(context, ManaPickerActivity.class);
-
-                i.putExtra("order_id", doc);
-                i.putExtra("CALENDAR",order.getTimestamp());
-                i.addFlags(FLAG_ACTIVITY_NEW_TASK);
-                context.startActivity(i);
-
+                Intent intent = new Intent(context, ManaPickerActivity.class);
+  
+                intent.putExtra("order_id", doc);
+                intent.putExtra("CALENDAR",order.getTimestamp());
+                intent.addFlags(FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(intent);
             }
         });
     }
@@ -174,15 +176,19 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
     private void openOrder(OrderListItemHolder holder, OrderListItem model) {
         holder.joinButton.setText(Constants.JOIN_TEXT);
         holder.joinButton.setBackgroundColor(context.getResources().getColor(R.color.dark_navy));
-        if (model.getPrice() >= MIN_ORDER) {
-            holder.statusText.setText(Constants.READY_TEXT);
+
+        holder.statusText.setText(model.getPrice() >= MIN_ORDER ? Constants.READY_TEXT : Constants.WAITING);
+
+        setProgressBar(holder, model);
+    }
+
+    private void setProgressBar(OrderListItemHolder holder, OrderListItem model) {
+        if (model.getPrice() >= CRITICAL_PRICE) {
             holder.progressBar.setProgressDrawable(context.getDrawable(R.drawable.progress_bar_green));
-            holder.progressBar.setProgress(model.getPrice());
         } else {
-            holder.statusText.setText(Constants.WAITING);
             holder.progressBar.setProgressDrawable(context.getDrawable(R.drawable.progress_bar_orange));
-            holder.progressBar.setProgress(model.getPrice());
         }
+        holder.progressBar.setProgress(model.getPrice());
     }
 
     /**
@@ -218,7 +224,7 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
         CardView orderCard;
         RecyclerView manotList;
 
-        public OrderListItemHolder(View itemView) {
+        OrderListItemHolder(View itemView) {
             super(itemView);
             textViewTitle = itemView.findViewById(R.id.order_title);
             infoButton = itemView.findViewById(R.id.btn_info);
@@ -252,14 +258,13 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    emptyView.setVisibility(
-                            getItemCount() == 0 ? VISIBLE : GONE);
+                    emptyView.setVisibility(getItemCount() == 0 ? VISIBLE : GONE);
                 }
             }, Constants.SHORT_DELAY);
         }
     }
 
-    public void setEmptyView(View view) {
+    void setEmptyView(View view) {
         this.emptyView = view;
         initEmptyView();
     }
