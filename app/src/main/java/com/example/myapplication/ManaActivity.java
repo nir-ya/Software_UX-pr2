@@ -1,27 +1,20 @@
 package com.example.myapplication;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.GridLayout;
-import android.widget.ImageView;
-import android.widget.RadioGroup;
+import android.widget.TextView;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.Timestamp;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.sql.Time;
-import java.util.Calendar;
 import java.util.HashMap;
 
 public class ManaActivity extends AppCompatActivity {
@@ -41,12 +34,14 @@ public class ManaActivity extends AppCompatActivity {
 
     CheckBox[] checkBoxes;
 
+    TextView ownerText, dishDescription;
 
     String manatype;
     String orderTime;
     String orderId;
     Timestamp time;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
 
     @Override
@@ -56,14 +51,19 @@ public class ManaActivity extends AppCompatActivity {
 
         connectToxXML();
 
-
         isAllMarkedListener();
+
+        updateTextViews();
 
         manatype = getIntent().getStringExtra("mana_type");
         orderTime = getIntent().getStringExtra("order_time");
         orderId = getIntent().getStringExtra("order_id");
         time =  getIntent().getParcelableExtra("CALENDAR");
+    }
 
+    private void updateTextViews() {
+        ownerText.setText(getString(R.string.owner_text, user.getDisplayName()));
+        dishDescription.setText(manatype);
     }
 
     private void setTosafot(HashMap tosafot) {
@@ -78,7 +78,6 @@ public class ManaActivity extends AppCompatActivity {
         tosafot.put(Constants.CHIPS, chipsView.isChecked());
         tosafot.put(Constants.EGGPLAT, eggplantView.isChecked());
         tosafot.put(Constants.KRUV, false);
-
     }
 
 
@@ -107,6 +106,8 @@ public class ManaActivity extends AppCompatActivity {
 
 
     private void connectToxXML() {
+        ownerText = findViewById(R.id.owner_text);
+        dishDescription = findViewById(R.id.dish_description);
 
         humusView = findViewById(R.id.humus_image);
         harifView = findViewById(R.id.harif_image);
@@ -124,7 +125,6 @@ public class ManaActivity extends AppCompatActivity {
                 ambaView, tahiniView, chipsView, eggplantView};
 
         markAll = findViewById(R.id.mark_all_checkbox);
-
     }
 
 
@@ -138,8 +138,6 @@ public class ManaActivity extends AppCompatActivity {
         intent.putExtra("order_time", orderTime);
         intent.putExtra("CALENDAR", time);
         startActivity(intent);
-
-
     }
 
     public void cancelOrder(View view) {

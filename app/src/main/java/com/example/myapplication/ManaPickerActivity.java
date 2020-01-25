@@ -2,48 +2,32 @@ package com.example.myapplication;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
-import android.widget.TextView;
-
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.Timestamp;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import java.text.DateFormat;
-import java.text.Format;
-import java.text.SimpleDateFormat;
+
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import org.w3c.dom.Document;
 
 public class ManaPickerActivity extends AppCompatActivity {
 
-
-
-
-        private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     ViewPager viewPager;  // TODO: change to a more informative names
     ManaPickerAdapter adapter;
     List<ManaListItem> models;
     private String orderId;
-    String manaType = "pita"; // TODO: this should be set according to the "model" presented
-
     Timestamp time;
     String orderTime;
+    ManaPickListener manaPickListener;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -54,10 +38,17 @@ public class ManaPickerActivity extends AppCompatActivity {
         time = getIntent().getParcelableExtra("CALENDAR");
         orderTime = Randomizer.formatter.format(new Date(time.toDate().toString()));
 
+        setupViewPager();
+
+        manaPickListener = new ManaPickListener();
+        viewPager.addOnPageChangeListener(manaPickListener);
+    }
+
+    private void setupViewPager() {
         models = new ArrayList<>();
-        models.add(new ManaListItem(R.drawable.pita, "חצי פיתה","15 שקלים")); // TODO these should be consts
-        models.add(new ManaListItem(R.drawable.pita, "פיתה","18 שקלים"));
-        models.add(new ManaListItem(R.drawable.lafa, "לאפה","22 שקלים"));
+        models.add(new ManaListItem(R.drawable.pita, "חצי פיתה","11 שקלים")); // TODO these should be consts
+        models.add(new ManaListItem(R.drawable.pita, "פיתה","20 שקלים"));
+        models.add(new ManaListItem(R.drawable.lafa, "לאפה","24 שקלים"));
 
         adapter = new ManaPickerAdapter(models,this);
 
@@ -68,23 +59,11 @@ public class ManaPickerActivity extends AppCompatActivity {
 
         DepthTransformation depthTransformation = new DepthTransformation();
         viewPager.setPageTransformer(true, depthTransformation);
-
-
-        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) { }
-
-            @Override
-            public void onPageSelected(int position) { }
-
-            @Override
-            public void onPageScrollStateChanged(int state) { }
-        });
     }
 
     public void startManaActivity(View view) {
         Intent intent = new Intent(this, ManaActivity.class);
-        intent.putExtra("mana_type", manaType);
+        intent.putExtra("mana_type", manaPickListener.getSelectedType());
         intent.putExtra("order_id", orderId);
         intent.putExtra("order_time", orderTime);
         intent.putExtra("CALENDAR",time);
@@ -106,6 +85,7 @@ public class ManaPickerActivity extends AppCompatActivity {
     }
 
     public void simHakol(View view) {
+        String manaType = manaPickListener.getSelectedType();
         HashMap tosafot = new HashMap<String, Boolean>(); // TODO: there are better ways to do this
         setTosafot(tosafot);
 
@@ -119,6 +99,33 @@ public class ManaPickerActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    private static class ManaPickListener implements ViewPager.OnPageChangeListener {
 
+        String selectedType;
 
+        @Override
+        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {}
+
+        @Override
+        public void onPageSelected(int position) {
+            switch (position) {
+                case 0:
+                    selectedType = ManaListItem.HALF_PITA;
+                    break;
+                case 1:
+                    selectedType = ManaListItem.PITA;
+                    break;
+                case 2:
+                    selectedType = ManaListItem.LAFA;
+                    break;
+            }
+        }
+
+        @Override
+        public void onPageScrollStateChanged(int state) {}
+
+        String getSelectedType() {
+            return selectedType;
+        }
+    }
 }

@@ -11,10 +11,10 @@ public class ManaListItem {
     static final String HALF_PITA = "half pita";
     static final String HALF_LAFA = "half lafa";
     //-- Price Listing
-    private static final int PITA_PRICE = 18;
-    private static final int LAFA_PRICE = 22;
-    private static final int HALF_PITA_PRICE = 0; //TODO
-    private static final int HALF_LAFA_PRICE = 0; //TODO
+    private static final int PITA_PRICE = 20;
+    private static final int LAFA_PRICE = 24;
+    private static final int HALF_PITA_PRICE = 11; //TODO verify
+    private static final int HALF_LAFA_PRICE = 13; //TODO verify
 
 
     //Variables

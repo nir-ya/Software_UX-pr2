@@ -18,7 +18,7 @@ public class ManaPickerAdapter extends PagerAdapter {
     private Context mContext;
 
 
-    public ManaPickerAdapter(List<ManaListItem> models, Context mContext) {
+    ManaPickerAdapter(List<ManaListItem> models, Context mContext) {
         this.models = models;
         this.mContext = mContext;
     }
@@ -47,16 +47,8 @@ public class ManaPickerAdapter extends PagerAdapter {
         manaType.setText(models.get(position).getType());
         manaPrice.setText(models.get(position).getPrice());
 
-        view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-
         container.addView(view,0);
         return view;
-
     }
 
     @Override

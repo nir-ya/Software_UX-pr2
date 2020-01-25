@@ -48,7 +48,7 @@
     <string name="loginSuccess">Login successful!</string>
     <string name="registerSuccess">Register successful!</string>
     <string name="registerFailure">Problem while Registering</string>
-    <string name="owner_text">המנה של אבנר</string>
+    <string name="owner_text">המנה של %s</string>
     <string name="mark_everything">סמן הכל</string>
     <string name="bring">יאללה, תביא!</string>
     <string name="azov_vitarti">עזוב, ויתרתי</string>
