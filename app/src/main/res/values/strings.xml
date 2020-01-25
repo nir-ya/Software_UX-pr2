@@ -73,5 +73,9 @@
         \nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה
         \nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה
     </string>
+    <string name="finish_activity_header">פירוט ההזמנה</string>
+    <string name="finish_activity_dial_button_text">התקשר</string>
+    <string name="finish_activity_ordered_button_text">הזמנתי</string>
+    <string name="finish_activity_copy_button_text">העתק הזמנה</string>
 
 </resources>
