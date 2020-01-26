@@ -61,13 +61,12 @@ public class ManaPickerActivity extends AppCompatActivity {
         viewPager = findViewById(R.id.manaPager);
         viewPager.setAdapter(adapter);
         viewPager.setClipToPadding(false);
-
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         int width = displayMetrics.widthPixels;
-        int height = displayMetrics.heightPixels;
-        int paddingToSet = width/4;
-        viewPager.setPadding(paddingToSet,height/6,paddingToSet,height/6);
+
+        int paddingToSet = width/6;
+        viewPager.setPadding(paddingToSet,0,paddingToSet,0);
 
         viewPager.setOffscreenPageLimit(3);
         viewPager.setPageMargin(dpToPx(10));
