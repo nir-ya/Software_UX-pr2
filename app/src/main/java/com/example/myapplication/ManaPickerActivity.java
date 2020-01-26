@@ -49,10 +49,10 @@ public class ManaPickerActivity extends AppCompatActivity {
 
     private void setupViewPager() {
         cards = new ArrayList<>();
-        cards.add(new ManaListItem(R.drawable.pita, getString(R.string.half_pita_text), getString(R.string.half_pita_price)));
-        cards.add(new ManaListItem(R.drawable.pita, getString(R.string.pita_text), getString(R.string.pita_price)));
-        cards.add(new ManaListItem(R.drawable.lafa, getString(R.string.lafa_text), getString(R.string.lafa_price)));
-        cards.add(new ManaListItem(R.drawable.lafa, getString(R.string.half_lafa_text), getString(R.string.half_lafa_price)));
+        cards.add(new ManaListItem(R.drawable.half_pita_full, getString(R.string.half_pita_text), getString(R.string.half_pita_price)));
+        cards.add(new ManaListItem(R.drawable.pita_full, getString(R.string.pita_text), getString(R.string.pita_price)));
+        cards.add(new ManaListItem(R.drawable.lafa_full, getString(R.string.lafa_text), getString(R.string.lafa_price)));
+        cards.add(new ManaListItem(R.drawable.half_lafa_full, getString(R.string.half_lafa_text), getString(R.string.half_lafa_price)));
 
         adapter = new ManaPickerAdapter(cards,this);
 
@@ -133,6 +133,8 @@ public class ManaPickerActivity extends AppCompatActivity {
                 case 2:
                     selectedType = ManaListItem.LAFA;
                     break;
+                case 3:
+                    selectedType = ManaListItem.HALF_LAFA;
             }
         }
 
