@@ -46,7 +46,7 @@ public class OrderConfirmationActivity extends AppCompatActivity {
         orderTime = extras.getString("order_time");
         time = extras.getParcelable("CALENDAR");
         
-        orderDetails.setText(getString(R.string.order_details_text,"פיתה", orderTime));
+        orderDetails.setText(getString(R.string.order_details_text, orderTime));
 
         tosafot = (HashMap<String, Boolean>) extras.getSerializable("tosafot");
     }

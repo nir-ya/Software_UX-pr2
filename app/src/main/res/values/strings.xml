@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">My Application</string>
+    <string name="app_name">ShevachApp</string>
     <string name="open_orders">OpenOrders</string>
     <string name="price">price</string>
     <string name="my_order">ההזמנה שלי</string>
@@ -57,7 +57,7 @@
     <string name="order_details">זהו! המנה בהזמנה\n של השעה %s</string>
 
     <string name="mana_success_toast">המנה שלך נוספה בהצלחה!</string>
-    <string name="order_details_text">%s בהזמנה לשעה \n%s</string>
+    <string name="order_details_text">הזמנה לשעה %s</string>
 
     <string name="join_order_tooltop">הצטרף להזמנה פתוחה</string>
     <string name="join_tooltip_subtext">יש חבר\'ה שעדיין מתארגנים? יאללה, בוא תצטרף להזמנה!</string>
@@ -68,5 +68,15 @@
     <string name="invalid_password_msg">בחר סיסמה בעלת 6 תווים לפחות</string>
     <string name="invalid_email_msg">כתובת הe-mail שהכנסת לא תקינה</string>
     <string name="order_list_item_title">הזמנה לשעה: %s</string>
+    <string name="final_order_details">
+        פיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה
+        \nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה
+        \nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה
+    </string>
+    <string name="finish_activity_header">פירוט ההזמנה</string>
+    <string name="finish_activity_dial_button_text">התקשר</string>
+    <string name="finish_activity_ordered_button_text">הזמנתי</string>
+    <string name="finish_activity_copy_button_text">העתק הזמנה</string>
+    <string name="shevach_phone_number">026528317</string>
 
 </resources>
