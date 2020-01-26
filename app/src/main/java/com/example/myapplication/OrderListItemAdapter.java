@@ -81,7 +81,11 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
     private void checkIfOrderTimePassed(@NonNull OrderListItem order, String documentId) {
         if(order.getTimestamp().compareTo(Timestamp.now()) < 0){
             DocumentReference orderRef = db.collection(Constants.ORDERS).document(documentId);
-            orderRef.update("status","locked");
+            if(order.reachedMinimum()){
+              orderRef.update("status", OrderListItem.LOCKED); //todo make status const String
+            }else{
+              orderRef.update("status", OrderListItem.CANCELED);
+            }
         }
     }
 
@@ -178,6 +182,8 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
             openOrder(holder, documentId, model);
         } else if (model.getStatus().equals(OrderListItem.LOCKED)) {
             lockOrder(holder, documentId, model);
+        } else if (model.getStatus().equals(OrderListItem.CANCELED)){
+            cancelOrder(holder, documentId, model);
         }
     }
 
@@ -214,6 +220,20 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
 
         setProgressBar(holder, model);
     }
+
+  /**
+   * Sets the graphic for presenting a canceled order
+   * @param holder - the RecyclerView item holder
+   * @param documentId - String representation of the document ID
+   * @param orderListItem order object
+   */
+  private void cancelOrder(OrderListItemHolder holder, String documentId, OrderListItem orderListItem) {
+    holder.statusText.setText(Constants.ORDER_CANCELED);
+    holder.orderButton.setText("התבאס");
+    holder.orderButton.setBackgroundColor(context.getResources().getColor(R.color.red));
+    holder.progressBar.setProgressDrawable(context.getDrawable(R.drawable.progress_bar_locked));
+    setOrderButtonHandler(holder.orderButton, documentId);
+  }
 
     private void setProgressBar(OrderListItemHolder holder, OrderListItem model) {
         if (model.getPrice() >= CRITICAL_PRICE) {
