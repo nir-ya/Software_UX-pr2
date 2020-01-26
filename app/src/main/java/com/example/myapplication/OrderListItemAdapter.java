@@ -3,6 +3,7 @@ package com.example.myapplication;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -70,12 +71,13 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
 
         updateOrderItemByStatus(holder, order, documentId);
 
-        setCardExpansion(holder.orderCard, holder);
-        setCardExpansion(holder.infoButton, holder);
+      checkIfOrderTimePassed(order, documentId);
+      setCardExpansion(holder.orderCard, holder);
+      setCardExpansion(holder.infoButton, holder);
 
-        setOrderInfoRecyclerView(holder, documentId);
 
-        checkIfOrderTimePassed(order, documentId);
+      setOrderInfoRecyclerView(holder, documentId);
+
     }
 
     private void checkIfOrderTimePassed(@NonNull OrderListItem order, String documentId) {
@@ -201,6 +203,13 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
         holder.progressBar.setProgressDrawable(context.getDrawable(R.drawable.progress_bar_locked));
 
         setOrderButtonHandler(holder.orderButton, documentId);
+
+        holder.statusText.setTextColor(context.getResources().getColor(R.color.TextGreen));
+        ViewGroup layout = (ViewGroup) holder.orderButton.getParent();
+        if(null!=layout) {
+            holder.orderButton.setVisibility(VISIBLE);
+            holder.infoButton.setVisibility(VISIBLE);
+        }
     }
 
     /**
@@ -219,6 +228,14 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
         holder.statusText.setText(model.getPrice() >= MIN_ORDER ? Constants.READY_TEXT : Constants.WAITING);
 
         setProgressBar(holder, model);
+
+        holder.statusText.setTextColor(context.getResources().getColor(R.color.TextGreen));
+        ViewGroup layout = (ViewGroup) holder.orderButton.getParent();
+        if(null!=layout) {
+            holder.orderButton.setVisibility(VISIBLE);
+            holder.infoButton.setVisibility(VISIBLE);
+        }
+
     }
 
   /**
@@ -232,7 +249,15 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
     holder.orderButton.setText("התבאס");
     holder.orderButton.setBackgroundColor(context.getResources().getColor(R.color.red));
     holder.progressBar.setProgressDrawable(context.getDrawable(R.drawable.progress_bar_locked));
-    setOrderButtonHandler(holder.orderButton, documentId);
+    ViewGroup layout = (ViewGroup) holder.orderButton.getParent();
+
+    holder.statusText.setTextColor(Color.RED);
+    if(null!=layout) {
+        holder.orderButton.setVisibility(View.GONE);
+        holder.infoButton.setVisibility(View.GONE);
+        //layout.removeView(holder.orderButton);
+        //layout.removeView(holder.infoButton);
+    }
   }
 
     private void setProgressBar(OrderListItemHolder holder, OrderListItem model) {
