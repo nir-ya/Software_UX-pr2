@@ -86,5 +86,9 @@
     <string name="pita_text">פיתה</string>
     <string name="lafa_text">לאפה</string>
     <string name="half_lafa_text">חצי לאפה</string>
+    <string name="half_pita_description">חצי פיתה, 10 שקלים</string>
+    <string name="pita_description">פיתה, 18 שקלים</string>
+    <string name="lafa_description">לאפה, 22 שקלים</string>
+    <string name="half_lafa_description">חצי לאפה, 12 שקלים</string>
 
 </resources>
