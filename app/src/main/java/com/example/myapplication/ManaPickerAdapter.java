@@ -13,19 +13,19 @@ import java.util.List;
 public class ManaPickerAdapter extends PagerAdapter {
 
 
-    private List<ManaListItem> models;
+    private List<ManaListItem> typeCards;
     private LayoutInflater layoutInflater;
     private Context mContext;
 
 
-    ManaPickerAdapter(List<ManaListItem> models, Context mContext) {
-        this.models = models;
+    ManaPickerAdapter(List<ManaListItem> typeCards, Context mContext) {
+        this.typeCards = typeCards;
         this.mContext = mContext;
     }
 
     @Override
     public int getCount() {
-        return models.size();
+        return typeCards.size();
     }
 
     @Override
@@ -43,9 +43,9 @@ public class ManaPickerAdapter extends PagerAdapter {
         TextView manaType = view.findViewById(R.id.manaItemTxt);
         TextView manaPrice = view.findViewById(R.id.manaItemPriceTxt);
 
-        manaImg.setImageResource(models.get(position).getManaImg());
-        manaType.setText(models.get(position).getType());
-        manaPrice.setText(models.get(position).getPrice());
+        manaImg.setImageResource(typeCards.get(position).getManaImg());
+        manaType.setText(typeCards.get(position).getType());
+        manaPrice.setText(typeCards.get(position).getPrice());
 
         container.addView(view,0);
         return view;

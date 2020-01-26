@@ -66,13 +66,16 @@ public class ManaActivity extends AppCompatActivity {
 
         switch (manatype) {
             case ManaListItem.HALF_PITA:
-                dishDescription.setText("חצי פיתה, 11 שקלים");
+                dishDescription.setText(R.string.half_pita_description);
                 break;
             case ManaListItem.PITA:
-                dishDescription.setText("פיתה, 20 שקלים");
+                dishDescription.setText(R.string.pita_description);
                 break;
             case ManaListItem.LAFA:
-                dishDescription.setText("לאפה, 24 שקלים");
+                dishDescription.setText(R.string.lafa_description);
+                break;
+            case ManaListItem.HALF_LAFA:
+                dishDescription.setText(R.string.half_lafa_description);
                 break;
         }
     }

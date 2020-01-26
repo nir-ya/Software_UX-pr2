@@ -1,9 +1,10 @@
 package com.example.myapplication;
 
+import android.animation.ArgbEvaluator;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,11 +24,13 @@ public class ManaPickerActivity extends AppCompatActivity {
 
     ViewPager viewPager;  // TODO: change to a more informative names
     ManaPickerAdapter adapter;
-    List<ManaListItem> models;
+    List<ManaListItem> cards;
     private String orderId;
     Timestamp time;
     String orderTime;
     ManaPickListener manaPickListener;
+
+    ArgbEvaluator argbEvaluator = new ArgbEvaluator();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -45,20 +48,32 @@ public class ManaPickerActivity extends AppCompatActivity {
     }
 
     private void setupViewPager() {
-        models = new ArrayList<>();
-        models.add(new ManaListItem(R.drawable.pita, "חצי פיתה","11 שקלים")); // TODO these should be consts
-        models.add(new ManaListItem(R.drawable.pita, "פיתה","20 שקלים"));
-        models.add(new ManaListItem(R.drawable.lafa, "לאפה","24 שקלים"));
+        cards = new ArrayList<>();
+        cards.add(new ManaListItem(R.drawable.half_pita_full, getString(R.string.half_pita_text), getString(R.string.half_pita_price)));
+        cards.add(new ManaListItem(R.drawable.pita_full, getString(R.string.pita_text), getString(R.string.pita_price)));
+        cards.add(new ManaListItem(R.drawable.lafa_full, getString(R.string.lafa_text), getString(R.string.lafa_price)));
+        cards.add(new ManaListItem(R.drawable.half_lafa_full, getString(R.string.half_lafa_text), getString(R.string.half_lafa_price)));
 
-        adapter = new ManaPickerAdapter(models,this);
+        adapter = new ManaPickerAdapter(cards,this);
 
         viewPager = findViewById(R.id.manaPager);
+
         viewPager.setAdapter(adapter);
-        viewPager.setPadding(0,0,0,0);
+        viewPager.setClipToPadding(false);
+
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        int width = displayMetrics.widthPixels;
+
+        int paddingToSet = width/6;
+        viewPager.setPadding(paddingToSet,0,paddingToSet,0);
+
+//        viewPager.setOffscreenPageLimit(3);
+//        viewPager.setPageMargin(dpToPx(10));
+
         viewPager.setCurrentItem(1);
 
-        DepthTransformation depthTransformation = new DepthTransformation();
-        viewPager.setPageTransformer(true, depthTransformation);
+//        viewPager.setPageTransformer(true, depthTransformation);
     }
 
     public void startManaActivity(View view) {
@@ -118,6 +133,8 @@ public class ManaPickerActivity extends AppCompatActivity {
                 case 2:
                     selectedType = ManaListItem.LAFA;
                     break;
+                case 3:
+                    selectedType = ManaListItem.HALF_LAFA;
             }
         }
 
@@ -127,5 +144,10 @@ public class ManaPickerActivity extends AppCompatActivity {
         String getSelectedType() {
             return selectedType;
         }
+    }
+
+    public int dpToPx(int dp) {
+        DisplayMetrics displayMetrics =  getResources().getDisplayMetrics();
+        return Math.round(dp * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
     }
 }
