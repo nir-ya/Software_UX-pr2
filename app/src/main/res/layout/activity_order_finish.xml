@@ -34,7 +34,6 @@
 
 
     <ScrollView
-        android:id="@+id/scrollView2"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/bottom_bar"
@@ -43,13 +42,23 @@
         app:layout_constraintVertical_bias="1.0"
         tools:layout_editor_absoluteX="41dp">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/final_order_details">
-
-        </TextView>
     </ScrollView>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:requiresFadingEdge="vertical"
+        android:id="@+id/orders_recycler_view"
+        android:scrollbars="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_bar"
+        app:layout_constraintTop_toBottomOf="@id/line_seperator"
+        app:layout_constraintVertical_bias="1.0"
+        tools:layout_editor_absoluteX="41dp"
+        android:layout_marginBottom="20dp"
+        android:scrollbarThumbHorizontal="@color/dark_navy"
+        android:scrollbarSize="1dp"
+        android:scrollbarStyle="outsideOverlay"
+        />
 
     <TableLayout
         android:id="@+id/bottom_bar"

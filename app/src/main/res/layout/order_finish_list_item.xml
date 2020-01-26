@@ -20,12 +20,12 @@
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintLeft_toRightOf="@id/Name"
+            app:layout_constraintLeft_toRightOf="@id/name"
             app:layout_constraintTop_toTopOf="parent" />
 
 
         <TextView
-            android:id="@+id/Name"
+            android:id="@+id/name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
@@ -49,15 +49,14 @@
             android:textColor="@color/dusty_teal"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintRight_toLeftOf="@id/Name"
+            app:layout_constraintRight_toLeftOf="@id/name"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/tosafut"
-            android:layout_width="230dp"
-            android:layout_height="48dp"
+            android:id="@+id/description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:fontFamily="@font/varela_round"
-            android:lines="2"
             android:scrollHorizontally="false"
             android:text="הכל - בלי חמוצים, טחינה, חציל, חריף"
             android:textAlignment="textStart"
