@@ -49,10 +49,10 @@ public class ManaPickerActivity extends AppCompatActivity {
 
     private void setupViewPager() {
         cards = new ArrayList<>();
-        cards.add(new ManaListItem(R.drawable.pita, "חצי פיתה","11 שקלים")); // TODO these should be consts
-        cards.add(new ManaListItem(R.drawable.pita, "פיתה","20 שקלים"));
-        cards.add(new ManaListItem(R.drawable.lafa, "לאפה","24 שקלים"));
-        cards.add(new ManaListItem(R.drawable.lafa, "חצי לאפה","16 שקלים"));
+        cards.add(new ManaListItem(R.drawable.pita, "חצי פיתה","10 שקלים")); // TODO these should be consts
+        cards.add(new ManaListItem(R.drawable.pita, "פיתה","18 שקלים"));
+        cards.add(new ManaListItem(R.drawable.lafa, "לאפה","22 שקלים"));
+        cards.add(new ManaListItem(R.drawable.lafa, "חצי לאפה","12 שקלים"));
 
         adapter = new ManaPickerAdapter(cards,this);
 

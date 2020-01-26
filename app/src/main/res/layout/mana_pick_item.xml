@@ -34,7 +34,7 @@
             android:fontFamily="@font/varela_round"
             android:text="פיתה"
             android:textColor="@color/dusty_teal"
-            android:textSize="30sp"
+            android:textSize="28sp"
             android:textStyle="bold"
             android:layout_gravity="center"
             >
