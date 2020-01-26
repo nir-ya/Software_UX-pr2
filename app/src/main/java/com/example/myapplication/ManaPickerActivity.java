@@ -1,9 +1,9 @@
 package com.example.myapplication;
 
+import android.animation.ArgbEvaluator;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,11 +23,13 @@ public class ManaPickerActivity extends AppCompatActivity {
 
     ViewPager viewPager;  // TODO: change to a more informative names
     ManaPickerAdapter adapter;
-    List<ManaListItem> models;
+    List<ManaListItem> cards;
     private String orderId;
     Timestamp time;
     String orderTime;
     ManaPickListener manaPickListener;
+
+    ArgbEvaluator argbEvaluator = new ArgbEvaluator();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -45,20 +47,20 @@ public class ManaPickerActivity extends AppCompatActivity {
     }
 
     private void setupViewPager() {
-        models = new ArrayList<>();
-        models.add(new ManaListItem(R.drawable.pita, "חצי פיתה","11 שקלים")); // TODO these should be consts
-        models.add(new ManaListItem(R.drawable.pita, "פיתה","20 שקלים"));
-        models.add(new ManaListItem(R.drawable.lafa, "לאפה","24 שקלים"));
+        cards = new ArrayList<>();
+        cards.add(new ManaListItem(R.drawable.pita, "חצי פיתה","11 שקלים")); // TODO these should be consts
+        cards.add(new ManaListItem(R.drawable.pita, "פיתה","20 שקלים"));
+        cards.add(new ManaListItem(R.drawable.lafa, "לאפה","24 שקלים"));
+        cards.add(new ManaListItem(R.drawable.lafa, "חצי לאפה","16 שקלים"));
 
-        adapter = new ManaPickerAdapter(models,this);
+        adapter = new ManaPickerAdapter(cards,this);
 
         viewPager = findViewById(R.id.manaPager);
         viewPager.setAdapter(adapter);
-        viewPager.setPadding(0,0,0,0);
+        viewPager.setPadding(130,0,130,0);
         viewPager.setCurrentItem(1);
 
-        DepthTransformation depthTransformation = new DepthTransformation();
-        viewPager.setPageTransformer(true, depthTransformation);
+//        viewPager.setPageTransformer(true, depthTransformation);
     }
 
     public void startManaActivity(View view) {
