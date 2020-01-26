@@ -7,7 +7,7 @@
         android:title="@string/lafa_text" />
     <item
         android:id="@+id/menu_half_pita"
-        android:title="@string/half_lafa_text" />
+        android:title="@string/half_pita_text" />
     <item
         android:id="@+id/menu_half_lafa"
         android:title="@string/half_lafa_text"/></menu>

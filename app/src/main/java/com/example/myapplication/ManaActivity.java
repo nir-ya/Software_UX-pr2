@@ -50,10 +50,12 @@ public class ManaActivity extends AppCompatActivity {
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
     Context mContext;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mana);
+
         mContext = this.getApplicationContext();
 
         connectToxXML();
@@ -63,7 +65,7 @@ public class ManaActivity extends AppCompatActivity {
         manatype = getIntent().getStringExtra("mana_type");
         orderTime = getIntent().getStringExtra("order_time");
         orderId = getIntent().getStringExtra("order_id");
-        time =  getIntent().getParcelableExtra("CALENDAR");
+        time = getIntent().getParcelableExtra("CALENDAR");
 
         updateTextViews();
     }
@@ -110,6 +112,10 @@ public class ManaActivity extends AppCompatActivity {
     }
 
 
+    /***
+     * this is a listener that checks if all marked
+     * if so, mark checkbox
+     */
     private void isAllMarkedListener() {
         markAll.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -134,6 +140,9 @@ public class ManaActivity extends AppCompatActivity {
     }
 
 
+    /**
+     * function to set all XML connections
+     */
     private void connectToxXML() {
         ownerText = findViewById(R.id.owner_text);
         dishDescription = findViewById(R.id.dish_description);
@@ -157,41 +166,54 @@ public class ManaActivity extends AppCompatActivity {
 
         manaTypeImageVIew = findViewById(R.id.mana_type_picture);
 
+        setManaTypeSwitchMenu();
+    }
+
+
+    /**
+     * this function set the mana type image clickable
+     * opens a menu where you can switch your mana type
+     */
+    private void setManaTypeSwitchMenu() {
         manaTypeImageVIew.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 PopupMenu popupMenu = new PopupMenu(mContext, manaTypeImageVIew);
                 MenuInflater inflater = getMenuInflater();
                 inflater.inflate(R.menu.mana_type_menu, popupMenu.getMenu());
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem menuItem) {
+                        switch (menuItem.getItemId()) {
+                            case R.id.menu_pita:
+                                manatype = ManaListItem.PITA;
+                                break;
+                            case R.id.menu_half_pita:
+                                manatype = ManaListItem.HALF_PITA;
+                                break;
+                            case R.id.menu_lafa:
+                                manatype = ManaListItem.LAFA;
+                                break;
+                            case R.id.menu_half_lafa:
+                                manatype = ManaListItem.HALF_LAFA;
+                                break;
+                            default:
+                                return false;
+                        }
+                        updateTextViews();
+                        return true;
+                    }
+                });
                 popupMenu.show();
             }
         });
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle item selection
-        switch (item.getItemId()) {
-            case R.id.menu_pita:
-                manatype = ManaListItem.PITA;
-                break;
-            case R.id.menu_half_pita:
-                manatype = ManaListItem.HALF_PITA;
-                break;
-            case R.id.menu_lafa:
-                manatype = ManaListItem.LAFA;
-                break;
-            case R.id.menu_half_lafa:
-                manatype = ManaListItem.HALF_LAFA;
-                break;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-        updateTextViews();
-        return true;
-    }
 
-
+    /**
+     * onCLick method that moves you to next screen
+     * @param view - button
+     */
     public void moveToConfirm(View view) {
 
         HashMap<String, Boolean> tosafot = new HashMap<>();
@@ -204,6 +226,10 @@ public class ManaActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    /**
+     * onClick method to return to main activity
+     * @param view - button
+     */
     public void cancelOrder(View view) {
         Intent intent = new Intent(this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
