@@ -3,6 +3,7 @@ package com.example.myapplication;
 import android.animation.ArgbEvaluator;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.View;
 
 import androidx.annotation.Nullable;
@@ -55,9 +56,22 @@ public class ManaPickerActivity extends AppCompatActivity {
 
         adapter = new ManaPickerAdapter(cards,this);
 
+
+
         viewPager = findViewById(R.id.manaPager);
         viewPager.setAdapter(adapter);
-        viewPager.setPadding(130,0,130,0);
+        viewPager.setClipToPadding(false);
+
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        int width = displayMetrics.widthPixels;
+        int height = displayMetrics.heightPixels;
+        int paddingToSet = width/4;
+        viewPager.setPadding(paddingToSet,height/6,paddingToSet,height/6);
+
+        viewPager.setOffscreenPageLimit(3);
+        viewPager.setPageMargin(dpToPx(10));
+
         viewPager.setCurrentItem(1);
 
 //        viewPager.setPageTransformer(true, depthTransformation);
@@ -129,5 +143,10 @@ public class ManaPickerActivity extends AppCompatActivity {
         String getSelectedType() {
             return selectedType;
         }
+    }
+
+    public int dpToPx(int dp) {
+        DisplayMetrics displayMetrics =  getResources().getDisplayMetrics();
+        return Math.round(dp * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
     }
 }
