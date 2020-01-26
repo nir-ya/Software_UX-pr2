@@ -1,0 +1,13 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_pita"
+        android:title="@string/pita_text" />
+    <item
+        android:id="@+id/menu_lafa"
+        android:title="@string/lafa_text" />
+    <item
+        android:id="@+id/menu_half_pita"
+        android:title="@string/half_lafa_text" />
+    <item
+        android:id="@+id/menu_half_lafa"
+        android:title="@string/half_lafa_text"/></menu>

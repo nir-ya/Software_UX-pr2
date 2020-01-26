@@ -2,13 +2,17 @@ package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.GridLayout;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import com.google.firebase.Timestamp;
@@ -45,11 +49,12 @@ public class ManaActivity extends AppCompatActivity {
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-
+    Context mContext;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mana);
+        mContext = this.getApplicationContext();
 
         connectToxXML();
 
@@ -155,9 +160,35 @@ public class ManaActivity extends AppCompatActivity {
         manaTypeImageVIew.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                
+                PopupMenu popupMenu = new PopupMenu(mContext, manaTypeImageVIew);
+                MenuInflater inflater = getMenuInflater();
+                inflater.inflate(R.menu.mana_type_menu, popupMenu.getMenu());
+                popupMenu.show();
             }
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.menu_pita:
+                manatype = ManaListItem.PITA;
+                break;
+            case R.id.menu_half_pita:
+                manatype = ManaListItem.HALF_PITA;
+                break;
+            case R.id.menu_lafa:
+                manatype = ManaListItem.LAFA;
+                break;
+            case R.id.menu_half_lafa:
+                manatype = ManaListItem.HALF_LAFA;
+                break;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+        updateTextViews();
+        return true;
     }
 
 
