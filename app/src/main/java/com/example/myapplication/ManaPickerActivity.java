@@ -30,8 +30,6 @@ public class ManaPickerActivity extends AppCompatActivity {
     String orderTime;
     ManaPickListener manaPickListener;
 
-    ArgbEvaluator argbEvaluator = new ArgbEvaluator();
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,6 +77,7 @@ public class ManaPickerActivity extends AppCompatActivity {
     public void startManaActivity(View view) {
         Intent intent = new Intent(this, ManaActivity.class);
         intent.putExtra("mana_type", manaPickListener.getSelectedType());
+
         intent.putExtra("order_id", orderId);
         intent.putExtra("order_time", orderTime);
         intent.putExtra("CALENDAR",time);

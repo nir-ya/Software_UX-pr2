@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.GridLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.firebase.Timestamp;
@@ -31,6 +32,7 @@ public class ManaActivity extends AppCompatActivity {
     CheckBox eggplantView;
     GridLayout gridView;
     CheckBox markAll;
+    ImageView manaTypeImageVIew;
 
     CheckBox[] checkBoxes;
 
@@ -61,21 +63,29 @@ public class ManaActivity extends AppCompatActivity {
         updateTextViews();
     }
 
+
     private void updateTextViews() {
         ownerText.setText(getString(R.string.owner_text, user.getDisplayName()));
 
         switch (manatype) {
             case ManaListItem.HALF_PITA:
                 dishDescription.setText(R.string.half_pita_description);
+                manaTypeImageVIew.setImageResource(R.drawable.half_pita_full);
                 break;
             case ManaListItem.PITA:
                 dishDescription.setText(R.string.pita_description);
+                manaTypeImageVIew.setImageResource(R.drawable.pita_full);
+
                 break;
             case ManaListItem.LAFA:
                 dishDescription.setText(R.string.lafa_description);
+                manaTypeImageVIew.setImageResource(R.drawable.lafa_full);
+
                 break;
             case ManaListItem.HALF_LAFA:
                 dishDescription.setText(R.string.half_lafa_description);
+                manaTypeImageVIew.setImageResource(R.drawable.half_lafa_full);
+
                 break;
         }
     }
@@ -139,6 +149,15 @@ public class ManaActivity extends AppCompatActivity {
                 ambaView, tahiniView, chipsView, eggplantView};
 
         markAll = findViewById(R.id.mark_all_checkbox);
+
+        manaTypeImageVIew = findViewById(R.id.mana_type_picture);
+
+        manaTypeImageVIew.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                
+            }
+        });
     }
 
 
