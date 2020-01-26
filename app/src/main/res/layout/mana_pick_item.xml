@@ -2,6 +2,7 @@
 <LinearLayout
     android:layout_height="match_parent"
     android:layout_width="match_parent"
+    android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 <androidx.cardview.widget.CardView
@@ -11,23 +12,20 @@
     android:layout_height="wrap_content"
     app:cardCornerRadius="50dp">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="center"
         android:padding="50dp"
+        android:orientation="vertical"
         android:background="@color/off_white">
 
         <ImageView
             android:id="@+id/manaItemImg"
+            android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/pita"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-        </ImageView>
+            android:src="@drawable/pita"
+            />
 
         <TextView
             android:id="@+id/manaItemTxt"
@@ -36,11 +34,10 @@
             android:fontFamily="@font/varela_round"
             android:text="פיתה"
             android:textColor="@color/dusty_teal"
-            android:textSize="30dp"
+            android:textSize="30sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/manaItemImg">
+            android:layout_gravity="center"
+            >
 
         </TextView>
 
@@ -51,17 +48,14 @@
             android:fontFamily="@font/varela_round"
             android:text="20 שקלים"
             android:textColor="@color/dusty_teal"
-            android:textSize="15dp"
+            android:textSize="15sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/manaItemTxt">
+            android:layout_gravity="center">
 
         </TextView>
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 </androidx.cardview.widget.CardView>
 
 </LinearLayout>
