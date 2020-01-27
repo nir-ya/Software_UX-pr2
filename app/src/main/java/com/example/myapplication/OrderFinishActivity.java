@@ -1,5 +1,6 @@
 package com.example.myapplication;
 
+import com.example.myapplication.Constants;
 import com.example.myapplication.Mana;
 
 
@@ -55,24 +56,6 @@ public class OrderFinishActivity extends AppCompatActivity {
         startActivity(dialIntent);
     }
 
-    static HashMap<String, String> hebrewExtras = setHebrewExtrasMap();
-
-    static HashMap<String, String> setHebrewExtrasMap() {
-        hebrewExtras = new HashMap<>();
-        hebrewExtras.put("Amba", "עמבה");
-        hebrewExtras.put("Chips", "צ'יפס");
-        hebrewExtras.put("Cucumber", "מלפפון");
-        hebrewExtras.put("Eggplant", "חצילים");
-        hebrewExtras.put("Harif", "חריף");
-        hebrewExtras.put("Hummus", "חומוס");
-        hebrewExtras.put("Kruv", "כרוב");
-        hebrewExtras.put("Onion", "בצל");
-        hebrewExtras.put("Pickles", "חמוצים");
-        hebrewExtras.put("Thina", "טחינה");
-        hebrewExtras.put("Tomato", "עגבניה");
-        return hebrewExtras;
-    }
-
     // this function is filthy please ignore it
     private void setUpRecyclerView() {
         Query query = manotRef.orderBy("owner", Query.Direction.ASCENDING);
@@ -106,7 +89,7 @@ public class OrderFinishActivity extends AppCompatActivity {
                                 description += " בלי ";
                                 for (String key : map.keySet()) {
                                     if (map.get(key) == false) {
-                                        description += hebrewExtras.get(key) + " ";
+                                        description += Constants.hebrewExtras.get(key) + " ";
                                     }
 
                                 }
@@ -117,7 +100,7 @@ public class OrderFinishActivity extends AppCompatActivity {
                                 description += " עם ";
                                 for (String key : map.keySet()) {
                                     if (map.get(key) == true) {
-                                        description += hebrewExtras.get(key) + " ";
+                                        description += Constants.hebrewExtras.get(key) + " ";
                                     }
 
                                 }
@@ -156,20 +139,28 @@ public class OrderFinishActivity extends AppCompatActivity {
     public void checkBoxClick(View view) {
         boolean checked = ((CheckBox)view).isChecked();
         count = adapter.getItemCount();
-        
+
         if(checked){
             checkedCount++;
         }
         else{
             checkedCount--;
         }
+
+
+
         if(checkedCount==count){
             finishButton.setVisibility(View.VISIBLE);
             finishButton.getLayoutParams().width = ViewGroup.LayoutParams.WRAP_CONTENT;
             finishButton.getLayoutParams().height = ViewGroup.LayoutParams.WRAP_CONTENT;
+            finishButton.setHeight(0);
+            finishButton.setWidth(0);
         }
         else {
             finishButton.setVisibility(View.INVISIBLE);
+
+            finishButton.getLayoutParams().width = 0;
+            finishButton.getLayoutParams().height = 0;
             finishButton.setWidth(0);
             finishButton.setHeight(0);
         }
