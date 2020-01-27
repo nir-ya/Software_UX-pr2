@@ -167,7 +167,7 @@ public class Mana {
 
             return tosafotString.toString();
         }
-        
+
        return Constants.NO_TOSAFOT;
     }
 
