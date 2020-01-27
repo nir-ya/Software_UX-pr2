@@ -20,7 +20,7 @@
             android:id="@+id/manaImg"
             android:layout_width="70dp"
             android:layout_height="70dp"
-            android:background="@drawable/pita"
+            android:src="@drawable/pita_full"
             app:layout_constraintBottom_toTopOf="@+id/hourTxt"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
