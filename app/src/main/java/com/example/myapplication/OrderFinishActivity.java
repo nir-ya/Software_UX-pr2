@@ -165,4 +165,10 @@ public class OrderFinishActivity extends AppCompatActivity {
             finishButton.setHeight(0);
         }
     }
+
+    public void returnToMain(View view) {
+        this.finish();
+
+
+    }
 }

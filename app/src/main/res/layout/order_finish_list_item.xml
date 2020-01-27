@@ -22,6 +22,9 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintLeft_toRightOf="@id/name"
             app:layout_constraintTop_toTopOf="parent"
+            android:layout_margin="5dp"
+            android:scaleX="1.40"
+            android:scaleY="1.40"
             android:onClick="checkBoxClick"/>
 
 
