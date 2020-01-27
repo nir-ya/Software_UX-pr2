@@ -98,7 +98,8 @@
                 android:text="@string/finish_activity_dial_button_text"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:onClick="dialShevach"/>
 
         </TableRow>
 
@@ -107,8 +108,10 @@
             android:layout_height="match_parent">
 
             <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:id="@+id/finish_button"
+                android:visibility="invisible"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
                 android:layout_margin="16dp"
                 android:layout_weight="1"
                 android:background="@drawable/border_button"

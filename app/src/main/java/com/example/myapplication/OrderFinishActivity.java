@@ -12,6 +12,10 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.Toast;
 
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.firebase.ui.firestore.SnapshotParser;
@@ -26,6 +30,9 @@ import java.util.Map;
 
 public class OrderFinishActivity extends AppCompatActivity {
 
+    private  int count;
+    private  int checkedCount=0;
+    private Button finishButton;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private CollectionReference manotRef ;
     private OrderFinishListItemAdapter adapter;
@@ -37,8 +44,9 @@ public class OrderFinishActivity extends AppCompatActivity {
         String orderId = getIntent().getStringExtra("order_id");
         manotRef= db.collection("OpenOrders/"+orderId+"/Manot");
         setContentView(R.layout.activity_order_finish);
-
+        finishButton = findViewById(R.id.finish_button);
         setUpRecyclerView();
+
     }
 
     public void dialShevach(View view) {
@@ -129,6 +137,7 @@ public class OrderFinishActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
+        count = adapter.getItemCount();
 
     }
 
@@ -142,5 +151,27 @@ public class OrderFinishActivity extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
         adapter.stopListening();
+    }
+
+    public void checkBoxClick(View view) {
+        boolean checked = ((CheckBox)view).isChecked();
+        count = adapter.getItemCount();
+        
+        if(checked){
+            checkedCount++;
+        }
+        else{
+            checkedCount--;
+        }
+        if(checkedCount==count){
+            finishButton.setVisibility(View.VISIBLE);
+            finishButton.getLayoutParams().width = ViewGroup.LayoutParams.WRAP_CONTENT;
+            finishButton.getLayoutParams().height = ViewGroup.LayoutParams.WRAP_CONTENT;
+        }
+        else {
+            finishButton.setVisibility(View.INVISIBLE);
+            finishButton.setWidth(0);
+            finishButton.setHeight(0);
+        }
     }
 }
