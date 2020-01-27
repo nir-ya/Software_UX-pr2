@@ -2,12 +2,14 @@ package com.example.myapplication;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Handler;
 import android.os.Looper;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -38,8 +40,6 @@ import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity implements NewOrderDialog.NewOrderDialogListener {
 
-
-    //yalla
 
     //fireBase Objects
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -99,8 +99,9 @@ public class MainActivity extends AppCompatActivity implements NewOrderDialog.Ne
         Dialog myBagDialog = new Dialog(MainActivity.this, R.style.Theme_Dialog);
         myBagDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         myBagDialog.setContentView(R.layout.mybag_dialog);
-        myBagDialog.show();
+        myBagDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         setUpMyBag(myBagDialog);
+        myBagDialog.show();
     }
 
     /**
@@ -112,7 +113,6 @@ public class MainActivity extends AppCompatActivity implements NewOrderDialog.Ne
         Query query = db.collectionGroup(getString(R.string.manot_collection))
                 .whereEqualTo(getString(R.string.owner_id), user.getUid());
 
-
         FirestoreRecyclerOptions options = new FirestoreRecyclerOptions.Builder<Mana>()
                 .setQuery(query, Mana.class)
                 .build();
@@ -122,9 +122,21 @@ public class MainActivity extends AppCompatActivity implements NewOrderDialog.Ne
         LinearLayoutManager layout = new LinearLayoutManager(this.getApplicationContext());
         myBagRecView.setLayoutManager(layout);
         myBagRecView.setAdapter(myBagAdapter);
+
+        /* Responsible foe deleting an item from myBag with swipe-left action */
+        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.LEFT) {
+            @Override
+            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+                myBagAdapter.deleteItem(viewHolder.getAdapterPosition());
+            }
+        }).attachToRecyclerView(myBagRecView);
         //start listening
         myBagAdapter.startListening();
-
         myBagDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
             @Override
             public void onDismiss(DialogInterface dialogInterface) {
@@ -254,6 +266,8 @@ public class MainActivity extends AppCompatActivity implements NewOrderDialog.Ne
             return config;
         }
     }
+
+
 
 
 
