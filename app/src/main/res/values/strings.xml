@@ -78,9 +78,7 @@
     <string name="finish_activity_ordered_button_text">הזמנתי</string>
     <string name="finish_activity_copy_button_text">העתק הזמנה</string>
     <string name="shevach_phone_number">026528317</string>
-<<<<<<< HEAD
     <string name="finish_activity_order_lock">נעילת הזמנה</string>
-=======
     <string name="half_pita_price">10 שקלים</string>
     <string name="pita_price">18 שקלים</string>
     <string name="lafa_price">22 שקלים</string>
@@ -93,6 +91,5 @@
     <string name="pita_description">פיתה, 18 שקלים</string>
     <string name="lafa_description">לאפה, 22 שקלים</string>
     <string name="half_lafa_description">חצי לאפה, 12 שקלים</string>
->>>>>>> Deveplop
 
 </resources>
