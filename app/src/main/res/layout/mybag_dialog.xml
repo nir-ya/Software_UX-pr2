@@ -3,8 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/light_peach"
+    android:layout_height="match_parent"
+    android:background="@color/transparent"
+    android:backgroundTint="@color/transparent"
     android:layoutDirection="rtl"
     android:orientation="vertical"
     android:paddingTop="5dp"
@@ -13,7 +14,10 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_layout"
+        android:backgroundTint="@color/light_peach"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,10 +27,13 @@
             android:id="@+id/orderTimeHeaderTxt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
             android:layout_alignParentRight="true"
+            android:layout_marginStart="133dp"
             android:layout_marginTop="10dp"
-            android:layout_marginRight="10dp"
+            android:layout_marginRight="153dp"
             android:fontFamily="@font/varela_round"
+            android:gravity="center"
             android:text="@string/hour_for"
             android:textColor="@color/darkestGreen"
             android:textDirection="rtl"
@@ -41,7 +48,6 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="5dp"
             android:background="@color/transparent"
-
             android:orientation="vertical" />
 
         <TextView
@@ -53,22 +59,9 @@
             android:layout_marginTop="20dp"
             android:fontFamily="@font/varela_round"
             android:gravity="center"
-            android:text="@string/sum_order_string"
             android:textColor="@color/darkestGreen"
             android:textSize="16sp"
             android:textStyle="bold" />
 
-
-        <TextView
-            android:id="@+id/howYouPayTxt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/totalTxt"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="5dp"
-            android:text="@string/payment_method"
-            android:textColor="@color/gunmetal"
-            android:textSize="12dp"
-            android:textStyle="bold" />
     </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

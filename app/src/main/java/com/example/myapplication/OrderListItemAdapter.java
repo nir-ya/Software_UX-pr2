@@ -3,6 +3,7 @@ package com.example.myapplication;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -70,18 +71,23 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
 
         updateOrderItemByStatus(holder, order, documentId);
 
-        setCardExpansion(holder.orderCard, holder);
-        setCardExpansion(holder.infoButton, holder);
+      checkIfOrderTimePassed(order, documentId);
+      setCardExpansion(holder.orderCard, holder);
+      setCardExpansion(holder.infoButton, holder);
 
-        setOrderInfoRecyclerView(holder, documentId);
 
-        checkIfOrderTimePassed(order, documentId);
+      setOrderInfoRecyclerView(holder, documentId);
+
     }
 
     private void checkIfOrderTimePassed(@NonNull OrderListItem order, String documentId) {
         if(order.getTimestamp().compareTo(Timestamp.now()) < 0){
             DocumentReference orderRef = db.collection(Constants.ORDERS).document(documentId);
-            orderRef.update("status","locked");
+            if(order.reachedMinimum()){
+              orderRef.update("status", OrderListItem.LOCKED); //todo make status const String
+            }else{
+              orderRef.update("status", OrderListItem.CANCELED);
+            }
         }
     }
 
@@ -178,6 +184,8 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
             openOrder(holder, documentId, model);
         } else if (model.getStatus().equals(OrderListItem.LOCKED)) {
             lockOrder(holder, documentId, model);
+        } else if (model.getStatus().equals(OrderListItem.CANCELED)){
+            cancelOrder(holder, documentId, model);
         }
     }
 
@@ -195,6 +203,13 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
         holder.progressBar.setProgressDrawable(context.getDrawable(R.drawable.progress_bar_locked));
 
         setOrderButtonHandler(holder.orderButton, documentId);
+
+        holder.statusText.setTextColor(context.getResources().getColor(R.color.TextGreen));
+        ViewGroup layout = (ViewGroup) holder.orderButton.getParent();
+        if(null!=layout) {
+            holder.orderButton.setVisibility(VISIBLE);
+            holder.infoButton.setVisibility(VISIBLE);
+        }
     }
 
     /**
@@ -213,7 +228,37 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
         holder.statusText.setText(model.getPrice() >= MIN_ORDER ? Constants.READY_TEXT : Constants.WAITING);
 
         setProgressBar(holder, model);
+
+        holder.statusText.setTextColor(context.getResources().getColor(R.color.TextGreen));
+        ViewGroup layout = (ViewGroup) holder.orderButton.getParent();
+        if(null!=layout) {
+            holder.orderButton.setVisibility(VISIBLE);
+            holder.infoButton.setVisibility(VISIBLE);
+        }
+
     }
+
+  /**
+   * Sets the graphic for presenting a canceled order
+   * @param holder - the RecyclerView item holder
+   * @param documentId - String representation of the document ID
+   * @param orderListItem order object
+   */
+  private void cancelOrder(OrderListItemHolder holder, String documentId, OrderListItem orderListItem) {
+    holder.statusText.setText(Constants.ORDER_CANCELED);
+    holder.orderButton.setText("התבאס");
+    holder.orderButton.setBackgroundColor(context.getResources().getColor(R.color.red));
+    holder.progressBar.setProgressDrawable(context.getDrawable(R.drawable.progress_bar_locked));
+    ViewGroup layout = (ViewGroup) holder.orderButton.getParent();
+
+    holder.statusText.setTextColor(Color.RED);
+    if(null!=layout) {
+        holder.orderButton.setVisibility(View.GONE);
+        holder.infoButton.setVisibility(View.GONE);
+        //layout.removeView(holder.orderButton);
+        //layout.removeView(holder.infoButton);
+    }
+  }
 
     private void setProgressBar(OrderListItemHolder holder, OrderListItem model) {
         if (model.getPrice() >= CRITICAL_PRICE) {

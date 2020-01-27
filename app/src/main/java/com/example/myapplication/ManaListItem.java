@@ -1,7 +1,5 @@
 package com.example.myapplication;
 
-import java.util.HashMap;
-
 public class ManaListItem {
 
     //CONSTANTS
@@ -10,36 +8,23 @@ public class ManaListItem {
     static final String LAFA = "lafa";
     static final String HALF_PITA = "half pita";
     static final String HALF_LAFA = "half lafa";
-    //-- Price Listing
-    private static final int PITA_PRICE = 20;
-    private static final int LAFA_PRICE = 24;
-    private static final int HALF_PITA_PRICE = 11; //TODO verify
-    private static final int HALF_LAFA_PRICE = 13; //TODO verify
 
 
     //Variables
     private int manaImg;
     private String type;
+
     private String owner;
     private String status;
-    private HashMap<String, Boolean> tosafot;
-    private String paymentMethod;
+    private int paymentMethod;
     private String notes;
-    private String price; // TODO: Remove this.
-    private int realPrice;
+    private String price;
 
 
 
-    public ManaListItem(String owner, String type, int price, HashMap<String, Boolean> tosafot,
-                        String paymentMethod) {
-        this.paymentMethod = paymentMethod;
-        this.owner = owner;
-        this.type = type;
-        this.realPrice = price;
-        this.status = "open"; // TODO: remove, or at least put as a constant
-        this.tosafot = tosafot;
-        //TODO: no payment method, no option to add notes.
-    }
+    public ManaListItem(){ }
+
+
 
     public ManaListItem(int manaImg, String type, String price) {
         this.manaImg = manaImg;
@@ -47,49 +32,33 @@ public class ManaListItem {
         this.price = price;
     }
 
-    public String getOwner() {
-        return owner;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public HashMap<String, Boolean> getTosafot() {
-        return tosafot;
-    }
-
-    public String getPaymentMethod() {
-        return paymentMethod;
-    }
-
-    public String getNotes() {
-        return notes;
-    }
 
     public String getPrice() {
-        return price;
-    }
 
-    public int getRealPrice() {
-        return realPrice;
+        return price;
     }
 
     public int getManaImg() {
         return manaImg;
     }
 
-    public void setManaImg(int manaImg) {
-        this.manaImg = manaImg;
-    }
-
     public String getType() {
         return type;
     }
 
-    public void setType(String type) {
-        this.type = type;
+
+    public static String getHebType(String type) {
+        switch (type) {
+            case PITA:
+                return "פיתה";
+            case LAFA:
+                return "לאפה";
+            case HALF_PITA:
+                return "חצי פיתה";
+            case HALF_LAFA:
+                return "חצי לאפה";
+            default:
+                return "שגיאה";
+        }
     }
-
-
 }

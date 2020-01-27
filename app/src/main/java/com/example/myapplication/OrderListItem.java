@@ -12,6 +12,7 @@ public class OrderListItem implements Parcelable {
 
     static final String LOCKED = "locked";
     static final String OPEN = "open";
+    static final String CANCELED = "canceled";
 
     private final static int MIN_ORDER = 70;
     private int price;
@@ -51,6 +52,10 @@ public class OrderListItem implements Parcelable {
 
 
     public OrderListItem() {
+    }
+
+    public boolean reachedMinimum(){
+        return price >= MIN_ORDER;
     }
 
     public OrderListItem(Timestamp time) {

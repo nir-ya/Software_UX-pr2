@@ -1,72 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center">
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+<androidx.cardview.widget.CardView
+    android:id="@+id/manaItem"
+    android:layout_margin="8dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="50dp">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/manaItem"
-        android:layout_width="333dp"
-        android:layout_height="333dp"
-        android:layout_gravity="center"
-        android:layout_margin="50dp"
-        app:cardCornerRadius="50dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="50dp"
+        android:orientation="vertical"
+        android:background="@color/off_white">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+        <ImageView
+            android:id="@+id/manaItemImg"
             android:layout_gravity="center"
-            android:background="@color/off_white">
+            android:layout_width="220dp"
+            android:layout_height="220dp"
+            android:src="@drawable/pita_full"
+            />
 
-            <ImageView
-                android:id="@+id/manaItemImg"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/pita"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+        <TextView
+            android:id="@+id/manaItemTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/varela_round"
+            android:text="פיתה"
+            android:textColor="@color/dusty_teal"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            >
 
-            </ImageView>
+        </TextView>
 
-            <TextView
-                android:id="@+id/manaItemTxt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/varela_round"
-                android:text="פיתה"
-                android:textColor="@color/dusty_teal"
-                android:textSize="30dp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/manaItemImg">
+        <TextView
+            android:id="@+id/manaItemPriceTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/varela_round"
+            android:text="20 שקלים"
+            android:textColor="@color/dusty_teal"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:layout_gravity="center">
 
-            </TextView>
-
-            <TextView
-                android:id="@+id/manaItemPriceTxt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/varela_round"
-                android:text="20 שקלים"
-                android:textColor="@color/dusty_teal"
-                android:textSize="15dp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/manaItemTxt">
-
-            </TextView>
+        </TextView>
 
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </androidx.cardview.widget.CardView>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>
 
 </LinearLayout>

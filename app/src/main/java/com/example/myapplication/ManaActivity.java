@@ -2,12 +2,17 @@ package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.GridLayout;
+import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import com.google.firebase.Timestamp;
@@ -31,6 +36,7 @@ public class ManaActivity extends AppCompatActivity {
     CheckBox eggplantView;
     GridLayout gridView;
     CheckBox markAll;
+    ImageView manaTypeImageVIew;
 
     CheckBox[] checkBoxes;
 
@@ -43,11 +49,14 @@ public class ManaActivity extends AppCompatActivity {
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
+    Context mContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mana);
+
+        mContext = this.getApplicationContext();
 
         connectToxXML();
 
@@ -56,23 +65,34 @@ public class ManaActivity extends AppCompatActivity {
         manatype = getIntent().getStringExtra("mana_type");
         orderTime = getIntent().getStringExtra("order_time");
         orderId = getIntent().getStringExtra("order_id");
-        time =  getIntent().getParcelableExtra("CALENDAR");
+        time = getIntent().getParcelableExtra("CALENDAR");
 
         updateTextViews();
     }
+
 
     private void updateTextViews() {
         ownerText.setText(getString(R.string.owner_text, user.getDisplayName()));
 
         switch (manatype) {
             case ManaListItem.HALF_PITA:
-                dishDescription.setText("חצי פיתה, 11 שקלים");
+                dishDescription.setText(R.string.half_pita_description);
+                manaTypeImageVIew.setImageResource(R.drawable.half_pita_full);
                 break;
             case ManaListItem.PITA:
-                dishDescription.setText("פיתה, 20 שקלים");
+                dishDescription.setText(R.string.pita_description);
+                manaTypeImageVIew.setImageResource(R.drawable.pita_full);
+
                 break;
             case ManaListItem.LAFA:
-                dishDescription.setText("לאפה, 24 שקלים");
+                dishDescription.setText(R.string.lafa_description);
+                manaTypeImageVIew.setImageResource(R.drawable.lafa_full);
+
+                break;
+            case ManaListItem.HALF_LAFA:
+                dishDescription.setText(R.string.half_lafa_description);
+                manaTypeImageVIew.setImageResource(R.drawable.half_lafa_full);
+
                 break;
         }
     }
@@ -92,6 +112,10 @@ public class ManaActivity extends AppCompatActivity {
     }
 
 
+    /***
+     * this is a listener that checks if all marked
+     * if so, mark checkbox
+     */
     private void isAllMarkedListener() {
         markAll.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -116,6 +140,9 @@ public class ManaActivity extends AppCompatActivity {
     }
 
 
+    /**
+     * function to set all XML connections
+     */
     private void connectToxXML() {
         ownerText = findViewById(R.id.owner_text);
         dishDescription = findViewById(R.id.dish_description);
@@ -136,9 +163,57 @@ public class ManaActivity extends AppCompatActivity {
                 ambaView, tahiniView, chipsView, eggplantView};
 
         markAll = findViewById(R.id.mark_all_checkbox);
+
+        manaTypeImageVIew = findViewById(R.id.mana_type_picture);
+
+        setManaTypeSwitchMenu();
     }
 
 
+    /**
+     * this function set the mana type image clickable
+     * opens a menu where you can switch your mana type
+     */
+    private void setManaTypeSwitchMenu() {
+        manaTypeImageVIew.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PopupMenu popupMenu = new PopupMenu(mContext, manaTypeImageVIew);
+                MenuInflater inflater = getMenuInflater();
+                inflater.inflate(R.menu.mana_type_menu, popupMenu.getMenu());
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem menuItem) {
+                        switch (menuItem.getItemId()) {
+                            case R.id.menu_pita:
+                                manatype = ManaListItem.PITA;
+                                break;
+                            case R.id.menu_half_pita:
+                                manatype = ManaListItem.HALF_PITA;
+                                break;
+                            case R.id.menu_lafa:
+                                manatype = ManaListItem.LAFA;
+                                break;
+                            case R.id.menu_half_lafa:
+                                manatype = ManaListItem.HALF_LAFA;
+                                break;
+                            default:
+                                return false;
+                        }
+                        updateTextViews();
+                        return true;
+                    }
+                });
+                popupMenu.show();
+            }
+        });
+    }
+
+
+    /**
+     * onCLick method that moves you to next screen
+     * @param view - button
+     */
     public void moveToConfirm(View view) {
 
         HashMap<String, Boolean> tosafot = new HashMap<>();
@@ -151,6 +226,10 @@ public class ManaActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    /**
+     * onClick method to return to main activity
+     * @param view - button
+     */
     public void cancelOrder(View view) {
         Intent intent = new Intent(this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

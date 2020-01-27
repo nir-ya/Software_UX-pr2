@@ -10,7 +10,7 @@
     <string name="email_hint">כתובת e-mail</string>
     <string name="password_hint">סיסמה</string>
     <string name="welcome_str">אהלן %s!</string>
-    <string name="hour_for">הזמנתך לשעה: %s</string>
+    <string name="hour_for">השבחים שלך</string>
     <string name="sum_order_string">הזמנה בסך %s שקלים</string>
     <string name="payment_method">תשלום במזומן</string>
     <string name="type_string">פלאפל</string>
@@ -78,6 +78,21 @@
     <string name="finish_activity_ordered_button_text">הזמנתי</string>
     <string name="finish_activity_copy_button_text">העתק הזמנה</string>
     <string name="shevach_phone_number">026528317</string>
+<<<<<<< HEAD
     <string name="finish_activity_order_lock">נעילת הזמנה</string>
+=======
+    <string name="half_pita_price">10 שקלים</string>
+    <string name="pita_price">18 שקלים</string>
+    <string name="lafa_price">22 שקלים</string>
+    <string name="half_lafa_price">12 שקלים</string>
+    <string name="half_pita_text">חצי פיתה</string>
+    <string name="pita_text">פיתה</string>
+    <string name="lafa_text">לאפה</string>
+    <string name="half_lafa_text">חצי לאפה</string>
+    <string name="half_pita_description">חצי פיתה, 10 שקלים</string>
+    <string name="pita_description">פיתה, 18 שקלים</string>
+    <string name="lafa_description">לאפה, 22 שקלים</string>
+    <string name="half_lafa_description">חצי לאפה, 12 שקלים</string>
+>>>>>>> Deveplop
 
 </resources>
