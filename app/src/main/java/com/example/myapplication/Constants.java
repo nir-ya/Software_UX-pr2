@@ -50,10 +50,9 @@ class Constants {
         hebrewExtras.put("Hummus", "חומוס");
         hebrewExtras.put("Kruv", "כרוב");
         hebrewExtras.put("Onion", "בצל");
-        hebrewExtras.put("Pickles", "חמוצים");
+        hebrewExtras.put("Pickels", "חמוצים");
         hebrewExtras.put("Thina", "טחינה");
         hebrewExtras.put("Tomato", "עגבניה");
-        hebrewExtras.put("Pickels","חמוצים");
         return hebrewExtras;
     }
 }
