@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".OrderFinishActivity"
-    android:background="@color/backgroundGreen">
+    android:background="@color/backgroundGreen"
+    tools:context=".OrderFinishActivity">
 
     <TextView
         android:id="@+id/header"
@@ -19,74 +19,117 @@
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/copy_button"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/dial_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="dialShevach"
-        android:text="@string/finish_activity_dial_button_text"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginEnd="40dp"
-        android:layout_marginBottom="20dp"
-        android:background="@drawable/border_button"
-        android:fontFamily="@font/varela_round"
-        android:padding="10dp"
-        android:textStyle="bold"/>
+    <View
+        android:id="@+id/line_seperator"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="10dp"
+        android:background="#c0c0c0"
+        app:layout_constraintTop_toBottomOf="@id/header" />
 
-    <Button
-        android:id="@+id/ordered_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/border_button"
-        android:fontFamily="@font/varela_round"
-        android:padding="10dp"
-        android:layout_marginEnd="40dp"
-        android:layout_marginBottom="20dp"
-        android:text="@string/finish_activity_ordered_button_text"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/dial_button"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/copy_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/finish_activity_copy_button_text"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:background="@drawable/border_button"
-        android:fontFamily="@font/varela_round"
-        android:padding="10dp"
-        android:textStyle="bold"/>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/dial_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/copy_button"
-        android:layout_marginBottom="10dp"
-        android:layout_marginTop="10dp">
+        app:layout_constraintBottom_toTopOf="@+id/bottom_bar"
 
-        <TextView
-            android:id="@+id/order_details"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/final_order_details"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"/>
+        app:layout_constraintTop_toBottomOf="@id/line_seperator"
+        app:layout_constraintVertical_bias="1.0"
+        tools:layout_editor_absoluteX="41dp">
+
     </ScrollView>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:requiresFadingEdge="vertical"
+        android:id="@+id/orders_recycler_view"
+        android:scrollbars="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_bar"
+        app:layout_constraintTop_toBottomOf="@id/line_seperator"
+        app:layout_constraintVertical_bias="1.0"
+        tools:layout_editor_absoluteX="41dp"
+        android:layout_marginBottom="20dp"
+        android:scrollbarThumbHorizontal="@color/dark_navy"
+        android:scrollbarSize="1dp"
+        android:scrollbarStyle="outsideOverlay"
+        />
+
+    <TableLayout
+        android:id="@+id/bottom_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/light_peach"
+        android:stretchColumns="*"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:background="@drawable/border_button"
+                android:backgroundTint="@color/darkestGreen"
+                android:fontFamily="@font/varela_round"
+                android:padding="10dp"
+                android:text="@string/finish_activity_copy_button_text"
+                android:textColor="@color/lightGrey"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:background="@drawable/border_button"
+                android:fontFamily="@font/varela_round"
+                android:padding="10dp"
+                android:text="@string/finish_activity_dial_button_text"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:onClick="dialShevach"/>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/finish_button"
+                android:visibility="invisible"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_margin="16dp"
+                android:layout_weight="1"
+                android:background="@drawable/border_button"
+                android:backgroundTint="@color/intense_orange"
+                android:fontFamily="@font/varela_round"
+                android:padding="10dp"
+                android:text="@string/finish_activity_order_lock"
+                android:textColor="@color/lightGrey"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:onClick="returnToMain"/>
+
+
+        </TableRow>
+
+
+    </TableLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
