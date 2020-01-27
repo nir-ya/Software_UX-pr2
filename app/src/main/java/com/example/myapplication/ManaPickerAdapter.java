@@ -12,19 +12,21 @@ import java.util.List;
 
 public class ManaPickerAdapter extends PagerAdapter {
 
-    private List<ManaListItem> models;
+
+    private List<ManaListItem> typeCards;
+
     private LayoutInflater layoutInflater;
     private Context mContext;
 
 
-    public ManaPickerAdapter(List<ManaListItem> models, Context mContext) {
-        this.models = models;
+    ManaPickerAdapter(List<ManaListItem> typeCards, Context mContext) {
+        this.typeCards = typeCards;
         this.mContext = mContext;
     }
 
     @Override
     public int getCount() {
-        return models.size();
+        return typeCards.size();
     }
 
     @Override
@@ -37,26 +39,24 @@ public class ManaPickerAdapter extends PagerAdapter {
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
 
         layoutInflater = LayoutInflater.from(mContext);
-        View view = layoutInflater.inflate(R.layout.mana_item,container,false);
+        View view = layoutInflater.inflate(R.layout.mana_pick_item,container,false);
         ImageView manaImg = view.findViewById(R.id.manaItemImg);
         TextView manaType = view.findViewById(R.id.manaItemTxt);
         TextView manaPrice = view.findViewById(R.id.manaItemPriceTxt);
 
-        ManaListItem curMana = models.get(position);
-        manaImg.setImageResource(curMana.getManaImg());
-        manaType.setText(curMana.getHebType(curMana.getType()));
-        manaPrice.setText(Integer.toString(models.get(position).getPrice())+"₪");
+        ManaListItem curMana = typeCards.get(position);
+        //manaImg.setImageResource(curMana.getManaImg());
+        //manaType.setText(curMana.getHebType(curMana.getType()));
+        //manaPrice.setText(Integer.toString(models.get(position).getPrice())+"₪");
 
-        view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-            }
-        });
+        manaImg.setImageResource(typeCards.get(position).getManaImg());
+        manaType.setText(typeCards.get(position).getType());
+        manaPrice.setText(typeCards.get(position).getPrice());
+
 
         container.addView(view,0);
         return view;
-
     }
 
     @Override

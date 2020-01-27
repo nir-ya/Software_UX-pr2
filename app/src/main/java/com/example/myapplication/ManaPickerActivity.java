@@ -1,28 +1,22 @@
 package com.example.myapplication;
 
+import android.animation.ArgbEvaluator;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+import android.util.DisplayMetrics;
 import android.view.View;
 
-import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.FirebaseFirestore;
-import java.text.DateFormat;
-import java.text.Format;
-import java.text.SimpleDateFormat;
+
 import java.util.ArrayList;
-import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import org.w3c.dom.Document;
 
 public class ManaPickerActivity extends AppCompatActivity {
 
@@ -30,72 +24,70 @@ public class ManaPickerActivity extends AppCompatActivity {
     String orderTime;
     String manaType;
     int manaPrice;
+
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     ViewPager viewPager;  // TODO: change to a more informative names
     ManaPickerAdapter adapter;
-    List<ManaListItem> models;
+    List<ManaListItem> cards;
     private String orderId;
-
-    Calendar cal;
-
+    Timestamp time;
+    String orderTime;
+    ManaPickListener manaPickListener;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mana_picker);
 
-        orderId = getIntent().getStringExtra("ref");
+        orderId = getIntent().getStringExtra("order_id");
+        time = getIntent().getParcelableExtra("CALENDAR");
+        orderTime = Randomizer.formatter.format(new Date(time.toDate().toString()));
 
-        cal = (Calendar) getIntent().getSerializableExtra("CALENDAR");
+        setupViewPager();
 
-        DocumentReference orderRef = db.collection(Constants.ORDERS).document(orderId);
-        orderRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-            @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-               OrderListItem order = documentSnapshot.toObject(OrderListItem.class);
-               if (order != null)
-               {
-                   orderTime = Randomizer.formatter.format(order.getTimestamp().toDate());
-               }
-            }
-        });
+        manaPickListener = new ManaPickListener();
+        viewPager.addOnPageChangeListener(manaPickListener);
+    }
+
 
         models = new ArrayList<>();
         models.add(new ManaListItem(R.drawable.pita,ManaListItem.HALF_PITA,15)); // TODO these should be consts
         models.add(new ManaListItem(R.drawable.pita, ManaListItem.PITA,18));
         models.add(new ManaListItem(R.drawable.lafa, ManaListItem.LAFA,22));
 
-        adapter = new ManaPickerAdapter(models,this);
+    private void setupViewPager() {
+        cards = new ArrayList<>();
+        cards.add(new ManaListItem(R.drawable.half_pita_full, getString(R.string.half_pita_text), getString(R.string.half_pita_price)));
+        cards.add(new ManaListItem(R.drawable.pita_full, getString(R.string.pita_text), getString(R.string.pita_price)));
+        cards.add(new ManaListItem(R.drawable.lafa_full, getString(R.string.lafa_text), getString(R.string.lafa_price)));
+        cards.add(new ManaListItem(R.drawable.half_lafa_full, getString(R.string.half_lafa_text), getString(R.string.half_lafa_price)));
+
+
+        adapter = new ManaPickerAdapter(cards,this);
 
         viewPager = findViewById(R.id.manaPager);
+
         viewPager.setAdapter(adapter);
-        viewPager.setPadding(0,0,0,0);
+        viewPager.setClipToPadding(false);
+
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        int width = displayMetrics.widthPixels;
+
+        int paddingToSet = width/6;
+        viewPager.setPadding(paddingToSet,0,paddingToSet,0);
+
         viewPager.setCurrentItem(1);
-
-        DepthTransformation depthTransformation = new DepthTransformation();
-        viewPager.setPageTransformer(true, depthTransformation);
-
-
-        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) { }
-
-            @Override
-            public void onPageSelected(int position) {
-                manaType = models.get(position).getType();
-                System.out.println("manaType:" + manaType);
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) { }
-        });
     }
 
     public void startManaActivity(View view) {
         Intent intent = new Intent(this, ManaActivity.class);
-        intent.putExtra("ref",orderId);
-        intent.putExtra("CALENDAR",cal);
+        intent.putExtra("mana_type", manaPickListener.getSelectedType());
+
+        intent.putExtra("order_id", orderId);
+        intent.putExtra("order_time", orderTime);
+        intent.putExtra("CALENDAR",time);
         startActivity(intent);
     }
 
@@ -115,18 +107,55 @@ public class ManaPickerActivity extends AppCompatActivity {
 
     public void simHakol(View view) {
 
+        String manaType = manaPickListener.getSelectedType();
         HashMap tosafot = new HashMap<String, Boolean>(); // TODO: there are better ways to do this
         setTosafot(tosafot);
 
         Intent intent = new Intent(this, OrderConfirmationActivity.class);
-        intent.putExtra("mana_type", manaType);
+
         intent.putExtra("tosafot", tosafot);
+        intent.putExtra("mana_type", manaType);
         intent.putExtra("order_id", orderId);
         intent.putExtra("order_time", orderTime);
-        intent.putExtra("CALENDAR",cal);
+        intent.putExtra("CALENDAR",time);
         startActivity(intent);
     }
 
+    private static class ManaPickListener implements ViewPager.OnPageChangeListener {
 
+        String selectedType = ManaListItem.PITA;
 
+        @Override
+        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {}
+
+        @Override
+        public void onPageSelected(int position) {
+            switch (position) {
+                case 0:
+                    selectedType = ManaListItem.HALF_PITA;
+                    break;
+                case 1:
+                    selectedType = ManaListItem.PITA;
+                    break;
+                case 2:
+                    selectedType = ManaListItem.LAFA;
+                    break;
+                case 3:
+                    selectedType = ManaListItem.HALF_LAFA;
+                    break;
+            }
+        }
+
+        @Override
+        public void onPageScrollStateChanged(int state) {}
+
+        String getSelectedType() {
+            return selectedType;
+        }
+    }
+
+    public int dpToPx(int dp) {
+        DisplayMetrics displayMetrics =  getResources().getDisplayMetrics();
+        return Math.round(dp * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
+    }
 }

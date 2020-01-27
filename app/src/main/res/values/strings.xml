@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">My Application</string>
+    <string name="app_name">ShevachApp</string>
     <string name="open_orders">OpenOrders</string>
     <string name="price">price</string>
     <string name="my_order">ההזמנה שלי</string>
@@ -48,7 +48,7 @@
     <string name="loginSuccess">Login successful!</string>
     <string name="registerSuccess">Register successful!</string>
     <string name="registerFailure">Problem while Registering</string>
-    <string name="owner_text">המנה של אבנר</string>
+    <string name="owner_text">המנה של %s</string>
     <string name="mark_everything">סמן הכל</string>
     <string name="bring">יאללה, תביא!</string>
     <string name="azov_vitarti">עזוב, ויתרתי</string>
@@ -57,7 +57,7 @@
     <string name="order_details">זהו! המנה בהזמנה\n של השעה %s</string>
 
     <string name="mana_success_toast">המנה שלך נוספה בהצלחה!</string>
-    <string name="order_time_text">הזמנה לשעה %s</string>
+    <string name="order_details_text">הזמנה לשעה %s</string>
 
     <string name="join_order_tooltop">הצטרף להזמנה פתוחה</string>
     <string name="join_tooltip_subtext">יש חבר\'ה שעדיין מתארגנים? יאללה, בוא תצטרף להזמנה!</string>
@@ -65,5 +65,30 @@
     <string name="create_tooltip_subtext">אם אין הזמנה בשעה שתרצה,\nתוכל ליצור אחת חדשה</string>
     <string name="mybag_tooltip">שכחת אם כבר הזמנת?</string>
     <string name="mybag_tooltip_subtext">תמיד תוכל להסתכל על ההזמנות שלך מהיום</string>
+    <string name="invalid_password_msg">בחר סיסמה בעלת 6 תווים לפחות</string>
+    <string name="invalid_email_msg">כתובת הe-mail שהכנסת לא תקינה</string>
+    <string name="order_list_item_title">הזמנה לשעה: %s</string>
+    <string name="final_order_details">
+        פיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה
+        \nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה
+        \nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה
+    </string>
+    <string name="finish_activity_header">פירוט ההזמנה</string>
+    <string name="finish_activity_dial_button_text">התקשר לשבח</string>
+    <string name="finish_activity_ordered_button_text">הזמנתי</string>
+    <string name="finish_activity_copy_button_text">העתק הזמנה</string>
+    <string name="shevach_phone_number">026528317</string>
+    <string name="half_pita_price">10 שקלים</string>
+    <string name="pita_price">18 שקלים</string>
+    <string name="lafa_price">22 שקלים</string>
+    <string name="half_lafa_price">12 שקלים</string>
+    <string name="half_pita_text">חצי פיתה</string>
+    <string name="pita_text">פיתה</string>
+    <string name="lafa_text">לאפה</string>
+    <string name="half_lafa_text">חצי לאפה</string>
+    <string name="half_pita_description">חצי פיתה, 10 שקלים</string>
+    <string name="pita_description">פיתה, 18 שקלים</string>
+    <string name="lafa_description">לאפה, 22 שקלים</string>
+    <string name="half_lafa_description">חצי לאפה, 12 שקלים</string>
 
 </resources>

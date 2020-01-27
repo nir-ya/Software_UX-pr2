@@ -27,8 +27,9 @@ public class Mana {
     //-- Price Listing
     private static final int PITA_PRICE = 18;
     private static final int LAFA_PRICE = 22;
-    private static final int HALF_PITA_PRICE = 15;
-    private static final int HALF_LAFA_PRICE = 0; //TODO
+    private static final int HALF_PITA_PRICE = 10; //TODO
+    private static final int HALF_LAFA_PRICE = 12; //TODO
+
 
     // Vars
     private String owner;

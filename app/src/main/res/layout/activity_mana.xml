@@ -30,7 +30,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/current_price"
+        android:id="@+id/dish_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
@@ -49,10 +49,8 @@
         android:layout_marginLeft="15dp"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
-        android:background="@drawable/ic_add_circle_black_24dp"
-        android:backgroundTint="@color/dark_green"
-        android:padding="10dp"
-        android:src="@drawable/pita"
+        android:background="@drawable/circle"
+        android:src="@drawable/half_pita_full"
         app:layout_constraintBottom_toBottomOf="@id/toolbar"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="@id/toolbar" />
@@ -108,8 +106,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:padding="2dp"
-                android:text="חומוס"
-                android:textColor="@color/TextGreen" />
+                android:text="חומוס" />
         </LinearLayout>
 
         <LinearLayout
@@ -314,6 +311,7 @@
         android:text="@string/azov_vitarti"
         android:textSize="14sp"
         android:autoSizeTextType="uniform"
+        android:onClick="cancelOrder"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/accept_button"
         app:layout_constraintHorizontal_bias="0.5"
