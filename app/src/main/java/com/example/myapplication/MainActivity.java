@@ -104,6 +104,8 @@ public class MainActivity extends AppCompatActivity implements NewOrderDialog.Ne
         myBagDialog.show();
     }
 
+
+    //Todo: Move myBgDialog to a seperate class
     /**
      * this application starts the myBag Recycler View
      *
@@ -132,9 +134,11 @@ public class MainActivity extends AppCompatActivity implements NewOrderDialog.Ne
 
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-                myBagAdapter.deleteItem(viewHolder.getAdapterPosition());
+
+                myBagAdapter.popUpAlertDialog(viewHolder.getAdapterPosition());
             }
         }).attachToRecyclerView(myBagRecView);
+
         //start listening
         myBagAdapter.startListening();
         myBagDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
@@ -143,6 +147,13 @@ public class MainActivity extends AppCompatActivity implements NewOrderDialog.Ne
                 myBagAdapter.stopListening();
             }
         });
+
+        if (myBagAdapter.getItemCount() == 0)
+        {
+            Toast.makeText(this,Integer.toString(myBagAdapter.getItemCount()),
+                    Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     /**

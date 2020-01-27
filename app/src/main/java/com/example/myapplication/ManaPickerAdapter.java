@@ -44,11 +44,6 @@ public class ManaPickerAdapter extends PagerAdapter {
         TextView manaType = view.findViewById(R.id.manaItemTxt);
         TextView manaPrice = view.findViewById(R.id.manaItemPriceTxt);
 
-        ManaListItem curMana = typeCards.get(position);
-        //manaImg.setImageResource(curMana.getManaImg());
-        //manaType.setText(curMana.getHebType(curMana.getType()));
-        //manaPrice.setText(Integer.toString(models.get(position).getPrice())+"₪");
-
 
         manaImg.setImageResource(typeCards.get(position).getManaImg());
         manaType.setText(typeCards.get(position).getType());
