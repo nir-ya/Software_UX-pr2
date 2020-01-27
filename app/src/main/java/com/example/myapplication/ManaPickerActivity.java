@@ -32,7 +32,6 @@ public class ManaPickerActivity extends AppCompatActivity {
     List<ManaListItem> cards;
     private String orderId;
     Timestamp time;
-    String orderTime;
     ManaPickListener manaPickListener;
 
     @Override
@@ -50,11 +49,6 @@ public class ManaPickerActivity extends AppCompatActivity {
         viewPager.addOnPageChangeListener(manaPickListener);
     }
 
-
-        models = new ArrayList<>();
-        models.add(new ManaListItem(R.drawable.pita,ManaListItem.HALF_PITA,15)); // TODO these should be consts
-        models.add(new ManaListItem(R.drawable.pita, ManaListItem.PITA,18));
-        models.add(new ManaListItem(R.drawable.lafa, ManaListItem.LAFA,22));
 
     private void setupViewPager() {
         cards = new ArrayList<>();

@@ -16,58 +16,24 @@ public class ManaListItem {
 
     private String owner;
     private String status;
-    private HashMap<String, Boolean> tosafot;
     private int paymentMethod;
     private String notes;
-    private int price;
+    private String price;
 
 
 
     public ManaListItem(){ }
 
-    public ManaListItem(String owner, String type, int price, HashMap<String, Boolean> tosafot,
-                        int paymentMethod) {
-        this.paymentMethod = paymentMethod;
-        this.owner = owner;
-        this.type = type;
-        this.price = price;
-        this.status = "open"; // TODO: remove, or at least put as a constant
-        this.tosafot = tosafot;
-        //TODO: no payment method, no option to add notes.
-    }
-
-    private String price; // TODO: Remove this.
 
 
-
-    public ManaListItem(int manaImg, String type, int price) {
+    public ManaListItem(int manaImg, String type, String price) {
         this.manaImg = manaImg;
         this.type = type;
         this.price = price;
     }
 
 
-    public String getOwner() {
-        return owner;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public HashMap<String, Boolean> getTosafot() {
-        return tosafot;
-    }
-
-    public int getPaymentMethod() {
-        return paymentMethod;
-    }
-
-    public String getNotes() {
-        return notes;
-    }
-
-    public int getPrice() {
+    public String getPrice() {
 
         return price;
     }
@@ -78,11 +44,6 @@ public class ManaListItem {
 
     public String getType() {
         return type;
-    }
-
-
-    public void setType(String type) {
-        this.type = type;
     }
 
 
