@@ -12,10 +12,24 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 
+import java.util.List;
+
 public class OrderFinishListItemAdapter extends FirestoreRecyclerAdapter<OrderFinishListItem,OrderFinishListItemAdapter.OrderFinishListItemHolder> {
+
+    FirestoreRecyclerOptions<OrderFinishListItem> options;
+    @Override
+    public int getItemCount()
+    {
+        final int count = options.getSnapshots() != null
+                ? options.getSnapshots().size()
+                : 0;
+
+        return count;
+    }
 
     public OrderFinishListItemAdapter(@NonNull FirestoreRecyclerOptions<OrderFinishListItem> options) {
         super(options);
+        options = options;
     }
 
     @Override

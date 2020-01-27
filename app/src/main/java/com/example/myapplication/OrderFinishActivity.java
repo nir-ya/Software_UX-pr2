@@ -27,12 +27,15 @@ import java.util.Map;
 public class OrderFinishActivity extends AppCompatActivity {
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private CollectionReference manotRef = db.collection("OpenOrders/Sa6iXPXwO7VuYLJEQ7/Manot");
+    private CollectionReference manotRef ;
     private OrderFinishListItemAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
+        String orderId = getIntent().getStringExtra("order_id");
+        manotRef= db.collection("OpenOrders/"+orderId+"/Manot");
         setContentView(R.layout.activity_order_finish);
 
         setUpRecyclerView();
@@ -91,17 +94,18 @@ public class OrderFinishActivity extends AppCompatActivity {
                         String description = "";
                         if (in > out) {
                             description = "הכל";
-                            if(out >0){
+                            if (out > 0) {
                                 description += " בלי ";
-                            for (String key : map.keySet()) {
-                                if (map.get(key) == false) {
-                                    description += hebrewExtras.get(key) + " ";
-                                }
+                                for (String key : map.keySet()) {
+                                    if (map.get(key) == false) {
+                                        description += hebrewExtras.get(key) + " ";
+                                    }
 
-                            }}
+                                }
+                            }
                         } else {
                             description = "כלום";
-                            if(in>0){
+                            if (in > 0) {
                                 description += " עם ";
                                 for (String key : map.keySet()) {
                                     if (map.get(key) == true) {
