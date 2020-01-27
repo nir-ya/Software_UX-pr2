@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/off_white"
+        android:layoutDirection="ltr"
         android:orientation="vertical"
         android:padding="5dp">
 
@@ -58,13 +59,14 @@
 
         <TextView
             android:id="@+id/description"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/varela_round"
             android:scrollHorizontally="false"
             android:text="הכל - בלי חמוצים, טחינה, חציל, חריף"
             android:textAlignment="textStart"
             android:textColor="@color/dusty_teal"
+            android:layout_marginRight="18dp"
             android:textSize="18sp"
 
             app:layout_constraintBottom_toBottomOf="parent"
