@@ -132,7 +132,7 @@ public class MainActivity extends AppCompatActivity implements NewOrderDialog.Ne
 
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-                myBagAdapter.deleteItem(viewHolder.getAdapterPosition());
+                myBagAdapter.popUpAlertDialog(viewHolder.getAdapterPosition());
             }
         }).attachToRecyclerView(myBagRecView);
         //start listening

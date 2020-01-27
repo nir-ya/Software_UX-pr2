@@ -91,5 +91,7 @@
     <string name="pita_description">פיתה, 18 שקלים</string>
     <string name="lafa_description">לאפה, 22 שקלים</string>
     <string name="half_lafa_description">חצי לאפה, 12 שקלים</string>
+    <string name="order_was_canceled">"הזמנה נמחקה"</string>
+    <string name="cancel_order">"בטוח שאתה רוצה למחוק את המנה שבחרת?"</string>
 
 </resources>
