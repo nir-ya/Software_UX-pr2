@@ -13,7 +13,17 @@ public class ManaListItem {
     //Variables
     private int manaImg;
     private String type;
-    private String price; // TODO: Remove this.
+
+    private String owner;
+    private String status;
+    private int paymentMethod;
+    private String notes;
+    private String price;
+
+
+
+    public ManaListItem(){ }
+
 
 
     public ManaListItem(int manaImg, String type, String price) {
@@ -22,7 +32,9 @@ public class ManaListItem {
         this.price = price;
     }
 
+
     public String getPrice() {
+
         return price;
     }
 
@@ -34,4 +46,19 @@ public class ManaListItem {
         return type;
     }
 
+
+    public static String getHebType(String type) {
+        switch (type) {
+            case PITA:
+                return "פיתה";
+            case LAFA:
+                return "לאפה";
+            case HALF_PITA:
+                return "חצי פיתה";
+            case HALF_LAFA:
+                return "חצי לאפה";
+            default:
+                return "שגיאה";
+        }
+    }
 }

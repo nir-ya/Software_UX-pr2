@@ -2,9 +2,11 @@ package com.example.myapplication;
 
 import android.content.res.Resources;
 
-public class Constants {
+import java.util.HashMap;
 
-    public static final long SHORT_DELAY = 2000;
+class Constants {
+
+    static final long SHORT_DELAY = 2000;
     static final String ORDERS = "OpenOrders";
     static final String MANOT_SUBCOLLECTION = "Manot";
     static final String MONEY_MADE = "הכסף שנצבר: %s מתוך 70 שקלים";
@@ -16,7 +18,7 @@ public class Constants {
     static final String WAITING = "מחכה למשבחים...";
 
     //Tosafot
-
+    static final String NO_TOSAFOT = "בלי תוספות";
     static final String HUMMUS = "Hummus";
     static final String HARIF = "Harif";
     static final String THINA = "Thina";
@@ -35,4 +37,22 @@ public class Constants {
     static final String FAB_USAGE_ID = "fab_intro";
     static final String BAG_USAGE_ID = "bag_intro";
 
+
+    static HashMap<String, String> hebrewExtras = setHebrewExtrasMap();
+
+    static HashMap<String,String> setHebrewExtrasMap() {
+        hebrewExtras = new HashMap<>();
+        hebrewExtras.put("Amba", "עמבה");
+        hebrewExtras.put("Chips", "צ'יפס");
+        hebrewExtras.put("Cucumber", "מלפפון");
+        hebrewExtras.put("Eggplant", "חצילים");
+        hebrewExtras.put("Harif", "חריף");
+        hebrewExtras.put("Hummus", "חומוס");
+        hebrewExtras.put("Kruv", "כרוב");
+        hebrewExtras.put("Onion", "בצל");
+        hebrewExtras.put("Pickles", "חמוצים");
+        hebrewExtras.put("Thina", "טחינה");
+        hebrewExtras.put("Tomato", "עבניה");
+        return hebrewExtras;
+    }
 }

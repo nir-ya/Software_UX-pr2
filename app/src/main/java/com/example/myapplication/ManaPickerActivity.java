@@ -20,6 +20,11 @@ import java.util.List;
 
 public class ManaPickerActivity extends AppCompatActivity {
 
+
+    String orderTime;
+    String manaType;
+    int manaPrice;
+
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     ViewPager viewPager;  // TODO: change to a more informative names
@@ -27,7 +32,6 @@ public class ManaPickerActivity extends AppCompatActivity {
     List<ManaListItem> cards;
     private String orderId;
     Timestamp time;
-    String orderTime;
     ManaPickListener manaPickListener;
 
     @Override
@@ -45,12 +49,14 @@ public class ManaPickerActivity extends AppCompatActivity {
         viewPager.addOnPageChangeListener(manaPickListener);
     }
 
+
     private void setupViewPager() {
         cards = new ArrayList<>();
         cards.add(new ManaListItem(R.drawable.half_pita_full, getString(R.string.half_pita_text), getString(R.string.half_pita_price)));
         cards.add(new ManaListItem(R.drawable.pita_full, getString(R.string.pita_text), getString(R.string.pita_price)));
         cards.add(new ManaListItem(R.drawable.lafa_full, getString(R.string.lafa_text), getString(R.string.lafa_price)));
         cards.add(new ManaListItem(R.drawable.half_lafa_full, getString(R.string.half_lafa_text), getString(R.string.half_lafa_price)));
+
 
         adapter = new ManaPickerAdapter(cards,this);
 
@@ -66,12 +72,7 @@ public class ManaPickerActivity extends AppCompatActivity {
         int paddingToSet = width/6;
         viewPager.setPadding(paddingToSet,0,paddingToSet,0);
 
-//        viewPager.setOffscreenPageLimit(3);
-//        viewPager.setPageMargin(dpToPx(10));
-
         viewPager.setCurrentItem(1);
-
-//        viewPager.setPageTransformer(true, depthTransformation);
     }
 
     public void startManaActivity(View view) {
@@ -99,6 +100,7 @@ public class ManaPickerActivity extends AppCompatActivity {
     }
 
     public void simHakol(View view) {
+
         String manaType = manaPickListener.getSelectedType();
         HashMap tosafot = new HashMap<String, Boolean>(); // TODO: there are better ways to do this
         setTosafot(tosafot);
@@ -134,6 +136,7 @@ public class ManaPickerActivity extends AppCompatActivity {
                     break;
                 case 3:
                     selectedType = ManaListItem.HALF_LAFA;
+                    break;
             }
         }
 
