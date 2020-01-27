@@ -20,10 +20,12 @@ import android.widget.Toast;
 
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.firebase.ui.firestore.SnapshotParser;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -170,5 +172,23 @@ public class OrderFinishActivity extends AppCompatActivity {
         this.finish();
 
 
+    }
+
+    public void copyOrder(View view) {
+
+        final String[] s = {""};
+        manotRef.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                if (!queryDocumentSnapshots.isEmpty()){
+                    for (DocumentSnapshot snapshot:queryDocumentSnapshots)
+                        s[0] += snapshot.toObject(Mana.class).toString() + "\n";
+                }            }
+        });
+        Intent sendIntent = new Intent();
+        sendIntent.putExtra(Intent.EXTRA_TEXT, s[0]);
+        sendIntent.setType("text/plain");
+        Intent shareIntent = Intent.createChooser(sendIntent, null);
+        startActivity(shareIntent);
     }
 }

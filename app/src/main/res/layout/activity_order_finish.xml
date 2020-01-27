@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/backgroundGreen"
+    android:layoutDirection="ltr"
     tools:context=".OrderFinishActivity">
 
     <TextView
@@ -14,12 +15,25 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:fontFamily="@font/varela_round"
-        android:padding="10dp"
+        android:padding="5dp"
         android:text="@string/finish_activity_header"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tooltip"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="16dp"
+        android:fontFamily="@font/varela_round"
+        android:padding="5dp"
+        android:text="סמן מנות שסיימת להזמין. לסיום, נא נעל את ההזמנה"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/header" />
 
     <View
         android:id="@+id/line_seperator"
@@ -30,7 +44,7 @@
         android:layout_marginRight="20dp"
         android:layout_marginBottom="10dp"
         android:background="#c0c0c0"
-        app:layout_constraintTop_toBottomOf="@id/header" />
+        app:layout_constraintTop_toBottomOf="@id/tooltip" />
 
 
     <ScrollView
@@ -47,6 +61,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:requiresFadingEdge="vertical"
         android:id="@+id/orders_recycler_view"
+
         android:scrollbars="vertical"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -75,6 +90,7 @@
             android:layout_height="match_parent">
 
             <Button
+                android:onClick="copyOrder"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"

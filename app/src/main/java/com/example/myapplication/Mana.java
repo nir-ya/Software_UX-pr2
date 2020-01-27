@@ -1,6 +1,8 @@
 package com.example.myapplication;
 
 
+import androidx.annotation.NonNull;
+
 import java.util.HashMap;
 
 /**
@@ -171,6 +173,8 @@ public class Mana {
        return Constants.NO_TOSAFOT;
     }
 
+
+
     /**
      * A getter, as required by FireStore
      * @return the notes for the Mana
@@ -182,4 +186,13 @@ public class Mana {
     public String getOwnerUserId() {
         return ownerUserId;
     }
+
+    @NonNull
+    @Override
+    public String toString() {
+        String s = getOwner() + "-" + Mana.getHebType(type) + "," + getTosafotString()+ "," + Mana.getPrice(type) + "שח";
+        return s;
+    }
+
+
 }
