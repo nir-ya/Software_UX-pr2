@@ -41,10 +41,17 @@ public class MyBagAdapter extends FirestoreRecyclerAdapter<Mana, MyBagAdapter.My
             public void onClick(View v) {
                 //Todo - alert dialog
                 deleteItem(position);
+
             }
         });
 
 
+        setGraphics(holder, mana);
+
+
+    }
+
+    private void setGraphics(@NonNull MyBagHolder holder, @NonNull Mana mana) {
         if(mana.getPaymentMethod()==Mana.MEZUMAN){
             holder.paymentImg.setImageDrawable(context.getDrawable(R.drawable.cash));
         }
@@ -72,8 +79,7 @@ public class MyBagAdapter extends FirestoreRecyclerAdapter<Mana, MyBagAdapter.My
 
     public void deleteItem(int position){
         getSnapshots().getSnapshot(position).getReference().delete();
-//        notifyItemRemoved(position);
-        notifyDataSetChanged();
+
     }
 
 

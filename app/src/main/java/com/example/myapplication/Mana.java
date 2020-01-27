@@ -161,10 +161,12 @@ public class Mana {
                 tosafotString.append(Constants.hebrewExtras.get(key)).append(", ");
             }
         }
-        tosafotString.delete(tosafotString.length()-2, tosafotString.length());
 
-        if(tosafotString.length()>1)
+        if(tosafotString.length()>1) {
+            tosafotString.delete(tosafotString.length() - 2, tosafotString.length());
+
             return tosafotString.toString();
+        }
 
        return Constants.NO_TOSAFOT;
     }
