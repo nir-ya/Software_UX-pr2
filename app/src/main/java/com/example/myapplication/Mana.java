@@ -157,13 +157,15 @@ public class Mana {
         for (String key : tosafot.keySet()) {
             if (tosafot.get(key)) {
                 System.out.println(key);
-                tosafotString.append(Constants.hebrewExtras.get(key)).append(",");
+                tosafotString.append(Constants.hebrewExtras.get(key)).append(", ");
             }
         }
-//        tosafotString.delete(tosafotString.length()-2, tosafotString.length());
+        tosafotString.delete(tosafotString.length()-2, tosafotString.length());
 
-        return tosafotString.toString();
-//       return Constants.NO_TOSAFOT;
+        if(tosafotString.length()>1)
+            return tosafotString.toString();
+
+       return Constants.NO_TOSAFOT;
     }
 
     /**

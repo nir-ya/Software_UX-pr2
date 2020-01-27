@@ -22,11 +22,7 @@ import org.w3c.dom.Text;
 
 public class MyBagAdapter extends FirestoreRecyclerAdapter<Mana, MyBagAdapter.MyBagHolder> {
 
-
     private final Context context;
-
-
-
 
     MyBagAdapter(@NonNull FirestoreRecyclerOptions<Mana> options, Context context) {
         super(options);
@@ -47,7 +43,6 @@ public class MyBagAdapter extends FirestoreRecyclerAdapter<Mana, MyBagAdapter.My
                 deleteItem(position);
             }
         });
-
 
 
         if(mana.getPaymentMethod()==Mana.MEZUMAN){
@@ -78,6 +73,7 @@ public class MyBagAdapter extends FirestoreRecyclerAdapter<Mana, MyBagAdapter.My
     public void deleteItem(int position){
         getSnapshots().getSnapshot(position).getReference().delete();
 //        notifyItemRemoved(position);
+        notifyDataSetChanged();
     }
 
 
