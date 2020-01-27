@@ -12,7 +12,6 @@ import java.util.List;
 
 public class ManaPickerAdapter extends PagerAdapter {
 
-
     private List<ManaListItem> models;
     private LayoutInflater layoutInflater;
     private Context mContext;
