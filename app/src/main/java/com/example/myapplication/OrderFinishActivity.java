@@ -95,7 +95,7 @@ public class OrderFinishActivity extends AppCompatActivity {
                                 }
                             }
                         } else {
-                            description = "כלום";
+                            description = "";
                             if (in > 0) {
                                 description += " עם ";
                                 for (String key : map.keySet()) {
