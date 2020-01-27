@@ -9,6 +9,7 @@
     android:id="@+id/manaItem"
     android:layout_margin="8dp"
     android:layout_width="match_parent"
+    android:onClick="startManaActivity"
     android:layout_height="wrap_content"
     app:cardCornerRadius="50dp">
 
