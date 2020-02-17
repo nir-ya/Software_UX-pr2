@@ -97,7 +97,7 @@ public class OrderConfirmationActivity extends AppCompatActivity {
 
     public void confirmOrder(View view) {
         addToDB();
-        Toast.makeText(this, getString(R.string.mana_success_toast), 2*Toast.LENGTH_LONG).show();
+        Toast.makeText(this, getString(R.string.mana_success_toast), 3*Toast.LENGTH_LONG).show();
         Intent intent = new Intent(this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);

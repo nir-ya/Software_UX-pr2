@@ -16,7 +16,7 @@
     <string name="type_string">פלאפל</string>
     <string name="price_shekels">₪ 20</string>
     <string name="additions_header_string">תוספות:</string>
-    <string name="delete_string">מחק</string>
+    <string name="delete_string">בטל</string>
     <string name="update_string">עדכן</string>
     <string name="status_string">סטטוס: מחכה לשילוח</string>
     <string name="join_string">הצטרף!</string>
