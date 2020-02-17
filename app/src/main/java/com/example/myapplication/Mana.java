@@ -66,7 +66,6 @@ public class Mana {
         this.type = type;
         this.tosafot = tosafot;
         this.paymentMethod = paymentMethod;
-        this.notes = notes;
         this.price = getPrice(type);
     }
 
@@ -171,13 +170,6 @@ public class Mana {
        return Constants.NO_TOSAFOT;
     }
 
-    /**
-     * A getter, as required by FireStore
-     * @return the notes for the Mana
-     */
-    public String getNotes() {
-        return notes;
-    }
 
     public String getOwnerUserId() {
         return ownerUserId;
