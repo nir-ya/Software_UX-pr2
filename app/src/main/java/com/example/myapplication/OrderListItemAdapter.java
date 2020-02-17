@@ -165,8 +165,10 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
             public void onClick(View view) {
                 if (!holder.expandableView.isExpanded()) {
                     holder.expandableView.expand(true);
+                    holder.infoButton.setText("צמצם");
                 } else {
                     holder.expandableView.collapse(true);
+                    holder.infoButton.setText("מי שם?");
                 }
             }
         });
@@ -227,6 +229,7 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
 
         holder.statusText.setText(model.getPrice() >= MIN_ORDER ? Constants.READY_TEXT : Constants.WAITING);
 
+
         setProgressBar(holder, model);
 
         holder.statusText.setTextColor(context.getResources().getColor(R.color.TextGreen));
@@ -235,6 +238,8 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
             holder.orderButton.setVisibility(VISIBLE);
             holder.infoButton.setVisibility(VISIBLE);
         }
+
+
 
     }
 
