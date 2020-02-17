@@ -70,6 +70,21 @@
         android:scaleX="1.5"
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
+    <TextView
+        android:id="@+id/clear_tosafot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/clear_tosafot"
+        android:textSize="16sp"
+        android:onClick="clearTosafot"
+        android:textColor="@color/darkestGreen"
+        app:layout_constraintTop_toTopOf="@id/mark_all_checkbox"
+        app:layout_constraintBottom_toBottomOf="@id/mark_all_checkbox"
+        app:layout_constraintRight_toLeftOf="@id/mark_all_checkbox"
+        app:layout_constraintLeft_toLeftOf="@id/grid_view"
+        app:layout_constraintHorizontal_bias="0.15"
+        />
+
     <GridLayout
         android:id="@+id/grid_view"
         android:layout_width="wrap_content"
