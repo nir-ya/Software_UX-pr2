@@ -17,7 +17,7 @@
         android:fontFamily="@font/varela_round"
         android:gravity="center"
         android:padding="10dp"
-        android:text="אז, מה אוכלים?"
+        android:text="@string/pita_or_lafa"
         android:layout_marginTop="50dp"
         android:layout_marginBottom="50dp"
         android:textSize="30dp"

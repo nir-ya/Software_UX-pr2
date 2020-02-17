@@ -94,5 +94,6 @@
     <string name="order_was_canceled">"הזמנה נמחקה"</string>
     <string name="cancel_order">"בטוח שאתה רוצה למחוק את המנה שבחרת?"</string>
     <string name="clear_tosafot"><u>נקה</u></string>
+    <string name="pita_or_lafa">פיתה או לאפה?</string>
 
 </resources>

@@ -76,6 +76,7 @@
         android:layout_height="wrap_content"
         android:text="@string/clear_tosafot"
         android:textSize="16sp"
+        android:fontFamily="@font/varela_round"
         android:onClick="clearTosafot"
         android:textColor="@color/darkestGreen"
         app:layout_constraintTop_toTopOf="@id/mark_all_checkbox"

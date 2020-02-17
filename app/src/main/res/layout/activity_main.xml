@@ -42,6 +42,16 @@
         app:layout_constraintLeft_toLeftOf="@id/bag"
         app:layout_constraintTop_toBottomOf="@id/bag"/>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/active_orders_textview"
+        app:layout_constraintBottom_toTopOf="@id/line"
+        android:text="הזמנות פעילות"
+        app:layout_constraintRight_toRightOf="@id/greeting"
+        android:fontFamily="@font/varela_round"
+        />
+
 
     <View
         android:id="@+id/line"
