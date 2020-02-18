@@ -16,12 +16,12 @@
     <string name="type_string">פלאפל</string>
     <string name="price_shekels">₪ 20</string>
     <string name="additions_header_string">תוספות:</string>
-    <string name="delete_string">מחק</string>
+    <string name="delete_string">בטל</string>
     <string name="update_string">עדכן</string>
     <string name="status_string">סטטוס: מחכה לשילוח</string>
     <string name="join_string">הצטרף!</string>
     <string name="info_string">מי שם?</string>
-    <string name="money_made">הכסף שנצבר: %s מתוך 70 שקלים</string>
+    <string name="money_made">נאספו %s ש"ח</string>
     <string name="locked_str">נעול</string>
     <string name="ready_str">\"סטטוס: מוכנה לשילוח\"</string>
     <string name="order_out">ההזמנה יצאה</string>
@@ -93,5 +93,8 @@
     <string name="half_lafa_description">חצי לאפה, 12 שקלים</string>
     <string name="order_was_canceled">"הזמנה נמחקה"</string>
     <string name="cancel_order">"בטוח שאתה רוצה למחוק את המנה שבחרת?"</string>
+    <string name="clear_tosafot"><u>נקה</u></string>
+    <string name="pita_or_lafa">פיתה או לאפה?</string>
+    <string name="register"><u>הרשמה</u></string>
 
 </resources>

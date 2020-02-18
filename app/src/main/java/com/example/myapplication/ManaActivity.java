@@ -34,13 +34,12 @@ public class ManaActivity extends AppCompatActivity {
     CheckBox tahiniView;
     CheckBox chipsView;
     CheckBox eggplantView;
-    GridLayout gridView;
     CheckBox markAll;
     ImageView manaTypeImageVIew;
 
     CheckBox[] checkBoxes;
 
-    TextView ownerText, dishDescription;
+    TextView ownerText, dishDescription, clearTextView;
 
     String manatype;
     String orderTime;
@@ -147,6 +146,8 @@ public class ManaActivity extends AppCompatActivity {
         ownerText = findViewById(R.id.owner_text);
         dishDescription = findViewById(R.id.dish_description);
 
+        clearTextView = findViewById(R.id.clear_tosafot);
+
         humusView = findViewById(R.id.humus_image);
         harifView = findViewById(R.id.harif_image);
         picklesView = findViewById(R.id.pickles_image);
@@ -234,5 +235,12 @@ public class ManaActivity extends AppCompatActivity {
         Intent intent = new Intent(this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
+    }
+
+    public void clearTosafot(View view) {
+        for(CheckBox checkBox:checkBoxes){
+            checkBox.setChecked(false);
+        }
+        markAll.setChecked(false);
     }
 }
