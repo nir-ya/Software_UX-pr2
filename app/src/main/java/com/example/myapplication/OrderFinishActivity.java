@@ -46,12 +46,11 @@ public class OrderFinishActivity extends AppCompatActivity {
         setContentView(R.layout.activity_order_finish);
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getWindow().setNavigationBarColor(getResources().getColor(R.color.light_peach));
-
-
-            String orderId = getIntent().getStringExtra("order_id");
-            manotRef = db.collection("OpenOrders/" + orderId + "/Manot");
-
         }
+
+        String orderId = getIntent().getStringExtra("order_id");
+        manotRef = db.collection("OpenOrders/" + orderId + "/Manot");
+
 
 
         finishButton = findViewById(R.id.finish_button);
