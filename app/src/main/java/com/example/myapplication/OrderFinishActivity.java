@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,22 +32,31 @@ import java.util.Map;
 
 public class OrderFinishActivity extends AppCompatActivity {
 
-    private  int count;
-    private  int checkedCount=0;
+    private int count;
+    private int checkedCount = 0;
     private Button finishButton;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private CollectionReference manotRef ;
+    private CollectionReference manotRef;
     private OrderFinishListItemAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        String orderId = getIntent().getStringExtra("order_id");
-        manotRef= db.collection("OpenOrders/"+orderId+"/Manot");
         setContentView(R.layout.activity_order_finish);
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setNavigationBarColor(getResources().getColor(R.color.light_peach));
+
+
+            String orderId = getIntent().getStringExtra("order_id");
+            manotRef = db.collection("OpenOrders/" + orderId + "/Manot");
+
+        }
+
+
         finishButton = findViewById(R.id.finish_button);
         setUpRecyclerView();
+
 
     }
 
@@ -137,26 +147,23 @@ public class OrderFinishActivity extends AppCompatActivity {
     }
 
     public void checkBoxClick(View view) {
-        boolean checked = ((CheckBox)view).isChecked();
+        boolean checked = ((CheckBox) view).isChecked();
         count = adapter.getItemCount();
 
-        if(checked){
+        if (checked) {
             checkedCount++;
-        }
-        else{
+        } else {
             checkedCount--;
         }
 
 
-
-        if(checkedCount==count){
+        if (checkedCount == count) {
             finishButton.setVisibility(View.VISIBLE);
             finishButton.getLayoutParams().width = ViewGroup.LayoutParams.WRAP_CONTENT;
             finishButton.getLayoutParams().height = ViewGroup.LayoutParams.WRAP_CONTENT;
             finishButton.setHeight(0);
             finishButton.setWidth(0);
-        }
-        else {
+        } else {
             finishButton.setVisibility(View.INVISIBLE);
 
             finishButton.getLayoutParams().width = 0;
