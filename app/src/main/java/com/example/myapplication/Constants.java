@@ -6,6 +6,10 @@ import java.util.HashMap;
 
 class Constants {
 
+    public static final int HALF_PITA_POSITION = 0;
+    public static final int PITA_POSITION = 1;
+    public static final int LAFA_POSITION = 2;
+    public static final int HALF_LAFA_POSITION = 3;
     static final long SHORT_DELAY = 2000;
     static final String ORDERS = "OpenOrders";
     static final String MANOT_SUBCOLLECTION = "Manot";
