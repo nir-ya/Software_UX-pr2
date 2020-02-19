@@ -1,7 +1,7 @@
 package com.example.myapplication;
 
-import android.animation.ArgbEvaluator;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
@@ -11,7 +11,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.firebase.Timestamp;
-import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -22,21 +21,24 @@ public class ManaPickerActivity extends AppCompatActivity {
 
 
     String orderTime;
-    String manaType;
-    int manaPrice;
 
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     ViewPager viewPager;  // TODO: change to a more informative names
     ManaPickerAdapter adapter;
     List<ManaListItem> cards;
     private String orderId;
     Timestamp time;
-    ManaPickListener manaPickListener;
+
+    String breadType = ManaListItem.PITA;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setNavigationBarColor(getResources().getColor(R.color.light_peach));
+        }
+
         setContentView(R.layout.activity_mana_picker);
 
         orderId = getIntent().getStringExtra("order_id");
@@ -44,45 +46,76 @@ public class ManaPickerActivity extends AppCompatActivity {
         orderTime = Randomizer.formatter.format(new Date(time.toDate().toString()));
 
         setupViewPager();
-
-        manaPickListener = new ManaPickListener();
-        viewPager.addOnPageChangeListener(manaPickListener);
     }
 
 
     private void setupViewPager() {
-        cards = new ArrayList<>();
-        cards.add(new ManaListItem(R.drawable.half_pita_full, getString(R.string.half_pita_text), getString(R.string.half_pita_price)));
-        cards.add(new ManaListItem(R.drawable.pita_full, getString(R.string.pita_text), getString(R.string.pita_price)));
-        cards.add(new ManaListItem(R.drawable.lafa_full, getString(R.string.lafa_text), getString(R.string.lafa_price)));
-        cards.add(new ManaListItem(R.drawable.half_lafa_full, getString(R.string.half_lafa_text), getString(R.string.half_lafa_price)));
+
+        initData();
 
 
-        adapter = new ManaPickerAdapter(cards,this);
+        adapter = new ManaPickerAdapter(cards, this);
+
 
         viewPager = findViewById(R.id.manaPager);
 
+
         viewPager.setAdapter(adapter);
+
+
         viewPager.setClipToPadding(false);
 
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         int width = displayMetrics.widthPixels;
 
-        int paddingToSet = width/6;
-        viewPager.setPadding(paddingToSet,0,paddingToSet,0);
+        int paddingToSet = width / 6;
+        viewPager.setPadding(paddingToSet, 0, paddingToSet, 0);
 
-        viewPager.setCurrentItem(1);
+        viewPager.setCurrentItem(Constants.PITA_POSITION);
+        ManaPickerAdapter.setSelectedPosition(Constants.PITA_POSITION);
+
+
+    }
+
+    private void initData() {
+        cards = new ArrayList<>();
+        cards.add(new ManaListItem(R.drawable.half_pita_full, getString(R.string.half_pita_text), getString(R.string.half_pita_price)));
+        cards.add(new ManaListItem(R.drawable.pita_full, getString(R.string.pita_text), getString(R.string.pita_price)));
+        cards.add(new ManaListItem(R.drawable.lafa_full, getString(R.string.lafa_text), getString(R.string.lafa_price)));
+        cards.add(new ManaListItem(R.drawable.half_lafa_full, getString(R.string.half_lafa_text), getString(R.string.half_lafa_price)));
     }
 
     public void startManaActivity(View view) {
-        Intent intent = new Intent(this, ManaActivity.class);
-        intent.putExtra("mana_type", manaPickListener.getSelectedType());
 
+        String selectedType = getSelectedTypeByPosition();
+
+        System.out.println("!!!!!!!!!!!!!!!!!!!!!\n"+selectedType);
+        Intent intent = new Intent(this, ManaActivity.class);
+        intent.putExtra("mana_type", selectedType);
         intent.putExtra("order_id", orderId);
         intent.putExtra("order_time", orderTime);
-        intent.putExtra("CALENDAR",time);
+        intent.putExtra("CALENDAR", time);
         startActivity(intent);
+    }
+
+    private String getSelectedTypeByPosition() {
+        switch (ManaPickerAdapter.getSelectedPosition()) {
+            case 0:
+                breadType = ManaListItem.HALF_PITA;
+                break;
+            case 1:
+                breadType = ManaListItem.PITA;
+                break;
+            case 2:
+                breadType = ManaListItem.LAFA;
+                break;
+            case 3:
+                breadType = ManaListItem.HALF_LAFA;
+                break;
+        }
+
+        return breadType;
     }
 
     private void setTosafot(HashMap tosafot) {
@@ -101,7 +134,7 @@ public class ManaPickerActivity extends AppCompatActivity {
 
     public void simHakol(View view) {
 
-        String manaType = manaPickListener.getSelectedType();
+        String manaType = getSelectedTypeByPosition();
         HashMap tosafot = new HashMap<String, Boolean>(); // TODO: there are better ways to do this
         setTosafot(tosafot);
 
@@ -111,45 +144,8 @@ public class ManaPickerActivity extends AppCompatActivity {
         intent.putExtra("mana_type", manaType);
         intent.putExtra("order_id", orderId);
         intent.putExtra("order_time", orderTime);
-        intent.putExtra("CALENDAR",time);
+        intent.putExtra("CALENDAR", time);
         startActivity(intent);
     }
 
-    private static class ManaPickListener implements ViewPager.OnPageChangeListener {
-
-        String selectedType = ManaListItem.PITA;
-
-        @Override
-        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {}
-
-        @Override
-        public void onPageSelected(int position) {
-            switch (position) {
-                case 0:
-                    selectedType = ManaListItem.HALF_PITA;
-                    break;
-                case 1:
-                    selectedType = ManaListItem.PITA;
-                    break;
-                case 2:
-                    selectedType = ManaListItem.LAFA;
-                    break;
-                case 3:
-                    selectedType = ManaListItem.HALF_LAFA;
-                    break;
-            }
-        }
-
-        @Override
-        public void onPageScrollStateChanged(int state) {}
-
-        String getSelectedType() {
-            return selectedType;
-        }
-    }
-
-    public int dpToPx(int dp) {
-        DisplayMetrics displayMetrics =  getResources().getDisplayMetrics();
-        return Math.round(dp * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
-    }
 }

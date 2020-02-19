@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -41,7 +42,7 @@ public class ManaActivity extends AppCompatActivity {
 
     TextView ownerText, dishDescription, clearTextView;
 
-    String manatype;
+    String  manatype;
     String orderTime;
     String orderId;
     Timestamp time;
@@ -54,6 +55,10 @@ public class ManaActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mana);
+
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setNavigationBarColor(getResources().getColor(R.color.light_salmon));
+        }
 
         mContext = this.getApplicationContext();
 
@@ -77,20 +82,23 @@ public class ManaActivity extends AppCompatActivity {
             case ManaListItem.HALF_PITA:
                 dishDescription.setText(R.string.half_pita_description);
                 manaTypeImageVIew.setImageResource(R.drawable.half_pita_full);
+                ManaPickerAdapter.setSelectedPosition(Constants.HALF_PITA_POSITION);
                 break;
             case ManaListItem.PITA:
                 dishDescription.setText(R.string.pita_description);
                 manaTypeImageVIew.setImageResource(R.drawable.pita_full);
-
+                ManaPickerAdapter.setSelectedPosition(Constants.PITA_POSITION);
                 break;
             case ManaListItem.LAFA:
                 dishDescription.setText(R.string.lafa_description);
                 manaTypeImageVIew.setImageResource(R.drawable.lafa_full);
+                ManaPickerAdapter.setSelectedPosition(Constants.LAFA_POSITION);
 
                 break;
             case ManaListItem.HALF_LAFA:
                 dishDescription.setText(R.string.half_lafa_description);
                 manaTypeImageVIew.setImageResource(R.drawable.half_lafa_full);
+                ManaPickerAdapter.setSelectedPosition(Constants.HALF_LAFA_POSITION);
 
                 break;
         }
@@ -222,6 +230,7 @@ public class ManaActivity extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), OrderConfirmationActivity.class);
         intent.putExtra("tosafot", tosafot);
         intent.putExtra("order_id", orderId);
+        intent.putExtra("mana_type", manatype);
         intent.putExtra("order_time", orderTime);
         intent.putExtra("CALENDAR", time);
         startActivity(intent);
