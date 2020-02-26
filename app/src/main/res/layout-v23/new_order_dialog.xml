@@ -45,7 +45,7 @@
         android:layout_height="wrap_content"
         android:autoSizeTextType="uniform"
         android:fontFamily="@font/varela_round"
-        android:text="@string/time_pick_instructions"
+        android:text="השעה שתבחרו היא השעה בה תבצעו את ההזמנה.\nזמן משלוח משוער: 40 דק'"
         android:textColor="@color/TextGreen"
         android:textDirection="rtl"
         android:textSize="16sp"

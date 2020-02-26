@@ -68,11 +68,7 @@
     <string name="invalid_password_msg">בחר סיסמה בעלת 6 תווים לפחות</string>
     <string name="invalid_email_msg">כתובת הe-mail שהכנסת לא תקינה</string>
     <string name="order_list_item_title">הזמנה לשעה: %s</string>
-    <string name="final_order_details">
-        פיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה
-        \nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה
-        \nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nפיתה\nלאפה
-    </string>
+
     <string name="finish_activity_header">פירוט ההזמנה</string>
     <string name="finish_activity_dial_button_text">התקשר לשבח</string>
     <string name="finish_activity_ordered_button_text">הזמנתי</string>
@@ -96,5 +92,9 @@
     <string name="clear_tosafot"><u>נקה</u></string>
     <string name="pita_or_lafa">פיתה או לאפה?</string>
     <string name="register"><u>הרשמה</u></string>
+    <string name="time_pick_instructions">
+        השעה שתבחרו היא השעה בה תבצעו את ההזמנה. זמן משלוח משוער: 40 דק\'\n
+        שעות הפעילות: 11:00 - 21:00
+    </string>
 
 </resources>

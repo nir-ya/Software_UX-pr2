@@ -45,9 +45,7 @@ public class Mana {
     /**
      * An empty constructor for Mana object. Required for FireStore integration.
      */
-    public Mana() {
-
-    }
+    public Mana() { }
 
     /**
      * Complete constructor of a Mana object
@@ -60,7 +58,12 @@ public class Mana {
      */
     public Mana(String type, String notes, int paymentMethod,
                 HashMap<String, Boolean> tosafot, String owner, String ownerUserId) {
+
+        if (owner.contains(" ")) {
+            owner = owner.split(" ")[0];
+        }
         this.owner = owner;
+
         this.ownerUserId = ownerUserId;
         this.status = OPEN;
         this.type = type;
