@@ -39,22 +39,8 @@
             app:layout_constraintEnd_toStartOf="@+id/manaTypeTxt"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintBottom_toBottomOf="@id/manaTypeTxt"
-            app:layout_constraintStart_toEndOf="@+id/updateBtn"
-            tools:layout_editor_absoluteY="25dp" />
-
-        <Button
-            android:id="@+id/updateBtn"
-            android:layout_width="50dp"
-            android:layout_height="25dp"
-            android:background="@color/darkestGreen"
-            android:fontFamily="@font/varela_round"
-            android:text="@string/update_string"
-            android:textColor="@color/lightGrey"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toStartOf="@+id/manaPriceTxt"
-            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/deleteBtn"
-            app:layout_constraintBottom_toBottomOf="@id/manaTypeTxt" />
+            tools:layout_editor_absoluteY="25dp" />
 
         <Button
             android:id="@+id/deleteBtn"
@@ -65,7 +51,7 @@
             android:text="@string/delete_string"
             android:textColor="@color/faded_orange"
             android:textStyle="bold"
-            app:layout_constraintEnd_toStartOf="@+id/updateBtn"
+            app:layout_constraintEnd_toStartOf="@+id/manaPriceTxt"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="@id/manaTypeTxt" />
@@ -82,7 +68,7 @@
             app:layout_constraintEnd_toStartOf="@+id/manaImg"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/manaPriceTxt"
-            tools:layout_editor_absoluteY="25dp" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tosafutTxt"
@@ -120,7 +106,7 @@
             app:layout_constraintBottom_toBottomOf="@id/hourTxt"
             app:layout_constraintEnd_toStartOf="@+id/statusTxt"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintTop_toBottomOf="@id/updateBtn"
+            app:layout_constraintTop_toBottomOf="@id/deleteBtn"
             app:layout_constraintStart_toStartOf="parent" />
 
         <TextView

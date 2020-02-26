@@ -7,11 +7,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TimePicker;
-
 import androidx.appcompat.app.AppCompatDialogFragment;
-
-
 import android.content.Context;
+import android.widget.Toast;
 
 /**
  * This class builds the new order dialog fragment
@@ -48,7 +46,14 @@ public class NewOrderDialog extends AppCompatDialogFragment {
                     public void onClick(DialogInterface dialogInterface, int i) {
                         int hour = timePicker.getCurrentHour();
                         int minute = timePicker.getCurrentMinute();
-                        listener.applyTime(hour, minute);
+                        if (hour < 11 || hour >= 21 && minute > 0)
+                        {
+                            Toast.makeText(getContext(), "השליח ישן בשעה הזאת", Toast.LENGTH_SHORT).show();
+                        }
+                        else
+                        {
+                            listener.applyTime(hour, minute);
+                        }
                     }
                 });
         return view;

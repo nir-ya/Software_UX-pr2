@@ -24,14 +24,11 @@ import android.widget.Toast;
 
 
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.wooplr.spotlight.SpotlightConfig;
@@ -49,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements NewOrderDialog.Ne
 
     //adapters
     private OrderListItemAdapter orderAdapter;
-    FloatingActionButton newOrderButt;
+    FloatingActionButton newOrderButton;
     ImageView myBagBtn;
     private TextView beFirst;
     private FirebaseUser user;
@@ -157,7 +154,7 @@ public class MainActivity extends AppCompatActivity implements NewOrderDialog.Ne
     private void connectToXML() {
         //views
         myBagBtn = findViewById(R.id.bag);
-        newOrderButt = findViewById(R.id.new_order_button);
+        newOrderButton = findViewById(R.id.new_order_button);
         beFirst = findViewById(R.id.be_first);
 
     }
@@ -182,7 +179,6 @@ public class MainActivity extends AppCompatActivity implements NewOrderDialog.Ne
     }
 
 
-
     private void startOrderProcedure(Timestamp time) {
 
         Intent intent = new Intent(MainActivity.this, ManaPickerActivity.class);
@@ -204,7 +200,6 @@ public class MainActivity extends AppCompatActivity implements NewOrderDialog.Ne
 
         NewOrderDialog newOrderDialog = new NewOrderDialog();
         newOrderDialog.show(getSupportFragmentManager(), "order dialog");
-
     }
 
 
@@ -239,7 +234,7 @@ public class MainActivity extends AppCompatActivity implements NewOrderDialog.Ne
                     SpotlightSequence.getInstance(MainActivity.this, config)
                             .addSpotlight(ordersRecyclerView, getString(R.string.join_order_tooltop),
                                     getString(R.string.join_tooltip_subtext), Constants.REC_USAGE_ID)
-                            .addSpotlight(newOrderButt, getString(R.string.create_order_tooltip)
+                            .addSpotlight(newOrderButton, getString(R.string.create_order_tooltip)
                                     , getString(R.string.create_tooltip_subtext), Constants.FAB_USAGE_ID)
                             .addSpotlight(myBagBtn, getString(R.string.mybag_tooltip)
                                     , getString(R.string.mybag_tooltip_subtext), Constants.BAG_USAGE_ID)
