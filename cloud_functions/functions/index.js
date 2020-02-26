@@ -23,7 +23,7 @@ exports.updatePriceOnManaChange = functions.firestore.document("OpenOrders/{orde
                 price: newPrice
             });
         });
-    });var
+    });
 
 });
 
@@ -53,9 +53,15 @@ exports.updatePriceOnManaDelete = functions.firestore.document("OpenOrders/{orde
     return db.runTransaction(transaction => {
         return transaction.get(orderRef).then(orderDoc => {
             var newPrice = orderDoc.data().price  - manaPrice;
-            return transaction.update(orderRef, {
-                price: newPrice
-            });
+            if(newPrice === 0){
+                return transaction.delete(orderRef);
+            }
+            else{
+                return transaction.update(orderRef, {
+                    price: newPrice
+                });
+            }
+
         });
     });
 
