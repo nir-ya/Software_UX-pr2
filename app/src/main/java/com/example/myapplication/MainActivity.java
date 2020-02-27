@@ -6,6 +6,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -36,7 +37,7 @@ import com.wooplr.spotlight.utils.SpotlightSequence;
 
 import java.util.Calendar;
 
-public class MainActivity extends AppCompatActivity implements NewOrderDialog.NewOrderDialogListener {
+public class MainActivity extends AppCompatActivity {
 
 
     //fireBase Objects
@@ -51,7 +52,6 @@ public class MainActivity extends AppCompatActivity implements NewOrderDialog.Ne
     private TextView beFirst;
     private FirebaseUser user;
 
-    Calendar cal = Calendar.getInstance();
     private RecyclerView ordersRecyclerView;
 
     @Override
@@ -98,7 +98,7 @@ public class MainActivity extends AppCompatActivity implements NewOrderDialog.Ne
      *
      * @param view - the button that his onClick call the function
      */
-    public void launchDialog(View view) {
+    public void launchMyBagDialog(View view) {
         Dialog myBagDialog = new Dialog(MainActivity.this, R.style.Theme_Dialog);
         myBagDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         myBagDialog.setContentView(R.layout.mybag_dialog);
@@ -169,16 +169,6 @@ public class MainActivity extends AppCompatActivity implements NewOrderDialog.Ne
 
     }
 
-
-    private void startOrderProcedure(Timestamp time) {
-
-        Intent intent = new Intent(MainActivity.this, ManaPickerActivity.class);
-        intent.putExtra("CALENDAR", time);
-        intent.putExtra("order_id", Randomizer.randomString(18));
-        startActivity(intent);
-
-    }
-
     private void popToast(boolean success) {
         int msgId = R.string.new_order_success;
         if (!success) {
@@ -190,74 +180,69 @@ public class MainActivity extends AppCompatActivity implements NewOrderDialog.Ne
     public void openNewOrderDialog(View view) {
 
         NewOrderDialog newOrderDialog = new NewOrderDialog();
+
         newOrderDialog.show(getSupportFragmentManager(), "order dialog");
     }
 
 
-    @Override
-    public void applyTime(int hour, int minute) {
-        cal.set(Calendar.HOUR_OF_DAY, hour);
-        cal.set(Calendar.MINUTE, minute);
-        Timestamp timestamp = new Timestamp(cal.getTime());
-        startOrderProcedure(timestamp);
+
+    /**
+     * this function creates tooltip, if user first uses the app
+     */
+    private void initializeTooltip() {
+
+
+        //create a spotlight configuration
+        final SpotlightConfig config = getSpotlightConfig();
+
+        //handler is for the spotlight delay - 3 seconds from app onCreate
+        new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //create spotlight sequence
+                runSpotlightSequence();
+            }
+
+            /**
+             * this function create and run the spotlights sequence.
+             */
+            private void runSpotlightSequence() {
+                SpotlightSequence.getInstance(MainActivity.this, config)
+                        .addSpotlight(ordersRecyclerView, getString(R.string.join_order_tooltop),
+                                getString(R.string.join_tooltip_subtext), Constants.REC_USAGE_ID)
+                        .addSpotlight(newOrderButton, getString(R.string.create_order_tooltip)
+                                , getString(R.string.create_tooltip_subtext), Constants.FAB_USAGE_ID)
+                        .addSpotlight(myBagBtn, getString(R.string.mybag_tooltip)
+                                , getString(R.string.mybag_tooltip_subtext), Constants.BAG_USAGE_ID)
+                        .startSequence();
+            }
+        }, Constants.LONG_DELAY); //3 seconds delay from application start
     }
-        /**
-         * this function craete tooltip, if user first using the app
-         */
-        private void initializeTooltip () {
 
 
-            //create a spotlight configuration
-            final SpotlightConfig config = getSpotlightConfig();
-
-            //handler is for the spotlight delay - 3 seconds from app onCreate
-            new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    //create spotlight sequence
-                    runSpotlightSequence();
-                }
-
-                /**
-                 * this function create and run the spotlights sequence.
-                 */
-                private void runSpotlightSequence() {
-                    SpotlightSequence.getInstance(MainActivity.this, config)
-                            .addSpotlight(ordersRecyclerView, getString(R.string.join_order_tooltop),
-                                    getString(R.string.join_tooltip_subtext), Constants.REC_USAGE_ID)
-                            .addSpotlight(newOrderButton, getString(R.string.create_order_tooltip)
-                                    , getString(R.string.create_tooltip_subtext), Constants.FAB_USAGE_ID)
-                            .addSpotlight(myBagBtn, getString(R.string.mybag_tooltip)
-                                    , getString(R.string.mybag_tooltip_subtext), Constants.BAG_USAGE_ID)
-                            .startSequence();
-                }
-            }, Constants.LONG_DELAY); //3 seconds delay from application start
-        }
-
-
-        /**
-         * this function creates a spotlight configuration
-         * configuration sets the colors, animations, etc. of the spotlight
-         * @return SpotlightConfiguration object
-         */
-        private SpotlightConfig getSpotlightConfig(){
-            final SpotlightConfig config = new SpotlightConfig();
-            config.setIntroAnimationDuration(500);
-            config.setRevealAnimationEnabled(true);
-            config.setPerformClick(true);
-            config.setFadingTextDuration(500);
-            config.setHeadingTvColor(Color.parseColor("#ffffff"));
-            config.setHeadingTvSize(32);
-            config.setSubHeadingTvColor(Color.parseColor("#ffffff"));
-            config.setSubHeadingTvSize(16);
-            config.setMaskColor(Color.parseColor("#dc6faf9f"));
-            config.setLineAnimationDuration(500);
-            config.setLineAndArcColor(Color.parseColor("#f47d5c"));
-            config.setDismissOnBackpress(true);
-            config.setDismissOnTouch(true);
-            return config;
-        }
+    /**
+     * this function creates a spotlight configuration
+     * configuration sets the colors, animations, etc. of the spotlight
+     * @return SpotlightConfiguration object
+     */
+    private SpotlightConfig getSpotlightConfig(){
+        final SpotlightConfig config = new SpotlightConfig();
+        config.setIntroAnimationDuration(500);
+        config.setRevealAnimationEnabled(true);
+        config.setPerformClick(true);
+        config.setFadingTextDuration(500);
+        config.setHeadingTvColor(Color.parseColor("#ffffff"));
+        config.setHeadingTvSize(32);
+        config.setSubHeadingTvColor(Color.parseColor("#ffffff"));
+        config.setSubHeadingTvSize(16);
+        config.setMaskColor(Color.parseColor("#dc6faf9f"));
+        config.setLineAnimationDuration(500);
+        config.setLineAndArcColor(Color.parseColor("#f47d5c"));
+        config.setDismissOnBackpress(true);
+        config.setDismissOnTouch(true);
+        return config;
     }
+}
 
 
 

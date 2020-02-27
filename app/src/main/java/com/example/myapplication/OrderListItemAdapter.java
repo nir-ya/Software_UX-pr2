@@ -31,7 +31,6 @@ import net.cachapa.expandablelayout.ExpandableLayout;
 
 import java.util.Calendar;
 import java.util.HashMap;
-import java.util.Map;
 
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 import static android.view.View.GONE;
@@ -228,7 +227,7 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
 
         setOrderButtonHandler(holder.orderButton, documentId);
 
-        holder.statusText.setTextColor(context.getResources().getColor(R.color.TextGreen));
+        holder.statusText.setTextColor(context.getResources().getColor(R.color.textGreen));
         ViewGroup layout = (ViewGroup) holder.orderButton.getParent();
         if (null != layout) {
             holder.orderButton.setVisibility(VISIBLE);
@@ -254,7 +253,7 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
 
         setProgressBar(holder, model);
 
-        holder.statusText.setTextColor(context.getResources().getColor(R.color.TextGreen));
+        holder.statusText.setTextColor(context.getResources().getColor(R.color.textGreen));
         ViewGroup layout = (ViewGroup) holder.orderButton.getParent();
         if (null != layout) {
             holder.orderButton.setVisibility(VISIBLE);
