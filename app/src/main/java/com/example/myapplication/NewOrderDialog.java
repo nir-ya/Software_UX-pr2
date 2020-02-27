@@ -97,9 +97,11 @@ public class NewOrderDialog extends AppCompatDialogFragment {
         if (!isValidTime(hour, minute)) {
             okButton.setClickable(false);
             okButton.setTextColor(getResources().getColor(R.color.grey));
+            okButton.setBackground(getResources().getDrawable(R.drawable.border_button));
         } else {
             okButton.setClickable(true);
-            okButton.setTextColor(getResources().getColor(R.color.textBlack));
+            okButton.setTextColor(getResources().getColor(R.color.lightGrey));
+            okButton.setBackground(getResources().getDrawable(R.drawable.full_button));
         }
     }
 
