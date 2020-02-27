@@ -29,7 +29,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/greeting"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="@id/greeting"
-        android:onClick="launchDialog"
+        android:onClick="launchMyBagDialog"
 
         />
     <TextView
@@ -107,7 +107,7 @@
             app:layout_constraintRight_toRightOf="parent"
             app:srcCompat="@drawable/add_plus"
             app:maxImageSize="48dp"
-            app:backgroundTint="@color/TextGreen"
+            app:backgroundTint="@color/textGreen"
             android:scaleType="center"
             android:onClick="openNewOrderDialog"
 
