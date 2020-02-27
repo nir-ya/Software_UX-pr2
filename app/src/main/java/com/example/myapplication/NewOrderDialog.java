@@ -86,8 +86,8 @@ public class NewOrderDialog extends AppCompatDialogFragment {
     private void startOrderProcedure(Timestamp time) {
 
         Intent intent = new Intent(getActivity() , ManaPickerActivity.class);
-        intent.putExtra("CALENDAR", time);
-        intent.putExtra("order_id", Randomizer.randomString(18));
+        intent.putExtra(getResources().getString(R.string.calendar_extra_name), time);
+        intent.putExtra(getResources().getString(R.string.order_id_extra_name), Randomizer.randomString(18));
         startActivity(intent);
         this.dismiss();
     }
@@ -156,23 +156,6 @@ public class NewOrderDialog extends AppCompatDialogFragment {
         builder.setView(view);
         return view;
     }
-
-
-//    @Override
-//    public void onAttach(Context context) {
-//        super.onAttach(context);
-//
-//        try {
-////            listener = (NewOrderDialogListener) context;
-//        } catch (ClassCastException e) {
-//            throw new ClassCastException(context.toString() +
-//                    "must implement ExampleDialogListener");
-//        }
-//    }
-
-//    public interface NewOrderDialogListener {
-//        void applyTime(int hour, int minute);
-//    }
 }
 
 

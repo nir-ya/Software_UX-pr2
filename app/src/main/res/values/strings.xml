@@ -101,5 +101,7 @@
     </string>
     <string name="time_travel_error">אין תמיכה במסע בזמן בשלב זה</string>
     <string name="new_order_dialog_title">בחרו שעה להזמנה</string>
+    <string name="calendar_extra_name">CALENDAR</string>
+    <string name="order_id_extra_name">order_id</string>
 
 </resources>

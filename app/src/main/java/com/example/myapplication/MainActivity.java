@@ -196,7 +196,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     /**
-     * this function craete tooltip, if user first using the app
+     * this function creates tooltip, if user first uses the app
      */
     private void initializeTooltip() {
 
