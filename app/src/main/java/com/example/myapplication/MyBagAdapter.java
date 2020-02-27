@@ -16,6 +16,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 
 import android.view.View;
 import android.widget.Toast;
@@ -34,15 +36,13 @@ public class MyBagAdapter extends FirestoreRecyclerAdapter<Mana, MyBagAdapter.My
 
     @Override
     protected void onBindViewHolder(@NonNull final MyBagHolder holder, final int position, @NonNull final Mana mana) {
-        System.out.println(position); // todo: delete
         holder.textViewType.setText(mana.getHebType(mana.getType()));
-        holder.textViewPrice.setText(Integer.toString(mana.getPrice()));
+        holder.textViewPrice.setText(Integer.toString(mana.getPrice()) + "₪");
         holder.tosafot.setText(mana.getTosafotString());
         holder.statusText.setText(mana.getStatus());
         holder.deleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Todo - alert dialog
                 popUpAlertDialog(position);
 
             }
@@ -63,13 +63,16 @@ public class MyBagAdapter extends FirestoreRecyclerAdapter<Mana, MyBagAdapter.My
         }
 
         if(mana.getType().equals(Mana.PITA)){
-            holder.manaImg.setImageDrawable(context.getDrawable(R.drawable.pita_full));
+            holder.manaImg.setImageDrawable(context.getDrawable(R.drawable.pita_full_no_margin));
         }
         else if(mana.getType().equals(Mana.LAFA)){
-            holder.manaImg.setImageDrawable(context.getDrawable(R.drawable.lafa_full));
+            holder.manaImg.setImageDrawable(context.getDrawable(R.drawable.lafa_full_no_margin));
+        }
+        else if(mana.getType().equals(Mana.HALF_LAFA)){
+            holder.manaImg.setImageDrawable(context.getDrawable(R.drawable.half_lafa_full_no_margin));
         }
         else
-            holder.manaImg.setImageDrawable(context.getDrawable(R.drawable.half_pita_full));
+            holder.manaImg.setImageDrawable(context.getDrawable(R.drawable.half_pita_full_no_margin));
     }
 
 
@@ -80,9 +83,15 @@ public class MyBagAdapter extends FirestoreRecyclerAdapter<Mana, MyBagAdapter.My
         return new MyBagHolder(v);
     }
 
-    public void deleteItem(int position){
-        getSnapshots().getSnapshot(position).getReference().delete();
-        notifyDataSetChanged();
+    public void deleteItem(final int position){
+        getSnapshots().getSnapshot(position).getReference().delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                notifyDataSetChanged();
+
+            }
+        });
+
 
     }
 

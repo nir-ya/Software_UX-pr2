@@ -121,25 +121,16 @@ public class MainActivity extends AppCompatActivity {
                 .build();
 
         final MyBagAdapter myBagAdapter = new MyBagAdapter(options, this);
+
         RecyclerView myBagRecView = myBagDialog.findViewById(R.id.myBagRecyclerView);
         LinearLayoutManager layout = new LinearLayoutManager(this.getApplicationContext());
         myBagRecView.setLayoutManager(layout);
         myBagRecView.setAdapter(myBagAdapter);
 
-        /* Responsible foe deleting an item from myBag with swipe-left action */
-        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.LEFT) {
-            @Override
-            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
-                return false;
-            }
 
-            @Override
-            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-                myBagAdapter.popUpAlertDialog(viewHolder.getAdapterPosition());
-            }
-        }).attachToRecyclerView(myBagRecView);
         //start listening
         myBagAdapter.startListening();
+
         myBagDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
             @Override
             public void onDismiss(DialogInterface dialogInterface) {
