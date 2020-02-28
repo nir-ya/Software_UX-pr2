@@ -60,6 +60,6 @@
         <ListView
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/TextGreen" />
+            android:background="@color/textGreen" />
     </LinearLayout>
 </androidx.cardview.widget.CardView>

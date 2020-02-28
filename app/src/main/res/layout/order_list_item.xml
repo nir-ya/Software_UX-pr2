@@ -71,7 +71,7 @@
                 android:layout_marginTop="15dp"
                 android:fontFamily="@font/varela_round"
                 android:text="@string/status_string"
-                android:textColor="@color/TextGreen"
+                android:textColor="@color/textGreen"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="@+id/order_title"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -116,24 +116,6 @@
             android:paddingBottom="20dp">
 
             <Button
-                android:layout_weight="1"
-                android:id="@+id/btn_order"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/full_button"
-                android:backgroundTint="@color/darkestGreen"
-                android:text="@string/join_string"
-                android:layout_margin="10dp"
-                android:paddingLeft="30dp"
-                android:paddingRight="30dp"
-                android:textColor="@color/lightGrey"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/btn_info"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <Button
                 android:id="@+id/btn_info"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -150,6 +132,24 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/btn_order"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:layout_weight="1"
+                android:id="@+id/btn_order"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/full_button"
+                android:backgroundTint="@color/darkestGreen"
+                android:text="@string/join_string"
+                android:layout_margin="10dp"
+                android:paddingLeft="30dp"
+                android:paddingRight="30dp"
+                android:textColor="@color/lightGrey"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/btn_info"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
         </LinearLayout>
 

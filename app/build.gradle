@@ -51,5 +51,6 @@ dependencies {
     implementation 'com.github.wooplr:Spotlight:1.2.3'
     implementation 'org.wso2.orbit.joda-time:joda-time:2.9.4.wso2v1'
 
+    implementation 'joda-time:joda-time:2.9.4'
 }
 apply plugin: 'com.google.gms.google-services'
