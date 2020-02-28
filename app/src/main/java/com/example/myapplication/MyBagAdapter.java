@@ -24,6 +24,10 @@ import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.TimeZone;
+
 public class MyBagAdapter extends FirestoreRecyclerAdapter<Mana, MyBagAdapter.MyBagHolder> {
 
     private final Context context;
@@ -40,14 +44,32 @@ public class MyBagAdapter extends FirestoreRecyclerAdapter<Mana, MyBagAdapter.My
         holder.textViewPrice.setText(Integer.toString(mana.getPrice()) + "₪");
         holder.tosafot.setText(mana.getTosafotString());
         holder.statusText.setText(mana.getStatus());
-        holder.deleteBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                popUpAlertDialog(position);
 
-            }
-        });
+        if (mana.getStatus().equals("open")){
+            holder.deleteBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    popUpAlertDialog(position);
 
+                }
+            });
+        }
+        else if (mana.getStatus().equals("canceled")){
+            holder.deleteBtn.setText("הסר");
+            holder.deleteBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    deleteItem(position);
+
+                }
+            });
+        }
+        else{
+            holder.deleteBtn.setVisibility(View.INVISIBLE);
+        }
+        DateFormat format = new SimpleDateFormat("HH:mm");
+        format.setTimeZone(TimeZone.getTimeZone("GMT+2"));
+        holder.hourText.setText(format.format(mana.getTimestamp()));
 
         setGraphics(holder, mana);
 
