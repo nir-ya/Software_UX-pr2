@@ -1,17 +1,13 @@
 package com.example.myapplication;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
-import android.widget.Button;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -26,7 +22,6 @@ import android.widget.Toast;
 
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
@@ -34,8 +29,6 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.wooplr.spotlight.SpotlightConfig;
 import com.wooplr.spotlight.utils.SpotlightSequence;
-
-import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -49,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
     private OrderListItemAdapter orderAdapter;
     FloatingActionButton newOrderButton;
     ImageView myBagBtn;
-    private TextView beFirst;
+    private TextView beFirstText;
     private FirebaseUser user;
 
     private RecyclerView ordersRecyclerView;
@@ -84,13 +77,12 @@ public class MainActivity extends AppCompatActivity {
                 .setQuery(query, OrderListItem.class)
                 .build();
         orderAdapter = new OrderListItemAdapter(options, this.getApplicationContext());
-        orderAdapter.setEmptyView(beFirst);
+        orderAdapter.setEmptyView(beFirstText);
         ordersRecyclerView = findViewById(R.id.orders_recycler_view);
         LinearLayoutManager layout = new LinearLayoutManager(this);
         layout.setOrientation(RecyclerView.VERTICAL);
         ordersRecyclerView.setLayoutManager(layout);
         ordersRecyclerView.setAdapter(orderAdapter);
-
     }
 
     /**
@@ -146,7 +138,7 @@ public class MainActivity extends AppCompatActivity {
         //views
         myBagBtn = findViewById(R.id.bag);
         newOrderButton = findViewById(R.id.new_order_button);
-        beFirst = findViewById(R.id.be_first);
+        beFirstText = findViewById(R.id.be_first);
 
     }
 
