@@ -30,6 +30,13 @@ import com.google.firebase.firestore.Query;
 import com.wooplr.spotlight.SpotlightConfig;
 import com.wooplr.spotlight.utils.SpotlightSequence;
 
+import org.joda.time.DateTime;
+
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
+
+
 public class MainActivity extends AppCompatActivity {
 
 
@@ -72,7 +79,14 @@ public class MainActivity extends AppCompatActivity {
      * this function is setting up the orders recycler view
      */
     private void setUpOrdersRecyclerView() {
-        Query query = ordersRef.orderBy(getString(R.string.price), Query.Direction.DESCENDING);
+        DateTime today = new DateTime().withTimeAtStartOfDay();
+        DateTime tomorrow = today.plusDays(1).withTimeAtStartOfDay();
+
+        Date tomorrowDate = tomorrow.toDate();
+        Date todayDate = today.toDate();
+
+        Query query = ordersRef.orderBy("timestamp", Query.Direction.ASCENDING).whereLessThan("timestamp",tomorrowDate)
+                .whereGreaterThan("timestamp", todayDate);
         FirestoreRecyclerOptions options = new FirestoreRecyclerOptions.Builder<OrderListItem>()
                 .setQuery(query, OrderListItem.class)
                 .build();
@@ -105,8 +119,16 @@ public class MainActivity extends AppCompatActivity {
      * @param myBagDialog parent dialog popup windows
      */
     private void setUpMyBag(Dialog myBagDialog) {
+        DateTime today = new DateTime().withTimeAtStartOfDay();
+        DateTime tomorrow = today.plusDays(1).withTimeAtStartOfDay();
+
+        Date tomorrowDate = tomorrow.toDate();
+        Date todayDate = today.toDate();
+
         Query query = db.collectionGroup(getString(R.string.manot_collection))
-                .whereEqualTo(getString(R.string.owner_id), user.getUid());
+                .whereEqualTo(getString(R.string.owner_id), user.getUid())
+                .whereLessThan("timestamp",tomorrowDate)
+                .whereGreaterThan("timestamp", todayDate);
 
         FirestoreRecyclerOptions options = new FirestoreRecyclerOptions.Builder<Mana>()
                 .setQuery(query, Mana.class)
@@ -178,11 +200,11 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+
     /**
-     * this function creates tooltip, if user first uses the app
+     * this function craete tooltip, if user first using the app
      */
     private void initializeTooltip() {
-
 
         //create a spotlight configuration
         final SpotlightConfig config = getSpotlightConfig();
@@ -211,13 +233,13 @@ public class MainActivity extends AppCompatActivity {
         }, Constants.LONG_DELAY); //3 seconds delay from application start
     }
 
-
     /**
      * this function creates a spotlight configuration
      * configuration sets the colors, animations, etc. of the spotlight
      * @return SpotlightConfiguration object
      */
     private SpotlightConfig getSpotlightConfig(){
+
         final SpotlightConfig config = new SpotlightConfig();
         config.setIntroAnimationDuration(500);
         config.setRevealAnimationEnabled(true);
