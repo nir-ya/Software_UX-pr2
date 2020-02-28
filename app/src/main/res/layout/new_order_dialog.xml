@@ -35,7 +35,6 @@
         android:numbersTextColor="@color/textGreen"
         android:numbersBackgroundColor="@color/backgroundGreen"
         android:backgroundTint="@color/backgroundGreen"
-        android:padding="10dp"
         android:timePickerMode="spinner"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
