@@ -38,8 +38,8 @@ public class ManaPickerActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_mana_picker);
 
-        orderId = getIntent().getStringExtra("order_id");
-        time = getIntent().getParcelableExtra("CALENDAR");
+        orderId = getIntent().getStringExtra(getResources().getString(R.string.order_id_extra_name));
+        time = getIntent().getParcelableExtra(getResources().getString(R.string.calendar_extra_name));
         orderTime = Randomizer.formatter.format(new Date(time.toDate().toString()));
 
         setupViewPager();

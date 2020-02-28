@@ -96,14 +96,12 @@
         android:text="שגר"
         android:textStyle="bold"
         android:fontFamily="@font/varela_round"
-        android:textColor="@color/lightGrey"
+        android:textColor="@color/grey"
         android:textSize="14sp"
-        android:background="@drawable/full_button"
+        android:background="@drawable/border_button"
         android:clickable="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/order_time_error_text"
-
-
         android:layout_marginBottom="50dp"
         app:layout_constraintStart_toEndOf="@+id/cancel_button" />
 
