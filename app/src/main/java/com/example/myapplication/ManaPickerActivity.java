@@ -19,10 +19,7 @@ import java.util.List;
 
 public class ManaPickerActivity extends AppCompatActivity {
 
-
     String orderTime;
-
-
     ViewPager viewPager;  // TODO: change to a more informative names
     ManaPickerAdapter adapter;
     List<ManaListItem> cards;
