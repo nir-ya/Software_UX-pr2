@@ -92,7 +92,7 @@
     <string name="clear_tosafot"><u>נקה</u></string>
     <string name="pita_or_lafa">פיתה או לאפה?</string>
     <string name="register"><u>הרשמה</u></string>
-    <string name="time_pick_instructions">השעה שבה יתחילו להכין את ההזמנה.\nזמן הכנה ומשלוח משוער: 40 דקות.</string>
+    <string name="time_pick_instructions">(השעה שבה תתקשרו להזמין)\nזמן הכנה ומשלוח משוער: 40 דקות.</string>
     <string name="order_hours_instruction">
         שעות הפעילות: 21:00 - 11:00
     </string>
@@ -103,5 +103,6 @@
     <string name="new_order_dialog_title">בחרו שעה להזמנה</string>
     <string name="calendar_extra_name">CALENDAR</string>
     <string name="order_id_extra_name">order_id</string>
+    <string name="order_confirm_text">שלח הזמנה</string>
 
 </resources>

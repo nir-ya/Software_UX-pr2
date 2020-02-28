@@ -53,7 +53,13 @@ public class NewOrderDialog extends AppCompatDialogFragment {
                 updateOrderInstructions(hour, minute);
             }
         });
+        setButtonListeners();
+        okButton.setClickable(false);
 
+        return builder.create();
+    }
+
+    private void setButtonListeners() {
         okButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -67,8 +73,6 @@ public class NewOrderDialog extends AppCompatDialogFragment {
                 cancel();
             }
         });
-
-        return builder.create();
     }
 
     private void cancel() {
@@ -91,7 +95,6 @@ public class NewOrderDialog extends AppCompatDialogFragment {
         startActivity(intent);
         this.dismiss();
     }
-
 
     private void updateOkButtonStatus(int hour, int minute) {
         if (!isValidTime(hour, minute)) {
