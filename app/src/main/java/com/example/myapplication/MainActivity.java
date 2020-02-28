@@ -32,8 +32,6 @@ import com.wooplr.spotlight.utils.SpotlightSequence;
 
 import org.joda.time.DateTime;
 
-import java.util.Arrays;
-import java.util.Calendar;
 import java.util.Date;
 
 
