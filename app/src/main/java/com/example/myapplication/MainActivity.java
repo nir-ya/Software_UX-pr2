@@ -206,38 +206,6 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    /**
-     * this function creates tooltip, if user first uses the app
-     */
-    private void initializeTooltip() {
-
-
-        //create a spotlight configuration
-        final SpotlightConfig config = getSpotlightConfig();
-
-        //handler is for the spotlight delay - 3 seconds from app onCreate
-        new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                //create spotlight sequence
-                runSpotlightSequence();
-            }
-
-            /**
-             * this function create and run the spotlights sequence.
-             */
-            private void runSpotlightSequence() {
-                SpotlightSequence.getInstance(MainActivity.this, config)
-                        .addSpotlight(ordersRecyclerView, getString(R.string.join_order_tooltop),
-                                getString(R.string.join_tooltip_subtext), Constants.REC_USAGE_ID)
-                        .addSpotlight(newOrderButton, getString(R.string.create_order_tooltip)
-                                , getString(R.string.create_tooltip_subtext), Constants.FAB_USAGE_ID)
-                        .addSpotlight(myBagBtn, getString(R.string.mybag_tooltip)
-                                , getString(R.string.mybag_tooltip_subtext), Constants.BAG_USAGE_ID)
-                        .startSequence();
-            }
-        }, Constants.LONG_DELAY); //3 seconds delay from application start
-    }
 
     /**
      * this function craete tooltip, if user first using the app
