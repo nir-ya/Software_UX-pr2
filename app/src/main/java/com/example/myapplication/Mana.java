@@ -1,6 +1,7 @@
 package com.example.myapplication;
 
 
+import java.util.Date;
 import java.util.HashMap;
 
 /**
@@ -40,6 +41,12 @@ public class Mana {
     private String notes;
     private int price;
     private String ownerUserId;
+
+    public Date getTimestamp() {
+        return timestamp;
+    }
+
+    private Date timestamp;
 
 
     /**
