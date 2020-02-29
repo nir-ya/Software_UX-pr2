@@ -22,7 +22,7 @@ public class Randomizer {
     static Format formatter = new SimpleDateFormat("HH:mm");
 
     static int randomSadSound() {
-        return Constants.SAD_SOUNDS[generate(0,5)];
+        return Constants.SAD_SOUNDS[generate(0,Constants.SAD_SOUNDS.length-1)];
     }
 
 }
