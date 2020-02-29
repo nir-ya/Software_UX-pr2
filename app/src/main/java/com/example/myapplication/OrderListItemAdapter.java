@@ -328,6 +328,7 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
 
         final MediaPlayer mp = MediaPlayer.create(context, Randomizer.randomSadSound());
 
+        mp.start();
 
 
         alertDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
