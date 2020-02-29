@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
         FirestoreRecyclerOptions options = new FirestoreRecyclerOptions.Builder<OrderListItem>()
                 .setQuery(query, OrderListItem.class)
                 .build();
-        orderAdapter = new OrderListItemAdapter(options, this.getApplicationContext());
+        orderAdapter = new OrderListItemAdapter(options, this);
         orderAdapter.setEmptyView(beFirstText);
         ordersRecyclerView = findViewById(R.id.orders_recycler_view);
         LinearLayoutManager layout = new LinearLayoutManager(this);
