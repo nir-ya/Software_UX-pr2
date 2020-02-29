@@ -53,6 +53,7 @@ public class MyBagAdapter extends FirestoreRecyclerAdapter<Mana, MyBagAdapter.My
 
                 }
             });
+            holder.statusText.setText("הזמנה פתוחה");
         }
         else if (mana.getStatus().equals("canceled")){
             holder.deleteBtn.setText("הסר");
@@ -63,6 +64,7 @@ public class MyBagAdapter extends FirestoreRecyclerAdapter<Mana, MyBagAdapter.My
 
                 }
             });
+            holder.statusText.setText("הזמנה סגורה");
         }
         else{
             holder.deleteBtn.setVisibility(View.INVISIBLE);
@@ -158,6 +160,7 @@ public class MyBagAdapter extends FirestoreRecyclerAdapter<Mana, MyBagAdapter.My
             paymentImg = itemView.findViewById(R.id.paymentImg);
             manaImg = itemView.findViewById(R.id.manaImg);
             deleteBtn = itemView.findViewById(R.id.deleteBtn);
+
         }
     }
 
