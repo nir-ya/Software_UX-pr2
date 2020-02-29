@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.firebase.ui.firestore.SnapshotParser;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
@@ -35,6 +36,7 @@ public class OrderFinishActivity extends AppCompatActivity {
     private CollectionReference manotRef;
     private OrderFinishListItemAdapter adapter;
     private String orderDescription;
+    private String orderId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +47,7 @@ public class OrderFinishActivity extends AppCompatActivity {
             getWindow().setNavigationBarColor(getResources().getColor(R.color.light_peach));
         }
 
-        String orderId = getIntent().getStringExtra("order_id");
+        orderId = getIntent().getStringExtra("order_id");
         manotRef = db.collection("OpenOrders/" + orderId + "/Manot");
 
         finishButton = findViewById(R.id.finish_button);
@@ -168,7 +170,9 @@ public class OrderFinishActivity extends AppCompatActivity {
     }
 
     public void lockOrder(View view) {
-        // TODO
+        DocumentReference orderRef = db.collection(Constants.ORDERS).document(orderId);
+        orderRef.update("status", OrderListItem.ORDERED);
+
         this.finish();
     }
 

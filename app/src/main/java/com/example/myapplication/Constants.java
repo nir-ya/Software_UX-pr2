@@ -1,7 +1,5 @@
 package com.example.myapplication;
 
-import android.content.res.Resources;
-
 import java.util.HashMap;
 
 class Constants {
@@ -17,6 +15,7 @@ class Constants {
     static final String LOCKED_TEXT = "הזמן!";
     static final String JOIN_TEXT = "הצטרף!";
     static final String READY_TEXT = "מוכן לשילוח";
+    public static final String ORDERED_TEXT = "ההזמנה בהכנה";
     static final String ORDER_OUT = "שעת ההזמנה הגיעה. מישהו צריך לקחת יוזמה";
     static final String ORDER_CANCELED = "שכחו מזה, לא הגענו למינימום";
     static final String WAITING = "מחכה למשבחים...";
