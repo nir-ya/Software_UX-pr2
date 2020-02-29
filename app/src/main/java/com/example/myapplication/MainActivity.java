@@ -5,6 +5,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -103,52 +104,8 @@ public class MainActivity extends AppCompatActivity {
      * @param view - the button that his onClick call the function
      */
     public void launchMyBagDialog(View view) {
-        Dialog myBagDialog = new Dialog(MainActivity.this, R.style.Theme_Dialog);
-        myBagDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        myBagDialog.setContentView(R.layout.mybag_dialog);
-        myBagDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-        setUpMyBag(myBagDialog);
-        myBagDialog.show();
-    }
-
-    /**
-     * this application starts the myBag Recycler View
-     *
-     * @param myBagDialog parent dialog popup windows
-     */
-    private void setUpMyBag(Dialog myBagDialog) {
-        DateTime today = new DateTime().withTimeAtStartOfDay();
-        DateTime tomorrow = today.plusDays(1).withTimeAtStartOfDay();
-
-        Date tomorrowDate = tomorrow.toDate();
-        Date todayDate = today.toDate();
-
-        Query query = db.collectionGroup(getString(R.string.manot_collection))
-                .whereEqualTo(getString(R.string.owner_id), user.getUid())
-                .whereLessThan("timestamp",tomorrowDate)
-                .whereGreaterThan("timestamp", todayDate);
-
-        FirestoreRecyclerOptions options = new FirestoreRecyclerOptions.Builder<Mana>()
-                .setQuery(query, Mana.class)
-                .build();
-
-        final MyBagAdapter myBagAdapter = new MyBagAdapter(options, this);
-
-        RecyclerView myBagRecView = myBagDialog.findViewById(R.id.myBagRecyclerView);
-        LinearLayoutManager layout = new LinearLayoutManager(this.getApplicationContext());
-        myBagRecView.setLayoutManager(layout);
-        myBagRecView.setAdapter(myBagAdapter);
-
-
-        //start listening
-        myBagAdapter.startListening();
-
-        myBagDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
-            @Override
-            public void onDismiss(DialogInterface dialogInterface) {
-                myBagAdapter.stopListening();
-            }
-        });
+        MyBagDialog myBagDialog = new MyBagDialog();
+        myBagDialog.show(getSupportFragmentManager(), "my bag dialog");
     }
 
     /**
@@ -192,7 +149,6 @@ public class MainActivity extends AppCompatActivity {
     public void openNewOrderDialog(View view) {
 
         NewOrderDialog newOrderDialog = new NewOrderDialog();
-
         newOrderDialog.show(getSupportFragmentManager(), "order dialog");
     }
 
