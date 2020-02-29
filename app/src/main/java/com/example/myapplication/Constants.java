@@ -42,7 +42,7 @@ class Constants {
 
 
     static final int[] SAD_SOUNDS = new int[]{R.raw.basa_whitney, R.raw.basa_sound,
-            R.raw.sad_trombone, R.raw.letitgoo, R.raw.believefly_basa, R.raw.titanic_basa};
+            R.raw.sad_trombone, R.raw.letitgoo, R.raw.believefly_basa, R.raw.titanic};
 
     static HashMap<String, String> hebrewExtras = setHebrewExtrasMap();
 

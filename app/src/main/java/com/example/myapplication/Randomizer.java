@@ -21,10 +21,6 @@ public class Randomizer {
 
     static Format formatter = new SimpleDateFormat("HH:mm");
 
-
-    int[] sadSounds = new int[]{R.raw.basa_whitney, R.raw.basa_sound,
-            R.raw.sad_trombone, R.raw.letitgoo, R.raw.believefly_basa, R.raw.titanic};
-
     static int randomSadSound() {
         return Constants.SAD_SOUNDS[generate(0,5)];
     }
