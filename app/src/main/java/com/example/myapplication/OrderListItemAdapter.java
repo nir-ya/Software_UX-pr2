@@ -325,9 +325,20 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
                 setTextColor(context.getResources().getColor(R.color.dark_green));
         alertDialog.getButton(AlertDialog.BUTTON_NEUTRAL).setTypeface(Typeface.DEFAULT, Typeface.BOLD);
 
-        MediaPlayer mp = MediaPlayer.create(context, R.raw.sad_trombone);
-        mp.start();
+
+        final MediaPlayer mp = MediaPlayer.create(context, Randomizer.randomSadSound());
+
+
+
+        alertDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialogInterface) {
+                mp.stop();
+            }
+        });
     }
+
+
 
     private void setOrderedItem(OrderListItemHolder holder, String documentId, OrderListItem model) {
         holder.statusText.setText(Constants.ORDERED_TEXT);
