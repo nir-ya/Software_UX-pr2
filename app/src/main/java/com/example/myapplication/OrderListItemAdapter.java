@@ -1,8 +1,13 @@
 package com.example.myapplication;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Typeface;
+import android.graphics.drawable.Icon;
+import android.media.MediaPlayer;
 import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -280,10 +286,60 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
 
         holder.statusText.setTextColor(Color.RED);
         if (null != layout) {
-            holder.orderButton.setVisibility(View.GONE);
+//            holder.orderButton.setVisibility(View.GONE);
             holder.infoButton.setVisibility(View.GONE);
         }
+
+        holder.orderButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                bassaAlert();
+            }
+        });
     }
+
+    /**
+     * This function pop-up a sad massage. א
+     * helps the user to vent his feelings in case of cancellation
+     */
+    private void bassaAlert() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context)
+                .setMessage(context.getResources().getString(R.string.sad_emoji_trio))
+                .setTitle(context.getResources().getString(R.string.bassa_text))
+                .setNeutralButton(context.getResources().getText(R.string.yalla_got_it),
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+
+        //set content size
+        TextView dialogText = (TextView) alertDialog.findViewById(android.R.id.message);
+        dialogText.setTextSize(40);
+
+        alertDialog.getButton(AlertDialog.BUTTON_NEUTRAL).
+                setTextColor(context.getResources().getColor(R.color.dark_green));
+        alertDialog.getButton(AlertDialog.BUTTON_NEUTRAL).setTypeface(Typeface.DEFAULT, Typeface.BOLD);
+
+
+        final MediaPlayer mp = MediaPlayer.create(context, Randomizer.randomSadSound());
+
+        mp.start();
+
+
+        alertDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialogInterface) {
+                mp.stop();
+            }
+        });
+    }
+
+
 
     private void setOrderedItem(OrderListItemHolder holder, String documentId, OrderListItem model) {
         holder.statusText.setText(Constants.ORDERED_TEXT);
@@ -362,6 +418,7 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
     public void onAttachedToRecyclerView(@NonNull RecyclerView recyclerView) {
         super.onAttachedToRecyclerView(recyclerView);
 
+
     }
 
     private void initEmptyView() {
@@ -381,4 +438,6 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
         this.emptyView = view;
         initEmptyView();
     }
+
+
 }

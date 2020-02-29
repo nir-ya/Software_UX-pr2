@@ -21,4 +21,23 @@ public class Randomizer {
 
     public static Format formatter = new SimpleDateFormat("HH:mm");
 
+    public static int randomSadSound(){
+        int rand = generate(0,5);
+        switch (rand){
+            case 0:
+                return R.raw.basa_sound;
+            case 1:
+                return R.raw.basa_whitney;
+            case 2:
+                return R.raw.letitgoo;
+            case 3:
+                return R.raw.sad_trombone;
+            case 4:
+                return R.raw.believefly_basa;
+            case 5:
+                return R.raw.titanic_basa;
+        }
+        return R.raw.basa_whitney;
+    }
+
 }
