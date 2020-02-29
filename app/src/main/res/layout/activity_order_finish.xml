@@ -11,15 +11,28 @@
         android:id="@+id/header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="14dp"
         android:layout_marginEnd="16dp"
         android:fontFamily="@font/varela_round"
-        android:padding="10dp"
+        android:padding="6dp"
         android:text="@string/finish_activity_header"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/order_instruction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/varela_round"
+        android:padding="6dp"
+        android:text="@string/order_instruction"
+        android:textSize="12sp"
+        android:layout_marginEnd="16dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/header" />
 
     <View
         android:id="@+id/line_seperator"
@@ -30,7 +43,7 @@
         android:layout_marginRight="20dp"
         android:layout_marginBottom="10dp"
         android:background="#c0c0c0"
-        app:layout_constraintTop_toBottomOf="@id/header" />
+        app:layout_constraintTop_toBottomOf="@id/order_instruction" />
 
 
     <ScrollView
@@ -84,6 +97,7 @@
                 android:padding="10dp"
                 android:text="@string/finish_activity_copy_button_text"
                 android:textColor="@color/lightGrey"
+                android:onClick="copyOrder"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -125,9 +139,7 @@
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:onClick="returnToMain"
-                />
-
+                android:onClick="lockOrder"/>
 
         </TableRow>
 

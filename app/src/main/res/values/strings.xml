@@ -104,5 +104,9 @@
     <string name="calendar_extra_name">CALENDAR</string>
     <string name="order_id_extra_name">order_id</string>
     <string name="order_confirm_text">שלח הזמנה</string>
+    <string name="order_instruction">סמנו את המנות לסיום ההזמנה</string>
+    <string name="bassa_text">איזה באסה!</string>
+    <string name="sad_emoji_trio">😥😥😥</string>
+    <string name="yalla_got_it">טוב יאללה, הבנתי</string>
 
 </resources>

@@ -1,9 +1,13 @@
 package com.example.myapplication;
 
-
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Typeface;
+import android.graphics.drawable.Icon;
+import android.media.MediaPlayer;
 import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -78,16 +83,14 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
         setCardExpansion(holder.orderCard, holder);
         setCardExpansion(holder.infoButton, holder);
 
-
         setOrderInfoRecyclerView(holder, documentId);
-
     }
 
     private void checkIfOrderTimePassed(@NonNull OrderListItem order, String documentId) {
-        if (order.getTimestamp().compareTo(Timestamp.now()) < 0) {
+        if (order.getTimestamp().compareTo(Timestamp.now()) < 0 && order.getStatus().equals(OrderListItem.OPEN)) {
             DocumentReference orderRef = db.collection(Constants.ORDERS).document(documentId);
             if (order.reachedMinimum()) {
-                orderRef.update("status", OrderListItem.LOCKED); //todo make status const String
+                orderRef.update("status", OrderListItem.READY); //todo make status const String
             } else {
                 orderRef.update("status", OrderListItem.CANCELED);
             }
@@ -203,12 +206,19 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
      * @param model  - the "Order" object
      */
     private void updateOrderItemByStatus(OrderListItemHolder holder, OrderListItem model, String documentId) {
-        if (model.getStatus().equals(OrderListItem.OPEN)) {
-            openOrder(holder, documentId, model);
-        } else if (model.getStatus().equals(OrderListItem.LOCKED)) {
-            lockOrder(holder, documentId, model);
-        } else if (model.getStatus().equals(OrderListItem.CANCELED)) {
-            cancelOrder(holder, documentId, model);
+        switch (model.getStatus()) {
+            case OrderListItem.OPEN:
+                setOpenItem(holder, documentId, model);
+                break;
+            case OrderListItem.READY:
+                setReadyItem(holder, documentId, model);
+                break;
+            case OrderListItem.CANCELED:
+                setCanceledItem(holder, documentId, model);
+                break;
+            case OrderListItem.ORDERED:
+                setOrderedItem(holder, documentId, model);
+                break;
         }
     }
 
@@ -219,7 +229,7 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
      * @param documentId
      * @param orderListItem
      */
-    private void lockOrder(OrderListItemHolder holder, String documentId, OrderListItem orderListItem) {
+    private void setReadyItem(OrderListItemHolder holder, String documentId, OrderListItem orderListItem) {
         holder.statusText.setText(Constants.ORDER_OUT);
         holder.orderButton.setText(Constants.LOCKED_TEXT);
         holder.orderButton.setBackgroundColor(context.getResources().getColor(R.color.grey));
@@ -242,14 +252,13 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
      * @param documentId
      * @param model      - the orderListItem relevant item
      */
-    private void openOrder(OrderListItemHolder holder, String documentId, OrderListItem model) {
+    private void setOpenItem(OrderListItemHolder holder, String documentId, OrderListItem model) {
         holder.orderButton.setText(Constants.JOIN_TEXT);
         holder.orderButton.setBackgroundColor(context.getResources().getColor(R.color.dark_navy));
 
         setJoinButtonHandler(holder.orderButton, documentId, model);
 
         holder.statusText.setText(model.getPrice() >= MIN_ORDER ? Constants.READY_TEXT : Constants.WAITING);
-
 
         setProgressBar(holder, model);
 
@@ -259,8 +268,6 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
             holder.orderButton.setVisibility(VISIBLE);
             holder.infoButton.setVisibility(VISIBLE);
         }
-
-
     }
 
     /**
@@ -270,7 +277,7 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
      * @param documentId    - String representation of the document ID
      * @param orderListItem order object
      */
-    private void cancelOrder(OrderListItemHolder holder, String documentId, OrderListItem orderListItem) {
+    private void setCanceledItem(OrderListItemHolder holder, String documentId, OrderListItem orderListItem) {
         holder.statusText.setText(Constants.ORDER_CANCELED);
         holder.orderButton.setText("התבאס");
         holder.orderButton.setBackgroundColor(context.getResources().getColor(R.color.red));
@@ -279,10 +286,70 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
 
         holder.statusText.setTextColor(Color.RED);
         if (null != layout) {
+//            holder.orderButton.setVisibility(View.GONE);
+            holder.infoButton.setVisibility(View.GONE);
+        }
+
+        holder.orderButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                bassaAlert();
+            }
+        });
+    }
+
+    /**
+     * This function pop-up a sad massage. א
+     * helps the user to vent his feelings in case of cancellation
+     */
+    private void bassaAlert() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context)
+                .setMessage(context.getResources().getString(R.string.sad_emoji_trio))
+                .setTitle(context.getResources().getString(R.string.bassa_text))
+                .setNeutralButton(context.getResources().getText(R.string.yalla_got_it),
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+
+        //set content size
+        TextView dialogText = (TextView) alertDialog.findViewById(android.R.id.message);
+        dialogText.setTextSize(40);
+
+        alertDialog.getButton(AlertDialog.BUTTON_NEUTRAL).
+                setTextColor(context.getResources().getColor(R.color.dark_green));
+        alertDialog.getButton(AlertDialog.BUTTON_NEUTRAL).setTypeface(Typeface.DEFAULT, Typeface.BOLD);
+
+
+        final MediaPlayer mp = MediaPlayer.create(context, Randomizer.randomSadSound());
+
+        mp.start();
+
+
+        alertDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialogInterface) {
+                mp.stop();
+            }
+        });
+    }
+
+
+
+    private void setOrderedItem(OrderListItemHolder holder, String documentId, OrderListItem model) {
+        holder.statusText.setText(Constants.ORDERED_TEXT);
+        holder.progressBar.setProgressDrawable(context.getDrawable(R.drawable.progress_bar_locked));
+        ViewGroup layout = (ViewGroup) holder.orderButton.getParent();
+
+        holder.statusText.setTextColor(context.getResources().getColor(R.color.textGreen));
+        if (layout != null) {
             holder.orderButton.setVisibility(View.GONE);
             holder.infoButton.setVisibility(View.GONE);
-            //layout.removeView(holder.orderButton);
-            //layout.removeView(holder.infoButton);
         }
     }
 
@@ -350,6 +417,7 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
     @Override
     public void onAttachedToRecyclerView(@NonNull RecyclerView recyclerView) {
         super.onAttachedToRecyclerView(recyclerView);
+
 
     }
 

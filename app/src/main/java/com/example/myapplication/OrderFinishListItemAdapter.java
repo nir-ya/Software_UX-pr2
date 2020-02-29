@@ -48,7 +48,6 @@ public class OrderFinishListItemAdapter extends FirestoreRecyclerAdapter<OrderFi
             textViewName = itemView.findViewById(R.id.name);
             textViewOrderType = itemView.findViewById(R.id.orderType);
             textViewDescription = itemView.findViewById(R.id.description);
-
         }
     }
 }
