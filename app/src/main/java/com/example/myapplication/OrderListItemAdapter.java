@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.Icon;
+import android.media.MediaPlayer;
 import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -323,6 +324,9 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
         alertDialog.getButton(AlertDialog.BUTTON_NEUTRAL).
                 setTextColor(context.getResources().getColor(R.color.dark_green));
         alertDialog.getButton(AlertDialog.BUTTON_NEUTRAL).setTypeface(Typeface.DEFAULT, Typeface.BOLD);
+
+        MediaPlayer mp = MediaPlayer.create(context, R.raw.sad_trombone);
+        mp.start();
     }
 
     private void setOrderedItem(OrderListItemHolder holder, String documentId, OrderListItem model) {
