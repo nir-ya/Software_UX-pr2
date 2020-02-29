@@ -29,7 +29,8 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/myBagRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="350dp"
+        android:layout_height="wrap_content"
+        app:layout_constrainedHeight="true"
         android:background="@color/transparent"
         android:layout_marginBottom="10dp"
         android:layout_marginTop="10dp"

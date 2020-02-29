@@ -56,6 +56,7 @@ public class NewOrderDialog extends AppCompatDialogFragment {
         setButtonListeners();
         okButton.setClickable(false);
 
+
         return builder.create();
     }
 
