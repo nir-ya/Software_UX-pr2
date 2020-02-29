@@ -4,15 +4,14 @@ package com.example.myapplication;
 import android.os.Parcel;
 import android.os.Parcelable;
 import com.google.firebase.Timestamp;
-import com.google.firebase.firestore.DocumentReference;
-import java.util.Calendar;
 
 
 public class OrderListItem implements Parcelable {
 
-    static final String LOCKED = "locked";
+    static final String READY = "ready";
     static final String OPEN = "open";
     static final String CANCELED = "canceled";
+    static final String ORDERED = "ordered";
 
     private final static int MIN_ORDER = 70;
     private int price;
@@ -63,7 +62,6 @@ public class OrderListItem implements Parcelable {
         this.status = "open";
         this.timestamp = time;
     }
-
 
     @Override
     public int describeContents() {

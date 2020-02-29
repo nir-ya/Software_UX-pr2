@@ -1,6 +1,5 @@
 package com.example.myapplication;
 
-
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -78,16 +77,14 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
         setCardExpansion(holder.orderCard, holder);
         setCardExpansion(holder.infoButton, holder);
 
-
         setOrderInfoRecyclerView(holder, documentId);
-
     }
 
     private void checkIfOrderTimePassed(@NonNull OrderListItem order, String documentId) {
-        if (order.getTimestamp().compareTo(Timestamp.now()) < 0) {
+        if (order.getTimestamp().compareTo(Timestamp.now()) < 0 && order.getStatus().equals(OrderListItem.OPEN)) {
             DocumentReference orderRef = db.collection(Constants.ORDERS).document(documentId);
             if (order.reachedMinimum()) {
-                orderRef.update("status", OrderListItem.LOCKED); //todo make status const String
+                orderRef.update("status", OrderListItem.READY); //todo make status const String
             } else {
                 orderRef.update("status", OrderListItem.CANCELED);
             }
@@ -203,12 +200,19 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
      * @param model  - the "Order" object
      */
     private void updateOrderItemByStatus(OrderListItemHolder holder, OrderListItem model, String documentId) {
-        if (model.getStatus().equals(OrderListItem.OPEN)) {
-            openOrder(holder, documentId, model);
-        } else if (model.getStatus().equals(OrderListItem.LOCKED)) {
-            lockOrder(holder, documentId, model);
-        } else if (model.getStatus().equals(OrderListItem.CANCELED)) {
-            cancelOrder(holder, documentId, model);
+        switch (model.getStatus()) {
+            case OrderListItem.OPEN:
+                setOpenItem(holder, documentId, model);
+                break;
+            case OrderListItem.READY:
+                setReadyItem(holder, documentId, model);
+                break;
+            case OrderListItem.CANCELED:
+                setCanceledItem(holder, documentId, model);
+                break;
+            case OrderListItem.ORDERED:
+                setOrderedItem(holder, documentId, model);
+                break;
         }
     }
 
@@ -219,7 +223,7 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
      * @param documentId
      * @param orderListItem
      */
-    private void lockOrder(OrderListItemHolder holder, String documentId, OrderListItem orderListItem) {
+    private void setReadyItem(OrderListItemHolder holder, String documentId, OrderListItem orderListItem) {
         holder.statusText.setText(Constants.ORDER_OUT);
         holder.orderButton.setText(Constants.LOCKED_TEXT);
         holder.orderButton.setBackgroundColor(context.getResources().getColor(R.color.grey));
@@ -242,14 +246,13 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
      * @param documentId
      * @param model      - the orderListItem relevant item
      */
-    private void openOrder(OrderListItemHolder holder, String documentId, OrderListItem model) {
+    private void setOpenItem(OrderListItemHolder holder, String documentId, OrderListItem model) {
         holder.orderButton.setText(Constants.JOIN_TEXT);
         holder.orderButton.setBackgroundColor(context.getResources().getColor(R.color.dark_navy));
 
         setJoinButtonHandler(holder.orderButton, documentId, model);
 
         holder.statusText.setText(model.getPrice() >= MIN_ORDER ? Constants.READY_TEXT : Constants.WAITING);
-
 
         setProgressBar(holder, model);
 
@@ -259,8 +262,6 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
             holder.orderButton.setVisibility(VISIBLE);
             holder.infoButton.setVisibility(VISIBLE);
         }
-
-
     }
 
     /**
@@ -270,7 +271,7 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
      * @param documentId    - String representation of the document ID
      * @param orderListItem order object
      */
-    private void cancelOrder(OrderListItemHolder holder, String documentId, OrderListItem orderListItem) {
+    private void setCanceledItem(OrderListItemHolder holder, String documentId, OrderListItem orderListItem) {
         holder.statusText.setText(Constants.ORDER_CANCELED);
         holder.orderButton.setText("התבאס");
         holder.orderButton.setBackgroundColor(context.getResources().getColor(R.color.red));
@@ -281,8 +282,18 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
         if (null != layout) {
             holder.orderButton.setVisibility(View.GONE);
             holder.infoButton.setVisibility(View.GONE);
-            //layout.removeView(holder.orderButton);
-            //layout.removeView(holder.infoButton);
+        }
+    }
+
+    private void setOrderedItem(OrderListItemHolder holder, String documentId, OrderListItem model) {
+        holder.statusText.setText(Constants.ORDERED_TEXT);
+        holder.progressBar.setProgressDrawable(context.getDrawable(R.drawable.progress_bar_locked));
+        ViewGroup layout = (ViewGroup) holder.orderButton.getParent();
+
+        holder.statusText.setTextColor(context.getResources().getColor(R.color.textGreen));
+        if (layout != null) {
+            holder.orderButton.setVisibility(View.GONE);
+            holder.infoButton.setVisibility(View.GONE);
         }
     }
 
@@ -370,6 +381,4 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
         this.emptyView = view;
         initEmptyView();
     }
-
-
 }
