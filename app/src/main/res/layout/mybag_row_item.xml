@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/parent_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/off_white"
+        android:layoutDirection="ltr"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+
+        <ImageView
+            android:id="@+id/manaImg"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/pita_full_no_margin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/manaTypeTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/varela_round"
+            android:text="@string/type_string"
+            android:textColor="@color/dusty_teal"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/manaImg"
+            app:layout_constraintRight_toLeftOf="@id/manaImg"
+            app:layout_constraintTop_toTopOf="@+id/manaImg" />
+
+
+        <TextView
+            android:id="@+id/manaPriceTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="8dp"
+            android:fontFamily="@font/varela_round"
+            android:text="@string/price_shekels"
+            android:textColor="@color/dusty_teal"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/manaTypeTxt"
+            app:layout_constraintRight_toLeftOf="@id/manaTypeTxt"
+            app:layout_constraintTop_toTopOf="@+id/manaTypeTxt"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <Button
+            android:id="@+id/deleteBtn"
+            android:layout_width="59dp"
+            android:layout_height="32dp"
+            android:background="@drawable/border_button"
+            android:fontFamily="@font/varela_round"
+            android:text="@string/delete_string"
+            android:textColor="@color/faded_orange"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            android:layout_marginStart="10dp"
+            app:layout_constraintBottom_toTopOf="@+id/tosafutTxt"
+            app:layout_constraintEnd_toStartOf="@+id/paymentImg"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.5" />
+
+        <TextView
+            android:id="@+id/tosafutTxt"
+            android:layout_width="312dp"
+            android:layout_height="43dp"
+            android:fontFamily="@font/varela_round"
+            android:text="טחינה, עמבה, סחוג"
+            android:textColor="@color/dusty_teal"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:paddingBottom="5dp"
+            app:layout_constraintBottom_toTopOf="@id/statusTxt"
+            app:layout_constraintEnd_toStartOf="@+id/manaImg"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/manaImg" />
+
+
+        <TextView
+            android:id="@+id/statusTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/varela_round"
+            android:text="סטטוס הזמנה"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/manaImg"
+            app:layout_constraintTop_toBottomOf="@+id/tosafutTxt"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/hourTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/varela_round"
+            android:text="00:00"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/statusTxt"
+            app:layout_constraintHorizontal_bias="0.938"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/statusTxt"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <ImageView
+            android:id="@+id/paymentImg"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/cash"
+            app:layout_constraintBottom_toBottomOf="@+id/manaPriceTxt"
+            app:layout_constraintEnd_toStartOf="@+id/manaPriceTxt"
+            app:layout_constraintTop_toTopOf="@+id/manaPriceTxt" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

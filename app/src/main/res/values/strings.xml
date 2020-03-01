@@ -1,3 +1,113 @@
 <resources>
-    <string name="app_name">My Application</string>
+    <string name="app_name">ShevachApp</string>
+    <string name="open_orders">OpenOrders</string>
+    <string name="price">price</string>
+    <string name="my_order">ההזמנה שלי</string>
+    <string name="manot_collection">Manot</string>
+    <string name="owner_field">owner</string>
+    <string name="username_hint">שם מלא</string>
+    <string name="login_button_text">כניסה</string>
+    <string name="email_hint">כתובת e-mail</string>
+    <string name="password_hint">סיסמה</string>
+    <string name="welcome_str">אהלן %s!</string>
+    <string name="hour_for">השבחים שלך</string>
+    <string name="sum_order_string">הזמנה בסך %s שקלים</string>
+    <string name="payment_method">תשלום במזומן</string>
+    <string name="type_string">פלאפל</string>
+    <string name="price_shekels">₪ 20</string>
+    <string name="additions_header_string">תוספות:</string>
+    <string name="delete_string">בטל</string>
+    <string name="update_string">עדכן</string>
+    <string name="status_string">סטטוס: מחכה לשילוח</string>
+    <string name="join_string">הצטרף!</string>
+    <string name="info_string">מי שם?</string>
+    <string name="money_made">נאספו %s ש"ח</string>
+    <string name="locked_str">נעול</string>
+    <string name="ready_str">\"סטטוס: מוכנה לשילוח\"</string>
+    <string name="order_out">ההזמנה יצאה</string>
+    <string name="waiting">מחכה למשבחים…</string>
+    <string name="my_order_str">ההזמנה שלי</string>
+    <string name="title_activity_main2">Main2Activity</string>
+
+    <array name="tosafot">
+        <item>חומוס</item>
+        <item>חריף</item>
+        <item>חמוצים</item>
+        <item>בצל</item>
+        <item>עגבניה</item>
+        <item>מלפפון</item>
+        <item>חציל</item>
+        <item>צ\'יפס</item>
+        <item>טחינה</item>
+        <item>עמבה</item>
+    </array>
+
+    <string name="new_order_success">הזמנתך נוספה בהצלחה!</string>
+    <string name="new_order_fail">אוי! משהו קרה..נסה שוב כפרה</string>
+    <string name="loginFailed">Login Failed</string>
+    <string name="loginSuccess">Login successful!</string>
+    <string name="registerSuccess">Register successful!</string>
+    <string name="registerFailure">Problem while Registering</string>
+    <string name="owner_text">המנה של %s</string>
+    <string name="mark_everything">סמן הכל</string>
+    <string name="bring">יאללה, תביא!</string>
+    <string name="azov_vitarti">עזוב, ויתרתי</string>
+    <string name="be_first">עדיין אין הזמנות…\nיאללה, קחו יוזמה!</string>
+    <string name="owner_id">ownerUserId</string>
+    <string name="order_details">זהו! המנה בהזמנה\n של השעה %s</string>
+
+    <string name="mana_success_toast">המנה שלך נוספה בהצלחה!</string>
+    <string name="order_details_text">הזמנה לשעה %s</string>
+
+    <string name="join_order_tooltop">הצטרף להזמנה פתוחה</string>
+    <string name="join_tooltip_subtext">כבר מתארגנת הזמנה?\nבוא תצטרף!</string>
+    <string name="create_order_tooltip">צור הזמנה חדשה</string>
+    <string name="create_tooltip_subtext">אין כרגע הזמנות?\nתתניע הזמנה חדשה!</string>
+    <string name="mybag_tooltip">למתי הזמנתי?</string>
+    <string name="mybag_tooltip_subtext">תמיד תוכל להסתכל על ההזמנות שלך מהיום</string>
+    <string name="invalid_password_msg">בחר סיסמה בעלת 6 תווים לפחות</string>
+    <string name="invalid_email_msg">כתובת הe-mail שהכנסת לא תקינה</string>
+    <string name="order_list_item_title">הזמנה לשעה: %s</string>
+
+    <string name="finish_activity_header">פירוט ההזמנה</string>
+    <string name="finish_activity_dial_button_text">התקשר לשבח</string>
+    <string name="finish_activity_ordered_button_text">הזמנתי</string>
+    <string name="finish_activity_copy_button_text">העתק הזמנה</string>
+    <string name="shevach_phone_number">026528317</string>
+    <string name="finish_activity_order_lock">הזמנתי!</string>
+    <string name="half_pita_price">10 שקלים</string>
+    <string name="pita_price">18 שקלים</string>
+    <string name="lafa_price">22 שקלים</string>
+    <string name="half_lafa_price">12 שקלים</string>
+    <string name="half_pita_text">חצי פיתה</string>
+    <string name="pita_text">פיתה</string>
+    <string name="lafa_text">לאפה</string>
+    <string name="half_lafa_text">חצי לאפה</string>
+    <string name="half_pita_description">חצי פיתה, 10 שקלים</string>
+    <string name="pita_description">פיתה, 18 שקלים</string>
+    <string name="lafa_description">לאפה, 22 שקלים</string>
+    <string name="half_lafa_description">חצי לאפה, 12 שקלים</string>
+    <string name="order_was_canceled">"הזמנה נמחקה"</string>
+    <string name="cancel_order">"בטוח שאתה רוצה למחוק את המנה שבחרת?"</string>
+    <string name="clear_tosafot"><u>נקה</u></string>
+    <string name="pita_or_lafa">פיתה או לאפה?</string>
+    <string name="register"><u>הרשמה</u></string>
+    <string name="time_pick_instructions">(השעה שבה תתקשרו להזמין)\nזמן הכנה ומשלוח משוער: 40 דקות</string>
+    <string name="order_hours_instruction">
+        שעות הפעילות:
+        11:00 עד 21:00
+    </string>
+    <string name="order_interval_instruction">
+        תנו לחברים 10 דקות להצטרף
+    </string>
+    <string name="time_travel_error">אין תמיכה במסע בזמן בשלב זה</string>
+    <string name="new_order_dialog_title">בחרו שעה להזמנה</string>
+    <string name="calendar_extra_name">CALENDAR</string>
+    <string name="order_id_extra_name">order_id</string>
+    <string name="order_confirm_text">שלח הזמנה</string>
+    <string name="order_instruction">סמנו את המנות לסיום ההזמנה</string>
+    <string name="bassa_text">איזה באסה!</string>
+    <string name="sad_emoji_trio">😥😥😥</string>
+    <string name="yalla_got_it">טוב יאללה, הבנתי</string>
+
 </resources>

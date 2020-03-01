@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/backgroundWhite"
+    tools:context=".OrderFinishActivity"
+    android:layoutDirection="rtl">
+
+    <TextView
+        android:id="@+id/header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:layout_marginEnd="16dp"
+        android:fontFamily="@font/varela_round"
+        android:padding="6dp"
+        android:text="@string/finish_activity_header"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/order_instruction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/varela_round"
+        android:padding="6dp"
+        android:text="@string/order_instruction"
+        android:textSize="12sp"
+        android:layout_marginEnd="16dp"
+        android:textStyle="bold"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/header" />
+
+    <View
+        android:id="@+id/line_seperator"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="10dp"
+        android:background="#c0c0c0"
+        app:layout_constraintTop_toBottomOf="@id/order_instruction" />
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_bar"
+
+        app:layout_constraintTop_toBottomOf="@id/line_seperator"
+        app:layout_constraintVertical_bias="1.0"
+        tools:layout_editor_absoluteX="41dp">
+
+    </ScrollView>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:requiresFadingEdge="vertical"
+        android:id="@+id/orders_recycler_view"
+        android:scrollbars="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_bar"
+        app:layout_constraintTop_toBottomOf="@id/line_seperator"
+        app:layout_constraintVertical_bias="1.0"
+        tools:layout_editor_absoluteX="41dp"
+        android:layout_marginBottom="20dp"
+        android:scrollbarThumbHorizontal="@color/dark_navy"
+        android:scrollbarSize="1dp"
+        android:scrollbarStyle="outsideOverlay"
+        />
+
+    <TableLayout
+        android:id="@+id/bottom_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/light_peach"
+        android:stretchColumns="*"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:background="@drawable/border_button"
+                android:backgroundTint="@color/darkestGreen"
+                android:fontFamily="@font/varela_round"
+                android:padding="10dp"
+                android:text="@string/finish_activity_copy_button_text"
+                android:textColor="@color/lightGrey"
+                android:onClick="copyOrder"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:drawableLeft="@drawable/copy_icon"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:background="@drawable/border_button"
+                android:fontFamily="@font/varela_round"
+                android:padding="10dp"
+                android:text="@string/finish_activity_dial_button_text"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:onClick="dialShevach"
+                android:drawableLeft="@drawable/phone_icon"/>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/finish_button"
+                android:visibility="invisible"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_margin="16dp"
+                android:layout_weight="1"
+                android:background="@drawable/border_button"
+                android:backgroundTint="@color/intense_orange"
+                android:fontFamily="@font/varela_round"
+                android:padding="10dp"
+                android:text="@string/finish_activity_order_lock"
+                android:textColor="@color/lightGrey"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:onClick="lockOrder"/>
+
+        </TableRow>
+
+
+    </TableLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

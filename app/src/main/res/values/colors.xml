@@ -1,6 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimary">#435059</color>
+    <color name="textBlack">#000000</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+    <color name="loginHintColor">#36020202</color>
+    <color name="backgroundWhite">#fffbf2</color>
+    <color name="textGreen">#6faf9f</color>
+    <color name="lightGrey">#FCFCFC</color>
+    <color name="darkestGreen">#435059</color>
+    <color name="transparent">#00000000</color>
+    <color name="light_peach">#fcd7a1</color>
+    <color name="dark_green">#52857a</color>
+    <color name="dark_navy">#0b2b26</color>
+    <color name="grey">#bdbdbd</color>
+    <color name="red">#cd3333</color>
+
+    <color name="light_grey2">#C2C2C2</color>
+    <color name="dark_grey">#757575</color>
+    <color name="light_salmon">#fffbf2</color>
+    <color name="gunmetal">#435059</color>
+    <color name="faded_orange">#f47d5c</color>
+    <color name="intense_orange">#fe7b29</color>
+    <color name="dusty_teal">#52857a</color>
+    <color name="off_white">#fffbf2</color>
+    <color name="dusty_real">#52857a</color>
+    <color name="cancelled_order_text">#D31449</color>
 </resources>
+

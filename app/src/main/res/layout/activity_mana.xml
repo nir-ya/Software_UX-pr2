@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/off_white"
+    tools:context=".ManaActivity">
+
+    <ImageView
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="110dp"
+        android:background="@drawable/full_button"
+        android:backgroundTint="@color/light_peach"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/owner_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
+        android:fontFamily="@font/varela_round"
+        android:text="@string/owner_text"
+        android:textColor="@color/textGreen"
+        android:textSize="26sp"
+        android:textStyle="bold"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/dish_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/varela_round"
+        android:text="@string/price_shekels"
+        android:textColor="@color/textGreen"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintRight_toRightOf="@id/owner_text"
+        app:layout_constraintTop_toBottomOf="@id/owner_text" />
+
+    <ImageView
+        android:id="@+id/mana_type_picture"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/circle"
+        android:src="@drawable/half_pita_full"
+        app:layout_constraintBottom_toBottomOf="@id/toolbar"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="@id/toolbar" />
+
+    <CheckBox
+        android:id="@+id/mark_all_checkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/grid_view"
+        app:layout_constraintRight_toRightOf="@id/grid_view"
+        android:layout_marginRight="15dp"
+        android:text="@string/mark_everything"
+        android:layoutDirection="rtl"
+        android:padding="5dp"
+        android:textSize="12sp"
+        android:scaleY="1.5"
+        android:scaleX="1.5"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+    <TextView
+        android:id="@+id/clear_tosafot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/clear_tosafot"
+        android:textSize="16sp"
+        android:fontFamily="@font/varela_round"
+        android:onClick="clearTosafot"
+        android:textColor="@color/darkestGreen"
+        app:layout_constraintTop_toTopOf="@id/mark_all_checkbox"
+        app:layout_constraintBottom_toBottomOf="@id/mark_all_checkbox"
+        app:layout_constraintRight_toLeftOf="@id/mark_all_checkbox"
+        app:layout_constraintLeft_toLeftOf="@id/grid_view"
+        app:layout_constraintHorizontal_bias="0.15"
+        />
+
+    <GridLayout
+        android:id="@+id/grid_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:alignmentMode="alignMargins"
+        android:background="@color/lightGrey"
+        android:backgroundTint="@color/transparent"
+        android:columnCount="4"
+        android:layoutDirection="rtl"
+        android:padding="5dp"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:rowCount="3"
+        app:layout_constraintBottom_toTopOf="@+id/cancel_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mark_all_checkbox">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <CheckBox
+                android:id="@+id/humus_image"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:background="@drawable/humus_selector"
+                android:button="@null" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:padding="2dp"
+                android:text="חומוס" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <CheckBox
+                android:id="@+id/harif_image"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:background="@drawable/harif_selector"
+                android:button="@null" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:padding="2dp"
+                android:text="חריף" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <CheckBox
+                android:id="@+id/pickles_image"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:background="@drawable/pickle_selector"
+                android:button="@null" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:padding="2dp"
+                android:text="חמוצים" />
+        </LinearLayout>
+
+        <LinearLayout
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical">
+
+            <CheckBox
+                android:id="@+id/onion_image"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:background="@drawable/onion_selector"
+                android:button="@null" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:padding="2dp"
+                android:text="בצל" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <CheckBox
+                android:id="@+id/tomato_image"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:background="@drawable/tomato_selector"
+                android:button="@null" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:padding="2dp"
+                android:text="עגבניה" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <CheckBox
+                android:id="@+id/cucumber_image"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:background="@drawable/cucumber_selector"
+                android:button="@null" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:padding="2dp"
+                android:text="מלפפון" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <CheckBox
+                android:id="@+id/eggplant_image"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:background="@drawable/eggplant_selector"
+                android:button="@null" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:padding="2dp"
+                android:text="חציל" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <CheckBox
+                android:id="@+id/chips_image"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:background="@drawable/chips_selector"
+                android:button="@null" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:padding="2dp"
+                android:text="ציפס" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <CheckBox
+                android:id="@+id/tahini_image"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:background="@drawable/tahini_selector"
+                android:button="@null" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:padding="2dp"
+                android:text="טחינה" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <CheckBox
+                android:id="@+id/amba_image"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:background="@drawable/amba_selector"
+                android:button="@null" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:padding="2dp"
+                android:text="עמבה" />
+        </LinearLayout>
+
+
+    </GridLayout>
+
+    <Button
+        android:id="@+id/cancel_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/border_button"
+        android:fontFamily="@font/varela_round"
+        android:padding="20dp"
+        android:text="@string/azov_vitarti"
+        android:textSize="14sp"
+        android:autoSizeTextType="uniform"
+        android:onClick="cancelOrder"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/accept_button"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/accept_button"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:onClick="moveToConfirm"
+        android:id="@+id/accept_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/full_button"
+        android:fontFamily="@font/varela_round"
+        android:padding="20dp"
+        android:text="@string/bring"
+        android:textColor="@color/lightGrey"
+        android:textSize="14sp"
+        android:autoSizeTextType="uniform"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        android:layout_marginBottom="50dp"
+        app:layout_constraintStart_toEndOf="@+id/cancel_button" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
