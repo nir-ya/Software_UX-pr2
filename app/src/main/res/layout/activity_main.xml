@@ -95,8 +95,7 @@
         android:text="@string/be_first"
         android:textSize="24sp"
         />
-
-
+    
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/new_order_button"
             android:layout_width="wrap_content"

@@ -1,28 +1,24 @@
 package com.example.myapplication;
 
-
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-
-import android.view.View;
-import android.widget.Toast;
-
-import org.w3c.dom.Text;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -47,28 +43,22 @@ public class MyBagAdapter extends FirestoreRecyclerAdapter<Mana, MyBagAdapter.My
         holder.tosafot.setText(mana.getTosafotString());
         holder.statusText.setText(mana.getStatus());
 
-        if (mana.getStatus().equals("open")){
+        if (mana.getStatus().equals(OrderListItem.OPEN)) {
             holder.deleteBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     popUpAlertDialog(position);
-
                 }
             });
             holder.statusText.setText("הזמנה פתוחה");
         }
-        else if (mana.getStatus().equals("canceled")){
+        else if (mana.getStatus().equals(OrderListItem.CANCELED)){
             holder.deleteBtn.setText("הסר");
-            holder.deleteBtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    deleteItem(position);
-
-                }
-            });
+            holder.deleteBtn.setClickable(false);
+            holder.deleteBtn.setTextColor(Color.GRAY);
             holder.statusText.setText("הזמנה סגורה");
         }
-        else{
+        else {
             holder.deleteBtn.setVisibility(View.INVISIBLE);
         }
         DateFormat format = new SimpleDateFormat("HH:mm");
@@ -76,8 +66,6 @@ public class MyBagAdapter extends FirestoreRecyclerAdapter<Mana, MyBagAdapter.My
         holder.hourText.setText(format.format(mana.getTimestamp()));
 
         setGraphics(holder, mana);
-
-
     }
 
     private void setGraphics(@NonNull MyBagHolder holder, @NonNull Mana mana) {

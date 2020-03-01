@@ -23,4 +23,6 @@
     <color name="dusty_teal">#52857a</color>
     <color name="off_white">#fffbf2</color>
     <color name="dusty_real">#52857a</color>
+    <color name="cancelled_order_text">#D31449</color>
 </resources>
+

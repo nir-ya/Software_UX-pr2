@@ -42,7 +42,8 @@ import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
 
-public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem, OrderListItemAdapter.OrderListItemHolder> {
+public class
+OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem, OrderListItemAdapter.OrderListItemHolder> {
 
     private Calendar cal = Calendar.getInstance();
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -284,7 +285,7 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
         holder.progressBar.setProgressDrawable(context.getDrawable(R.drawable.progress_bar_locked));
         ViewGroup layout = (ViewGroup) holder.orderButton.getParent();
 
-        holder.statusText.setTextColor(Color.RED);
+        holder.statusText.setTextColor(context.getResources().getColor(R.color.cancelled_order_text));
         if (null != layout) {
 //            holder.orderButton.setVisibility(View.GONE);
             holder.infoButton.setVisibility(View.GONE);
