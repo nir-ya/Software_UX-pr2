@@ -100,7 +100,8 @@
                 android:onClick="copyOrder"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:drawableLeft="@drawable/email"/>
 
             <Button
                 android:layout_width="wrap_content"
@@ -113,7 +114,8 @@
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:onClick="dialShevach"/>
+                android:onClick="dialShevach"
+                android:drawableLeft="@drawable/phone"/>
 
         </TableRow>
 
@@ -138,6 +140,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 android:onClick="lockOrder"/>
+
         </TableRow>
 
 

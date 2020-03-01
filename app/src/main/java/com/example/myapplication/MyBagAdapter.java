@@ -31,7 +31,8 @@ import java.util.TimeZone;
 public class MyBagAdapter extends FirestoreRecyclerAdapter<Mana, MyBagAdapter.MyBagHolder> {
 
     private final Context context;
-    AlertDialog.Builder deleteBuilder;
+    private AlertDialog.Builder deleteBuilder;
+
 
     MyBagAdapter(@NonNull FirestoreRecyclerOptions<Mana> options, Context context) {
         super(options);
@@ -40,6 +41,7 @@ public class MyBagAdapter extends FirestoreRecyclerAdapter<Mana, MyBagAdapter.My
 
     @Override
     protected void onBindViewHolder(@NonNull final MyBagHolder holder, final int position, @NonNull final Mana mana) {
+
         holder.textViewType.setText(mana.getHebType(mana.getType()));
         holder.textViewPrice.setText(Integer.toString(mana.getPrice()) + "₪");
         holder.tosafot.setText(mana.getTosafotString());
@@ -53,6 +55,7 @@ public class MyBagAdapter extends FirestoreRecyclerAdapter<Mana, MyBagAdapter.My
 
                 }
             });
+            holder.statusText.setText("הזמנה פתוחה");
         }
         else if (mana.getStatus().equals("canceled")){
             holder.deleteBtn.setText("הסר");
@@ -63,6 +66,7 @@ public class MyBagAdapter extends FirestoreRecyclerAdapter<Mana, MyBagAdapter.My
 
                 }
             });
+            holder.statusText.setText("הזמנה סגורה");
         }
         else{
             holder.deleteBtn.setVisibility(View.INVISIBLE);
@@ -158,7 +162,15 @@ public class MyBagAdapter extends FirestoreRecyclerAdapter<Mana, MyBagAdapter.My
             paymentImg = itemView.findViewById(R.id.paymentImg);
             manaImg = itemView.findViewById(R.id.manaImg);
             deleteBtn = itemView.findViewById(R.id.deleteBtn);
+
         }
+    }
+
+    public boolean checkEmptyOrders(){
+        if(getItemCount() == 0){
+            return true;
+        }
+        return false;
     }
 
 }
