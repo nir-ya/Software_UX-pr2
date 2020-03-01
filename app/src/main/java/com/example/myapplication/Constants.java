@@ -11,7 +11,7 @@ class Constants {
     static final long SHORT_DELAY = 2000;
     static final String ORDERS = "OpenOrders";
     static final String MANOT_SUBCOLLECTION = "Manot";
-    static final String MONEY_MADE = "הכסף שנצבר: %s מתוך 70 שקלים";
+    static final String MONEY_MADE = "נאספו %s מתוך 70 ש\"ח";
     static final String LOCKED_TEXT = "הזמן!";
     static final String JOIN_TEXT = "הצטרף!";
     static final String READY_TEXT = "מוכן לשילוח";
