@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:background="@color/backgroundGreen"
     android:orientation="vertical"
-    android:padding="5dp">
+    android:padding="16dp"
+    >
 
     <TextView
         android:id="@+id/clock_header_text"
@@ -15,6 +16,7 @@
         android:layout_marginRight="15dp"
         android:autoSizeTextType="uniform"
         android:fontFamily="@font/varela_round"
+        android:padding="6dp"
         android:text="@string/new_order_dialog_title"
         android:textColor="@color/textGreen"
         android:textDirection="rtl"
@@ -115,7 +117,7 @@
         android:background="@drawable/border_button"
         android:fontFamily="@font/varela_round"
         app:layout_constraintTop_toBottomOf="@+id/order_time_error_text"
-
+        android:layout_marginBottom="10dp"
         app:layout_constraintEnd_toStartOf="@+id/ok_button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/ok_button" />
