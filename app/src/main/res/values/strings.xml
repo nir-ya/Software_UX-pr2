@@ -60,10 +60,10 @@
     <string name="order_details_text">הזמנה לשעה %s</string>
 
     <string name="join_order_tooltop">הצטרף להזמנה פתוחה</string>
-    <string name="join_tooltip_subtext">יש חבר\'ה שעדיין מתארגנים? יאללה, בוא תצטרף להזמנה!</string>
+    <string name="join_tooltip_subtext">כבר מתארגנת הזמנה?\nבוא תצטרף!</string>
     <string name="create_order_tooltip">צור הזמנה חדשה</string>
-    <string name="create_tooltip_subtext">אם אין הזמנה בשעה שתרצה,\nתוכל ליצור אחת חדשה</string>
-    <string name="mybag_tooltip">שכחת אם כבר הזמנת?</string>
+    <string name="create_tooltip_subtext">אין כרגע הזמנות?\nתתניע הזמנה חדשה!</string>
+    <string name="mybag_tooltip">למתי הזמנתי?</string>
     <string name="mybag_tooltip_subtext">תמיד תוכל להסתכל על ההזמנות שלך מהיום</string>
     <string name="invalid_password_msg">בחר סיסמה בעלת 6 תווים לפחות</string>
     <string name="invalid_email_msg">כתובת הe-mail שהכנסת לא תקינה</string>
