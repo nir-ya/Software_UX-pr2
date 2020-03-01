@@ -1,22 +1,17 @@
 package com.example.myapplication;
 
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
-import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.Dialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -59,11 +54,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().setNavigationBarColor(getResources().getColor(R.color.backgroundGreen));
+            getWindow().setNavigationBarColor(getResources().getColor(R.color.backgroundWhite));
         }
 
         connectToXML();
-        setUpOrdersRecyclerView();
+        setupOrdersRecyclerView();
 
         user = FirebaseAuth.getInstance().getCurrentUser();
         TextView greeting = findViewById(R.id.greeting);
@@ -77,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
     /**
      * this function is setting up the orders recycler view
      */
-    private void setUpOrdersRecyclerView() {
+    private void setupOrdersRecyclerView() {
         DateTime today = new DateTime().withTimeAtStartOfDay();
         DateTime tomorrow = today.plusDays(1).withTimeAtStartOfDay();
 

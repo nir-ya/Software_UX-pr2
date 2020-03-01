@@ -42,13 +42,14 @@ import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
 
-public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem, OrderListItemAdapter.OrderListItemHolder> {
+public class
+OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem, OrderListItemAdapter.OrderListItemHolder> {
 
     private Calendar cal = Calendar.getInstance();
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private View emptyView;
 
-    private static final int CRITICAL_PRICE = 52;
+    private static final int CRITICAL_PRICE = 60;
     private static final int MIN_ORDER = 70;
     private final Context context;
 
@@ -233,7 +234,7 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
         holder.statusText.setText(Constants.ORDER_OUT);
         holder.orderButton.setText(Constants.LOCKED_TEXT);
         holder.orderButton.setBackgroundColor(context.getResources().getColor(R.color.grey));
-        holder.progressBar.setProgressDrawable(context.getDrawable(R.drawable.progress_bar_locked));
+        holder.progressBar.setProgressDrawable(context.getDrawable(R.drawable.progress_bar_green));
 
         setOrderButtonHandler(holder.orderButton, documentId);
 
@@ -284,7 +285,7 @@ public class OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem
         holder.progressBar.setProgressDrawable(context.getDrawable(R.drawable.progress_bar_locked));
         ViewGroup layout = (ViewGroup) holder.orderButton.getParent();
 
-        holder.statusText.setTextColor(Color.RED);
+        holder.statusText.setTextColor(context.getResources().getColor(R.color.cancelled_order_text));
         if (null != layout) {
 //            holder.orderButton.setVisibility(View.GONE);
             holder.infoButton.setVisibility(View.GONE);

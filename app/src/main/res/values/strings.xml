@@ -74,7 +74,7 @@
     <string name="finish_activity_ordered_button_text">הזמנתי</string>
     <string name="finish_activity_copy_button_text">העתק הזמנה</string>
     <string name="shevach_phone_number">026528317</string>
-    <string name="finish_activity_order_lock">נעילת הזמנה</string>
+    <string name="finish_activity_order_lock">הזמנתי!</string>
     <string name="half_pita_price">10 שקלים</string>
     <string name="pita_price">18 שקלים</string>
     <string name="lafa_price">22 שקלים</string>
@@ -92,9 +92,10 @@
     <string name="clear_tosafot"><u>נקה</u></string>
     <string name="pita_or_lafa">פיתה או לאפה?</string>
     <string name="register"><u>הרשמה</u></string>
-    <string name="time_pick_instructions">(השעה שבה תתקשרו להזמין)\nזמן הכנה ומשלוח משוער: 40 דקות.</string>
+    <string name="time_pick_instructions">(השעה שבה תתקשרו להזמין)\nזמן הכנה ומשלוח משוער: 40 דקות</string>
     <string name="order_hours_instruction">
-        שעות הפעילות: 21:00 - 11:00
+        שעות הפעילות:
+        11:00 עד 21:00
     </string>
     <string name="order_interval_instruction">
         תנו לחברים 10 דקות להצטרף

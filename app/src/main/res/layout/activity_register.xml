@@ -7,7 +7,7 @@
     android:gravity="center"
     android:orientation="vertical"
     tools:context=".RegisterActivity"
-    android:background="@color/backgroundGreen">
+    android:background="@color/backgroundWhite">
     <ScrollView
         android:id="@+id/register_scroll"
         android:layout_width="wrap_content"
