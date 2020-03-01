@@ -49,7 +49,7 @@ OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem, OrderListIt
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private View emptyView;
 
-    private static final int CRITICAL_PRICE = 52;
+    private static final int CRITICAL_PRICE = 60;
     private static final int MIN_ORDER = 70;
     private final Context context;
 
