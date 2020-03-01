@@ -234,7 +234,7 @@ OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem, OrderListIt
         holder.statusText.setText(Constants.ORDER_OUT);
         holder.orderButton.setText(Constants.LOCKED_TEXT);
         holder.orderButton.setBackgroundColor(context.getResources().getColor(R.color.grey));
-        holder.progressBar.setProgressDrawable(context.getDrawable(R.drawable.progress_bar_locked));
+        holder.progressBar.setProgressDrawable(context.getDrawable(R.drawable.progress_bar_green));
 
         setOrderButtonHandler(holder.orderButton, documentId);
 
