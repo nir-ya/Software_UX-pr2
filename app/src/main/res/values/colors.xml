@@ -5,7 +5,7 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
     <color name="loginHintColor">#36020202</color>
-    <color name="backgroundGreen">#ecf7f3</color>
+    <color name="backgroundWhite">#fffbf2</color>
     <color name="textGreen">#6faf9f</color>
     <color name="lightGrey">#FCFCFC</color>
     <color name="darkestGreen">#435059</color>

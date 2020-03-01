@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().setNavigationBarColor(getResources().getColor(R.color.backgroundGreen));
+            getWindow().setNavigationBarColor(getResources().getColor(R.color.backgroundWhite));
         }
 
         connectToXML();

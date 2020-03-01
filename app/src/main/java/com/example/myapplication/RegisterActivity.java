@@ -38,7 +38,7 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
 
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().setNavigationBarColor(getResources().getColor(R.color.backgroundGreen));
+            getWindow().setNavigationBarColor(getResources().getColor(R.color.backgroundWhite));
         }
 
 
