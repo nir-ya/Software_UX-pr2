@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/backgroundGreen"
     android:orientation="vertical"
+    android:layoutDirection="rtl"
     android:padding="16dp"
     >
 
@@ -55,7 +56,7 @@
         android:textSize="15sp"
         android:padding="6dp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintTop_toBottomOf="@id/timepicker"/>
 
@@ -71,7 +72,7 @@
         android:textDirection="rtl"
         android:textSize="15sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/clock_info_text" />
 
     <TextView
@@ -86,7 +87,7 @@
         android:textDirection="rtl"
         android:textSize="15sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/opening_hours_text" />
 
     <Button
