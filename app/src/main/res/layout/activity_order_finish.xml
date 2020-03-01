@@ -102,7 +102,7 @@
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:drawableLeft="@drawable/email"/>
+                android:drawableLeft="@drawable/copy_icon"/>
 
             <Button
                 android:layout_width="wrap_content"
@@ -116,7 +116,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 android:onClick="dialShevach"
-                android:drawableLeft="@drawable/phone"/>
+                android:drawableLeft="@drawable/phone_icon"/>
 
         </TableRow>
 

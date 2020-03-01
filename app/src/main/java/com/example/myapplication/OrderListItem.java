@@ -10,7 +10,7 @@ public class OrderListItem implements Parcelable {
 
     static final String READY = "ready";
     static final String OPEN = "open";
-    static final String CANCELED = "cancelled";
+    static final String CANCELED = "canceled";
     static final String ORDERED = "ordered";
 
     private final static int MIN_ORDER = 70;
