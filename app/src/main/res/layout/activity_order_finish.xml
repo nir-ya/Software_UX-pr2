@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/backgroundWhite"
-    tools:context=".OrderFinishActivity"
-    android:layoutDirection="rtl">
+    android:layoutDirection="rtl"
+    tools:context=".OrderFinishActivity">
 
     <TextView
         android:id="@+id/header"
@@ -26,11 +26,11 @@
         android:id="@+id/order_instruction"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
         android:fontFamily="@font/varela_round"
         android:padding="6dp"
         android:text="@string/order_instruction"
         android:textSize="12sp"
-        android:layout_marginEnd="16dp"
         android:textStyle="bold"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/header" />
@@ -59,20 +59,19 @@
     </ScrollView>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:requiresFadingEdge="vertical"
         android:id="@+id/orders_recycler_view"
-        android:scrollbars="vertical"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginBottom="20dp"
+        android:requiresFadingEdge="vertical"
+        android:scrollbarSize="1dp"
+        android:scrollbarStyle="outsideOverlay"
+        android:scrollbarThumbHorizontal="@color/dark_navy"
+        android:scrollbars="vertical"
         app:layout_constraintBottom_toTopOf="@+id/bottom_bar"
         app:layout_constraintTop_toBottomOf="@id/line_seperator"
         app:layout_constraintVertical_bias="1.0"
-        tools:layout_editor_absoluteX="41dp"
-        android:layout_marginBottom="20dp"
-        android:scrollbarThumbHorizontal="@color/dark_navy"
-        android:scrollbarSize="1dp"
-        android:scrollbarStyle="outsideOverlay"
-        />
+        tools:layout_editor_absoluteX="41dp" />
 
     <TableLayout
         android:id="@+id/bottom_bar"
@@ -94,29 +93,29 @@
                 android:layout_margin="16dp"
                 android:background="@drawable/border_button"
                 android:backgroundTint="@color/darkestGreen"
+                android:drawableLeft="@drawable/copy_icon"
                 android:fontFamily="@font/varela_round"
+                android:onClick="copyOrder"
                 android:padding="10dp"
                 android:text="@string/finish_activity_copy_button_text"
                 android:textColor="@color/lightGrey"
-                android:onClick="copyOrder"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:drawableLeft="@drawable/copy_icon"/>
+                app:layout_constraintTop_toTopOf="parent" />
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
                 android:background="@drawable/border_button"
+                android:drawableLeft="@drawable/phone_icon"
                 android:fontFamily="@font/varela_round"
+                android:onClick="dialShevach"
                 android:padding="10dp"
                 android:text="@string/finish_activity_dial_button_text"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:onClick="dialShevach"
-                android:drawableLeft="@drawable/phone_icon"/>
+                app:layout_constraintTop_toTopOf="parent" />
 
         </TableRow>
 
@@ -126,7 +125,6 @@
 
             <Button
                 android:id="@+id/finish_button"
-                android:visibility="invisible"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_margin="16dp"
@@ -134,13 +132,14 @@
                 android:background="@drawable/border_button"
                 android:backgroundTint="@color/intense_orange"
                 android:fontFamily="@font/varela_round"
+                android:onClick="lockOrder"
                 android:padding="10dp"
                 android:text="@string/finish_activity_order_lock"
                 android:textColor="@color/lightGrey"
                 android:textStyle="bold"
+                android:visibility="invisible"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:onClick="lockOrder"/>
+                app:layout_constraintTop_toTopOf="parent" />
 
         </TableRow>
 

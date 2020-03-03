@@ -5,8 +5,8 @@
     android:id="@+id/card_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginVertical="3dp"
     android:layout_marginHorizontal="20dp"
+    android:layout_marginVertical="3dp"
     app:cardBackgroundColor="@color/transparent"
     app:cardElevation="0dp"
     app:cardUseCompatPadding="true">
@@ -83,11 +83,11 @@
 
         <net.cachapa.expandablelayout.ExpandableLayout
 
-            android:layoutDirection="rtl"
             android:id="@+id/expandable_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/light_salmon"
+            android:layoutDirection="rtl"
             app:el_duration="1000"
             app:el_expanded="false"
             app:el_parallax="0.5">
@@ -95,14 +95,13 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                >
+                android:orientation="vertical">
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/manot_list"
-                    android:orientation="vertical"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" />
 
             </LinearLayout>
         </net.cachapa.expandablelayout.ExpandableLayout>
@@ -119,11 +118,11 @@
                 android:id="@+id/btn_info"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/border_button"
-                android:fontFamily="@font/varela_round"
-                android:layout_weight="1"
                 android:layout_margin="10dp"
                 android:layout_marginTop="20dp"
+                android:layout_weight="1"
+                android:background="@drawable/border_button"
+                android:fontFamily="@font/varela_round"
 
 
                 android:text="@string/info_string"
@@ -135,16 +134,16 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <Button
-                android:layout_weight="1"
                 android:id="@+id/btn_order"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
                 android:background="@drawable/full_button"
                 android:backgroundTint="@color/darkestGreen"
-                android:text="@string/join_string"
-                android:layout_margin="10dp"
                 android:paddingLeft="30dp"
                 android:paddingRight="30dp"
+                android:text="@string/join_string"
                 android:textColor="@color/lightGrey"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/btn_info"

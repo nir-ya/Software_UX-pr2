@@ -65,8 +65,8 @@
         android:id="@+id/radiogroup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="right"
         android:checkedButton="@id/radio_cash"
+        android:gravity="right"
         android:layoutDirection="rtl"
         android:padding="24dp"
         app:layout_constraintHorizontal_bias="0.5"
@@ -79,13 +79,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:text="מזומן לשליח"
-            android:textStyle="bold"
-            android:padding="5dp"
-            android:textColor="@color/dusty_teal"
             android:buttonTint="@color/dusty_teal"
+            android:onClick="onRadioButtonClicked"
+            android:padding="5dp"
+            android:text="מזומן לשליח"
+            android:textColor="@color/dusty_teal"
             android:textSize="18sp"
-            android:onClick="onRadioButtonClicked"/>
+            android:textStyle="bold" />
 
 
         <RadioButton
@@ -93,13 +93,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:text="אשראי לבית העסק"
             android:buttonTint="@color/dusty_teal"
-            android:textColor="@color/dusty_teal"
-            android:textStyle="bold"
-            android:textSize="18sp"
+            android:onClick="onRadioButtonClicked"
             android:padding="5dp"
-            android:onClick="onRadioButtonClicked"/>
+            android:text="אשראי לבית העסק"
+            android:textColor="@color/dusty_teal"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
 
     </RadioGroup>
@@ -113,8 +113,8 @@
         android:onClick="confirmOrder"
         android:padding="20dp"
         android:text="@string/order_confirm_text"
-        android:textStyle="bold"
         android:textColor="@color/off_white"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"

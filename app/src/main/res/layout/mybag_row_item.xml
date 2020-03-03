@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_height="wrap_content"
     android:layout_width="match_parent"
->
+    android:layout_height="wrap_content">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/parent_layout"
@@ -58,13 +56,13 @@
             android:id="@+id/deleteBtn"
             android:layout_width="59dp"
             android:layout_height="32dp"
+            android:layout_marginStart="10dp"
             android:background="@drawable/border_button"
             android:fontFamily="@font/varela_round"
             android:text="@string/delete_string"
             android:textColor="@color/faded_orange"
             android:textSize="15dp"
             android:textStyle="bold"
-            android:layout_marginStart="10dp"
             app:layout_constraintBottom_toTopOf="@+id/tosafutTxt"
             app:layout_constraintEnd_toStartOf="@+id/paymentImg"
             app:layout_constraintHorizontal_bias="0"
@@ -77,11 +75,11 @@
             android:layout_width="312dp"
             android:layout_height="43dp"
             android:fontFamily="@font/varela_round"
+            android:paddingBottom="5dp"
             android:text="טחינה, עמבה, סחוג"
             android:textColor="@color/dusty_teal"
             android:textSize="12sp"
             android:textStyle="bold"
-            android:paddingBottom="5dp"
             app:layout_constraintBottom_toTopOf="@id/statusTxt"
             app:layout_constraintEnd_toStartOf="@+id/manaImg"
             app:layout_constraintHorizontal_bias="1.0"

@@ -5,10 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/backgroundWhite"
-    android:orientation="vertical"
     android:layoutDirection="rtl"
-    android:padding="16dp"
-    >
+    android:orientation="vertical"
+    android:padding="16dp">
 
     <TextView
         android:id="@+id/clock_header_text"
@@ -29,15 +28,15 @@
 
     <TimePicker
         android:id="@+id/timepicker"
-        android:numbersInnerTextColor="@color/textGreen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@color/off_white"
+        android:backgroundTint="@color/backgroundWhite"
         android:headerBackground="@color/textGreen"
+        android:numbersBackgroundColor="@color/backgroundWhite"
+        android:numbersInnerTextColor="@color/textGreen"
         android:numbersSelectorColor="@color/textGreen"
         android:numbersTextColor="@color/textGreen"
-        android:numbersBackgroundColor="@color/backgroundWhite"
-        android:backgroundTint="@color/backgroundWhite"
         android:timePickerMode="spinner"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -50,15 +49,15 @@
         android:layout_height="wrap_content"
         android:autoSizeTextType="uniform"
         android:fontFamily="@font/varela_round"
+        android:padding="6dp"
         android:text="@string/time_pick_instructions"
         android:textColor="@color/textGreen"
         android:textDirection="rtl"
         android:textSize="15sp"
-        android:padding="6dp"
         android:textStyle="bold"
-        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintTop_toBottomOf="@id/timepicker"/>
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/timepicker" />
 
     <TextView
         android:id="@+id/opening_hours_text"
@@ -95,32 +94,32 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="שגר"
-        android:textStyle="bold"
-        android:fontFamily="@font/varela_round"
-        android:textColor="@color/grey"
-        android:textSize="14sp"
+        android:layout_marginBottom="50dp"
         android:background="@drawable/border_button"
         android:clickable="false"
+        android:fontFamily="@font/varela_round"
+        android:text="שגר"
+        android:textColor="@color/grey"
+        android:textSize="14sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/order_time_error_text"
-        android:layout_marginBottom="50dp"
-        app:layout_constraintStart_toEndOf="@+id/cancel_button" />
+        app:layout_constraintStart_toEndOf="@+id/cancel_button"
+        app:layout_constraintTop_toBottomOf="@+id/order_time_error_text" />
 
     <Button
         android:id="@+id/cancel_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:textStyle="bold"
-        android:text="שכח"
-        android:textSize="14sp"
+        android:layout_marginBottom="10dp"
         android:background="@drawable/border_button"
         android:fontFamily="@font/varela_round"
-        app:layout_constraintTop_toBottomOf="@+id/order_time_error_text"
-        android:layout_marginBottom="10dp"
+        android:text="שכח"
+        android:textSize="14sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/ok_button"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/order_time_error_text"
         app:layout_constraintTop_toTopOf="@+id/ok_button" />
 
 

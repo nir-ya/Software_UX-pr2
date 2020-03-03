@@ -59,32 +59,31 @@
         android:id="@+id/mark_all_checkbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/grid_view"
-        app:layout_constraintRight_toRightOf="@id/grid_view"
         android:layout_marginRight="15dp"
-        android:text="@string/mark_everything"
         android:layoutDirection="rtl"
         android:padding="5dp"
-        android:textSize="12sp"
-        android:scaleY="1.5"
         android:scaleX="1.5"
+        android:scaleY="1.5"
+        android:text="@string/mark_everything"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@+id/grid_view"
+        app:layout_constraintRight_toRightOf="@id/grid_view"
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
     <TextView
         android:id="@+id/clear_tosafot"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/clear_tosafot"
-        android:textSize="16sp"
         android:fontFamily="@font/varela_round"
         android:onClick="clearTosafot"
+        android:text="@string/clear_tosafot"
         android:textColor="@color/darkestGreen"
-        app:layout_constraintTop_toTopOf="@id/mark_all_checkbox"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@id/mark_all_checkbox"
-        app:layout_constraintRight_toLeftOf="@id/mark_all_checkbox"
-        app:layout_constraintLeft_toLeftOf="@id/grid_view"
         app:layout_constraintHorizontal_bias="0.15"
-        />
+        app:layout_constraintLeft_toLeftOf="@id/grid_view"
+        app:layout_constraintRight_toLeftOf="@id/mark_all_checkbox"
+        app:layout_constraintTop_toTopOf="@id/mark_all_checkbox" />
 
     <GridLayout
         android:id="@+id/grid_view"
@@ -321,13 +320,13 @@
         android:id="@+id/cancel_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:autoSizeTextType="uniform"
         android:background="@drawable/border_button"
         android:fontFamily="@font/varela_round"
+        android:onClick="cancelOrder"
         android:padding="20dp"
         android:text="@string/azov_vitarti"
         android:textSize="14sp"
-        android:autoSizeTextType="uniform"
-        android:onClick="cancelOrder"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/accept_button"
         app:layout_constraintHorizontal_bias="0.5"
@@ -336,21 +335,21 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <Button
-        android:onClick="moveToConfirm"
         android:id="@+id/accept_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="50dp"
+        android:autoSizeTextType="uniform"
         android:background="@drawable/full_button"
         android:fontFamily="@font/varela_round"
+        android:onClick="moveToConfirm"
         android:padding="20dp"
         android:text="@string/bring"
         android:textColor="@color/lightGrey"
         android:textSize="14sp"
-        android:autoSizeTextType="uniform"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        android:layout_marginBottom="50dp"
         app:layout_constraintStart_toEndOf="@+id/cancel_button" />
 
 
