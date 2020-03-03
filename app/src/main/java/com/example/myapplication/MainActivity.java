@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
 
     //fireBase Objects
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private CollectionReference ordersRef = db.collection(getString(R.string.orders_db_collection));
+    private CollectionReference ordersRef;
 
 
     //adapters
@@ -57,6 +57,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        ordersRef = db.collection(getString(R.string.orders_db_collection));
 
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getWindow().setNavigationBarColor(getResources().getColor(R.color.backgroundWhite));
