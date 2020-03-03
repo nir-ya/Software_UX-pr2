@@ -49,6 +49,7 @@ OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem, OrderListIt
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private View emptyView;
 
+    static final int EMPTY_VIEW_DELAY = 2000;
     private static final int CRITICAL_PRICE = 60;
     private static final int MIN_ORDER = 70;
     private final Context context;
@@ -431,7 +432,7 @@ OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem, OrderListIt
                 public void run() {
                     emptyView.setVisibility(getItemCount() == 0 ? VISIBLE : GONE);
                 }
-            }, Constants.SHORT_DELAY);
+            }, EMPTY_VIEW_DELAY);
         }
     }
 

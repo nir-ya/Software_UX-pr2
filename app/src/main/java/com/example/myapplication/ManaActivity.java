@@ -1,7 +1,5 @@
 package com.example.myapplication;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
@@ -11,10 +9,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
@@ -24,6 +23,11 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
 
 public class ManaActivity extends AppCompatActivity {
+
+    static final int HALF_PITA_POSITION = 0;
+    static final int PITA_POSITION = 1;
+    static final int LAFA_POSITION = 2;
+    static final int HALF_LAFA_POSITION = 3;
 
     CheckBox humusView;
     CheckBox harifView;
@@ -82,23 +86,23 @@ public class ManaActivity extends AppCompatActivity {
             case ManaListItem.HALF_PITA:
                 dishDescription.setText(R.string.half_pita_description);
                 manaTypeImageVIew.setImageResource(R.drawable.half_pita_full);
-                ManaPickerAdapter.setSelectedPosition(Constants.HALF_PITA_POSITION);
+                ManaPickerAdapter.setSelectedPosition(HALF_PITA_POSITION);
                 break;
             case ManaListItem.PITA:
                 dishDescription.setText(R.string.pita_description);
                 manaTypeImageVIew.setImageResource(R.drawable.pita_full);
-                ManaPickerAdapter.setSelectedPosition(Constants.PITA_POSITION);
+                ManaPickerAdapter.setSelectedPosition(PITA_POSITION);
                 break;
             case ManaListItem.LAFA:
                 dishDescription.setText(R.string.lafa_description);
                 manaTypeImageVIew.setImageResource(R.drawable.lafa_full);
-                ManaPickerAdapter.setSelectedPosition(Constants.LAFA_POSITION);
+                ManaPickerAdapter.setSelectedPosition(LAFA_POSITION);
 
                 break;
             case ManaListItem.HALF_LAFA:
                 dishDescription.setText(R.string.half_lafa_description);
                 manaTypeImageVIew.setImageResource(R.drawable.half_lafa_full);
-                ManaPickerAdapter.setSelectedPosition(Constants.HALF_LAFA_POSITION);
+                ManaPickerAdapter.setSelectedPosition(HALF_LAFA_POSITION);
 
                 break;
         }

@@ -48,6 +48,11 @@ public class MainActivity extends AppCompatActivity {
 
     private RecyclerView ordersRecyclerView;
 
+    static final long TOOLTIP_DELAY = 3000;
+    static final String REC_USAGE_ID = "rec_intro";
+    static final String FAB_USAGE_ID = "fab_intro";
+    static final String BAG_USAGE_ID = "bag_intro";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -172,14 +177,14 @@ public class MainActivity extends AppCompatActivity {
             private void runSpotlightSequence() {
                 SpotlightSequence.getInstance(MainActivity.this, config)
                         .addSpotlight(ordersRecyclerView, getString(R.string.join_order_tooltop),
-                                getString(R.string.join_tooltip_subtext), Constants.REC_USAGE_ID)
+                                getString(R.string.join_tooltip_subtext), REC_USAGE_ID)
                         .addSpotlight(newOrderButton, getString(R.string.create_order_tooltip)
-                                , getString(R.string.create_tooltip_subtext), Constants.FAB_USAGE_ID)
+                                , getString(R.string.create_tooltip_subtext), FAB_USAGE_ID)
                         .addSpotlight(myBagBtn, getString(R.string.mybag_tooltip)
-                                , getString(R.string.mybag_tooltip_subtext), Constants.BAG_USAGE_ID)
+                                , getString(R.string.mybag_tooltip_subtext), BAG_USAGE_ID)
                         .startSequence();
             }
-        }, Constants.LONG_DELAY); //3 seconds delay from application start
+        }, TOOLTIP_DELAY);
     }
 
     /**

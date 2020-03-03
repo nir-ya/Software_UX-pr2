@@ -69,8 +69,8 @@ public class ManaPickerActivity extends AppCompatActivity {
         int paddingToSet = width / 6;
         viewPager.setPadding(paddingToSet, 0, paddingToSet, 0);
 
-        viewPager.setCurrentItem(Constants.PITA_POSITION);
-        ManaPickerAdapter.setSelectedPosition(Constants.PITA_POSITION);
+        viewPager.setCurrentItem(ManaActivity.PITA_POSITION);
+        ManaPickerAdapter.setSelectedPosition(ManaActivity.PITA_POSITION);
 
 
     }
