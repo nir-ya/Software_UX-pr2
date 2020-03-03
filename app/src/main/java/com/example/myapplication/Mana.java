@@ -52,15 +52,17 @@ public class Mana {
     /**
      * An empty constructor for Mana object. Required for FireStore integration.
      */
-    public Mana() { }
+    public Mana() {
+    }
 
     /**
      * Complete constructor of a Mana object
-     * @param type - String representing the break type of the Mana
+     *
+     * @param type          - String representing the break type of the Mana
      * @param notes
      * @param paymentMethod - String representing the payment method for the Mana (Credit / Cash)
-     * @param tosafot - A Hashmap of Tosafot: String->Boolean
-     * @param owner - A String representing the user who ordered the Mana
+     * @param tosafot       - A Hashmap of Tosafot: String->Boolean
+     * @param owner         - A String representing the user who ordered the Mana
      * @param ownerUserId
      */
     public Mana(String type, String notes, int paymentMethod,
@@ -81,6 +83,7 @@ public class Mana {
 
     /**
      * A getter method for the price of the Mana
+     *
      * @return the price of the selected mana, based on the price list.
      */
     public int getPrice() {
@@ -89,6 +92,7 @@ public class Mana {
 
     /**
      * A static method for getting prices of dishes
+     *
      * @return the price of the selected mana, based on the price list.
      */
     public static int getPrice(String type) {
@@ -109,6 +113,7 @@ public class Mana {
 
     /**
      * A getter, as required by FireStore
+     *
      * @return the owner for the Mana
      */
     public String getOwner() {
@@ -117,6 +122,7 @@ public class Mana {
 
     /**
      * A getter, as required by FireStore
+     *
      * @return the status of the Mana
      */
     public String getStatus() {
@@ -125,6 +131,7 @@ public class Mana {
 
     /**
      * A getter, as required by FireStore
+     *
      * @return the type of the Mana
      */
     public String getType() {
@@ -148,6 +155,7 @@ public class Mana {
 
     /**
      * A getter, as required by FireStore
+     *
      * @return the payment method for the Mana
      */
     public int getPaymentMethod() {
@@ -156,6 +164,7 @@ public class Mana {
 
     /**
      * A getter, as required by FireStore
+     *
      * @return the Tosafot for the Mana, as HashMap
      */
     public HashMap<String, Boolean> getTosafot() {
@@ -171,13 +180,13 @@ public class Mana {
             }
         }
 
-        if(tosafotString.length()>1) {
+        if (tosafotString.length() > 1) {
             tosafotString.delete(tosafotString.length() - 2, tosafotString.length());
 
             return tosafotString.toString();
         }
 
-       return Constants.NO_TOSAFOT;
+        return Constants.NO_TOSAFOT;
     }
 
 

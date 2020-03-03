@@ -14,9 +14,10 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 
 import java.util.List;
 
-public class OrderFinishListItemAdapter extends FirestoreRecyclerAdapter<OrderFinishListItem,OrderFinishListItemAdapter.OrderFinishListItemHolder> {
+public class OrderFinishListItemAdapter extends FirestoreRecyclerAdapter<OrderFinishListItem, OrderFinishListItemAdapter.OrderFinishListItemHolder> {
 
     FirestoreRecyclerOptions<OrderFinishListItem> options;
+
     public OrderFinishListItemAdapter(@NonNull FirestoreRecyclerOptions<OrderFinishListItem> options) {
         super(options);
         options = options;
@@ -33,17 +34,17 @@ public class OrderFinishListItemAdapter extends FirestoreRecyclerAdapter<OrderFi
     @Override
     public OrderFinishListItemHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.order_finish_list_item,
-                parent,false);
+                parent, false);
         return new OrderFinishListItemHolder(v);
     }
 
-    class OrderFinishListItemHolder extends RecyclerView.ViewHolder{
+    class OrderFinishListItemHolder extends RecyclerView.ViewHolder {
         TextView textViewName;
         TextView textViewOrderType;
         TextView textViewDescription;
 
 
-        public OrderFinishListItemHolder(View itemView){
+        public OrderFinishListItemHolder(View itemView) {
             super(itemView);
             textViewName = itemView.findViewById(R.id.name);
             textViewOrderType = itemView.findViewById(R.id.orderType);

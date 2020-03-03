@@ -18,12 +18,15 @@ import androidx.appcompat.app.AppCompatDialogFragment;
 import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
+
 import org.joda.time.DateTime;
+
 import java.util.Date;
 
 public class MyBagDialog extends DialogFragment {
@@ -35,14 +38,13 @@ public class MyBagDialog extends DialogFragment {
     private Button backBtn;
 
 
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.mybag_dialog,container,false);
+        View view = inflater.inflate(R.layout.mybag_dialog, container, false);
         setDialogLayout();
         user = FirebaseAuth.getInstance().getCurrentUser();
-        backBtn =  view.findViewById(R.id.backBtn);
+        backBtn = view.findViewById(R.id.backBtn);
         headerText = view.findViewById(R.id.myBagTitle);
         myBagRecView = view.findViewById(R.id.myBagRecyclerView);
         setupRecyclerDialog();
@@ -53,7 +55,6 @@ public class MyBagDialog extends DialogFragment {
                 getDialog().dismiss();
             }
         });
-
 
 
         return view;
@@ -78,14 +79,14 @@ public class MyBagDialog extends DialogFragment {
 
         Query query = db.collectionGroup(getString(R.string.manot_collection))
                 .whereEqualTo(getString(R.string.owner_id), user.getUid())
-                .whereLessThan("timestamp",tomorrowDate)
+                .whereLessThan("timestamp", tomorrowDate)
                 .whereGreaterThan("timestamp", todayDate);
 
         FirestoreRecyclerOptions options = new FirestoreRecyclerOptions.Builder<Mana>()
                 .setQuery(query, Mana.class)
                 .build();
 
-        final MyBagAdapter myBagAdapter = new MyBagAdapter(options,this.getContext());
+        final MyBagAdapter myBagAdapter = new MyBagAdapter(options, this.getContext());
 
         LinearLayoutManager layout = new LinearLayoutManager(this.getContext());
         myBagRecView.setLayoutManager(layout);

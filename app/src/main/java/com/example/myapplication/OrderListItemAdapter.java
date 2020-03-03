@@ -342,7 +342,6 @@ OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem, OrderListIt
     }
 
 
-
     private void setOrderedItem(OrderListItemHolder holder, String documentId, OrderListItem model) {
         holder.statusText.setText(Constants.ORDERED_TEXT);
         holder.progressBar.setProgressDrawable(context.getDrawable(R.drawable.progress_bar_locked));

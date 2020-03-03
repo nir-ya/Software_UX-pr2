@@ -46,7 +46,7 @@ public class ManaActivity extends AppCompatActivity {
 
     TextView ownerText, dishDescription, clearTextView;
 
-    String  manatype;
+    String manatype;
     String orderTime;
     String orderId;
     Timestamp time;
@@ -225,6 +225,7 @@ public class ManaActivity extends AppCompatActivity {
 
     /**
      * onCLick method that moves you to next screen
+     *
      * @param view - button
      */
     public void moveToConfirm(View view) {
@@ -242,6 +243,7 @@ public class ManaActivity extends AppCompatActivity {
 
     /**
      * onClick method to return to main activity
+     *
      * @param view - button
      */
     public void cancelOrder(View view) {
@@ -251,7 +253,7 @@ public class ManaActivity extends AppCompatActivity {
     }
 
     public void clearTosafot(View view) {
-        for(CheckBox checkBox:checkBoxes){
+        for (CheckBox checkBox : checkBoxes) {
             checkBox.setChecked(false);
         }
         markAll.setChecked(false);

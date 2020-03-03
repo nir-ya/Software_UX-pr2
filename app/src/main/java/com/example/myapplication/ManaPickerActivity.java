@@ -87,7 +87,7 @@ public class ManaPickerActivity extends AppCompatActivity {
 
         String selectedType = getSelectedTypeByPosition();
 
-        System.out.println("!!!!!!!!!!!!!!!!!!!!!\n"+selectedType);
+        System.out.println("!!!!!!!!!!!!!!!!!!!!!\n" + selectedType);
         Intent intent = new Intent(this, ManaActivity.class);
         intent.putExtra("mana_type", selectedType);
         intent.putExtra("order_id", orderId);

@@ -2,6 +2,7 @@ package com.example.myapplication;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.os.Build;
@@ -11,11 +12,13 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -94,6 +97,7 @@ public class LoginActivity extends AppCompatActivity {
 
     /**
      * handle login to firebase
+     *
      * @param view
      */
     public void login(View view) {
@@ -127,22 +131,23 @@ public class LoginActivity extends AppCompatActivity {
 
     /**
      * check whether input fields have valid values
+     *
      * @param view
      */
-    public void checkInput(View view){
+    public void checkInput(View view) {
         boolean good = true;
 
-        if(passwordText.length() <6){
+        if (passwordText.length() < 6) {
             passwordText.getBackground().mutate().setColorFilter(getResources().getColor(android.R.color.holo_red_light), PorterDuff.Mode.SRC_ATOP);
             good = false;
         }
         Matcher matcher = emailChecker.matcher(emailText.getText().toString());
-        if(!matcher.matches()){
+        if (!matcher.matches()) {
             emailText.getBackground().mutate().setColorFilter(getResources().getColor(android.R.color.holo_red_light), PorterDuff.Mode.SRC_ATOP);
             good = false;
         }
 
-        if (good){
+        if (good) {
             login(view);
         }
     }
@@ -156,6 +161,7 @@ public class LoginActivity extends AppCompatActivity {
 
     /**
      * start register activity
+     *
      * @param view
      */
     public void register(View view) {
@@ -166,6 +172,7 @@ public class LoginActivity extends AppCompatActivity {
 
     /**
      * used to handle register activity sucess
+     *
      * @param requestCode
      * @param resultCode
      * @param data

@@ -3,6 +3,7 @@ package com.example.myapplication;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.google.firebase.Timestamp;
 
 
@@ -16,7 +17,7 @@ public class OrderListItem implements Parcelable {
     private final static int MIN_ORDER = 70;
     private int price;
     private String status;
-    private  Timestamp timestamp;
+    private Timestamp timestamp;
 
 
     protected OrderListItem(Parcel in) {
@@ -53,7 +54,7 @@ public class OrderListItem implements Parcelable {
     public OrderListItem() {
     }
 
-    public boolean reachedMinimum(){
+    public boolean reachedMinimum() {
         return price >= MIN_ORDER;
     }
 

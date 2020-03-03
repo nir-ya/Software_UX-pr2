@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.viewpager.widget.PagerAdapter;
@@ -58,7 +59,7 @@ public class ManaPickerAdapter extends PagerAdapter {
     public Object instantiateItem(@NonNull ViewGroup container, final int position) {
 
         layoutInflater = LayoutInflater.from(mContext);
-        View view = layoutInflater.inflate(R.layout.mana_pick_item,container,false);
+        View view = layoutInflater.inflate(R.layout.mana_pick_item, container, false);
         ImageView manaImg = view.findViewById(R.id.manaItemImg);
         TextView manaType = view.findViewById(R.id.manaItemTxt);
         TextView manaPrice = view.findViewById(R.id.manaItemPriceTxt);
@@ -69,9 +70,8 @@ public class ManaPickerAdapter extends PagerAdapter {
         manaPrice.setText(typeCards.get(position).getPrice());
 
         MaterialCardView cv = view.findViewById(R.id.manaItem);
-        cv.setStrokeColor(selectedPosition==position?
-                mContext.getResources().getColor(R.color.dark_green): Color.TRANSPARENT);
-
+        cv.setStrokeColor(selectedPosition == position ?
+                mContext.getResources().getColor(R.color.dark_green) : Color.TRANSPARENT);
 
 
         view.setOnClickListener(new View.OnClickListener() {
@@ -82,13 +82,13 @@ public class ManaPickerAdapter extends PagerAdapter {
             }
         });
 
-        container.addView(view,0);
+        container.addView(view, 0);
         return view;
     }
 
     @Override
     public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
-        container.removeView((View)object);
+        container.removeView((View) object);
     }
 
 }

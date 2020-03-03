@@ -5,6 +5,10 @@ import java.text.Format;
 import java.text.SimpleDateFormat;
 
 public class Randomizer {
+
+    static final int[] SAD_SOUNDS = new int[]{R.raw.basa_whitney, R.raw.basa_sound,
+            R.raw.sad_trombone, R.raw.letitgoo, R.raw.believefly_basa, R.raw.titanic};
+
     private static int generate(int min, int max) {
         return min + (int) (Math.random() * ((max - min) + 1));
     }
@@ -22,7 +26,7 @@ public class Randomizer {
     static Format formatter = new SimpleDateFormat("HH:mm");
 
     static int randomSadSound() {
-        return Constants.SAD_SOUNDS[generate(0,Constants.SAD_SOUNDS.length-1)];
+        return SAD_SOUNDS[generate(0, SAD_SOUNDS.length - 1)];
     }
 
 }

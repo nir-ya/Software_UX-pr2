@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
         Date tomorrowDate = tomorrow.toDate();
         Date todayDate = today.toDate();
 
-        Query query = ordersRef.orderBy("timestamp", Query.Direction.ASCENDING).whereLessThan("timestamp",tomorrowDate)
+        Query query = ordersRef.orderBy("timestamp", Query.Direction.ASCENDING).whereLessThan("timestamp", tomorrowDate)
                 .whereGreaterThan("timestamp", todayDate);
         FirestoreRecyclerOptions options = new FirestoreRecyclerOptions.Builder<OrderListItem>()
                 .setQuery(query, OrderListItem.class)
@@ -153,8 +153,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
-
     /**
      * this function craete tooltip, if user first using the app
      */
@@ -190,9 +188,10 @@ public class MainActivity extends AppCompatActivity {
     /**
      * this function creates a spotlight configuration
      * configuration sets the colors, animations, etc. of the spotlight
+     *
      * @return SpotlightConfiguration object
      */
-    private SpotlightConfig getSpotlightConfig(){
+    private SpotlightConfig getSpotlightConfig() {
 
         final SpotlightConfig config = new SpotlightConfig();
         config.setIntroAnimationDuration(500);

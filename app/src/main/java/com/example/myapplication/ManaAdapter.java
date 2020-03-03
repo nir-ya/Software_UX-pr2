@@ -30,10 +30,9 @@ public class ManaAdapter extends FirestoreRecyclerAdapter<Mana, ManaAdapter.Mano
     protected void onBindViewHolder(@NonNull final ManotHolder holder, final int position, @NonNull final Mana model) {
         holder.textViewTitle.setText(model.getOwner());//TODO - change to normal title
         holder.textViewPrice.setText(Integer.toString(model.getPrice()));
-        if(model.getPaymentMethod()==Mana.MEZUMAN){
+        if (model.getPaymentMethod() == Mana.MEZUMAN) {
             holder.payment.setImageDrawable(context.getDrawable(R.drawable.cash));
-        }
-        else {
+        } else {
             holder.payment.setImageDrawable(context.getDrawable(R.drawable.credit));
         }
 

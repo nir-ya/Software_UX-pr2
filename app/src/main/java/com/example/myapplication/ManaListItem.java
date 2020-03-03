@@ -21,9 +21,8 @@ public class ManaListItem {
     private String price;
 
 
-
-    public ManaListItem(){ }
-
+    public ManaListItem() {
+    }
 
 
     public ManaListItem(int manaImg, String type, String price) {

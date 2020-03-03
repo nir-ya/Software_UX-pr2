@@ -51,7 +51,7 @@ public class OrderConfirmationActivity extends AppCompatActivity {
         orderId = extras.getString("order_id");
         orderTime = extras.getString("order_time");
         time = extras.getParcelable("CALENDAR");
-        
+
         orderDetails.setText(getString(R.string.order_details_text, orderTime));
 
         tosafot = (HashMap<String, Boolean>) extras.getSerializable("tosafot");
@@ -63,10 +63,9 @@ public class OrderConfirmationActivity extends AppCompatActivity {
         orderRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
-                if(documentSnapshot.exists()) {
+                if (documentSnapshot.exists()) {
                     addManaToDB(ordersCollection);
-                }
-                else{
+                } else {
                     OrderListItem order = new OrderListItem(time);
                     orderId = Randomizer.randomString(18);
                     DocumentReference d = ordersCollection.document(orderId);
@@ -79,16 +78,16 @@ public class OrderConfirmationActivity extends AppCompatActivity {
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                    OrderListItem order = new OrderListItem(time);
-                    orderId = Randomizer.randomString(18);
-                    DocumentReference d = ordersCollection.document(orderId);
+                OrderListItem order = new OrderListItem(time);
+                orderId = Randomizer.randomString(18);
+                DocumentReference d = ordersCollection.document(orderId);
                 System.out.println("!!!!!!!!!");
                 System.out.println(orderId);
-                    d.set(order);
+                d.set(order);
 
-                    addManaToDB(ordersCollection);
-                }
-                    });
+                addManaToDB(ordersCollection);
+            }
+        });
     }
 
     private void addManaToDB(CollectionReference ordersCollection) {
@@ -103,7 +102,7 @@ public class OrderConfirmationActivity extends AppCompatActivity {
 
     public void confirmOrder(View view) {
         addToDB();
-        Toast.makeText(this, getString(R.string.mana_success_toast), 3*Toast.LENGTH_LONG).show();
+        Toast.makeText(this, getString(R.string.mana_success_toast), 3 * Toast.LENGTH_LONG).show();
         Intent intent = new Intent(this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);

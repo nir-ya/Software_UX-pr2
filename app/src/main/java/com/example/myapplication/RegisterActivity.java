@@ -21,7 +21,6 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 
 
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -110,6 +109,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     /**
      * function is responsible for registering new user
+     *
      * @param view
      */
     public void register(View view) {
@@ -124,7 +124,7 @@ public class RegisterActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
 
                             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                            
+
                             // create update to add display name to user
                             UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
                                     .setDisplayName(username)
@@ -156,28 +156,29 @@ public class RegisterActivity extends AppCompatActivity {
 
     /**
      * check whether input fields have valid values
+     *
      * @param view
      */
-    public void checkInput(View view){
+    public void checkInput(View view) {
         boolean good = true;
-        if(nameText.length() < 3){
+        if (nameText.length() < 3) {
             nameText.getBackground().mutate().setColorFilter(getResources().getColor(android.R.color.holo_red_light), PorterDuff.Mode.SRC_ATOP);
             good = false;
         }
 
-        if(passwordText.length() < 6){
+        if (passwordText.length() < 6) {
             passwordText.getBackground().mutate().setColorFilter(getResources().getColor(android.R.color.holo_red_light), PorterDuff.Mode.SRC_ATOP);
             Toast.makeText(this, getString(R.string.invalid_password_msg), Toast.LENGTH_SHORT).show();
             good = false;
         }
         Matcher matcher = emailChecker.matcher(emailText.getText().toString());
-        if(!matcher.matches()){
+        if (!matcher.matches()) {
             emailText.getBackground().mutate().setColorFilter(getResources().getColor(android.R.color.holo_red_light), PorterDuff.Mode.SRC_ATOP);
             Toast.makeText(this, getString(R.string.invalid_email_msg), Toast.LENGTH_SHORT).show();
             good = false;
         }
 
-        if (good){
+        if (good) {
             register(view);
         }
     }

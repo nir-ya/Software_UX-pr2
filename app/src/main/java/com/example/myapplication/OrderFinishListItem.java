@@ -5,13 +5,13 @@ public class OrderFinishListItem {
     private String type;
     private String orderDescription;
 
-    public OrderFinishListItem(String owner, String type, String orderDescription){
+    public OrderFinishListItem(String owner, String type, String orderDescription) {
         this.owner = owner;
         this.type = type;
         this.orderDescription = orderDescription;
     }
 
-    public OrderFinishListItem(){
+    public OrderFinishListItem() {
 
     }
 
