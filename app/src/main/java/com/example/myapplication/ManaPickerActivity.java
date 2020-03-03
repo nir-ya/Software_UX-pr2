@@ -116,17 +116,17 @@ public class ManaPickerActivity extends AppCompatActivity {
     }
 
     private void setTosafot(HashMap tosafot) {
-        tosafot.put(Constants.HUMMUS, true);
-        tosafot.put(Constants.THINA, true);
-        tosafot.put(Constants.HARIF, true);
-        tosafot.put(Constants.AMBA, true);
-        tosafot.put(Constants.TOMATO, true);
-        tosafot.put(Constants.CUCUMBER, true);
-        tosafot.put(Constants.ONION, true);
-        tosafot.put(Constants.KRUV, true);
-        tosafot.put(Constants.PICKELS, true);
-        tosafot.put(Constants.CHIPS, true);
-        tosafot.put(Constants.EGGPLAT, true);
+        tosafot.put(getString(R.string.hummus_key), true);
+        tosafot.put(getString(R.string.thina_key), true);
+        tosafot.put(getString(R.string.harif_key), true);
+        tosafot.put(getString(R.string.amba_key), true);
+        tosafot.put(getString(R.string.tomato_key), true);
+        tosafot.put(getString(R.string.cucumber_key), true);
+        tosafot.put(getString(R.string.onion_key), true);
+        tosafot.put(getString(R.string.kruv_key), true);
+        tosafot.put(getString(R.string.pickles_key), true);
+        tosafot.put(getString(R.string.chips_key), true);
+        tosafot.put(getString(R.string.eggplant_key), true);
     }
 
     public void simHakol(View view) {
@@ -144,5 +144,4 @@ public class ManaPickerActivity extends AppCompatActivity {
         intent.putExtra("CALENDAR", time);
         startActivity(intent);
     }
-
 }

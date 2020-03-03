@@ -109,17 +109,17 @@ public class ManaActivity extends AppCompatActivity {
     }
 
     private void setTosafot(HashMap tosafot) {
-        tosafot.put(Constants.HUMMUS, humusView.isChecked());
-        tosafot.put(Constants.THINA, tahiniView.isChecked());
-        tosafot.put(Constants.HARIF, harifView.isChecked());
-        tosafot.put(Constants.AMBA, ambaView.isChecked());
-        tosafot.put(Constants.TOMATO, tomatoView.isChecked());
-        tosafot.put(Constants.CUCUMBER, cucumberView.isChecked());
-        tosafot.put(Constants.ONION, onionView.isChecked());
-        tosafot.put(Constants.PICKELS, picklesView.isChecked());
-        tosafot.put(Constants.CHIPS, chipsView.isChecked());
-        tosafot.put(Constants.EGGPLAT, eggplantView.isChecked());
-        tosafot.put(Constants.KRUV, false);
+        tosafot.put(getString(R.string.hummus_key), humusView.isChecked());
+        tosafot.put(getString(R.string.thina_key), tahiniView.isChecked());
+        tosafot.put(getString(R.string.harif_key), harifView.isChecked());
+        tosafot.put(getString(R.string.amba_key), ambaView.isChecked());
+        tosafot.put(getString(R.string.tomato_key), tomatoView.isChecked());
+        tosafot.put(getString(R.string.cucumber_key), cucumberView.isChecked());
+        tosafot.put(getString(R.string.onion_key), onionView.isChecked());
+        tosafot.put(getString(R.string.pickles_key), picklesView.isChecked());
+        tosafot.put(getString(R.string.chips_key), chipsView.isChecked());
+        tosafot.put(getString(R.string.eggplant_key), eggplantView.isChecked());
+        tosafot.put(getString(R.string.kruv_key), false);
     }
 
 

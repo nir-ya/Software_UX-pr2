@@ -14,6 +14,7 @@ import java.util.HashMap;
 public class Mana {
 
     // Constants
+    private static final String NO_TOSAFOT = "בלי תוספות";
     //-- Types of manot
     static final String PITA = "pita";
     static final String LAFA = "lafa";
@@ -41,6 +42,24 @@ public class Mana {
     private String notes;
     private int price;
     private String ownerUserId;
+
+    static HashMap<String, String> hebrewExtras = setHebrewExtrasMap();
+
+    private static HashMap<String,String> setHebrewExtrasMap() {
+        hebrewExtras = new HashMap<>();
+        hebrewExtras.put("Amba", "עמבה");
+        hebrewExtras.put("Chips", "צ'יפס");
+        hebrewExtras.put("Cucumber", "מלפפון");
+        hebrewExtras.put("Eggplant", "חצילים");
+        hebrewExtras.put("Harif", "חריף");
+        hebrewExtras.put("Hummus", "חומוס");
+        hebrewExtras.put("Kruv", "כרוב");
+        hebrewExtras.put("Onion", "בצל");
+        hebrewExtras.put("Pickels", "חמוצים");
+        hebrewExtras.put("Thina", "טחינה");
+        hebrewExtras.put("Tomato", "עגבניה");
+        return hebrewExtras;
+    }
 
     public Date getTimestamp() {
         return timestamp;
@@ -176,7 +195,7 @@ public class Mana {
         for (String key : tosafot.keySet()) {
             if (tosafot.get(key)) {
                 System.out.println(key);
-                tosafotString.append(Constants.hebrewExtras.get(key)).append(", ");
+                tosafotString.append(hebrewExtras.get(key)).append(", ");
             }
         }
 
@@ -186,7 +205,7 @@ public class Mana {
             return tosafotString.toString();
         }
 
-        return Constants.NO_TOSAFOT;
+        return NO_TOSAFOT;
     }
 
 

@@ -98,7 +98,7 @@ public class OrderFinishActivity extends AppCompatActivity {
                                 description += " בלי ";
                                 for (String key : map.keySet()) {
                                     if (map.get(key) == false) {
-                                        description += Constants.hebrewExtras.get(key) + " ";
+                                        description += Mana.hebrewExtras.get(key) + " ";
                                     }
 
                                 }
@@ -109,7 +109,7 @@ public class OrderFinishActivity extends AppCompatActivity {
                                 description += " עם ";
                                 for (String key : map.keySet()) {
                                     if (map.get(key) == true) {
-                                        description += Constants.hebrewExtras.get(key) + " ";
+                                        description += Mana.hebrewExtras.get(key) + " ";
                                     }
 
                                 }
@@ -170,7 +170,7 @@ public class OrderFinishActivity extends AppCompatActivity {
     }
 
     public void lockOrder(View view) {
-        DocumentReference orderRef = db.collection(Constants.ORDERS).document(orderId);
+        DocumentReference orderRef = db.collection(getString(R.string.orders_db_collection)).document(orderId);
         orderRef.update("status", OrderListItem.ORDERED);
 
         this.finish();

@@ -28,6 +28,9 @@
     <string name="waiting">מחכה למשבחים…</string>
     <string name="my_order_str">ההזמנה שלי</string>
     <string name="title_activity_main2">Main2Activity</string>
+    <string name="orders_db_collection">OpenOrders</string>
+    <string name="manot_db_subcollection">Manot</string>
+    <string name="price_status_text">נאספו %s מתוך 70 ש"ח</string>
 
     <array name="tosafot">
         <item>חומוס</item>
@@ -109,5 +112,19 @@
     <string name="bassa_text">איזה באסה!</string>
     <string name="sad_emoji_trio">😥😥😥</string>
     <string name="yalla_got_it">טוב יאללה, הבנתי</string>
+    <string name="order_status_label">status</string>
+    <string name="bassa_button_text">התבאס</string>
+
+    <string name="hummus_key">Hummus</string>
+    <string name="harif_key">Harif</string>
+    <string name="thina_key">Thina</string>
+    <string name="amba_key">Amba</string>
+    <string name="tomato_key">Tomato</string>
+    <string name="cucumber_key">Cucumber</string>
+    <string name="onion_key">Onion</string>
+    <string name="kruv_key">Kruv</string>
+    <string name="pickles_key">Pickles</string>
+    <string name="chips_key">Chips</string>
+    <string name="eggplant_key">Eggplant</string>
 
 </resources>

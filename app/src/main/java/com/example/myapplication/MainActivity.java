@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
 
     //fireBase Objects
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private CollectionReference ordersRef = db.collection(Constants.ORDERS);
+    private CollectionReference ordersRef = db.collection(getString(R.string.orders_db_collection));
 
 
     //adapters

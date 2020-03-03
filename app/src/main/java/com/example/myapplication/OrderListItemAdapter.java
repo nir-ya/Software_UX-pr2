@@ -45,11 +45,19 @@ import static android.view.View.VISIBLE;
 public class
 OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem, OrderListItemAdapter.OrderListItemHolder> {
 
+    private static final String LOCKED_TEXT = "הזמן!";
+    private static final String JOIN_TEXT = "הצטרף!";
+    private static final String READY_TEXT = "מוכן לשילוח";
+    private static final String ORDERED_TEXT = "ההזמנה בהכנה";
+    private static final String ORDER_OUT = "שעת ההזמנה הגיעה. מישהו צריך לקחת יוזמה";
+    private static final String ORDER_CANCELED = "שכחו מזה, לא הגענו למינימום";
+    private static final String WAITING = "מחכה למשבחים...";
+
     private Calendar cal = Calendar.getInstance();
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private View emptyView;
 
-    static final int EMPTY_VIEW_DELAY = 2000;
+    private static final int EMPTY_VIEW_DELAY = 2000;
     private static final int CRITICAL_PRICE = 60;
     private static final int MIN_ORDER = 70;
     private final Context context;
@@ -90,11 +98,11 @@ OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem, OrderListIt
 
     private void checkIfOrderTimePassed(@NonNull OrderListItem order, String documentId) {
         if (order.getTimestamp().compareTo(Timestamp.now()) < 0 && order.getStatus().equals(OrderListItem.OPEN)) {
-            DocumentReference orderRef = db.collection(Constants.ORDERS).document(documentId);
+            DocumentReference orderRef = db.collection(context.getString(R.string.orders_db_collection)).document(documentId);
             if (order.reachedMinimum()) {
-                orderRef.update("status", OrderListItem.READY); //todo make status const String
+                orderRef.update(context.getString(R.string.order_status_label), OrderListItem.READY);
             } else {
-                orderRef.update("status", OrderListItem.CANCELED);
+                orderRef.update(context.getString(R.string.order_status_label), OrderListItem.CANCELED);
             }
         }
     }
@@ -145,8 +153,8 @@ OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem, OrderListIt
 
     private void setOrderInfoRecyclerView(@NonNull OrderListItemHolder holder, String documentId) {
 
-        CollectionReference manotRef = db.collection(Constants.ORDERS)
-                .document(documentId).collection(Constants.MANOT_SUBCOLLECTION);
+        CollectionReference manotRef = db.collection(context.getString(R.string.orders_db_collection))
+                .document(documentId).collection(context.getString(R.string.manot_db_subcollection));
 
         Query query = manotRef.orderBy("price", Query.Direction.DESCENDING);
 
@@ -232,8 +240,8 @@ OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem, OrderListIt
      * @param orderListItem
      */
     private void setReadyItem(OrderListItemHolder holder, String documentId, OrderListItem orderListItem) {
-        holder.statusText.setText(Constants.ORDER_OUT);
-        holder.orderButton.setText(Constants.LOCKED_TEXT);
+        holder.statusText.setText(ORDER_OUT);
+        holder.orderButton.setText(LOCKED_TEXT);
         holder.orderButton.setBackgroundColor(context.getResources().getColor(R.color.grey));
         holder.progressBar.setProgressDrawable(context.getDrawable(R.drawable.progress_bar_green));
 
@@ -255,12 +263,12 @@ OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem, OrderListIt
      * @param model      - the orderListItem relevant item
      */
     private void setOpenItem(OrderListItemHolder holder, String documentId, OrderListItem model) {
-        holder.orderButton.setText(Constants.JOIN_TEXT);
+        holder.orderButton.setText(JOIN_TEXT);
         holder.orderButton.setBackgroundColor(context.getResources().getColor(R.color.dark_navy));
 
         setJoinButtonHandler(holder.orderButton, documentId, model);
 
-        holder.statusText.setText(model.getPrice() >= MIN_ORDER ? Constants.READY_TEXT : Constants.WAITING);
+        holder.statusText.setText(model.getPrice() >= MIN_ORDER ? READY_TEXT : WAITING);
 
         setProgressBar(holder, model);
 
@@ -280,8 +288,8 @@ OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem, OrderListIt
      * @param orderListItem order object
      */
     private void setCanceledItem(OrderListItemHolder holder, String documentId, OrderListItem orderListItem) {
-        holder.statusText.setText(Constants.ORDER_CANCELED);
-        holder.orderButton.setText("התבאס");
+        holder.statusText.setText(ORDER_CANCELED);
+        holder.orderButton.setText(context.getString(R.string.bassa_button_text));
         holder.orderButton.setBackgroundColor(context.getResources().getColor(R.color.red));
         holder.progressBar.setProgressDrawable(context.getDrawable(R.drawable.progress_bar_locked));
         ViewGroup layout = (ViewGroup) holder.orderButton.getParent();
@@ -343,7 +351,7 @@ OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem, OrderListIt
 
 
     private void setOrderedItem(OrderListItemHolder holder, String documentId, OrderListItem model) {
-        holder.statusText.setText(Constants.ORDERED_TEXT);
+        holder.statusText.setText(ORDERED_TEXT);
         holder.progressBar.setProgressDrawable(context.getDrawable(R.drawable.progress_bar_locked));
         ViewGroup layout = (ViewGroup) holder.orderButton.getParent();
 
@@ -372,7 +380,7 @@ OrderListItemAdapter extends FirestoreRecyclerAdapter<OrderListItem, OrderListIt
      */
     private void setPriceTextView(OrderListItemHolder holder, OrderListItem model) {
         String priceStr = Integer.toString(model.getPrice());
-        String priceTextInput = String.format(Constants.MONEY_MADE, priceStr);
+        String priceTextInput = String.format(context.getString(R.string.price_status_text), priceStr);
         holder.priceText.setText(priceTextInput);
     }
 

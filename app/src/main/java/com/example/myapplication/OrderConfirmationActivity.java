@@ -58,7 +58,7 @@ public class OrderConfirmationActivity extends AppCompatActivity {
     }
 
     void addToDB() {
-        final CollectionReference ordersCollection = db.collection(Constants.ORDERS);
+        final CollectionReference ordersCollection = db.collection(getString(R.string.orders_db_collection));
         DocumentReference orderRef = ordersCollection.document(orderId);
         orderRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
@@ -92,7 +92,7 @@ public class OrderConfirmationActivity extends AppCompatActivity {
 
     private void addManaToDB(CollectionReference ordersCollection) {
         CollectionReference manotCollectionReference = ordersCollection.document(orderId)
-                .collection(Constants.MANOT_SUBCOLLECTION);
+                .collection(getString(R.string.manot_db_subcollection));
         if (manaType == null) {
             manaType = "pita";
         }
