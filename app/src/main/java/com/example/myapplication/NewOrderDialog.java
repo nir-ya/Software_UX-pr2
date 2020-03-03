@@ -36,8 +36,6 @@ public class NewOrderDialog extends AppCompatDialogFragment {
     private Button okButton, cancelButton;
     private TextView openingHoursText, orderTimeErrorText;
 
-    private final static int TIME_PICKER_INTERVAL = 5;
-
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
@@ -64,9 +62,6 @@ public class NewOrderDialog extends AppCompatDialogFragment {
         });
         setButtonListeners();
         okButton.setClickable(false);
-
-        setTimePickerInterval(timePicker);
-
 
         return builder.create();
     }
@@ -170,28 +165,6 @@ public class NewOrderDialog extends AppCompatDialogFragment {
 
         builder.setView(view);
         return view;
-    }
-
-    /**
-     * Set TimePicker interval by adding a custom minutes list
-     *
-     * @param timePicker
-     */
-    private void setTimePickerInterval(TimePicker timePicker) {
-        try {
-
-            NumberPicker minutePicker = (NumberPicker) timePicker.findViewById(Resources.getSystem().getIdentifier(
-                    "minute", "id", "android"));
-            minutePicker.setMinValue(0);
-            minutePicker.setMaxValue((60 / TIME_PICKER_INTERVAL) - 1);
-            List<String> displayedValues = new ArrayList<String>();
-            for (int i = 0; i < 60; i += TIME_PICKER_INTERVAL) {
-                displayedValues.add(String.format("%02d", i));
-            }
-            minutePicker.setDisplayedValues(displayedValues.toArray(new String[0]));
-        } catch (Exception e) {
-            Log.e(TAG, "Exception: " + e);
-        }
     }
 }
 
