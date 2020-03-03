@@ -46,7 +46,7 @@ class Constants {
 
     static HashMap<String, String> hebrewExtras = setHebrewExtrasMap();
 
-    static HashMap<String,String> setHebrewExtrasMap() {
+    private static HashMap<String,String> setHebrewExtrasMap() {
         hebrewExtras = new HashMap<>();
         hebrewExtras.put("Amba", "עמבה");
         hebrewExtras.put("Chips", "צ'יפס");
