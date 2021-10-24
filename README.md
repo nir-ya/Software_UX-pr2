@@ -1,6 +1,6 @@
 # The ShevachApp
 
-Project 2 in Software and UX workshop
+Project 2 in HUJI Software and UX workshop
 
 <ins>Developers' names:</ins>
 Avner Duchovni, Eyal Diskin, Ran Hadar, Liav Alter, Nir Yazdi.  
